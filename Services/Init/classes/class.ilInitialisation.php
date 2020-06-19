@@ -11,6 +11,9 @@ use ILIAS\Filesystem\Security\Sanitizing\FilenameSanitizerImpl;
 use ILIAS\GlobalScreen\Services;
 
 require_once("libs/composer/vendor/autoload.php");
+// LEHRKE PATCH : START
+require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerVarHolder.php';
+// LEHRKE PATCH : END
 
 // needed for slow queries, etc.
 if (!isset($GLOBALS['ilGlobalStartTime']) || !$GLOBALS['ilGlobalStartTime']) {

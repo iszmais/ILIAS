@@ -115,6 +115,18 @@ class ilStyleDefinition
         if (!$DIC) {
             return null;
         }
+        // LEHRKE PATCH : START
+        if (CustomerVarHolder::get()) {
+            require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
+            $customerRepository = new CustomerRepository();
+            $customer  = $customerRepository->findByShortname(CustomerVarHolder::get());
+            if ($customer != null) {
+                $skin = explode(':',$customer['stylesheet']);
+                $DIC['ilias']->account->prefs['skin'] = $skin[0];
+                return $skin[0];
+            }
+        }
+        // LEHRKE PATCH : END
         if ($DIC->isDependencyAvailable("systemStyle") && is_object($DIC->systemStyle()->getSkin())) {
             return $DIC->systemStyle()->getSkin()->getId();
         } else {
@@ -292,6 +304,19 @@ class ilStyleDefinition
             return null;
         }
 
+        // LEHRKE PATCH : START
+        if (CustomerVarHolder::get()) {
+            require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
+            $customerRepository = new CustomerRepository();
+            $customer  = $customerRepository->findByShortname(CustomerVarHolder::get());
+            if ($customer != null) {
+                $skin = explode(':',$customer['stylesheet']);
+                $DIC['ilias']->account->prefs['style'] = $skin[1];
+                self::$current_style = $skin[1];
+                return $skin[1];
+            }
+        }
+        // LEHRKE PATCH : END
         self::setCurrentStyle($DIC->user()->prefs['style']);
 
         if ($DIC->isDependencyAvailable("systemStyle") && self::styleExistsForCurrentSkin(self::$current_style)) {

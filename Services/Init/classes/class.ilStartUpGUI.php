@@ -73,6 +73,9 @@ class ilStartUpGUI
         $this->lng = $DIC->language();
         $this->lng->loadLanguageModule('auth');
         $this->logger = ilLoggerFactory::getLogger('init');
+        // LEHRKE PATCH : START
+        $this->ctrl->setParameter($this,'customer',CustomerVarHolder::get());
+        // LEHRKE PATCH : END
 
         $this->ctrl->saveParameter($this, array("rep_ref_id", "lang", "target", "client_id"));
 
@@ -270,6 +273,11 @@ class ilStartUpGUI
             if (empty($_GET['cookies'])) {
                 $additional_params = '';
                 ilUtil::setCookie("iltest", "cookie", false);
+                // LEHRKE PATCH : START
+                ilUtil::redirect("login.php?target=" . $_GET["target"] . "&soap_pw=" . $_GET["soap_pw"] .
+                    "&ext_uid=" . $_GET["ext_uid"] . "&cookies=nocookies&client_id=" .
+                    rawurlencode(CLIENT_ID) . "&lang=" . $lng->getLangKey() . $additional_params . "&customer=".CustomerVarHolder::get());
+                // LEHRKE PATCH : END
                 ilUtil::redirect("login.php?target=" . $_GET["target"] . "&soap_pw=" . $_GET["soap_pw"] .
                     "&ext_uid=" . $_GET["ext_uid"] . "&cookies=nocookies&client_id=" .
                     rawurlencode(CLIENT_ID) . "&lang=" . $lng->getLangKey() . $additional_params);
@@ -420,7 +428,17 @@ class ilStartUpGUI
             $lng->loadLanguageModule("auth");
             $success = $lng->txt("auth_account_code_used");
         }
-        
+
+        // LEHRKE PATCH : START
+        if (isset($_GET['customer']) && strlen($_GET['customer'])) {
+            require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
+            $customerRepository = new CustomerRepository();
+            $customer = $customerRepository->findByShortname($_GET['customer']);
+            if ($customer == null) {
+                $failure = $lng->txt("ui_uihk_LehrkeCutsomerManager_customer_not_found");
+            }
+        }
+        // LEHRKE PATCH : END
         
         // --- render
         
@@ -460,6 +478,10 @@ class ilStartUpGUI
             $tpl->setVariable('LPE', $page_editor_html);
         }
 
+        // LEHRKE PATCH : START
+        $tpl->setVariable('CUSTOMER_WELCOME_TEXT','<div class="customer_welcome_text"><h1>'.$customer['customer_welcome_header'].'</h1>'.$customer['customer_welcome_text'].'</div>');
+        $tpl->setVariable('CUSTOMER_FOOTER_TEXT','<div class="customer_footer_text">'.$customer['customer_footer_text'].'</div>');
+        // LEHRKE PATCH : END
         $tpl->fillWindowTitle();
         $tpl->fillCssFiles();
         $tpl->fillJavaScriptFiles();
@@ -470,7 +492,10 @@ class ilStartUpGUI
     protected function showCodeForm($a_username = null, $a_form = null)
     {
         global $tpl, $lng;
-        
+
+        // LEHRKE PATCH : START
+        $this->ctrl->setParameter($this,'customer',CustomerVarHolder::get());
+        // LEHRKE PATCH : END
         self::initStartUpTemplate("tpl.login_reactivate_code.html");
 
         ilUtil::sendFailure($lng->txt("time_limit_reached"));
@@ -2090,7 +2115,10 @@ class ilStartUpGUI
         // framework is needed for language selection
         include_once("./Services/UICore/classes/class.ilUIFramework.php");
         ilUIFramework::init();
-        
+
+        // LEHRKE PATCH : START
+        $ilCtrl->setParameter($this,'customer',CustomerVarHolder::get()); //TODO
+        // LEHRKE PATCH : END
         $tpl->addBlockfile('CONTENT', 'content', 'tpl.startup_screen.html', 'Services/Init');
         $tpl->setVariable('HEADER_ICON', ilUtil::getImagePath('HeaderIcon.svg'));
         $tpl->setVariable("HEADER_ICON_RESPONSIVE", ilUtil::getImagePath("HeaderIconResponsive.svg"));

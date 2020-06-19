@@ -471,6 +471,16 @@ class ilUserProfile
         }
         
         $fields = $this->getStandardFields();
+        // LEHRKE PATCH : START
+        if (CustomerVarHolder::get()) {
+            require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
+            $customerRepository = new CustomerRepository();
+            $customer = $customerRepository->findByShortname(CustomerVarHolder::get());
+            if ($customer) {
+                $reqFields = json_decode($customer['req_fields'],true);
+            }
+        }
+        // LEHRKE PATCH : END
         $current_group = "";
         $custom_fields_done = false;
         foreach ($fields as $f => $p) {
@@ -537,6 +547,13 @@ class ilUserProfile
                         $ti->setMaxLength($p["maxlength"]);
                         $ti->setSize($p["size"]);
                         $ti->setRequired($ilSetting->get("require_" . $f));
+                        // LEHRKE PATCH : START
+                        if (isset($reqFields[$f]) && $reqFields[$f] == 1) {
+                            $ti->setRequired(true);
+                        } else {
+                            $ti->setRequired($ilSetting->get("require_".$f));
+                        }
+                        // LEHRKE PATCH : END
                         if (!$ti->getRequired() || $ti->getValue()) {
                             $ti->setDisabled($ilSetting->get("usr_settings_disable_" . $f));
                         }
@@ -723,6 +740,30 @@ class ilUserProfile
                             $ta->setValue($lng->txt("reg_passwd_via_mail"));
                         }
                         $a_form->addItem($ta);
+                        // LEHRKE PATCH : START
+                        if(self::$mode == self::MODE_REGISTRATION) {
+                            if (CustomerVarHolder::get()) {
+                                require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
+                                $customerRepository = new CustomerRepository();
+                                $customer = $customerRepository->findByShortname(CustomerVarHolder::get());
+                                if ($customer['has_password']) {
+                                    $companyID = new ilHiddenInputGUI('customer');
+                                    $companyID->setRequired(true);
+                                    $companyID->setValue(CustomerVarHolder::get());
+                                    $a_form->addItem($companyID);
+
+                                    $field = new ilFormSectionHeaderGUI();
+                                    $field->setTitle($lng->txt("ui_uihk_LehrkeCutsomerManager_company_password_header"));
+                                    $a_form->addItem($field);
+
+                                    $company_password = new ilPasswordInputGUI($lng->txt('ui_uihk_LehrkeCutsomerManager_caption_company_password'), 'company_password');
+                                    $company_password->setRetype(false);
+                                    $company_password->setRequired(true);
+                                    $a_form->addItem($company_password);
+                                }
+                            }
+                        }
+                        // LEHRKE PATCH : END
                     }
                     break;
                     
