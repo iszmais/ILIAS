@@ -236,6 +236,7 @@ class ilAccountRegistrationGUI
 
         $this->__initForm();
         $form_valid = $this->form->checkInput();
+
         // custom validation
         $valid_code = $valid_role = false;
                 

@@ -436,6 +436,7 @@ class ilStartUpGUI
             $success = $lng->txt("auth_account_code_used");
         }
         
+
         // --- render
         
         // Instantiate login template
