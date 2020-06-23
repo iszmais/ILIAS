@@ -236,7 +236,6 @@ class ilAccountRegistrationGUI
 
         $this->__initForm();
         $form_valid = $this->form->checkInput();
-        
         // custom validation
         $valid_code = $valid_role = false;
                 
@@ -375,6 +374,29 @@ class ilAccountRegistrationGUI
         } else {
             $password = $this->__createUser($valid_role);
             $this->__distributeMails($password);
+            // LEHRKE PATCH : START
+            require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
+            $customerRepository = new CustomerRepository();
+            $customer = $customerRepository->findByShortname($_POST['customer']);
+            $assignable_child_roles = $rbacreview->getAssignableChildRoles(intval($customer['ilias_category']));
+            $role_ids = array();
+            foreach ($assignable_child_roles as $acr)
+            {
+                $role_ids[$acr['title']] = $acr['rol_id'];
+            }
+            $role = $role_ids[$customer['shortname'].'_lerner'];
+            if ($role != null) {
+                $DIC->rbac()->admin()->assignUser($role, $this->userObj->getId());
+            } else {
+                $DIC->logger()->root()->info("Userrole '".$customer['shortname'].'_lerner'."' is missing");
+            }
+
+            $skin = explode(':',$customer['stylesheet']);
+            $this->userObj->setPref("style", $skin[1]);
+            $this->userObj->setPref("skin", $skin[0]);
+            $this->userObj->writePrefs();
+            $this->userObj->update();
+            // LEHRKE PATCH : END
             $this->login($password);
             return true;
         }
@@ -691,6 +713,9 @@ class ilAccountRegistrationGUI
             $this->tpl->setVariable('TXT_REGISTERED', $this->lng->txt('txt_submitted'));
         } elseif ($this->registration_settings->getRegistrationType() == IL_REG_ACTIVATION) {
             $login_url = './login.php?cmd=force_login&lang=' . $this->userObj->getLanguage();
+            // LEHRKE PATCH : START
+            $login_url = './login.php?cmd=force_login&lang='.$this->userObj->getLanguage().'&customer='.CustomerVarHolder::get();
+            // LEHRKE PATCH : END
             $this->tpl->setVariable('TXT_REGISTERED', sprintf($this->lng->txt('reg_confirmation_link_successful'), $login_url));
             $this->tpl->setVariable('REDIRECT_URL', $login_url);
         } else {

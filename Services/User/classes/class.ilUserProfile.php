@@ -741,27 +741,11 @@ class ilUserProfile
                         }
                         $a_form->addItem($ta);
                         // LEHRKE PATCH : START
-                        if(self::$mode == self::MODE_REGISTRATION) {
-                            if (CustomerVarHolder::get()) {
-                                require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
-                                $customerRepository = new CustomerRepository();
-                                $customer = $customerRepository->findByShortname(CustomerVarHolder::get());
-                                if ($customer['has_password']) {
-                                    $companyID = new ilHiddenInputGUI('customer');
-                                    $companyID->setRequired(true);
-                                    $companyID->setValue(CustomerVarHolder::get());
-                                    $a_form->addItem($companyID);
-
-                                    $field = new ilFormSectionHeaderGUI();
-                                    $field->setTitle($lng->txt("ui_uihk_LehrkeCutsomerManager_company_password_header"));
-                                    $a_form->addItem($field);
-
-                                    $company_password = new ilPasswordInputGUI($lng->txt('ui_uihk_LehrkeCutsomerManager_caption_company_password'), 'company_password');
-                                    $company_password->setRetype(false);
-                                    $company_password->setRequired(true);
-                                    $a_form->addItem($company_password);
-                                }
-                            }
+                        if (CustomerVarHolder::get()) {
+                            $companyID = new ilHiddenInputGUI('customer');
+                            $companyID->setRequired(true);
+                            $companyID->setValue(CustomerVarHolder::get());
+                            $a_form->addItem($companyID);
                         }
                         // LEHRKE PATCH : END
                     }

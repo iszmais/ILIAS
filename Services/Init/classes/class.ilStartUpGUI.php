@@ -223,7 +223,19 @@ class ilStartUpGUI
         // not controlled by login page editor
         $tpl->setVariable("PAGETITLE", "- " . $this->lng->txt("startpage"));
         $tpl->setVariable("ILIAS_RELEASE", $ilSetting->get("ilias_version"));
-        
+
+        // LEHRKE PATCH : START
+        if (isset($_GET['customer']) && strlen($_GET['customer'])) {
+            require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
+            $customer = (new CustomerRepository())->findByShortname($_GET['customer']);
+            if ($customer == null) {
+                ilUtil::sendFailure($GLOBALS['lng']->txt("ui_uihk_LehrkeCutsomerManager_customer_not_found"));
+            } else {
+                $tpl->setVariable('CUSTOMER_WELCOME_TEXT','<div class="customer_welcome_text"><h1>'.$customer['customer_welcome_header'].'</h1>'.$customer['customer_welcome_text'].'</div>');
+                $tpl->setVariable('CUSTOMER_FOOTER_TEXT','<div class="customer_footer_text">'.$customer['customer_footer_text'].'</div>');
+            }
+        }
+        // LEHRKE PATCH : END
         // check expired session and send message
         if ($GLOBALS['DIC']['ilAuthSession']->isExpired()) {
             ilUtil::sendFailure($GLOBALS['lng']->txt('auth_err_expired'));
@@ -273,11 +285,6 @@ class ilStartUpGUI
             if (empty($_GET['cookies'])) {
                 $additional_params = '';
                 ilUtil::setCookie("iltest", "cookie", false);
-                // LEHRKE PATCH : START
-                ilUtil::redirect("login.php?target=" . $_GET["target"] . "&soap_pw=" . $_GET["soap_pw"] .
-                    "&ext_uid=" . $_GET["ext_uid"] . "&cookies=nocookies&client_id=" .
-                    rawurlencode(CLIENT_ID) . "&lang=" . $lng->getLangKey() . $additional_params . "&customer=".CustomerVarHolder::get());
-                // LEHRKE PATCH : END
                 ilUtil::redirect("login.php?target=" . $_GET["target"] . "&soap_pw=" . $_GET["soap_pw"] .
                     "&ext_uid=" . $_GET["ext_uid"] . "&cookies=nocookies&client_id=" .
                     rawurlencode(CLIENT_ID) . "&lang=" . $lng->getLangKey() . $additional_params);
@@ -428,17 +435,6 @@ class ilStartUpGUI
             $lng->loadLanguageModule("auth");
             $success = $lng->txt("auth_account_code_used");
         }
-
-        // LEHRKE PATCH : START
-        if (isset($_GET['customer']) && strlen($_GET['customer'])) {
-            require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/LehrkeCustomerManager/classes/class.CustomerRepository.php';
-            $customerRepository = new CustomerRepository();
-            $customer = $customerRepository->findByShortname($_GET['customer']);
-            if ($customer == null) {
-                $failure = $lng->txt("ui_uihk_LehrkeCutsomerManager_customer_not_found");
-            }
-        }
-        // LEHRKE PATCH : END
         
         // --- render
         
@@ -478,10 +474,6 @@ class ilStartUpGUI
             $tpl->setVariable('LPE', $page_editor_html);
         }
 
-        // LEHRKE PATCH : START
-        $tpl->setVariable('CUSTOMER_WELCOME_TEXT','<div class="customer_welcome_text"><h1>'.$customer['customer_welcome_header'].'</h1>'.$customer['customer_welcome_text'].'</div>');
-        $tpl->setVariable('CUSTOMER_FOOTER_TEXT','<div class="customer_footer_text">'.$customer['customer_footer_text'].'</div>');
-        // LEHRKE PATCH : END
         $tpl->fillWindowTitle();
         $tpl->fillCssFiles();
         $tpl->fillJavaScriptFiles();
@@ -2117,7 +2109,7 @@ class ilStartUpGUI
         ilUIFramework::init();
 
         // LEHRKE PATCH : START
-        $ilCtrl->setParameter($this,'customer',CustomerVarHolder::get()); //TODO
+        $ilCtrl->setParameter(new self(),'customer',CustomerVarHolder::get());
         // LEHRKE PATCH : END
         $tpl->addBlockfile('CONTENT', 'content', 'tpl.startup_screen.html', 'Services/Init');
         $tpl->setVariable('HEADER_ICON', ilUtil::getImagePath('HeaderIcon.svg'));
