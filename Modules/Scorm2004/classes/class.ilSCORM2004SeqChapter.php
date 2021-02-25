@@ -35,7 +35,7 @@ require_once("./Modules/Scorm2004/classes/class.ilSCORM2004Chapter.php");
 */
 class ilSCORM2004SeqChapter extends ilSCORM2004Chapter
 {
-    public $tree;
+    public ilSCORM2004Tree $tree;
 
     /**
     * Constructor

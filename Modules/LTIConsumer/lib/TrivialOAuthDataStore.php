@@ -3,7 +3,7 @@
 /**
  * A Trivial memory-based store - no support for tokens
  */
-class TrivialOAuthDataStore extends OAuthDataStore
+class TrivialOAuthDataStore extends OAuthDataStore_overwrite
 {
     private $consumers = array();
 

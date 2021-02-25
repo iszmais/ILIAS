@@ -31,6 +31,7 @@ class ilSCORM2004Node
     public $type;
     public $id;
     public $slm_object;
+    private ilSCORM2004Tree $tree;
 
     /**
     * @param	object		$a_slm_object		ilObjScorm2004LearningModule object

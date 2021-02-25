@@ -1028,7 +1028,7 @@ abstract class assQuestion
     */
     public static function _getSuggestedSolutionOutput($question_id)
     {
-        $question = &assQuestion::_instanciateQuestion($question_id);
+        $question = assQuestion::_instanciateQuestion($question_id);
         if (!is_object($question)) {
             return "";
         }
@@ -1086,15 +1086,15 @@ abstract class assQuestion
             array('integer','integer'),
             array($question_id, $subquestion_index)
         );
+        $return = [];
         if ($result->numRows() == 1) {
             $row = $ilDB->fetchAssoc($result);
-            return array(
+            $return = [
                 "internal_link" => $row["internal_link"],
                 "import_id" => $row["import_id"]
-            );
-        } else {
-            return array();
+            ];
         }
+        return $return;
     }
     
     /**
@@ -4068,7 +4068,8 @@ abstract class assQuestion
      */
     public static function &_instanciateQuestionGUI($question_id)
     {
-        return self::instantiateQuestionGUI($question_id);
+        $result = self::instantiateQuestionGUI($question_id);
+        return $result;
     }
 
     /**

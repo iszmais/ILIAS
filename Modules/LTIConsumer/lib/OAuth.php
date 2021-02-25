@@ -69,23 +69,53 @@ class OAuthToken
     }
 }
 
-class OAuthSignatureMethod
+abstract class OAuthSignatureMethod_overwrite
 {
-    public function check_signature(&$request, $consumer, $token, $signature)
-    {
+    /**
+     * Needs to return the name of the Signature Method (ie HMAC-SHA1)
+     * @return string
+     */
+    abstract public function get_name() : string;
+
+    /**
+     * Build up the signature
+     * NOTE: The output of this function MUST NOT be urlencoded.
+     * the encoding is handled in OAuthRequest when the final
+     * request is serialized
+     *
+     * @param OAuthRequest  $request
+     * @param OAuthConsumer $consumer
+     * @param OAuthToken    $token |null
+     *
+     * @return string
+     */
+    abstract public function build_signature(OAuthRequest $request, OAuthConsumer $consumer, OAuthToken $token) : string;
+
+    /**
+     * Verifies that a given signature is correct
+     *
+     * @param OAuthRequest  $request
+     * @param OAuthConsumer $consumer
+     * @param OAuthToken    $token
+     * @param string        $signature
+     *
+     * @return bool
+     */
+    public function check_signature(OAuthRequest &$request, OAuthConsumer $consumer, OAuthToken $token, string $signature
+    ) : bool {
         $built = $this->build_signature($request, $consumer, $token);
         return $built == $signature;
     }
 }
 
-class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
+class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod_overwrite
 {
-    public function get_name()
+    public function get_name() :string
     {
         return "HMAC-SHA1";
     }
 
-    public function build_signature($request, $consumer, $token)
+    public function build_signature(OAuthRequest $request, OAuthConsumer $consumer, OAuthToken $token) : string
     {
         global $OAuth_last_computed_signature;
         $OAuth_last_computed_signature = false;
@@ -107,14 +137,14 @@ class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod
     }
 }
 
-class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod
+class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod_overwrite
 {
-    public function get_name()
+    public function get_name() : string
     {
         return "PLAINTEXT";
     }
 
-    public function build_signature($request, $consumer, $token)
+    public function build_signature(OAuthRequest $request, OAuthConsumer $consumer, OAuthToken $token) : string
     {
         $sig = array(
       OAuthUtil::urlencode_rfc3986($consumer->secret)
@@ -134,9 +164,9 @@ class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod
     }
 }
 
-class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod
+class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod_overwrite
 {
-    public function get_name()
+    public function get_name() : string
     {
         return "RSA-SHA1";
     }
@@ -161,7 +191,7 @@ class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod
         throw Exception("fetch_private_cert not implemented");
     }
 
-    public function build_signature(&$request, $consumer, $token)
+    public function build_signature(OAuthRequest $request, OAuthConsumer $consumer, OAuthToken $token) : string
     {
         $base_string = $request->get_signature_base_string();
         $request->base_string = $base_string;
@@ -181,7 +211,8 @@ class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod
         return base64_encode($signature);
     }
 
-    public function check_signature(&$request, $consumer, $token, $signature)
+    public function check_signature(OAuthRequest &$request, OAuthConsumer $consumer, OAuthToken $token, string $signature
+    ) : bool
     {
         $decoded_sig = base64_decode($signature);
 
@@ -252,18 +283,8 @@ class OAuthRequest
             // Parse the query-string to find GET parameters
             $parameters = OAuthUtil::parse_parameters($_SERVER['QUERY_STRING']);
 
-            $ourpost = $_POST;
-            // Deal with magic_quotes
-            // http://www.php.net/manual/en/security.magicquotes.disabling.php
-            if (get_magic_quotes_gpc()) {
-                $outpost = array();
-                foreach ($_POST as $k => $v) {
-                    $v = stripslashes($v);
-                    $ourpost[$k] = $v;
-                }
-            }
             // Add POST Parameters if they exist
-            $parameters = array_merge($parameters, $ourpost);
+            $parameters = array_merge($parameters, $_POST);
 
             // We have a Authorization-header with OAuth data. Parse the header
             // and add those overriding any duplicates from GET or POST
@@ -711,7 +732,7 @@ class OAuthServer
     }
 }
 
-class OAuthDataStore
+class OAuthDataStore_overwrite
 {
     public function lookup_consumer($consumer_key)
     {

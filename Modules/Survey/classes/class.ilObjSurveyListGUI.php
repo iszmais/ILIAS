@@ -13,7 +13,7 @@ class ilObjSurveyListGUI extends ilObjectListGUI
     /**
      * @var ilRbacSystem
      */
-    protected $rbacsystem;
+    protected ilRbacSystem $rbacsystem;
 
     /**
     * constructor

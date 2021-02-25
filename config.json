@@ -1,0 +1,25 @@
+{
+  "common" : {
+    "client_id" : "ilias",
+    "master_password" : "ohP8quah"
+  },
+  "database" : {
+    "type" : "mysql",
+    "database" : "ilias",
+    "user" : "root",
+    "password" : "root"
+  },
+  "filesystem" : {
+    "data_dir" : "/var/www/ilias_external/media/ilias"
+  },
+  "http" : {
+    "path" : "http://ilias"
+  },
+  "systemfolder" : {
+    "contact" : {
+      "firstname" : "Ingmar",
+      "lastname" : "Szmais",
+      "email" : "iszmais@databay.de"
+    }
+  }
+}
