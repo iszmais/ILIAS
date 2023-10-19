@@ -24,6 +24,7 @@ use ILIAS\User\UserGUIRequest;
 use ILIAS\FileUpload\FileUpload;
 use ILIAS\ResourceStorage\Services as ResourceStorageServices;
 use ILIAS\ResourceStorage\Stakeholder\ResourceStakeholder;
+use ILIAS\LegalDocuments\Conductor;
 
 /**
  * Class ilObjUserGUI
@@ -61,6 +62,7 @@ class ilObjUserGUI extends ilObjectGUI
     private ilUserDefinedFields $user_defined_fields;
 
     private int $usrf_ref_id;
+    private Conductor $legal_documents;
 
     public function __construct(
         $a_data,
@@ -112,6 +114,7 @@ class ilObjUserGUI extends ilObjectGUI
         $this->requested_letter = $this->user_request->getLetter();
         $this->requested_baseClass = $this->user_request->getBaseClass();
         $this->requested_search = $this->user_request->getSearch();
+        $this->legal_documents = $DIC['legalDocuments'];
     }
 
     public function executeCommand(): void
@@ -567,7 +570,6 @@ class ilObjUserGUI extends ilObjectGUI
         // get form
         $this->initForm('edit');
         $this->getValues();
-        $this->showAcceptedTermsOfService();
         $this->tpl->setContent($this->form_gui->getHTML());
     }
 
@@ -915,10 +917,8 @@ class ilObjUserGUI extends ilObjectGUI
         $data['approve_date'] = ($this->object->getApproveDate() != '')
             ? ilDatePresentation::formatDate(new ilDateTime($this->object->getApproveDate(), IL_CAL_DATETIME))
             : null;
-        $data['agree_date'] = ($this->object->getAgreeDate() != '')
-            ? ilDatePresentation::formatDate(new ilDateTime($this->object->getAgreeDate(), IL_CAL_DATETIME))
-            : null;
-        $data['last_login'] = ($this->object->getLastLogin() != '')
+
+        $data["last_login"] = ($this->object->getLastLogin() != '')
             ? ilDatePresentation::formatDate(new ilDateTime($this->object->getLastLogin(), IL_CAL_DATETIME))
             : null;
         $data['active'] = $this->object->getActive();
@@ -1071,9 +1071,16 @@ class ilObjUserGUI extends ilObjectGUI
 
         // create date, approve date, agreement date, last login
         if ($a_mode == 'edit') {
-            $sia = ['create_date', 'approve_date', 'agree_date', 'last_login', 'owner'];
-            foreach ($sia as $a) {
+            $sia = [
+                'create_date' => '',
+                'approve_date' => '',
+                ...$this->legal_documents->userManagementFields($this->object),
+                'last_login' => '',
+                'owner' => '',
+            ];
+            foreach ($sia as $a => $v) {
                 $siai = new ilNonEditableValueGUI($this->lng->txt($a), $a);
+                $siai->setValue($v);
                 $this->form_gui->addItem($siai);
             }
         }
@@ -1915,12 +1922,11 @@ class ilObjUserGUI extends ilObjectGUI
             $ilCtrl->redirectByClass(['ilStartUpGUI', 'ilPasswordAssistanceGUI'], 'showUsernameAssistanceForm');
         } elseif ('pwassist' == $a_target) {
             $ilCtrl->redirectByClass(['ilStartUpGUI', 'ilPasswordAssistanceGUI'], '');
-        } elseif ('agreement' == $a_target) {
-            $ilCtrl->setTargetScript('ilias.php');
-            if ($ilUser->getId() > 0 && !$ilUser->isAnonymous()) {
-                $ilCtrl->redirectByClass(['ildashboardgui', 'ilpersonalprofilegui'], 'showUserAgreement');
-            } else {
-                $ilCtrl->redirectByClass(['ilStartUpGUI'], 'showTermsOfService');
+        } else {
+            $target = $this->legal_documents->findGotoLink($a_target);
+            if ($target->isOK()) {
+                $ilCtrl->setTargetScript('ilias.php');
+                $ilCtrl->redirectByClass($target->value()->guiPath(), $target->value()->command());
             }
         }
 
@@ -1979,40 +1985,5 @@ class ilObjUserGUI extends ilObjectGUI
         }
 
         return $profile_maybe_incomplete;
-    }
-
-    protected function showAcceptedTermsOfService(): void
-    {
-        /** @var $agree_date ilNonEditableValueGUI */
-        $agree_date = $this->form_gui->getItemByPostVar('agree_date');
-        if ($agree_date && $agree_date->getValue()) {
-            $this->lng->loadLanguageModule('tos');
-            $helper = new \ilTermsOfServiceHelper();
-            /** @var ilObjUser $user */
-            $user = $this->object;
-            $entity = $helper->getCurrentAcceptanceForUser($user);
-            if ($entity->getId()) {
-                $modal = $this->ui_factory
-                    ->modal()
-                    ->lightbox([
-                        $this->ui_factory->modal()->lightboxTextPage($entity->getText(), $entity->getTitle())
-                    ]);
-
-                $titleLink = $this->ui_factory
-                    ->button()
-                    ->shy($entity->getTitle(), '#')
-                    ->withOnClick($modal->getShowSignal());
-
-                $agreement_document = new ilNonEditableValueGUI(
-                    $this->lng->txt('tos_agreement_document'),
-                    '',
-                    true
-                );
-                $agreement_document->setValue($this->ui_renderer->render([$titleLink, $modal]));
-                $agree_date->addSubItem($agreement_document);
-            }
-        } elseif ($agree_date) {
-            $agree_date->setValue($this->lng->txt('tos_not_accepted_yet'));
-        }
     }
 }

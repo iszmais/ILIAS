@@ -221,7 +221,7 @@ class AdministrationMainBarProvider extends AbstractStaticMainMenuProvider
             "communication" =>
                 array("mail", "cadm", "nwss", "coms", "adn", "awra", "nota"),
             "user_administration" =>
-                array("usrf", 'tos', "rolf", "otpl", "auth", "ps"),
+            array("usrf", 'tos', 'dpro', "rolf", "otpl", "auth", "ps"),
             "search_and_find" =>
                 array("seas", "mds", "taxs"),
             "extending_ilias" =>

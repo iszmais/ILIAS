@@ -39,7 +39,6 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
     protected ilLogger $logger;
     protected ilGlobalTemplateInterface $mainTemplate;
     protected ilObjUser $user;
-    protected ilTermsOfServiceDocumentEvaluation $termsOfServiceEvaluation;
     protected ServerRequestInterface $httpRequest;
     protected \ILIAS\DI\Container $dic;
     protected ilAuthSession $authSession;
@@ -56,7 +55,6 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
      */
     public function __construct(
         ilObjUser $user = null,
-        ilTermsOfServiceDocumentEvaluation $termsOfServiceEvaluation = null,
         ilGlobalTemplateInterface $mainTemplate = null,
         ServerRequestInterface $httpRequest = null
     ) {
@@ -68,11 +66,6 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
             $user = $DIC->user();
         }
         $this->user = $user;
-
-        if ($termsOfServiceEvaluation === null) {
-            $termsOfServiceEvaluation = $DIC['tos.document.evaluator'];
-        }
-        $this->termsOfServiceEvaluation = $termsOfServiceEvaluation;
 
         if ($mainTemplate === null) {
             $mainTemplate = $DIC->ui()->mainTemplate();
@@ -309,7 +302,7 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
         $page_editor_html = $this->showShibbolethLoginForm($page_editor_html);
         $page_editor_html = $this->showSamlLoginForm($page_editor_html);
         $page_editor_html = $this->showRegistrationLinks($page_editor_html);
-        $page_editor_html = $this->showTermsOfServiceLink($page_editor_html);
+        $page_editor_html = $this->showLegalDocumentsLink($page_editor_html);
         $page_editor_html = $this->purgePlaceholders($page_editor_html);
 
         // check expired session and send message
@@ -331,8 +324,7 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
         if ($page_editor_html !== '') {
             $tpl->setVariable('LPE', $page_editor_html);
         }
-        $tosWithdrawalGui = new ilTermsOfServiceWithdrawalGUIHelper($this->user);
-        $tosWithdrawalGui->setWithdrawalInfoForLoginScreen($this->httpRequest);
+
         self::printToGlobalTemplate($tpl);
     }
 
@@ -1078,36 +1070,19 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
         );
     }
 
-    /**
-     * Show terms of service link
-     */
-    protected function showTermsOfServiceLink(string $page_editor_html): string
+    protected function showLegalDocumentsLink(string $page_editor_html): string
     {
         global $tpl;
+        global $DIC;
 
-        if (!$this->user->getId()) {
+        if (0 === $this->user->getId()) {
             $this->user->setId(ANONYMOUS_USER_ID);
         }
 
-        $helper = new ilTermsOfServiceHelper();
-        if ($helper->isGloballyEnabled() && $this->termsOfServiceEvaluation->hasDocument()) {
-            $utpl = new ilTemplate('tpl.login_terms_of_service_link.html', true, true, 'Services/Init');
-            $utpl->setVariable('TXT_TERMS_OF_SERVICE', $this->lng->txt('usr_agreement'));
-            $utpl->setVariable('LINK_TERMS_OF_SERVICE', $this->ctrl->getLinkTarget($this, 'showTermsOfService'));
-
-            return $this->substituteLoginPageElements(
-                $tpl,
-                $page_editor_html,
-                $utpl->get(),
-                '[list-user-agreement]',
-                'USER_AGREEMENT'
-            );
-        }
-
         return $this->substituteLoginPageElements(
-            $GLOBALS['tpl'],
+            $tpl,
             $page_editor_html,
-            '',
+            $DIC['legalDocuments']->loginPageHTML(),
             '[list-user-agreement]',
             'USER_AGREEMENT'
         );
@@ -1377,12 +1352,10 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
             $this->ctrl->setParameter($this, "client_id", "");
         }
 
-        $tosWithdrawalGui = new ilTermsOfServiceWithdrawalGUIHelper($this->user);
-
         $tpl->setVariable("TXT_PAGEHEADLINE", $this->lng->txt("logout"));
         $tpl->setVariable(
             "TXT_LOGOUT_TEXT",
-            $this->lng->txt("logout_text") . $tosWithdrawalGui->getWithdrawalTextForLogoutScreen($this->httpRequest)
+            $this->lng->txt("logout_text") . $DIC['legalDocuments']->logoutText()
         );
         $tpl->setVariable("TXT_LOGIN", $this->lng->txt("login_to_ilias"));
         $tpl->setVariable(
@@ -1407,9 +1380,6 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
         );
 
         $user_language = $this->user->getLanguage();
-
-        $tosWithdrawalGui = new ilTermsOfServiceWithdrawalGUIHelper($this->user);
-        $tosWithdrawalGui->handleWithdrawalLogoutRequest($this->httpRequest, $this);
 
         $used_external_auth_mode = ilSession::get('used_external_auth_mode');
 
@@ -1465,60 +1435,11 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
         $tpl->printToStdout();
     }
 
-    /**
-     * Get terms of service
-     */
-    protected function getAcceptance(): void
+    protected function showLegalDocuments(): void
     {
-        $this->showTermsOfService();
-    }
-
-    protected function confirmAcceptance(): void
-    {
-        $this->showTermsOfService(true);
-    }
-
-    protected function confirmWithdrawal(): void
-    {
-        if (!$this->user->getId()) {
-            $this->user->setId(ANONYMOUS_USER_ID);
-        }
-        $back_to_login = false;
-        if ($this->user->getPref('consent_withdrawal_requested') != 1) {
-            $back_to_login = true;
-        }
-        $tpl = self::initStartUpTemplate('tpl.view_terms_of_service.html', $back_to_login, !$back_to_login);
-
-        $helper = new ilTermsOfServiceHelper();
-        $handleDocument = $helper->isGloballyEnabled() && $this->termsOfServiceEvaluation->hasDocument();
-        if ($handleDocument) {
-            $document = $this->termsOfServiceEvaluation->document();
-            if ('confirmWithdrawal' === $this->ctrl->getCmd()) {
-                if (isset($this->httpRequest->getParsedBody()['status']) && 'withdrawn' === $this->httpRequest->getParsedBody()['status']) {
-                    $helper->deleteAcceptanceHistoryByUser($this->user->getId());
-                    $this->ctrl->redirectToUrl(self::logoutUrl());
-                }
-            }
-
-            $tpl->setVariable('FORM_ACTION', $this->ctrl->getFormAction($this, $this->ctrl->getCmd()));
-            $tpl->setVariable('ACCEPT_CHECKBOX', ilLegacyFormElementsUtil::formCheckbox(0, 'status', 'accepted'));
-            $tpl->setVariable('ACCEPT_TERMS_OF_SERVICE', $this->lng->txt('accept_usr_agreement'));
-            $tpl->setVariable('TXT_SUBMIT', $this->lng->txt('submit'));
-
-            $tpl->setPermanentLink('usr', null, 'agreement');
-            $tpl->setVariable('TERMS_OF_SERVICE_CONTENT', $document->content());
-        } else {
-            $tpl->setVariable(
-                'TERMS_OF_SERVICE_CONTENT',
-                sprintf(
-                    $this->lng->txt('no_agreement_description'),
-                    'mailto:' . ilLegacyFormElementsUtil::prepareFormOutput(
-                        ilSystemSupportContacts::getMailsToAddress()
-                    )
-                )
-            );
-        }
-
+        global $DIC;
+        $tpl = self::initStartUpTemplate(['agreement.html', 'Services/LegalDocuments'], true, false);
+        $tpl->setVariable('CONTENT', $DIC['legalDocuments']->agreeContent(self::class, __FUNCTION__));
         self::printToGlobalTemplate($tpl);
     }
 

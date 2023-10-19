@@ -64,11 +64,10 @@ class ilMailTest extends ilMailBaseTest
             $user = $this
                 ->getMockBuilder(ilObjUser::class)
                 ->disableOriginalConstructor()
-                ->onlyMethods(['getId', 'hasToAcceptTermsOfService', 'checkTimeLimit', 'getActive'])
+                ->onlyMethods(['getId', 'checkTimeLimit', 'getActive'])
                 ->getMock();
             $user->method('getId')->willReturn($usrId);
             $user->method('getActive')->willReturn(true);
-            $user->method('hasToAcceptTermsOfService')->willReturn(false);
             $user->method('checkTimeLimit')->willReturn(true);
             $userInstanceById[$usrId] = $user;
 

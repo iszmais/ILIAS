@@ -1,0 +1,12 @@
+{
+    "maintenance_model": "Classic",
+    "first_maintainer": "lscharmer(87863)",
+    "second_maintainer": "",
+    "implicit_maintainers": [],
+    "coordinator": [],
+    "tester": "",
+    "testcase_writer": "",
+    "path": "Services/DataProtection",
+    "belong_to_component": "None",
+    "used_in_components": []
+}

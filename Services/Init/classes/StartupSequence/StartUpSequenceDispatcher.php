@@ -13,6 +13,7 @@ use ilForcedUserPasswordChangeStartUpStep;
 use ilTermsOfServiceWithdrawalStartUpStep;
 use ilUserProfileStartUpStep;
 use SplQueue;
+use ILIAS\LegalDocuments\StartUpStep;
 
 /**
  * Class StartupSequenceDispatcher
@@ -34,11 +35,9 @@ class StartUpSequenceDispatcher
     protected function initSequence(): void
     {
         $this->sequence = new SplQueue();
-        $this->sequence->push(new ilTermsOfServiceWithdrawalStartUpStep(
-            $this->dic
-        ));
-        $this->sequence->push(new ilTermsOfServiceAcceptanceStartUpStep(
-            $this->dic
+        $this->sequence->push(new StartUpStep(
+            $this->dic->ctrl(),
+            $this->dic['legalDocuments']
         ));
         $this->sequence->push(new ilUserProfileStartUpStep(
             $this->dic->user(),

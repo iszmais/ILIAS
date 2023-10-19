@@ -229,8 +229,8 @@ class PageContentProvider extends AbstractModificationProvider
 
             $footer = $f->mainControls()->footer($links, $text);
 
-            $tosWithdrawalGui = new \ilTermsOfServiceWithdrawalGUIHelper($this->dic->user());
-            $footer = $tosWithdrawalGui->modifyFooter($footer);
+            global $DIC;
+            $footer = $DIC['legalDocuments']->modifyFooter($footer);
 
             if (self::$perma_link !== "") {
                 $footer = $footer->withPermanentURL(new URI(self::$perma_link));

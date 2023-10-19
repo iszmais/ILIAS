@@ -20,6 +20,9 @@ declare(strict_types=1);
 
 use ILIAS\BackgroundTasks\Implementation\Bucket\BasicBucket;
 use ILIAS\Mail\Autoresponder\AutoresponderService;
+use ILIAS\LegalDocuments\Conductor;
+use ILIAS\Data\Result\Ok;
+use ILIAS\Data\Result\Error;
 
 /**
  * @author Stefan Meyer <meyer@leifos.com>
@@ -58,6 +61,7 @@ class ilMail
     protected int $maxRecipientCharacterLength = 998;
     protected ilMailMimeSenderFactory $senderFactory;
     protected ilObjUser $actor;
+    protected readonly Conductor $legal_documents;
 
     public function __construct(
         int $a_user_id,
@@ -93,6 +97,7 @@ class ilMail
             return (int) ilObjUser::_lookupId($login);
         };
         $this->auto_responder_service = $auto_responder_service ?? $DIC->mail()->autoresponder();
+        $this->legal_documents = $DIC['legalDocuments'];
         $this->user_id = $a_user_id;
         if (null === $this->mail_obj_ref_id) {
             $this->readMailObjectReferenceId();
@@ -675,14 +680,16 @@ class ilMail
 
             $mailOptions = $this->getMailOptionsByUserId($user->getId());
 
-            $canReadInternalMails = !$user->hasToAcceptTermsOfService() && $user->checkTimeLimit();
 
-            if ($this->isSystemMail() && !$canReadInternalMails) {
+            $canReadInternalMails = $this->legal_documents->userCanReadInternalMail()->applyTo($user->checkTimeLimit() ? new Ok($user) : new Error('Expired Account'))->except(
+                fn ($error) => new Error(is_string($error) ? $error : $error->getMessage())
+            );
+
+            if ($this->isSystemMail() && !$canReadInternalMails->isOk()) {
                 $this->logger->debug(sprintf(
-                    "Skipped recipient with id %s (Accepted User Agreement:%s|Expired Account:%s)",
+                    "Skipped recipient with id %s (%s)",
                     $usrId,
-                    var_export(!$user->hasToAcceptTermsOfService(), true),
-                    var_export(!$user->checkTimeLimit(), true)
+                    $canReadInternalMails->error()
                 ));
                 continue;
             }
@@ -699,7 +706,7 @@ class ilMail
                     $mailOptions->getIncomingType() === ilMailOptions::INCOMING_BOTH
                 );
 
-                if (!$canReadInternalMails || $wantsToReceiveExternalEmail) {
+                if (!$canReadInternalMails->isOk() || $wantsToReceiveExternalEmail) {
                     $emailAddresses = $mailOptions->getExternalEmailAddresses();
                     $usrIdToExternalEmailAddressesMap[$user->getId()] = $emailAddresses;
 
