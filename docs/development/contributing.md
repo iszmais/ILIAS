@@ -21,6 +21,7 @@ In general we consider everyone who takes part in the development of ILIAS a
 contributor, where the contribution could take various forms, e.g. testing,
 creating feature request, writing documentation, reporting security issues. We
 aim to include everyone performing these or similar activities in our processes.
+This includes Coordinators and every person with a Authority the same as external developers.
 
 For practical reasons we need to define a contributor to be everyone who wants
 to contribute commits to our repository for now. We trying to figure out ways to
