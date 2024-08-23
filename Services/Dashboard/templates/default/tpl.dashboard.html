@@ -1,3 +1,24 @@
 <div class="ilDashboardMainContent">
+<script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+<input id="wpn-channel"></input>
+<button id="wpn-start">Start</button>
+<button id="wpn-stop">Stop</button>
+<script>
+  document.querySelector('#wpn-start').addEventListener('click', () => {
+    var input = document.querySelector('#wpn-channel').value
+    if (input !== '') {
+      const beamsClient = new PusherPushNotifications.Client({
+        instanceId: '5827f13b-206e-47a6-860c-34090e4f382a',
+      });
+      beamsClient.start().then(() => beamsClient.addDeviceInterest(input))
+    }
+  })
+  document.querySelector('#wpn-stop').addEventListener('click', () => {
+    const beamsClient = new PusherPushNotifications.Client({
+      instanceId: '5827f13b-206e-47a6-860c-34090e4f382a',
+    });
+    beamsClient.stop()
+  })
+</script>
 {CONTENT}
 </div>
