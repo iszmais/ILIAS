@@ -721,7 +721,7 @@ class ilObjectListGUI
         $this->access_cache = [];
         $this->ref_id = $ref_id;
         $this->obj_id = $obj_id;
-        $this->object_properties = $this->object_dic['object_properties']->getFor($obj_id);
+        $this->object_properties = $this->object_dic['object_properties_agregator']->getFor($obj_id);
         $this->setTitle($title);
         $this->setDescription($description);
 
@@ -1832,6 +1832,14 @@ class ilObjectListGUI
         }
     }
 
+    public function insertTestScreenCommand(): void
+    {
+        if ($this->std_cmd_only || $this->type !== 'tst') {
+            return;
+        }
+        $this->insertCommand($this->getCommandLink('testScreen'), $this->lng->txt('tst_start_test'));
+    }
+
     public function insertInfoScreenCommand(): void
     {
         if ($this->std_cmd_only) {
@@ -1845,12 +1853,25 @@ class ilObjectListGUI
         );
     }
 
+    public function handleDisableInfoScreenCommand(): void
+    {
+        $object = ilObjectFactory::getInstanceByObjId($this->obj_id);
+
+        if (
+            $this->type === 'tst'
+            && $object !== null
+            && $object->getMainSettings()->getAdditionalSettings()->getHideInfoTab()
+        ) {
+            $this->enableInfoScreen(false);
+        }
+    }
+
     /**
      * Insert common social commands (comments, notes, tagging)
      */
     public function insertCommonSocialCommands(bool $header_actions = false): void
     {
-        if ($this->std_cmd_only || ($this->user->getId() == ANONYMOUS_USER_ID)) {
+        if ($this->std_cmd_only || $this->user->isAnonymous()) {
             return;
         }
 
@@ -1903,6 +1924,12 @@ class ilObjectListGUI
         }
     }
 
+    /**
+     * ks, 23 OCT 2023: This function is badly named and it already was before
+     * the changes made today. I decided to keept this so, for the time being
+     * as changes would be needed in multiple child classes and as this should
+     * change anyway.
+     */
     public function insertTimingsCommand(): void
     {
         if (
@@ -1918,7 +1945,7 @@ class ilObjectListGUI
 
         // #18737
         if ($this->reference_ref_id) {
-            $this->ctrl->setParameterByClass('ilobjectactivationgui', 'ref_id', $this->reference_ref_id);
+            $this->ctrl->setParameterByClass('ilconditionhandlergui', 'ref_id', $this->reference_ref_id);
         }
 
         if (
@@ -1926,25 +1953,41 @@ class ilObjectListGUI
             $this->checkCommandAccess('write', '', $this->ref_id, $this->type)
         ) {
             $this->ctrl->setParameterByClass(
-                'ilobjectactivationgui',
+                get_class($this->container_obj),
+                'tl_id',
+                $this->ref_id
+            );
+            $time_limit_link = $this->ctrl->getLinkTargetByClass(
+                get_class($this->container_obj),
+                'editAvailabilityPeriod'
+            );
+            $this->insertCommand($time_limit_link, $this->lng->txt('edit_availability_period'));
+            $this->ctrl->clearParameterByClass(
+                get_class($this->container_obj),
+                'tl_id',
+            );
+
+            $this->ctrl->setParameterByClass(
+                'ilconditionhandlergui',
                 'cadh',
                 $this->ajax_hash
             );
             $this->ctrl->setParameterByClass(
-                'ilobjectactivationgui',
+                'ilconditionhandlergui',
                 'parent_id',
                 $parent_ref_id
             );
-            $cmd_lnk = $this->ctrl->getLinkTargetByClass(
-                [$this->gui_class_name, 'ilcommonactiondispatchergui', 'ilobjectactivationgui'],
-                'edit'
+
+            $availbility_link = $this->ctrl->getLinkTargetByClass(
+                [$this->gui_class_name, 'ilcommonactiondispatchergui', 'ilobjectactivationgui', 'ilconditionhandlergui'],
+                'listConditions'
             );
 
-            $this->insertCommand($cmd_lnk, $this->lng->txt('obj_activation_list_gui'));
+            $this->insertCommand($availbility_link, $this->lng->txt('preconditions'));
         }
 
         if ($this->reference_ref_id) {
-            $this->ctrl->setParameterByClass('ilobjectactivationgui', 'ref_id', $this->ref_id);
+            $this->ctrl->setParameterByClass('ilconditionhandlergui', 'ref_id', $this->ref_id);
         }
     }
 
@@ -2060,6 +2103,9 @@ class ilObjectListGUI
             }
             $this->insertLPSettingsCommand();
 
+            $this->insertTestScreenCommand();
+
+            $this->handleDisableInfoScreenCommand();
 
             // info screen command
             if ($this->getInfoScreenStatus()) {
@@ -2069,11 +2115,6 @@ class ilObjectListGUI
             $this->insertLPCommand();
 
             if (!$this->isMode(self::IL_LIST_AS_TRIGGER)) {
-                // edit timings
-                if ($this->timings_enabled) {
-                    $this->insertTimingsCommand();
-                }
-
                 // delete
                 if ($this->delete_enabled) {
                     $this->insertDeleteCommand();
@@ -2098,6 +2139,10 @@ class ilObjectListGUI
                 if ($this->repository_transfer_enabled) {
                     $this->insertCutCommand(true);
                     $this->insertCopyCommand(true);
+                }
+
+                if ($this->timings_enabled) {
+                    $this->insertTimingsCommand();
                 }
 
                 // subscribe

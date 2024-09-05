@@ -24,6 +24,7 @@ use ILIAS\User\UserGUIRequest;
 use ILIAS\FileUpload\FileUpload;
 use ILIAS\ResourceStorage\Services as ResourceStorageServices;
 use ILIAS\ResourceStorage\Stakeholder\ResourceStakeholder;
+use ILIAS\LegalDocuments\Conductor;
 
 /**
  * Class ilObjUserGUI
@@ -38,8 +39,6 @@ class ilObjUserGUI extends ilObjectGUI
     private ilHelpGUI $help;
     private ilTabsGUI $tabs;
     private ilMailMimeSenderFactory $mail_sender_factory;
-    private UIFactory $ui_factory;
-    private Renderer $ui_renderer;
 
     private FileUpload $uploads;
     private ResourceStorageServices $irss;
@@ -61,14 +60,13 @@ class ilObjUserGUI extends ilObjectGUI
     private ilUserDefinedFields $user_defined_fields;
 
     private int $usrf_ref_id;
+    private Conductor $legal_documents;
 
     public function __construct(
         $a_data,
         int $a_id,
         bool $a_call_by_reference = false,
-        bool $a_prepare_output = true,
-        UIFactory $ui_factory = null,
-        Renderer $ui_renderer = null
+        bool $a_prepare_output = true
     ) {
         /** @var ILIAS\DI\Container $DIC */
         global $DIC;
@@ -78,16 +76,6 @@ class ilObjUserGUI extends ilObjectGUI
         $this->mail_sender_factory = $DIC->mail()->mime()->senderFactory();
 
         $this->user_profile = new ilUserProfile();
-
-        if ($ui_factory === null) {
-            $ui_factory = $DIC['ui.factory'];
-        }
-        $this->ui_factory = $ui_factory;
-
-        if ($ui_renderer === null) {
-            $ui_renderer = $DIC['ui.renderer'];
-        }
-        $this->ui_renderer = $ui_renderer;
 
         $this->default_layout_and_style = $DIC['ilClientIniFile']->readVariable('layout', 'skin') .
                 ':' . $DIC['ilClientIniFile']->readVariable('layout', 'style');
@@ -112,6 +100,7 @@ class ilObjUserGUI extends ilObjectGUI
         $this->requested_letter = $this->user_request->getLetter();
         $this->requested_baseClass = $this->user_request->getBaseClass();
         $this->requested_search = $this->user_request->getSearch();
+        $this->legal_documents = $DIC['legalDocuments'];
     }
 
     public function executeCommand(): void
@@ -567,7 +556,6 @@ class ilObjUserGUI extends ilObjectGUI
         // get form
         $this->initForm('edit');
         $this->getValues();
-        $this->showAcceptedTermsOfService();
         $this->tpl->setContent($this->form_gui->getHTML());
     }
 
@@ -915,9 +903,7 @@ class ilObjUserGUI extends ilObjectGUI
         $data['approve_date'] = ($this->object->getApproveDate() != '')
             ? ilDatePresentation::formatDate(new ilDateTime($this->object->getApproveDate(), IL_CAL_DATETIME))
             : null;
-        $data['agree_date'] = ($this->object->getAgreeDate() != '')
-            ? ilDatePresentation::formatDate(new ilDateTime($this->object->getAgreeDate(), IL_CAL_DATETIME))
-            : null;
+
         $data['last_login'] = ($this->object->getLastLogin() != '')
             ? ilDatePresentation::formatDate(new ilDateTime($this->object->getLastLogin(), IL_CAL_DATETIME))
             : null;
@@ -1071,10 +1057,21 @@ class ilObjUserGUI extends ilObjectGUI
 
         // create date, approve date, agreement date, last login
         if ($a_mode == 'edit') {
-            $sia = ['create_date', 'approve_date', 'agree_date', 'last_login', 'owner'];
-            foreach ($sia as $a) {
-                $siai = new ilNonEditableValueGUI($this->lng->txt($a), $a);
-                $this->form_gui->addItem($siai);
+            $sia = [
+                'create_date' => '',
+                'approve_date' => '',
+                ...$this->legal_documents->userManagementFields($this->object),
+                'last_login' => '',
+                'owner' => '',
+            ];
+            foreach ($sia as $a => $v) {
+                if (is_string($v)) {
+                    $siai = new ilNonEditableValueGUI($this->lng->txt($a), $a);
+                    $siai->setValue($v);
+                    $this->form_gui->addItem($siai);
+                } else {
+                    $this->form_gui->addItem($v);
+                }
             }
         }
 
@@ -1136,6 +1133,7 @@ class ilObjUserGUI extends ilObjectGUI
             'title' => isset($settings['require_title']) && $settings['require_title']
         ];
         foreach ($fields as $field => $req) {
+            $max_len = $field === 'title' ? 32 : 128;
             if ($this->isSettingChangeable($field)) {
                 // #18795
                 $caption = ($field == 'title')
@@ -1143,7 +1141,7 @@ class ilObjUserGUI extends ilObjectGUI
                     : $field;
                 $inp = new ilTextInputGUI($this->lng->txt($caption), $field);
                 $inp->setSize(32);
-                $inp->setMaxLength(32);
+                $inp->setMaxLength($max_len);
                 $inp->setRequired($req);
                 $this->form_gui->addItem($inp);
             }
@@ -1220,8 +1218,8 @@ class ilObjUserGUI extends ilObjectGUI
 
         if ($this->isSettingChangeable('email')) {
             $em = new ilEMailInputGUI($this->lng->txt('email'), 'email');
-            $em->setRequired(isset($settings['require_email']) &&
-                $settings['require_email']);
+            $em->setRequired(isset($settings['require_email']) && $settings['require_email']);
+            $em->setMaxLength(128);
             $this->form_gui->addItem($em);
         }
 
@@ -1915,12 +1913,11 @@ class ilObjUserGUI extends ilObjectGUI
             $ilCtrl->redirectByClass(['ilStartUpGUI', 'ilPasswordAssistanceGUI'], 'showUsernameAssistanceForm');
         } elseif ('pwassist' == $a_target) {
             $ilCtrl->redirectByClass(['ilStartUpGUI', 'ilPasswordAssistanceGUI'], '');
-        } elseif ('agreement' == $a_target) {
-            $ilCtrl->setTargetScript('ilias.php');
-            if ($ilUser->getId() > 0 && !$ilUser->isAnonymous()) {
-                $ilCtrl->redirectByClass(['ildashboardgui', 'ilpersonalprofilegui'], 'showUserAgreement');
-            } else {
-                $ilCtrl->redirectByClass(['ilStartUpGUI'], 'showTermsOfService');
+        } else {
+            $target = $this->legal_documents->findGotoLink($a_target);
+            if ($target->isOK()) {
+                $ilCtrl->setTargetScript('ilias.php');
+                $ilCtrl->redirectByClass($target->value()->guiPath(), $target->value()->command());
             }
         }
 
@@ -1979,40 +1976,5 @@ class ilObjUserGUI extends ilObjectGUI
         }
 
         return $profile_maybe_incomplete;
-    }
-
-    protected function showAcceptedTermsOfService(): void
-    {
-        /** @var $agree_date ilNonEditableValueGUI */
-        $agree_date = $this->form_gui->getItemByPostVar('agree_date');
-        if ($agree_date && $agree_date->getValue()) {
-            $this->lng->loadLanguageModule('tos');
-            $helper = new \ilTermsOfServiceHelper();
-            /** @var ilObjUser $user */
-            $user = $this->object;
-            $entity = $helper->getCurrentAcceptanceForUser($user);
-            if ($entity->getId()) {
-                $modal = $this->ui_factory
-                    ->modal()
-                    ->lightbox([
-                        $this->ui_factory->modal()->lightboxTextPage($entity->getText(), $entity->getTitle())
-                    ]);
-
-                $titleLink = $this->ui_factory
-                    ->button()
-                    ->shy($entity->getTitle(), '#')
-                    ->withOnClick($modal->getShowSignal());
-
-                $agreement_document = new ilNonEditableValueGUI(
-                    $this->lng->txt('tos_agreement_document'),
-                    '',
-                    true
-                );
-                $agreement_document->setValue($this->ui_renderer->render([$titleLink, $modal]));
-                $agree_date->addSubItem($agreement_document);
-            }
-        } elseif ($agree_date) {
-            $agree_date->setValue($this->lng->txt('tos_not_accepted_yet'));
-        }
     }
 }

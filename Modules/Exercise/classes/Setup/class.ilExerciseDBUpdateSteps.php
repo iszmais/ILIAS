@@ -82,4 +82,138 @@ class ilExerciseDBUpdateSteps implements \ilDatabaseUpdateSteps
             );
         }
     }
+
+    public function step_7(): void
+    {
+        if (!$this->db->tableColumnExists('exc_assignment_peer', 'id')) {
+            $this->db->addTableColumn('exc_assignment_peer', 'id', array(
+                'type' => 'integer',
+                'notnull' => true,
+                'length' => 4,
+                'default' => 0
+            ));
+            $this->db->createSequence('exc_assignment_peer');
+        }
+    }
+
+    public function step_8(): void
+    {
+        $set = $this->db->queryF(
+            "SELECT * FROM exc_assignment_peer ",
+            [],
+            []
+        );
+        while ($rec = $this->db->fetchAssoc($set)) {
+            $next_id = $this->db->nextId("exc_assignment_peer");
+            $this->db->update(
+                "exc_assignment_peer",
+                [
+                "id" => ["integer", $next_id]
+            ],
+                [    // where
+                    "ass_id" => ["integer", $rec["ass_id"]],
+                    "giver_id" => ["integer", $rec["giver_id"]],
+                    "peer_id" => ["integer", $rec["peer_id"]]
+                ]
+            );
+        }
+    }
+
+    public function step_9(): void
+    {
+        $this->db->dropPrimaryKey("exc_assignment_peer");
+        $this->db->addPrimaryKey("exc_assignment_peer", ["id"]);
+    }
+
+    public function step_10(): void
+    {
+        $this->db->addUniqueConstraint("exc_assignment_peer", array('ass_id', 'giver_id', 'peer_id'), 'c1');
+    }
+
+    public function step_11(): void
+    {
+        $this->db->addIndex("exc_assignment_peer", ["ass_id"], "i1");
+    }
+
+    public function step_12(): void
+    {
+        if (!$this->db->tableColumnExists('exc_idl', 'requested')) {
+            $this->db->addTableColumn('exc_idl', 'requested', array(
+                'type' => 'integer',
+                'notnull' => true,
+                'length' => 1,
+                'default' => 0
+            ));
+        }
+    }
+
+    public function step_13(): void
+    {
+        if (!$this->db->tableColumnExists('exc_assignment', 'solution_rid')) {
+            $this->db->addTableColumn(
+                'exc_assignment',
+                'solution_rid',
+                [
+                    'type' => 'text',
+                    'notnull' => false,
+                    'length' => 64,
+                    'default' => ''
+                ]
+            );
+        }
+    }
+
+    public function step_14(): void
+    {
+        if (!$this->db->tableColumnExists('exc_mem_ass_status', 'feedback_rcid')) {
+            $this->db->addTableColumn(
+                'exc_mem_ass_status',
+                'feedback_rcid',
+                [
+                    'type' => 'text',
+                    'notnull' => false,
+                    'length' => 64,
+                    'default' => ''
+                ]
+            );
+        }
+    }
+
+    public function step_15(): void
+    {
+        if (!$this->db->tableExists('exc_team_data')) {
+            $this->db->createTable(
+                'exc_team_data',
+                [
+                    "id" => [
+                        'type' => 'integer',
+                        'notnull' => true,
+                        'length' => 4
+                    ],
+                    "feedback_rcid" => [
+                        'type' => 'text',
+                        'notnull' => false,
+                        'length' => 64,
+                        'default' => ''
+                    ]
+                ]
+            );
+        }
+        $this->db->addPrimaryKey('exc_team_data', ["id"]);
+    }
+
+    public function step_16(): void
+    {
+        $set = $this->db->queryF(
+            "SELECT DISTINCT il_exc_team.id FROM il_exc_team LEFT JOIN exc_team_data ON il_exc_team.id = exc_team_data.id WHERE exc_team_data.id IS NULL",
+            [],
+            []
+        );
+        while ($rec = $this->db->fetchAssoc($set)) {
+            $this->db->insert("exc_team_data", [
+                "id" => ["integer", (int) $rec["id"]],
+            ]);
+        }
+    }
+
 }

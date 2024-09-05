@@ -33,6 +33,7 @@ use ILIAS\Filesystem\Definitions\SuffixDefinitions;
 use ILIAS\FileUpload\Processor\InsecureFilenameSanitizerPreProcessor;
 use ILIAS\FileUpload\Processor\SVGBlacklistPreProcessor;
 use ILIAS\FileDelivery\Init;
+use ILIAS\LegalDocuments\Conductor;
 
 require_once("libs/composer/vendor/autoload.php");
 
@@ -356,6 +357,21 @@ class ilInitialisation
         };
     }
 
+    protected static function initUploadPolicies(\ILIAS\DI\Container $dic): void
+    {
+        $dic['upload_policy_repository'] = static function ($dic) {
+            return new UploadPolicyDBRepository($dic->database());
+        };
+
+        $dic['upload_policy_resolver'] = static function ($dic): UploadPolicyResolver {
+            return new UploadPolicyResolver(
+                $dic->rbac()->review(),
+                $dic->user(),
+                $dic['upload_policy_repository']->getAll(),
+            );
+        };
+    }
+
     /**
      * builds http path
      */
@@ -403,6 +419,9 @@ class ilInitialisation
 
         // remove everything after the first .php in the path
         $ilias_http_path = preg_replace('/(http|https)(:\/\/)(.*?\/.*?\.php).*/', '$1$2$3', $ilias_http_path);
+        $ilias_http_path = preg_replace('/goto.php\/$/', '', $ilias_http_path);
+        $ilias_http_path = preg_replace('/goto.php$/', '', $ilias_http_path);
+        $ilias_http_path = preg_replace('/go\/.*$/', '', $ilias_http_path);
 
         $f = new \ILIAS\Data\Factory();
         $uri = $f->uri(ilFileUtils::removeTrailingPathSeparators($ilias_http_path));
@@ -720,41 +739,9 @@ class ilInitialisation
         };
     }
 
-    protected static function initTermsOfService(\ILIAS\DI\Container $c): void
+    protected static function initLegalDocuments(Container $c): void
     {
-        $c['tos.criteria.type.factory'] = function (
-            \ILIAS\DI\Container $c
-        ): ilTermsOfServiceCriterionTypeFactoryInterface {
-            return new ilTermsOfServiceCriterionTypeFactory(
-                $c->rbac()->review(),
-                $c['ilObjDataCache'],
-                ilCountry::getCountryCodes()
-            );
-        };
-
-        $c['tos.service'] = function (\ILIAS\DI\Container $c): ilTermsOfServiceHelper {
-            $persistence = new ilTermsOfServiceDataGatewayFactory();
-            $persistence->setDatabaseAdapter($c->database());
-            return new ilTermsOfServiceHelper(
-                $persistence,
-                $c['tos.document.evaluator'],
-                $c['tos.criteria.type.factory'],
-                new ilObjTermsOfService()
-            );
-        };
-
-        $c['tos.document.evaluator'] = function (\ILIAS\DI\Container $c): ilTermsOfServiceDocumentEvaluation {
-            return new ilTermsOfServiceSequentialDocumentEvaluation(
-                new ilTermsOfServiceLogicalAndDocumentCriteriaEvaluation(
-                    $c['tos.criteria.type.factory'],
-                    $c->user(),
-                    $c->logger()->tos()
-                ),
-                $c->user(),
-                $c->logger()->tos(),
-                ilTermsOfServiceDocument::orderBy('sorting')->get()
-            );
-        };
+        $c['legalDocuments'] = static fn(Container $c) => new Conductor($c);
     }
 
     protected static function initAccessibilityControlConcept(\ILIAS\DI\Container $c): void
@@ -1282,7 +1269,7 @@ class ilInitialisation
         self::initCron($GLOBALS['DIC']);
         self::initAvatar($GLOBALS['DIC']);
         self::initCustomObjectIcons($GLOBALS['DIC']);
-        self::initTermsOfService($GLOBALS['DIC']);
+        self::initLegalDocuments($GLOBALS['DIC']);
         self::initAccessibilityControlConcept($GLOBALS['DIC']);
 
         // --- needs settings
@@ -1434,6 +1421,8 @@ class ilInitialisation
     {
         $init_http = new InitHttpServices();
         $init_http->init($container);
+
+        \ILIAS\StaticURL\Init::init($container);
     }
 
     /**
@@ -1530,6 +1519,8 @@ class ilInitialisation
             // load style definitions
             // use the init function with plugin hook here, too
             self::initStyle();
+
+            self::initUploadPolicies($DIC);
         }
 
         self::initUIFramework($GLOBALS["DIC"]);
@@ -1601,22 +1592,6 @@ class ilInitialisation
     }
 
     /**
-     * Extract current cmd from request
-     * @todo superglobal access <= refinery undefined
-     */
-    protected static function getCurrentCmd(): string
-    {
-        $cmd = $_POST['cmd'] ?? ($_GET['cmd'] ?? '');
-
-        if (is_array($cmd)) {
-            $cmd_keys = array_keys($cmd);
-            $cmd = array_shift($cmd_keys) ?? '';
-        }
-
-        return $cmd;
-    }
-
-    /**
      * Block authentication based on current request
      */
     protected static function blockedAuthentication(string $a_current_script): bool
@@ -1670,13 +1645,18 @@ class ilInitialisation
                 ilLoggerFactory::getLogger('auth')->debug('Blocked authentication for cmdClass: ' . $requestCmdClass);
                 return true;
             }
-            $cmd = self::getCurrentCmd();
-            if (
-                $cmd == "showTermsOfService" ||
-                $cmd == 'showAccountMigration' || $cmd == 'migrateAccount' ||
-                $cmd == 'processCode' || $cmd == 'showLoginPage' || $cmd == 'showLogout' ||
-                $cmd == 'doStandardAuthentication' || $cmd == 'doCasAuthentication'
-            ) {
+            $cmd = $DIC->ctrl()->getCmd();
+
+            if (in_array($cmd, [
+                'showLegalDocuments',
+                'showAccountMigration',
+                'migrateAccount',
+                'processCode',
+                'showLoginPage',
+                'showLogout',
+                'doStandardAuthentication',
+                'doCasAuthentication',
+            ], true)) {
                 ilLoggerFactory::getLogger('auth')->debug('Blocked authentication for cmd: ' . $cmd);
                 return true;
             }

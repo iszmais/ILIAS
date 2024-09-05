@@ -17,10 +17,12 @@
  *********************************************************************/
 
 use ILIAS\File\Icon\IconDatabaseRepository;
-use ILIAS\ResourceStorage\Flavour\Definition\CropToSquare;
+use ILIAS\ResourceStorage\Flavour\Definition\CropToRectangle;
 use ILIAS\ResourceStorage\Flavour\Definition\FlavourDefinition;
 use ILIAS\ResourceStorage\Flavour\Definition\PagesToExtract;
 use ILIAS\ResourceStorage\Services;
+use ILIAS\Data\DataSize;
+use ILIAS\Services\WOPI\Discovery\ActionDBRepository;
 
 /**
  * Class ilObjFileListGUI
@@ -35,21 +37,17 @@ class ilObjFileListGUI extends ilObjectListGUI
 
     private bool $use_flavor_for_cards = true;
     protected string $title;
-    private bool $persist = true;
-    private int $max_size = 512;
-    private FlavourDefinition $crop_definition;
-    private FlavourDefinition $extract_definition;
     private IconDatabaseRepository $icon_repo;
+    private ActionDBRepository $action_repo;
     private Services $irss;
 
     public function __construct(int $context = self::CONTEXT_REPOSITORY)
     {
-        global $DIC;
         parent::__construct($context);
 
-        $this->irss = $DIC->resourceStorage();
-        $this->crop_definition = new CropToSquare($this->persist, $this->max_size);
-        $this->extract_definition = new PagesToExtract($this->persist, $this->max_size, 1, true);
+        global $DIC;
+        $DIC->language()->loadLanguageModule('wopi');
+        $this->action_repo = new ActionDBRepository($DIC->database());
     }
 
     protected function getTileImagePath(): string
@@ -67,50 +65,19 @@ class ilObjFileListGUI extends ilObjectListGUI
         if ($img !== null && $img->exists()) {
             return $img->getFullPath();
         }
-
         // Fallback to use a flavour as tile image
-        if ($this->use_flavor_for_cards && ($flavour_path = $this->getCardImageFallbackPath(
+        if (!$this->use_flavor_for_cards) {
+            // Fallback to use a default tile image
+            return ilUtil::getImagePath('cont_tile/cont_tile_default_' . $this->type . '.svg');
+        }
+        if (($flavour_path = $this->getCardImageFallbackPath(
             $this->obj_id,
             $this->type
-        )) !== '') {
-            return $flavour_path;
+        )) === '') {
+            // Fallback to use a default tile image
+            return ilUtil::getImagePath('cont_tile/cont_tile_default_' . $this->type . '.svg');
         }
-
-        // Fallback to use a default tile image
-        return ilUtil::getImagePath('cont_tile/cont_tile_default_' . $this->type . '.svg');
-    }
-
-    /**
-     * @description Can be used to take preview flavours as card images
-     */
-    protected function getCardImageFallbackPath(int $obj_id, string $type): string
-    {
-        $rid = $this->irss->manage()->find(ilObjFileAccess::getListGUIData($obj_id)['rid'] ?? '');
-        if ($rid !== null) {
-            if ($this->irss->flavours()->possible($rid, $this->crop_definition)) {
-                $url = $this->irss->consume()->flavourUrls(
-                    $this->irss->flavours()->get(
-                        $rid,
-                        $this->crop_definition
-                    )
-                )->getURLs(false)->current();
-                if ($url !== null) {
-                    return $url;
-                }
-            }
-            if ($this->irss->flavours()->possible($rid, $this->extract_definition)) {
-                $url = $this->irss->consume()->flavourUrls(
-                    $this->irss->flavours()->get(
-                        $rid,
-                        $this->extract_definition
-                    )
-                )->getURLs(false)->current();
-                if ($url !== null) {
-                    return $url;
-                }
-            }
-        }
-        return '';
+        return $flavour_path;
     }
 
     /**
@@ -160,7 +127,6 @@ class ilObjFileListGUI extends ilObjectListGUI
         return $frame;
     }
 
-
     /**
      * Returns the icon image type.
      * For most objects, this is same as the object type, e.g. 'cat','fold'.
@@ -177,15 +143,6 @@ class ilObjFileListGUI extends ilObjectListGUI
     {
         $suffix = ilObjFileAccess::getListGUIData($this->obj_id)["suffix"] ?? "";
         return $this->icon_repo->getIconFilePathBySuffix($suffix);
-    }
-
-    /**
-     * getTitle overwritten in class.ilObjLinkResourceList.php
-     */
-    public function getTitle(): string
-    {
-        // Remove filename extension from title
-        return $this->secure(preg_replace('/\\.[a-z0-9]+\\z/i', '', $this->title));
     }
 
     /**
@@ -208,15 +165,15 @@ class ilObjFileListGUI extends ilObjectListGUI
         // Display a warning if a file is not a hidden Unix file, and
         // the filename extension is missing
         if (null === $revision && !preg_match('/^\\.|\\.[a-zA-Z0-9]+$/', $this->title)) {
-            $props[] = array(
+            $props[] = [
                 "alert" => false,
                 "property" => $DIC->language()->txt("filename_interoperability"),
                 "value" => $DIC->language()->txt("filename_extension_missing"),
-                'propertyNameVisible' => false,
-            );
+                'propertyNameVisible' => false
+            ];
         }
 
-        $props[] = array(
+        $props[] = [
             "alert" => false,
             "property" => $DIC->language()->txt("type"),
             "value" => ilObjFileAccess::_getFileExtension(
@@ -224,16 +181,20 @@ class ilObjFileListGUI extends ilObjectListGUI
                     ($file_data['title'] ?? "") :
                     $this->title
             ),
-            'propertyNameVisible' => false,
+            'propertyNameVisible' => false
+        ];
+
+        $data_size = new DataSize(
+            $file_data['size'] ?? 0,
+            DataSize::KB
         );
 
-
-        $props[] = array(
+        $props[] = [
             "alert" => false,
             "property" => $DIC->language()->txt("size"),
-            "value" => ilUtil::formatSize($file_data['size'] ?? 0, 'short'),
-            'propertyNameVisible' => false,
-        );
+            "value" => (string) $data_size,
+            'propertyNameVisible' => false
+        ];
         $version = $file_data['version'] ?? 1;
         if ($version > 1) {
             // add versions link
@@ -243,30 +204,30 @@ class ilObjFileListGUI extends ilObjectListGUI
             } else {
                 $value = $DIC->language()->txt("version") . ": $version";
             }
-            $props[] = array(
+            $props[] = [
                 "alert" => false,
                 "property" => $DIC->language()->txt("version"),
                 "value" => $value,
-                "propertyNameVisible" => false,
-            );
+                "propertyNameVisible" => false
+            ];
         }
 
         if (isset($file_data["date"])) {
-            $props[] = array(
+            $props[] = [
                 "alert" => false,
                 "property" => $DIC->language()->txt("last_update"),
                 "value" => ilDatePresentation::formatDate(new ilDateTime($file_data["date"], IL_CAL_DATETIME)),
-                'propertyNameVisible' => false,
-            );
+                'propertyNameVisible' => false
+            ];
         }
 
-        if (isset($file_data["page_count"]) && (int)$file_data["page_count"] > 0) {
-            $props[] = array(
+        if (isset($file_data["page_count"]) && (int) $file_data["page_count"] > 0) {
+            $props[] = [
                 "alert" => false,
                 "property" => $DIC->language()->txt("page_count"),
                 "value" => $file_data["page_count"],
-                'propertyNameVisible' => true,
-            );
+                'propertyNameVisible' => true
+            ];
         }
 
         return $props;
@@ -287,13 +248,15 @@ class ilObjFileListGUI extends ilObjectListGUI
         string $type,
         ?int $obj_id = null
     ): bool {
-        if (ilFileVersionsGUI::CMD_UNZIP_CURRENT_REVISION === $cmd) {
-            $file_data = ilObjFileAccess::getListGUIData($this->obj_id);
+        $data = ilObjFileAccess::getListGUIData($this->obj_id);
 
-            return ilObjFileAccess::isZIP($file_data['mime'] ?? null);
-        }
+        $additional_check = match ($cmd) {
+            ilFileVersionsGUI::CMD_UNZIP_CURRENT_REVISION => ilObjFileAccess::isZIP($data['mime'] ?? null),
+            'editExternal' => $this->action_repo->hasActionForSuffix($data['suffix'] ?? ''),
+            default => true,
+        };
 
-        return parent::checkCommandAccess(
+        return $additional_check && parent::checkCommandAccess(
             $permission,
             $cmd,
             $ref_id,
@@ -331,7 +294,6 @@ class ilObjFileListGUI extends ilObjectListGUI
                 $access_granted = false;
             }
         }
-
 
         return parent::getCommandLink($cmd);
     }

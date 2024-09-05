@@ -470,6 +470,7 @@ class ilObjTestSettingsMainGUI extends ilTestSettingsGUI
         $inputs['time_span'] = $field_factory->duration($this->lng->txt('rep_time_period'))
             ->withTimezone($this->activeUser->getTimeZone())
             ->withFormat($format)
+            ->withUseTime(true)
             ->withRequired(true);
         $inputs['activation_visibility'] = $field_factory->checkbox(
             $this->lng->txt('rep_activation_limited_visibility'),
@@ -577,7 +578,8 @@ class ilObjTestSettingsMainGUI extends ilTestSettingsGUI
     private function getIntroductionSettingsForStorage(array $section): ilObjTestSettingsIntroduction
     {
         return $this->main_settings->getIntroductionSettings()
-            ->withIntroductionEnabled($section['introduction_enabled']);
+            ->withIntroductionEnabled($section['introduction_enabled'])
+            ->withExamConditionsCheckboxEnabled($section['conditions_checkbox_enabled']);
     }
 
     private function getAccessSettingsForStorage(array $section): ilObjTestSettingsAccess
@@ -682,15 +684,13 @@ class ilObjTestSettingsMainGUI extends ilTestSettingsGUI
         }
 
         $inputs['organisational_units_activation'] = $this->getOrganisationalUnitsActivationInput();
-        if ((new ilSkillManagementSettings())->isActivated()) {
-            $inputs['skills_service_activation'] = $this->main_settings
-                ->getAdditionalSettings()->toForm(
-                    $this->lng,
-                    $this->ui->factory()->input()->field(),
-                    $this->refinery,
-                    $environment
-                );
-        }
+
+        $inputs += $this->main_settings->getAdditionalSettings()->toForm(
+            $this->lng,
+            $this->ui->factory()->input()->field(),
+            $this->refinery,
+            $environment
+        );
 
         $inputs = array_filter($inputs, fn($v) => $v !== null);
 
@@ -758,13 +758,13 @@ class ilObjTestSettingsMainGUI extends ilTestSettingsGUI
 
     protected function getAdditionalFunctionalitySettingsForStorage(array $section): ilObjTestSettingsAdditional
     {
-        $additional_settings = $this->main_settings->getAdditionalSettings();
+        $additional_settings = $this->main_settings->getAdditionalSettings()->withHideInfoTab($section['hide_info_tab']);
 
         if ($this->test_object->participantDataExist()) {
             return $additional_settings;
         }
 
-        if ($section === [] || !(new ilSkillManagementSettings())->isActivated()) {
+        if (!(new ilSkillManagementSettings())->isActivated()) {
             return $additional_settings->withSkillsServiceEnabled(false);
         }
 

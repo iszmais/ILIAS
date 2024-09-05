@@ -182,6 +182,7 @@ class ilBookingReservationsTableGUI extends ilTable2GUI
         if ($ilUser->getId() !== ANONYMOUS_USER_ID) {
             $this->addMultiCommand('rsvConfirmCancel', $lng->txt('book_set_cancel'));
             if ($this->access->checkAccess('write', '', $this->ref_id)) {
+                $this->addMultiCommand('redirectMailToBooker', $lng->txt('book_mail_to_booker'));
                 $this->addMultiCommand('rsvConfirmDelete', $lng->txt('delete'));
             }
             $this->setSelectAllCheckbox('mrsv');
@@ -705,6 +706,18 @@ class ilBookingReservationsTableGUI extends ilTable2GUI
             }
         }
 
+        // reservation information
+        if ($a_set['user_id'] == $ilUser->getId() || $ilAccess->checkAccess('write', '', $this->ref_id)) {
+            if ($a_set['post_text'] !== "" || $a_set['post_file'] !== "") {
+                $ilCtrl->setParameter($this->parent_obj, 'object_id', $a_set['object_id']);
+                $dd_items[] = $f->button()->shy(
+                    $lng->txt('book_post_booking_information'),
+                    $ilCtrl->getLinkTarget($this->parent_obj, 'displayPostInfo')
+                );
+                $ilCtrl->setParameter($this->parent_obj, 'object_id', null);
+            }
+        }
+
         if ($can_be_cancelled) {
             $ilCtrl->setParameter($this->parent_obj, 'reservation_id', $a_set['booking_reservation_id']);
             $dd_items[] = $f->button()->shy(
@@ -717,6 +730,10 @@ class ilBookingReservationsTableGUI extends ilTable2GUI
 
         if ($ilAccess->checkAccess('write', '', $this->ref_id)) {
             $ilCtrl->setParameter($this->parent_obj, 'reservation_id', $a_set['booking_reservation_id']);
+            $dd_items[] = $f->button()->shy(
+                $lng->txt('book_mail_to_booker'),
+                $ilCtrl->getLinkTarget($this->parent_obj, 'redirectMailToBooker')
+            );
             $dd_items[] = $f->button()->shy(
                 $lng->txt('delete'),
                 $ilCtrl->getLinkTarget($this->parent_obj, 'rsvConfirmDelete')

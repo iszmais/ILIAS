@@ -1723,7 +1723,6 @@ assessment#:#tst_results_grading_opt_show_status_desc#:#Status ‘prošao’ / �
 assessment#:#tst_results_overview#:#Pregled prolaza testa
 assessment#:#tst_results_print_best_solution#:#Najbolje moguće rješenje
 assessment#:#tst_results_print_best_solution_info#:#Dodatno će se za svako pitanje pokazati najbolje moguće rješenje.
-assessment#:#tst_results_tax_filters#:#Filtar rezultata
 assessment#:#tst_resume_dyn_test_with_cur_quest_sel#:#Nastavi test s trenutačnim izborom pitanja
 assessment#:#tst_resume_test#:#Nastavi test
 assessment#:#tst_revert_changes#:#Poništi uređivanje
@@ -7641,8 +7640,6 @@ crs#:#crs_timings_suggested_info#:#Predloženo vrijeme obrade
 crs#:#crs_timings_time_frame#:#Vremenski okvir
 crs#:#crs_timings_time_frame_tt#:#Vremenski okvir u danima
 crs#:#crs_timings_update_error#:#Vaše postavke nisu valjane, provjerite raspored za sljedeće materijale za tečaj:
-crs#:#crs_timings_visibility#:#Ako je odabran, materijal je vidljiv i izvan zadane dostupnosti.
-crs#:#crs_timings_visibility_short#:#Vidljivost
 crs#:#crs_timings_warning_timing_exists#:#Vremena su konfigurirana za ovaj objekt. Ako aktivirate postavke dostupnosti, ove će se postavke vremena resetirati.
 crs#:#crs_to#:#Do
 crs#:#crs_tutor#:#Mentor
@@ -10672,10 +10669,10 @@ mail#:#mail_roles#:#to users with the following local roles###29 07 2022 new var
 mail#:#mail_s#:#E-pošta(e)
 mail#:#mail_salutation_anonymous#:#Pozdrav
 mail#:#mail_salutation_f#:#Poštovana gospođo.
-mail#:#mail_salutation_female#:#Izlaz za rezervirano mjesto [MAIL_SALUTATION], ako je oslovaljavanje "Gospođa"
-mail#:#mail_salutation_general#:#Izlaz za rezervirano mjesto [MAIL_SALUTATION], ako oslovljavanje nije poželjno ili navedeno
+mail#:#mail_salutation_female#:#Izlaz za rezervirano mjesto &lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, ako je oslovaljavanje "Gospođa"
+mail#:#mail_salutation_general#:#Izlaz za rezervirano mjesto &lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, ako oslovljavanje nije poželjno ili navedeno
 mail#:#mail_salutation_m#:#Poštovani gospodine.
-mail#:#mail_salutation_male#:#Izlaz za rezervirano mjesto [MAIL_SALUTATION], ako je oslovljavanje "Gospodin"
+mail#:#mail_salutation_male#:#Izlaz za rezervirano mjesto &lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, ako je oslovljavanje "Gospodin"
 mail#:#mail_salutation_n#:#Pozdrav
 mail#:#mail_saved#:#Poruka je spremljena
 mail#:#mail_second_email#:#Druga adresa e-pošte
@@ -11930,6 +11927,8 @@ notification_adm#:#osd_vanish#:#Presentation Time###29 07 2022 new variable
 notification_adm#:#osd_vanish_desc#:#Visible time of a notification on the screen in seconds.###29 07 2022 new variable
 notification_adm#:#play_sound#:#Play a Sound###29 07 2022 new variable
 notification_adm#:#play_sound_desc#:#Play a sound when receiving a new notficiation.###29 07 2022 new variable
+obj#:#activation_visible_when_disabled#:#Vidljivost
+obj#:#activation_visible_when_disabled_info#:#Ako je odabran, materijal je vidljiv i izvan zadane dostupnosti.
 obj#:#cont_filter_empty#:#Please use the filter to see any objects.###04 06 2021 new variable
 obj#:#cont_skll_published#:#Svi su zadaci objavljeni.
 obj#:#cont_skll_published_some_not#:#Svi zadani zadaci su objavljeni. Neki korisnici nisu imali zadatke kompetencija, pase nije mogao objaviti nijedan zadatak.

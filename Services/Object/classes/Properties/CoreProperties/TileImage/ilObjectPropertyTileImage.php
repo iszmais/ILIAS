@@ -91,7 +91,6 @@ class ilObjectPropertyTileImage implements \ilObjectProperty
         $tile_image = $field_factory
             ->file(new \ilObjectTileImageUploadHandlerGUI($this->tile_image), $language->txt(self::INPUT_LABEL), $language->txt(self::INPUT_BYLINE))
             ->withAcceptedMimeTypes(self::SUPPORTED_MIME_TYPES)
-            ->withMaxFileSize((int) \ilFileUtils::getUploadSizeLimitBytes())
             ->withAdditionalTransformation($trafo);
 
         if ($this->tile_image->getRid() === null
@@ -109,8 +108,8 @@ class ilObjectPropertyTileImage implements \ilObjectProperty
         $timg->setInfo($language->txt(self::INPUT_BYLINE));
         $timg->setSuffixes(self::SUPPORTED_FILE_EXTENSIONS);
         $timg->setUseCache(false);
-        $timg->setImage($this->tile_image->getSrcUrlForLegacyForm());
-        $timg->setValue($this->tile_image->getRid() ?? '');
+        $timg->setImage($this->tile_image?->getSrcUrlForLegacyForm() ?? '');
+        $timg->setValue($this->tile_image?->getRid() ?? '');
         return $timg;
     }
 }

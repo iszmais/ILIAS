@@ -20,7 +20,6 @@ use ILIAS\Refinery\Transformation;
 use ILIAS\TA\Questions\assQuestionSuggestedSolution;
 use ILIAS\TA\Questions\assQuestionSuggestedSolutionsDatabaseRepository;
 use ILIAS\DI\Container;
-use Psr\Http\Message\ServerRequestInterface;
 
 require_once './Modules/Test/classes/inc.AssessmentConstants.php';
 
@@ -512,13 +511,6 @@ abstract class assQuestion
                         . '">'
                         . $possible_texts[0]
                         . '</a>';
-                    break;
-
-                case assQuestionSuggestedSolution::TYPE_TEXT:
-                    $solutionValue = $solution->getValue();
-                    $solutionValue = $this->fixSvgToPng($solutionValue);
-                    $solutionValue = $this->fixUnavailableSkinImageSources($solutionValue);
-                    $output[] = ilLegacyFormElementsUtil::prepareTextareaOutput($solutionValue, true);
                     break;
             }
         }
@@ -2125,7 +2117,7 @@ abstract class assQuestion
         return $question_gui;
     }
 
-    public function setExportDetailsXLS(ilAssExcelFormatHelper $worksheet, int $startrow, int $col, int $active_id, int $pass): int
+    public function setExportDetailsXLSX(ilAssExcelFormatHelper $worksheet, int $startrow, int $col, int $active_id, int $pass): int
     {
         $worksheet->setFormattedExcelTitle($worksheet->getColumnCoord($col) . $startrow, $this->lng->txt($this->getQuestionType()));
         $worksheet->setFormattedExcelTitle($worksheet->getColumnCoord($col + 1) . $startrow, $this->getTitle());

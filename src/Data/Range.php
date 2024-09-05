@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * This file is part of ILIAS, a powerful learning management system
+ * published by ILIAS open source e-Learning e.V.
+ *
+ * ILIAS is licensed with the GPL-3.0,
+ * see https://www.gnu.org/licenses/gpl-3.0.en.html
+ * You should have received a copy of said license along with the
+ * source code, too.
+ *
+ * If this is not the case or you just want to try ILIAS, you'll find
+ * us at:
+ * https://www.ilias.de
+ * https://github.com/ILIAS-eLearning
+ *
+ *********************************************************************/
+
 declare(strict_types=1);
 
 namespace ILIAS\Data;
@@ -31,8 +47,8 @@ class Range
 
     protected function checkLength(int $length): void
     {
-        if ($length < 1) {
-            throw new \InvalidArgumentException("Length must be larger than 0", 1);
+        if ($length < 0) {
+            throw new \InvalidArgumentException("Length must be larger or equal then 0", 1);
         }
     }
 
@@ -53,6 +69,10 @@ class Range
 
     public function getEnd(): int
     {
+        if ($this->length === PHP_INT_MAX) {
+            return PHP_INT_MAX;
+        }
+
         return $this->start + $this->length;
     }
 
@@ -70,5 +90,21 @@ class Range
         $clone = clone $this;
         $clone->length = $length;
         return $clone;
+    }
+
+    /**
+     * This will create a range that is guaranteed to not exceed $max.
+     */
+    public function croppedTo(int $max): Range
+    {
+        if ($max > $this->getEnd()) {
+            return $this;
+        }
+
+        if ($this->getStart() > $max) {
+            return new self($max, 0);
+        }
+
+        return $this->withLength($max - $this->getStart());
     }
 }

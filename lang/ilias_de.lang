@@ -349,6 +349,7 @@ adn#:#administrative_notification_description#:#Bereitstellen systemweiter Ankü
 adn#:#btn_cancel#:#Abbrechen
 adn#:#btn_delete#:#Löschen
 adn#:#btn_delete_confirm#:#Möchten Sie diese Ankündigung löschen?
+adn#:#btn_duplicate#:#Duplizieren
 adn#:#btn_edit#:#Bearbeiten
 adn#:#btn_reset#:#Zurücksetzen
 adn#:#btn_reset_confirm#:#Möchten Sie diese Ankündigung für alle Benutzer zurücksetzen?
@@ -365,6 +366,9 @@ adn#:#msg_error_false_date_configuration#:#Mit dieser Konfiguration von Daten ka
 adn#:#msg_event_date_end#:#Ende Ereignis
 adn#:#msg_event_date_start#:#Beginn Ereignis
 adn#:#msg_form_title#:#Ankündigung
+adn#:#msg_has_language_limitation#:#Auf ausgewählte Sprachen beschränken
+adn#:#msg_has_language_limitation_info#:#Benachrichtigung wird nur Personen mit einer der nachfolgend ausgewählten Sprachen angezeigt.
+adn#:#msg_languages#:#Sprachen
 adn#:#msg_limit_to_roles#:#Auf ausgewählte Rollen beschränken
 adn#:#msg_limit_to_roles_info#:#Benachrichtigung wird nur Personen mit einer der nachfolgend ausgewählten Rollen angezeigt.
 adn#:#msg_limited_to_role_ids#:#Anzeige
@@ -373,10 +377,12 @@ adn#:#msg_permanent_info#:#Ankündigungen permanent oder zeitlich begrenzt anzei
 adn#:#msg_permanent_no#:#Zeitlich begrenzt
 adn#:#msg_permanent_yes#:#Permanent
 adn#:#msg_presentation#:#Anzeige
+adn#:#msg_show_to_all_languages#:#Allen Sprachen anzeigen
 adn#:#msg_show_to_all_roles#:#Allen Rollen anzeigen
 adn#:#msg_show_to_all_roles_info#:#Die Benachrichtigung wird allen Benutzern angezeigt und ist auch im Öffentlichen Bereich für nicht-eingeloggte Personen sichtbar.
 adn#:#msg_success_created#:#Ankündigung erstellt
 adn#:#msg_success_deleted#:#Ankündigung erfolgreich gelöscht
+adn#:#msg_success_duplicated#:#Ankündigung erfolgreich dupliziert
 adn#:#msg_success_reset#:#Ankündigung zurückgesetzt
 adn#:#msg_success_updated#:#Ankündigung aktualisiert
 adn#:#msg_table_title#:#Ankündigungen
@@ -1031,6 +1037,7 @@ assessment#:#qpl_question_is_in_use#:#Die Frage, die Sie jetzt bearbeiten möcht
 assessment#:#qpl_questions_deleted#:#Fragen gelöscht
 assessment#:#qpl_reset_preview#:#Vorschau zurücksetzen
 assessment#:#qpl_save_skill_assigns_update#:#Kompetenzzuweisung speichern
+assessment#:#qpl_settings_availability#:#Verfügbarkeit
 assessment#:#qpl_settings_general_form_prop_show_tax_desc#:#Vorhandene Taxonomien können zum Filtern der Fragen genutzt werden.
 assessment#:#qpl_settings_general_form_property_nav_taxonomy#:#Taxonomie als Navigationsbaum
 assessment#:#qpl_settings_general_form_property_nav_taxonomy_description#:#Ist eine Taxonomie ausgewählt, wird diese nicht als Filter sondern als Navigationsbaum angezeigt.
@@ -1075,11 +1082,11 @@ assessment#:#question_id_short#:#ID
 assessment#:#question_instances_title#:#Diese Frage wird in den folgenden Tests verwendet
 assessment#:#question_is_part_of_running_test#:#Die Frage ist Teil eines laufenden Tests und darf nicht geändert werden.
 assessment#:#question_marking#:#Fragen markieren
-assessment#:#question_marking_description#:#Teilnehmer erhalten die Möglichkeit, Fragen für sich zu markieren. Die Markierungen werden auch in der Übersicht 'Bearbeitungsstand' angezeigt, sofern diese aktiviert ist.
+assessment#:#question_marking_description#:#Teilnehmer erhalten die Möglichkeit, Fragen für sich zu markieren. Die Markierungen werden auch in der 'Übersicht Testdurchlauf' angezeigt, sofern diese aktiviert ist.
 assessment#:#question_not_answered#:#Die Frage wurde nicht beantwortet
 assessment#:#question_saved_for_upload#:#Die Frage wurde automatisch gespeichert, um das Hochladen einer Datei zu ermöglichen. Wenn Sie die Bearbeitung dieser Frage jetzt abbrechen, beachten Sie bitte, dass Sie die Frage im Fragenpool löschen müssen, wenn Sie sie nicht behalten wollen.
-assessment#:#question_summary#:#Bearbeitungsstand
-assessment#:#question_summary_btn#:#Bearbeitungsstand
+assessment#:#question_summary#:#Übersicht Testdurchlauf
+assessment#:#question_summary_btn#:#Übersicht Testdurchlauf
 assessment#:#question_title#:#Fragentitel
 assessment#:#question_type#:#Fragetyp
 assessment#:#questionpool_not_entered#:#Bitte geben Sie einen Namen für den Fragenpool an!
@@ -1288,6 +1295,7 @@ assessment#:#tst_answered_questions_of_total#:#%s von %s
 assessment#:#tst_answered_questions_test#:#In diesem Test beantwortete Fragen
 assessment#:#tst_attached_xls_file#:#Sie finden die Testergebnisse für diesen Teilnehmer in der angehängten Excel-Datei.
 assessment#:#tst_attempt#:#Versuch
+assessment#:#tst_attempt_limit_message#:#Ihr Limit für Testversuche beträgt <b>%s</b>.
 assessment#:#tst_back_to_pass_details#:#Zurück zur Übersicht des Durchlaufs
 assessment#:#tst_back_to_question_list#:#Zurück zur Fragenliste
 assessment#:#tst_back_to_top#:#Zurück nach oben
@@ -1309,6 +1317,8 @@ assessment#:#tst_change_workingtime#:#Zeitverlängerung für einen Teilnehmer er
 assessment#:#tst_comp_eval_mode#:#Evaluierung über
 assessment#:#tst_comp_points#:#Kompetenz-Punkte
 assessment#:#tst_competence#:#Kompetenz
+assessment#:#tst_conditions_checkbox_enabled#:#Prüfungsbedingungen
+assessment#:#tst_conditions_checkbox_enabled_desc#:#Die Teilnehmer müssen ein Kontrollkästchen auswählen, um den Test zu starten. Bitte verwenden Sie die Einführungsnachricht, um den Teilnehmern die Prüfung vorzustellen.
 assessment#:#tst_confirm_submit_answers#:#Bitte bestätigen Sie, dass Sie den Test beenden und die gegebenen Antworten abschicken möchten. Nach dem Abschicken gibt es keine Möglichkeit mehr, Anworten einzugeben oder zu korrigieren.
 assessment#:#tst_conflicting_setting#:#Diese Einstellung steht in Konflikt mit einer anderen Einstellung.
 assessment#:#tst_copy#:#Test kopieren
@@ -1362,6 +1372,23 @@ assessment#:#tst_eval_total_passed#:#Gesamtzahl der bestandenen Tests
 assessment#:#tst_eval_total_passed_average_points#:#Durchschnittliche Punktezahl der bestandenen Tests
 assessment#:#tst_eval_total_passed_average_time#:#Mittlere Bearbeitungsdauer aller bestandenen Tests
 assessment#:#tst_eval_total_persons#:#Gesamtzahl der Personen, die den Test gestartet haben
+assessment#:#tst_exam_access_code#:#Zugangscode
+assessment#:#tst_exam_access_code_label#:#Geben Sie den Zugangscode ein, um Ihren bereits begonnenen Test fortzusetzen.
+assessment#:#tst_exam_conditions#:#Prüfungsbedingungen
+assessment#:#tst_exam_conditions_label#:#Ankreuzen, um die Bedingungen zu akzeptieren.
+assessment#:#tst_exam_conditions_not_checked_message#:#Sie müssen die Prüfungsbedingungen akzeptieren!
+assessment#:#tst_exam_ending_time_message#:#Der Test kann nicht nach %s gestartet werden.
+assessment#:#tst_exam_modal_message_conditions#:#Bitte bestätigen Sie die Bedingungen, um den Test zu starten.
+assessment#:#tst_exam_modal_message_conditions_and_password#:#Bitte bestätigen Sie die Bedingungen und geben Sie das Passwort ein, um den Test zu starten.
+assessment#:#tst_exam_modal_message_password#:#Bitte geben Sie das Passwort ein, um den Test zu starten.
+assessment#:#tst_exam_not_assigned_participant_disclaimer#:#Du kannst den Test nicht starten, da du kein zugewiesener Teilnehmer bist.
+assessment#:#tst_exam_password#:#Testpasswort
+assessment#:#tst_exam_password_invalid_message#:#Das angegebene Passwort ist ungültig!
+assessment#:#tst_exam_password_label#:#Passwort
+assessment#:#tst_exam_required_fields_not_filled_message#:#Sie müssen alle erforderlichen Felder ausfüllen!
+assessment#:#tst_exam_start#:#Test starten
+assessment#:#tst_exam_use_previous_answers#:#Vorherige Antworten
+assessment#:#tst_exam_use_previous_answers_label#:#Wenn aktiviert, werden Antworten aus früheren Tests vorausgefüllt.
 assessment#:#tst_extratime_added#:#Die Bearbeitungszeit des Teilnehmers wurde um %s Minuten verlängert.
 assessment#:#tst_extratime_info#:#Falls die Bearbeitungszeit eines Testteilnehmers mehrmals verlängert wird, geben Sie hier bitte die Summe aller seiner Zeitverlängerungen an.
 assessment#:#tst_extratime_notavailable#:#Zeitverlängerungen können nur für Tests mit einem Durchlauf und einer vorgegebenen Bearbeitungszeit durchgeführt werden.
@@ -1394,6 +1421,8 @@ assessment#:#tst_general_properties#:#Einstellungen des Tests
 assessment#:#tst_header_participant#:#Ihre Antwort:
 assessment#:#tst_header_solution#:#Bestmögliche Lösung:
 assessment#:#tst_heading_scoring#:#Bewertung
+assessment#:#tst_hide_info_tab#:#Info-Tab ausblenden
+assessment#:#tst_hide_info_tab_desc#:#Blendet den Tab „Info“ des Tests aus.
 assessment#:#tst_hide_pagecontents#:#Seiteninhalte ausblenden
 assessment#:#tst_hide_pagecontents_desc#:#ILIAS-Inhalte, die über den Button "Seite bearbeiten" vor und hinter dem eigentlichen Fragentext platziert wurden, werden in den Ergebnisansichten und der Druckausgabe nicht angezeigt.
 assessment#:#tst_hide_side_list#:#Fragenliste aus
@@ -1473,6 +1502,10 @@ assessment#:#tst_introduction_desc#:#Zeigt einen Einleitungstext auf dem 'Info'-
 assessment#:#tst_introduction_text#:#Einleitungstext
 assessment#:#tst_invited_nobody#:#Es wurden keine Benutzer, Gruppen oder Rollen als feste Teilnehmer hinzugefügt
 assessment#:#tst_invited_selected_users#:#Die ausgewählten Benutzer wurden als feste Teilnehmer hinzugefügt
+assessment#:#tst_launcher_button_label_passes_limit_reached#:#Sie haben das Limit der möglichen Testdurchläufe erreicht.
+assessment#:#tst_launcher_status_message_conditions#:#Sie werden nach Ihrer Zustimmung zu den Prüfungsbedingungen gefragt, wenn Sie den Test starten.
+assessment#:#tst_launcher_status_message_conditions_and_password#:#Sie werden nach dem Passwort und Ihrer Zustimmung zu den Prüfungsbedingungen gefragt, wenn Sie den Test starten.
+assessment#:#tst_launcher_status_message_password#:#Sie werden nach dem Passwort gefragt, wenn Sie den Test starten.
 assessment#:#tst_level#:#Kompetenzstufe
 assessment#:#tst_limit_nr_of_tries#:#Anzahl von Testdurchläufen begrenzen
 assessment#:#tst_link_only_unassigned#:#Sie haben mindestens eine Frage ausgewählt, die bereits einem Fragepool zugeordnet ist. Nur Fragen, die keinem Fragenpool zugeordnet sind, können einem Fragenpool hinzugefügt werden. Bitte treffen Sie eine neue Auswahl.
@@ -1568,6 +1601,7 @@ assessment#:#tst_objectives_progress_header#:#Fortschritte in den Lernzielen
 assessment#:#tst_old_style_rnd_quest_set_broken#:#Dieser Random Test befindet sich in einem irreparablen Zustand, da angeschlossene Fragepools gelöscht wurden. Aus diesem Grund können Teilnehmer diesen Test nicht länger absolvieren.
 assessment#:#tst_optional_questions_confirmation_fixed_test#:#<b>Fragen zu bereits erfolgreich bearbeiteten Lernzielen sind in vorherigen Versuchen erfolgreich beantwortet worden.</b><br /><br />Sie wollen nun zu einer Frage wechseln, welche zu einem bereits bestandenen Lernziel gehört.<br />Sie können wählen:<br /><br />Wenn Sie fortfahren, können Sie die Fragen zu diesen Lernzielen erneut bearbeiten oder nur einsehen. Wenn Sie die aus früheren Versuchen übernommenen Antworten nicht verändern, können Sie Ihr Lernzielergebnis auch nicht verschlechtern.<br /><br />Wenn Sie die Fragen nicht erneut bearbeiten oder einsehen möchten, können Sie zurück gehen. Die Fragen werden in jedem Fall in der Auswertung berücksichtigt.
 assessment#:#tst_optional_questions_confirmation_non_fixed_test#:#<b>Fragen zu bereits erfolgreich bearbeiteten Lernzielen sind optional.</b><br /><br />Sie wollen nun zu einer Frage wechseln, welche zu einem bereits bestandenen Lernziel gehört.<br />Sie können wählen:<br /><br />Wenn Sie fortfahren, können Sie die Fragen zu diesen Lernzielen bearbeiten. Da für diesen Versuch aber neue Fragen ausgewählt wurden, wurden Ihre Antworten aus vorherigen Versuchen nicht übernommen. Sie können sich bei erneuter Bearbeitung der Fragen Ihr Lernzielergebnis auch verschlechtern.<br /><br />Wenn Sie die Fragen nicht erneut bearbeiten möchten können Sie zurück gehen. Die Fragen werden dann in der Auswertung nicht berücksichtigt.
+assessment#:#tst_out_of_time_message#:#Sie haben die maximal erlaubte Bearbeitungszeit des Tests erreicht!
 assessment#:#tst_participant#:#Teilnehmer
 assessment#:#tst_participant_fullname_pattern#:#%2$s, %1$s
 assessment#:#tst_participant_status#:#Teilnehmerstatus
@@ -1616,6 +1650,7 @@ assessment#:#tst_postpone_on#:#Nicht beantwortete Fragen werden ans Testende ges
 assessment#:#tst_postpone_on_desc#:#Fragen, deren Antworten die Teilnehmer verwerfen oder überblättern, präsentiert ILIAS am Ende des Test noch einmal.
 assessment#:#tst_presentation_properties#:#Durchführung: Verhalten der Frage
 assessment#:#tst_presentation_settings_section#:#Darstellung
+assessment#:#tst_previous_access_code_not_available#:#Kein vorheriger Code verfügbar!
 assessment#:#tst_print#:#Test und Assessment – Druckansicht
 assessment#:#tst_proceed#:#Fortfahren
 assessment#:#tst_processing_time#:#Bearbeitungsdauer begrenzen
@@ -1750,7 +1785,7 @@ assessment#:#tst_results_back_overview#:#Zurück zur Ergebnisübersicht
 assessment#:#tst_results_details_options#:#Weitere Optionen
 assessment#:#tst_results_gamification#:#Gamification
 assessment#:#tst_results_grading_opt_show_details#:#Detaillierte Testergebnisse anzeigen
-assessment#:#tst_results_grading_opt_show_details_desc#:#Zusätzlich zum zusammenfassenden Testergebnis wird eine Aktion "Detaillierte Ergebnisse" angeboten. Die Tabelle "Detaillierte Testergebnisse" zeigt für jeden Durchlauf die Titel der Fragen und die erreichten Punkte an. Der Inhalt der Tabelle kann im Abschnitt "Weitere Optionen" weiter ergänzt werden.
+assessment#:#tst_results_grading_opt_show_details_desc#:#Zusätzlich zum zusammenfassenden Testergebnis wird eine Aktion "Detaillierte Ergebnisse" angeboten. Die Tabelle "Detaillierte Testergebnisse" zeigt für jeden Durchlauf die Titel der Fragen, die erreichten Punkte und die gewählten Antworten an. Der Inhalt der Tabelle kann im Abschnitt "Weitere Optionen" weiter ergänzt werden.
 assessment#:#tst_results_grading_opt_show_mark#:#Note anzeigen
 assessment#:#tst_results_grading_opt_show_mark_desc#:#Eine Meldung im Reiter "Ergebnisse" informiert Teilnehmerinnen und Teilnehmer, welche Note sie erzielt haben.
 assessment#:#tst_results_grading_opt_show_status#:#"Bestanden" / "Nicht bestanden" anzeigen
@@ -1760,7 +1795,6 @@ assessment#:#tst_results_print_best_solution#:#Bestmögliche Lösung
 assessment#:#tst_results_print_best_solution_info#:#Den eigenen Antworten werden die bestmöglichen Lösungen gegenübergestellt.
 assessment#:#tst_results_print_best_solution_singlepage#:#Bestmögliche Lösung
 assessment#:#tst_results_print_best_solution_singlepage_info#:#Zusätzlich wird für jede Frage die bestmögliche Lösung angezeigt.
-assessment#:#tst_results_tax_filters#:#Ergebnisfilter
 assessment#:#tst_resume_dyn_test_with_cur_quest_sel#:#Test mit aktueller Fragenauswahl fortsetzen
 assessment#:#tst_resume_test#:#Test fortsetzen
 assessment#:#tst_revert_changes#:#Bearbeitung zurücknehmen
@@ -1799,6 +1833,7 @@ assessment#:#tst_setting_offer_hints_label#:#Lösungshinweise
 assessment#:#tst_settings_conflict_compulsory_and_lock#:#"Verpflichtende Fragen" kann nicht zusammen mit "Antworten festschreiben" verwendet werden.
 assessment#:#tst_settings_conflict_postpone_and_lock#:#"Nicht beantwortete Fragen werden ans Testende geschoben" kann nicht zusammen mit "Antworten bei Anzeige der Folgefrage festschreiben" verwendet werden.
 assessment#:#tst_settings_conflict_shuffle_and_lock#:#"Fragen mischen" kann nicht zusammen mit "Antworten bei Anzeige der Folgefrage festschreiben" verwendet werden.
+assessment#:#tst_settings_header_additional#:#Zusätzliche Funktionen
 assessment#:#tst_settings_header_execution#:#Durchführung: Zugang
 assessment#:#tst_settings_header_intro#:#Informationen zum Einstieg
 assessment#:#tst_settings_header_test_run#:#Durchführung: Steuerung Testdurchlauf
@@ -1817,15 +1852,15 @@ assessment#:#tst_show_solution_details_desc#:#Die Tabelle "Detallierte Testergeb
 assessment#:#tst_show_solution_details_singlepage#:#Bewertete Antworten auf Einzelseiten
 assessment#:#tst_show_solution_details_singlepage_desc#:#Teilnehmerinnen und Teilnehmer können jede Frage einzeln aufrufen und sehen, ob ihre Antworten richtig waren und wie viele Punkte sie damit erreicht haben.
 assessment#:#tst_show_solution_feedback#:#Rückmeldungen
-assessment#:#tst_show_solution_feedback_desc#:#Falls Rückmeldungen zu den gegebenen Antworten bei der Frage hinterlegt worden sind, werden diese angezeigt. Sie müssen die Option "Bewertete Antworten als Liste" und/oder "Bewertete Antworten auf Einzelseiten" aktivieren, um diese Funktion zu nutzen.
+assessment#:#tst_show_solution_feedback_desc#:#Falls Rückmeldungen zu den gegebenen Antworten bei der Frage hinterlegt worden sind, werden diese angezeigt. Sie müssen die Option "Detallierte Testergebnisse anzeigen" aktivieren, um diese Funktion zu nutzen.
 assessment#:#tst_show_solution_printview#:#Druckbare Liste der Antworten
 assessment#:#tst_show_solution_printview_desc#:#Nach dem Klick auf "Test beenden" wird im Reiter "Ergebnisse" ein zusätzlicher Reiter "Bewertete Antworten" eingeblendet. Den Teilnehmerinnen und Teilnehmern werden hier ihre Antworten zu den einzelnen Testfragen angezeigt.
 assessment#:#tst_show_solution_signature#:#Platzhalter für Unterschrift
 assessment#:#tst_show_solution_signature_desc#:#Ist die Option „Detaillierte Testergebnisse anzeigen“ oder „Druckbare Liste der Antworten“ aktiviert, fügt ILIAS zusätzlich ein Unterschriftenfeld in den Ausdruck ein. In diesem kann die Person, die den Test durchgeführt hat, unterschreiben.
 assessment#:#tst_show_solution_suggested#:#Inhalte zur Wiederholung
 assessment#:#tst_show_solution_suggested_desc#:#Falls den Fragen im Test Inhalte zur Wiederholung des Stoffs zugeordnet wurden, werden diese angezeigt. Sie müssen die Option "Detaillierte Testergebnissen anzeigen" aktivieren, um diese Funktion zu nutzen. Teilnehmerinnen und Teilnehmer können so etwaige Wissenslücken schließen.
-assessment#:#tst_show_summary#:#Bearbeitungsstand
-assessment#:#tst_show_summary_description#:#Mit der Schaltfläche 'Bearbeitungsstand' können Teilnehmer eine Übersicht aufrufen, die zeigt, welche Fragen sie jeweils bereits bearbeitet oder markiert haben. Das Verhalten des 'Bearbeitungsstand' können Sie noch weiter konfigurieren:
+assessment#:#tst_show_summary#:#Übersicht Testdurchlauf
+assessment#:#tst_show_summary_description#:#Mit der Schaltfläche 'Übersicht Testdurchlauf' können Teilnehmer eine Übersicht aufrufen, die zeigt, welche Fragen sie jeweils bereits bearbeitet oder markiert haben. Das Verhalten des 'Übersicht Testdurchlauf' können Sie noch weiter konfigurieren:
 assessment#:#tst_show_toplist#:#Platzierung
 assessment#:#tst_shuffle_questions#:#Fragen mischen
 assessment#:#tst_shuffle_questions_description#:#Die Reihenfolge der Fragen wird pro Teilnehmer und pro Testdurchlauf neu gemischt.
@@ -1887,10 +1922,12 @@ assessment#:#tst_text_count_system#:#Bewertungsregel
 assessment#:#tst_threshold#:#Schwellenwert (in %)
 assessment#:#tst_time_already_spent#:#Sie haben den Test gestartet: %s. Ihre maximale Bearbeitungsdauer beträgt %s.
 assessment#:#tst_time_already_spent_left#:#Es verbleiben Ihnen noch %s
+assessment#:#tst_time_limit_message#:#Sie haben <b>%s Minuten</b>, um alle Fragen zu beantworten.
 assessment#:#tst_title_output#:#Anzeige der Fragentitel
 assessment#:#tst_title_output_full#:#Fragentitel und erreichbare Punkte
 assessment#:#tst_title_output_hide_points#:#Nur Fragentitel
 assessment#:#tst_title_output_no_title#:#Weder Fragentitel noch erreichbare Punkte
+assessment#:#tst_title_output_only_points#:#Nur erreichbare Punkte
 assessment#:#tst_trigger_result_refreshing#:#Es erfolgt eine Neuberechnung des Ergebnisses. Dies kann eine Weile dauern.
 assessment#:#tst_type#:#Test-Typ
 assessment#:#tst_unchanged_answer_is_correct#:#Die vorgegebene Antwort ist korrekt.
@@ -2113,6 +2150,7 @@ background_tasks#:#ui_msg_no_files_found#:#Es wurden keine Dateien gefunden. Der
 background_tasks#:#ui_msg_num_files#:#%s Datei(-en) wurden gefunden, möchten Sie fortfahren?
 background_tasks#:#ui_msg_sum_file_sizes#:#Die Gesamtdownloadgrösse vor Erstellung des Zip-Ordners beträgt %s. Möchten Sie fortfahren?
 background_tasks#:#waiting#:#Warten
+badge#:#awarded_by#:#Vergeben durch
 badge#:#badge_activity_badges#:#Automatisch vergebenes Badge
 badge#:#badge_add_template#:#Template hinzufügen
 badge#:#badge_add_to_backpack#:#Zum Backpack hinzufügen
@@ -2179,6 +2217,17 @@ badge#:#badge_template_types_specific#:#Bestimmte
 badge#:#badge_types#:#Typen
 badge#:#badge_user_profile#:#Profil veröffentlicht###Modified as part of gender mainstreaming activities for ILIAS 8
 badge#:#badge_valid#:#Gültig bis
+badge#:#criteria#:#Kriterium
+badge#:#endless#:#Für immer
+badge#:#issued_on#:#Ausgestellt am
+badge#:#position_updated#:#Zuordnungen zum Profil geändert.
+badge#:#sort_by_date_asc#:#Aufsteigend nach Datum sortieren
+badge#:#sort_by_date_desc#:#Absteigend nach Datum sortieren
+badge#:#sort_by_title_asc#:#Aufsteigend nach Titel sortieren
+badge#:#sort_by_title_desc#:#Absteigend nach Titel sortieren
+badge#:#table_view#:#Tabelle
+badge#:#tile_view#:#Kacheln
+badge#:#valid_until#:#Gültig bis
 bgtask#:#bgtask_blocked#:#Laufender Download
 bgtask#:#bgtask_blocked_cancel_new#:#Neuen Download abbrechen
 bgtask#:#bgtask_blocked_cancel_old#:#Laufenden Download abbrechen
@@ -2263,6 +2312,8 @@ bibl#:#not_yet_migrated#:#Dieses Objekt wurde noch nicht migriert. Wenden Sie si
 bibl#:#obj_bibl_duplicate#:#Literaturliste duplizieren
 bibl#:#order#:#Sortierung
 bibl#:#override_entries#:#Einträge überschreiben
+bibl#:#replace_bibliography_file#:#Literaturliste ersetzen
+bibl#:#replace_bibliography_file_info#:#Die aktuelle Literaturlisten-Datei wird durch die neue Datei ersetzt. Alle vorhandenen Einträge der aktuellen Datei werden dabei gelöscht.
 bibl#:#ris#:#Ris
 bibl#:#ris_default_a2#:#Zweiter Autor
 bibl#:#ris_default_au#:#Autor
@@ -2468,6 +2519,8 @@ book#:#book_is_used#:#In Benutzung
 book#:#book_limit_objects_available#:#Sie können nicht %s Teilnehmer zu "%s" hinzufügen, weil nur %s Einträge verfügbar sind.
 book#:#book_list#:#Liste
 book#:#book_log#:#Reservierungen
+book#:#book_mail_permanent_link#:#Link zum Buchungspool
+book#:#book_mail_to_booker#:#Mail an den Buchenden
 book#:#book_message#:#Mitteilung
 book#:#book_message_info#:#Sie können hier eine Mitteilung an den Organisator des Buchungspools eingeben.
 book#:#book_messages#:#Mitteilungen
@@ -2503,7 +2556,7 @@ book#:#book_period#:#Dauer
 book#:#book_pool_added#:#Ein Buchungspool wurde angelegt.
 book#:#book_pool_selection#:#Auswahl Buchungspool
 book#:#book_post_booking_file#:#Datei
-book#:#book_post_booking_information#:#Informationen nach einer Buchung
+book#:#book_post_booking_information#:#Reservierungsinformationen
 book#:#book_post_booking_text#:#Text
 book#:#book_post_booking_text_info#:#Die Platzhalter können genutzt werden, um Buchungsdetails zum Infotext hinzuzufügen.<br />Der Platzhalter [OBJECT] wird durch das jeweilige Buchungsobjekt ersetzt.<br />Der Platzhalter [PERIOD] wird durch den gewählten Buchungszeitraum ersetzt.
 book#:#book_pref_book_cron#:#Buchung mit Präferenzen
@@ -3043,10 +3096,13 @@ cmix#:#cmix_lrs_type#:#Learning Record Store (LRS)
 cmix#:#cmix_new#:#Neues xAPI/cmi5-Objekt anlegen
 cmix#:#completed_info#:#Die Aktivität wurde normal beendet oder abgeschlossen.
 cmix#:#completed_label#:#Statements mit dem Verb 'completed'
-cmix#:#conf_availability#:#Verfügbarkeit
-cmix#:#conf_availability_0#:#nicht verfügbar
-cmix#:#conf_availability_1#:#für bestehende Objekte
-cmix#:#conf_availability_2#:#für neue und bestehende Objekte
+cmix#:#conf_availability#:#Verwendbarkeit
+cmix#:#conf_availability_0#:#nicht verwendbar / deaktiviert
+cmix#:#conf_availability_0_info#:#Bestehende xAPI/cmi5-Objekte, die diesen LRS-Typ verwenden, sind nicht mehr benutzbar.
+cmix#:#conf_availability_1#:#ausschließlich in bestehenden Objekten
+cmix#:#conf_availability_1_info#:#Dieser LRS-Typ wird beim Anlegen neuer xAPI/cmi5-Objekte nicht angeboten. Bestehende xAPI/cmi5-Objekte, die diesen Typ verwenden, können weiterhin Daten schreiben oder lesen. Nutzen Sie diese Option, um zu einem späteren Zeitpunkt Daten im angebundenen LRS löschen zu können.
+cmix#:#conf_availability_2#:#in neuen und bestehenden Objekten
+cmix#:#conf_availability_2_info#:#Dieser LRS-Typ kann beim Anlegen von xAPI/cmi5-Objekten ausgewählt werden.
 cmix#:#conf_bypass_proxy#:#Erkennung des Lernfortschritts
 cmix#:#conf_bypass_proxy_disabled#:#xAPI-Proxy, um sofort Daten zu erhalten.
 cmix#:#conf_bypass_proxy_enabled#:#CronJob zur Abfrage des Learning Record Store
@@ -3127,7 +3183,7 @@ cmix#:#conf_user_name_none_info#:#Sendet '-' anstelle eines Namens
 cmix#:#conf_user_registered_mail#:#Registrierte E-Mail-Adresse
 cmix#:#content_privacy_ident#:#Benutzeridentifikation
 cmix#:#content_privacy_name#:#Anmeldename
-cmix#:#create_lrs_type_form#:#Neuer LRS-Typ
+cmix#:#create_lrs_type_form#:#Neuer Learning Record Store Typ
 cmix#:#create_registration#:#Registrieren Sie Ihre E-Mail-Adresse
 cmix#:#cron_xapi_results_evaluation#:#xAPI/cmi5 Ergebnisse holen
 cmix#:#cron_xapi_results_evaluation_desc#:#Fordert alle xAPI-Ergebnisse aus dem Learning Record Store für Objekte an, die den ILIAS xAPI-Proxy nicht unterstützen.
@@ -3165,15 +3221,14 @@ cmix#:#highscore_top_table#:#Bestenliste
 cmix#:#highscore_top_table_description#:#Teilnehmern wird eine Tabelle mit den besten Platzierungen angezeigt.
 cmix#:#highscore_wtime#:#Dauer
 cmix#:#highscore_wtime_description#:#Eine Spalte mit der Dauer wird in die Rangliste aufgenommen.
-cmix#:#info_availability#:#Hiermit können Sie die Verfügbarkeit des LRS-Typs innerhalb des Magazins betreiben. Alle Typen können auf "für bestehende Objekte" gesetzt werden, anstatt gelöscht zu werden.
-cmix#:#info_description#:#Diese Beschreibung wird bei der Auswahl des Typs für neue Objekte angezeigt.
+cmix#:#info_description#:#Diese Beschreibung wird bei der Auswahl des LRS-Typs für neue Objekte angezeigt.
 cmix#:#info_external_lrs#:#Bei einem externen Learning Record Store (LRS) wird dem Anwender ein Hinweis angezeigt. Ein externer LRS ist gekennzeichnet durch einen unzureichenden Einfluss auf den LRS und durch den Betreiber von ILIAS. Dies ist der Fall, wenn es keine Rechte zum Löschen gibt.
-cmix#:#info_lrs_endpoint#:#URL des Endpoints ohne '/' am Ende der Seite
-cmix#:#info_lrs_key#:#Key oder Login für den Zugriff, z.B. 12345
+cmix#:#info_lrs_endpoint#:#URL des Endpoints ohne „/“ am Ende
+cmix#:#info_lrs_key#:#Key oder Login für den Zugriff von ILIAS auf den LRS
 cmix#:#info_lrs_secret#:#Gemeinsames Secret / Passwort
 cmix#:#info_privacy_comment_default#:#Bitte geben Sie bei Verwendung dieses LRS bei Bedarf einen zusätzlichen Hinweis auf die Datensicherheit an.
 cmix#:#info_remarks#:#Hier können Sie Ihre Kommentare zu diesem LRS-Typ festhalten.
-cmix#:#info_title#:#Dieser Titel wird bei der Auswahl des Typs für neue Objekte angezeigt.
+cmix#:#info_title#:#Dieser Titel wird bei der Auswahl des LRS-Typs für neue Objekte angezeigt.
 cmix#:#initialized_info#:#Die Aktivität wurde erfolgreich begonnen.
 cmix#:#initialized_label#:#Statements mit dem Verb 'initialized'
 cmix#:#launch_options#:#Optionen für den Start
@@ -3204,7 +3259,7 @@ cmix#:#tab_scoring#:#Platzierungen
 cmix#:#tab_settings#:#Einstellungen
 cmix#:#tab_statements#:#Lernerfahrungen
 cmix#:#tbl_action_raw_data#:#Rohdaten anzeigen
-cmix#:#tbl_lrs_type_availability#:#Verfügbarkeit
+cmix#:#tbl_lrs_type_availability#:#Verwendbarkeit
 cmix#:#tbl_lrs_type_title#:#Titel
 cmix#:#tbl_lrs_type_usages#:#Anzahl der Nutzungen
 cmix#:#tbl_lrs_types_header#:#LRS-Typen
@@ -3338,9 +3393,7 @@ cntr#:#sorting_new_items_position#:#Einfügen neuer Objekte
 cntr#:#tab_back_to_repository#:#Zurück zum Magazin
 common#:#HH#:#SS:MM
 common#:#absolute_path#:#Absoluter Pfad
-common#:#accept_usr_agreement#:#Nutzungsvereinbarung akzeptieren?
 common#:#accept_usr_agreement_btn#:#Zustimmen
-common#:#accept_usr_agreement_intro#:#Es liegen neue Nutzungsbedingungen vor. Sie müssen sie akzeptieren, bevor Sie mit der Nutzung von ILIAS fortfahren können. Lesen Sie das folgende Dokument sorgfältig durch und geben Sie unten auf der Seite Ihre Zustimmung oder Ablehnung.
 common#:#access#:#Zugriff
 common#:#accessFree#:#Befristung des Zugriffs aufheben
 common#:#accessRestrict#:#Zugriff befristen
@@ -3401,7 +3454,6 @@ common#:#adve_assessment_settings#:#Test und Assessment-Einstellungen
 common#:#adve_frm_post_settings#:#Forenbeiträge
 common#:#adve_general_settings#:#Allgemeine Einstellungen
 common#:#adve_survey_settings#:#Umfrage-Einstellungen
-common#:#agree_date#:#Zugestimmt am
 common#:#all#:#Alle
 common#:#all_global_roles#:#Globale Rollen
 common#:#all_local_roles#:#Lokale Rollen (alle)
@@ -3854,6 +3906,20 @@ common#:#download_selected_items#:#Herunterladen
 common#:#download_with_uploaded_filename#:#Hochgeladenen Dateinamen verwenden
 common#:#download_with_uploaded_filename_info#:#Wählen Sie diese Option ausschließlich für die Rückwärtskompatibilität mit ILIAS 3.9 und älteren Versionen aus: Wenn diese Option aktiviert ist, erhalten heruntergeladene Dateien den Namen, der beim Hochladen in ILIAS verwendet worden ist. Wenn diese Option nicht ausgewählt ist, erhalten heruntergeladene Dateien den Titel des Dateiobjekts als Namen. Diese Option hat keine Auswirkung auf WebDAV. Bei WebDAV erhalten heruntergeladene Dateien IMMER den Titel des Dateiobjekts als Namen.
 common#:#downloading_settings#:#Einstellungen
+common#:#dpro_accept_usr_agreement#:#Datenschutzerklärung akzeptieren?
+common#:#dpro_accept_usr_agreement_intro#:#Es liegt eine neue Datenschutzerklärung vor. Sie müssen diese akzeptieren, bevor Sie mit der Nutzung von ILIAS fortfahren können. Lesen Sie das folgende Dokument sorgfältig durch und geben Sie unten auf der Seite Ihre Zustimmung oder Ablehnung.
+common#:#dpro_force_accept_usr_agreement#:#Sie müssen die Datenschutzerklärung akzeptieren!
+common#:#dpro_refuse_acceptance#:#Wiederruf der Akzeptanz der Datenschutzerklärung
+common#:#dpro_usr_agreement#:#Datenschutzerklärung
+common#:#dpro_usr_agreement_footer_intro#:#Zu dieser Datenschutzerklärung haben Sie ihr Einverständnis erklärt.
+common#:#dpro_withdraw_consent_description#:#Widerrufen Sie hier die Zustimmung zu der Datenschutzerklärung.
+common#:#dpro_withdraw_consent_description_external#:#Bitte kehren Sie zu Ihrer Herkunftsinstallation zurück, und loggen Sie sich erneut ein, um den Widerrufsvorgang abzuschließen.
+common#:#dpro_withdraw_consent_description_internal#:#Bitte loggen Sie sich wieder ein, um den Widerrufsvorgang abzuschließen.
+common#:#dpro_withdraw_consent_header#:#Einverständnis zur Datenschutzerklärung widerrufen
+common#:#dpro_withdraw_consent_info#:#Widerrufen der Zustimmung zu der Datenschutzerklärung
+common#:#dpro_withdraw_consent_info_external#:#Bitte benachrichtigen Sie den zuständigen Administrator Ihres Autorisierungssystems, und teilen Sie Ihre Absicht mit.
+common#:#dpro_withdrawal_sure_account#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu der Datenschutzerklärung widerrufen möchten?
+common#:#dpro_withdrawal_sure_account_deletion#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu der Datenschutzerklärung widerrufen möchten? Ihr ILIAS-Konto wird in Folge dessen unwiderruflich gelöscht.
 common#:#drafts#:#Entwürfe
 common#:#drag_file_here#:#Ziehen Sie die Datei in diesen Bereich
 common#:#drag_files_here#:#Ziehen Sie die Dateien in diesen Bereich
@@ -3957,6 +4023,7 @@ common#:#exc_files#:#Dateien
 common#:#exc_files_returned#:#Abgegebene Dateien
 common#:#exc_instruction#:#Arbeitsanweisung
 common#:#exc_last_submission#:#Datum der letzten Abgabe
+common#:#exc_member_of_crs_grp#:#Mitglied in Kurs/Gruppe
 common#:#exc_members_already_assigned#:#Die ausgewählten Benutzer sind bereits Mitglieder dieser Übungseinheit.
 common#:#exc_members_assigned#:#Die Benutzer wurden der Übung zugeordnet
 common#:#exc_members_comments_saved#:#Die Kommentare zu den Übungen der ausgewählten Benutzer wurden gespeichert.
@@ -4063,7 +4130,6 @@ common#:#fold_wizard_page#:#Ordner kopieren (Schritt 2/2)
 common#:#folder#:#Ordner
 common#:#folders#:#Ordner
 common#:#follow_link_to_read_mails#:#Um diese Mails zu lesen, klicken Sie bitte auf den folgenden Link:
-common#:#force_accept_usr_agreement#:#Sie müssen die Nutzungsvereinbarung akzeptieren!
 common#:#forgot_password#:#Passwort vergessen?
 common#:#forgot_username#:#Anmeldenamen vergessen?
 common#:#form_input_not_valid#:#Einige Angaben sind unvollständig oder ungültig. Bitte korrigieren Sie Ihre Eingabe.
@@ -4075,11 +4141,18 @@ common#:#forums#:#Foren
 common#:#forums_anonymized#:#Forum anonymisiert
 common#:#forums_anonymous#:#Anonym
 common#:#forums_articles#:#Beiträge
+common#:#forums_closed#:#geschlossen
 common#:#forums_disable_forum_notification#:#Benachrichtigung für gesamtes Forum beenden
 common#:#forums_enable_forum_notification#:#Benachrichtigung für gesamtes Forum starten
 common#:#forums_forum_notification_enabled#:#Sie werden über neue Beiträge in diesem Forum benachrichtigt.
 common#:#forums_last_post#:#Letzter Beitrag
+common#:#forums_last_posting_asc#:#Neuestes Thema zuerst
+common#:#forums_last_posting_dsc#:#Ältestes Thema zuerst
 common#:#forums_notification_settings#:#Benachrichtigung über neue und geänderte Forenbeiträge
+common#:#forums_rating_asc#:#Bewertung aufsteigend
+common#:#forums_rating_dsc#:#Bewertung absteigend
+common#:#forums_thread_sorting_asc#:#Thema A→Z
+common#:#forums_thread_sorting_dsc#:#Thema Z→A
 common#:#forums_threads#:#Themen
 common#:#forums_use_alias#:#Sie können hier ein Pseudonym eingeben, das Sie für diesen Beitrag verwenden möchten. Wenn Sie dieses Feld leer lassen, wird Ihr Beitrag als von "%s" geschrieben markiert.
 common#:#forums_your_name#:#Ihr Name
@@ -4564,7 +4637,6 @@ common#:#mm_personal_and_shared_r#:#Persönliche und geteilte Ressourcen
 common#:#mm_personal_workspace#:#Persönlicher Arbeitsraum
 common#:#mm_portfolio#:#Portfolio
 common#:#mm_private_chats#:#Private Chats
-common#:#mm_rep_tree_view#:#Baumansicht
 common#:#mm_repo_tree_view#:#Baumansicht
 common#:#mm_repo_tree_view_act#:#Baumansicht an
 common#:#mm_repo_tree_view_deact#:#Baumansicht aus
@@ -4636,7 +4708,7 @@ common#:#msg_link_clipboard_p#:#Wählen Sie nun den gewünschten Ort, in den die
 common#:#msg_link_clipboard_s#:#Wählen Sie nun den gewünschten Ort, in den das ausgewählte Objekt verknüpft werden sollen. Klicken Sie abschließend auf den Einfügen-Button.
 common#:#msg_linked#:#Objekt(e) verknüpft
 common#:#msg_may_not_contain#:#Dieses Objekt darf keine Objekte des folgenden Typs beinhalten:
-common#:#msg_min_one_role#:#Jeder Benutzer muss mindestens einer globalen Rolle zugewiesen sein!
+common#:#msg_min_one_role#:#Jedes ILIAS-Konto muss mindestens einer globalen Rolle zugewiesen sein!
 common#:#msg_multi_language_selected#:#Es ist nicht möglich, für mehrere Übersetzungen die gleiche Sprache auszuwählen
 common#:#msg_no_default_language#:#Keine Standardübersetzung bestimmt! Sie müssen eine Sprache als Standardübersetzung definieren.
 common#:#msg_no_delete_yourself#:#Sie können nicht Ihr eigenes Anmeldekonto löschen.
@@ -4807,6 +4879,8 @@ common#:#obj_crsv#:#Kurszertifikat
 common#:#obj_dbk#:#Digilib-Buch
 common#:#obj_dcl#:#Datensammlung
 common#:#obj_dcl_duplicate#:#Datensammlung kopieren
+common#:#obj_dpro#:#Datenschutzerklärung
+common#:#obj_dpro_desc#:#Datenschutzerklärung verwalten
 common#:#obj_dshs#:#Dashboard
 common#:#obj_dshs_desc#:#Dashboard administrieren
 common#:#obj_ecss#:#ECS
@@ -5280,7 +5354,6 @@ common#:#referral_comment#:#Woher kennen Sie ILIAS?
 common#:#refresh#:#Aktualisieren
 common#:#refresh_languages#:#Alle Sprachen aktualisieren
 common#:#refuse#:#Antrag ablehnen
-common#:#refuse_tos_acceptance#:#Akzeptanz der Nutzungsvereinbarung ablehnen
 common#:#reg_account_confirmation_successful#:#Das ILIAS-Konto wurde bestätigt und aktiviert.
 common#:#reg_goto_parent_membership_info#:#Nur Mitglieder können auf das Zielobjekt zugreifen.
 common#:#reg_mail_body_2_confirmation#:#Der Link wird nur für %s gültig sein, danach müssen Sie sich erneut registrieren.
@@ -5655,6 +5728,20 @@ common#:#tomorrow#:#Morgen
 common#:#toolbar_more_actions#:#Mehr Aktionen
 common#:#tools#:#Tools
 common#:#top_of_page#:#Seitenanfang
+common#:#tos_accept_usr_agreement#:#Nutzungsvereinbarung akzeptieren?
+common#:#tos_accept_usr_agreement_intro#:#Es liegen neue Nutzungsbedingungen vor. Sie müssen sie akzeptieren, bevor Sie mit der Nutzung von ILIAS fortfahren können. Lesen Sie das folgende Dokument sorgfältig durch und geben Sie unten auf der Seite Ihre Zustimmung oder Ablehnung.
+common#:#tos_force_accept_usr_agreement#:#Sie müssen die Nutzungsvereinbarung akzeptieren!
+common#:#tos_refuse_acceptance#:#Akzeptanz der Nutzungsvereinbarung ablehnen
+common#:#tos_usr_agreement#:#Nutzungsvereinbarung
+common#:#tos_usr_agreement_footer_intro#:#Zu dieser Nutzungsvereinbarung haben Sie ihr Einverständnis erklärt.
+common#:#tos_withdraw_consent_description#:#Widerrufen Sie hier die Zustimmung zu den Nutzungsvereinbarungen.
+common#:#tos_withdraw_consent_description_external#:#Bitte kehren Sie zu Ihrer Herkunftsinstallation zurück, und loggen Sie sich erneut ein, um den Widerrufsvorgang abzuschließen.
+common#:#tos_withdraw_consent_description_internal#:#Bitte loggen Sie sich wieder ein, um den Widerrufsvorgang abzuschließen.
+common#:#tos_withdraw_consent_header#:#Einverständnis zur Nutzungsvereinbarung widerrufen
+common#:#tos_withdraw_consent_info#:#Widerrufen der Zustimmung zu den Nutzungsvereinbarungen
+common#:#tos_withdraw_consent_info_external#:#Bitte benachrichtigen Sie den zuständigen Administrator Ihres Autorisierungssystems, und teilen Sie Ihre Absicht mit.
+common#:#tos_withdrawal_sure_account#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu den Nutzungsvereinbarungen widerrufen möchten?
+common#:#tos_withdrawal_sure_account_deletion#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu den Nutzungsvereinbarungen widerrufen möchten? Ihr ILIAS-Konto wird in Folge dessen unwiderruflich gelöscht.
 common#:#total#:#Gesamt
 common#:#tracking_settings#:#Einstellungen
 common#:#translation#:#Übersetzung
@@ -5716,8 +5803,6 @@ common#:#update_orgunits#:#Benutzerfeld 'Organisationseinheiten' aktualisieren
 common#:#update_orgunits_desc#:#Wenn eingeschaltet, werden bei allen Benutzern das Feld 'Organisationseinheiten' aktualisiert und so allfällige Fehler behoben.
 common#:#upload#:#Hochladen
 common#:#upload_error_file_not_found#:#Fehler beim Hochladen: Datei nicht gefunden
-common#:#upload_files#:#Dateien hochladen
-common#:#upload_files_title#:#Dateien hochladen
 common#:#upload_pending#:#Ausstehend
 common#:#upload_settings#:#Upload-Einstellungen
 common#:#uploaded_and_checked#:#Die Datei wurde hochgeladen und überprüft, Sie können sie nun importieren.
@@ -5768,6 +5853,7 @@ common#:#userfolder_export_file_size#:#Dateigröße
 common#:#userfolder_export_files#:#Dateien
 common#:#userfolder_export_xml#:#XML
 common#:#username#:#Anmeldename###Modified as part of gender mainstreaming activities for ILIAS 8
+common#:#username_assistance#:#Anmeldenamen-Unterstützung
 common#:#users#:#Benutzer
 common#:#users_not_imported#:#Die folgenden Benutzer existieren nicht. Daher können deren Mails nicht importiert werden
 common#:#users_online#:#Aktive Benutzer
@@ -5775,8 +5861,6 @@ common#:#usr#:#Benutzer
 common#:#usr_account_inactive#:#Inaktiver Benutzer
 common#:#usr_active_only#:#Nur aktive Benutzer
 common#:#usr_add#:#Neuer Benutzer
-common#:#usr_agreement#:#Nutzungsvereinbarung
-common#:#usr_agreement_footer_intro#:#Zu dieser Nutzungsvereinbarung haben Sie ihr Einverständnis erklärt.
 common#:#usr_edit#:#Benutzer bearbeiten
 common#:#usr_field_change_components_listening#:#Es gibt mindestens eine Komponente, die sich für die getätigten Änderungen interessiert. Möchten Sie die Änderungen samt der von den Komponenten beschriebenen Konsequenzen final durchführen?
 common#:#usr_filter_coursemember#:#Mitglied eines Kurses
@@ -5887,12 +5971,6 @@ common#:#wiki_add#:#Wiki anlegen
 common#:#wiki_new#:#Neues Wiki anlegen
 common#:#with#:#mit
 common#:#withdraw_consent#:#Einverständnis widerrufen
-common#:#withdraw_consent_description#:#Widerrufen Sie hier die Zustimmung zu den Nutzungsvereinbarungen.
-common#:#withdraw_consent_description_external#:#Bitte kehren Sie zu Ihrer Herkunftsinstallation zurück, und loggen Sie sich erneut ein, um den Widerrufsvorgang abzuschließen.
-common#:#withdraw_consent_description_internal#:#Bitte loggen Sie sich wieder ein, um den Widerrufsvorgang abzuschließen.
-common#:#withdraw_consent_header#:#Einverständnis zur Nutzungsvereinbarung widerrufen
-common#:#withdraw_consent_info#:#Widerrufen der Zustimmung zu den Nutzungsvereinbarungen
-common#:#withdraw_consent_info_external#:#Bitte benachrichtigen Sie den zuständigen Administrator Ihres Autorisierungssystems, und teilen Sie Ihre Absicht mit.
 common#:#withdraw_consent_info_internal#:#Wenn Sie hier bestätigen, wird Ihr ILIAS-Konto gelöscht.
 common#:#withdraw_usr_agreement#:#Widerrufen
 common#:#withdrawal_complete#:#Widerrufsvorgang abgeschlossen.
@@ -5901,8 +5979,6 @@ common#:#withdrawal_complete_redirect#:#Widerrufsvorgang ist abgeschlossen. Zur 
 common#:#withdrawal_mail_info#:#Die folgende Nachricht wird in Ihrem Auftrag versandt, wenn Sie bestätigen:[BR][BR]
 common#:#withdrawal_mail_subject#:#Widerruf Einverständnis zu Nutzungsvereinbarungen
 common#:#withdrawal_mail_text#:#Guten Tag,[BR][BR]hiermit widerrufe ich mein Einverständnis zur Nutzungsvereinbarung Ihrer ILIAS-Installation. Bitte leiten Sie die entsprechenden Maßnahmen ein.[BR][BR]Name: %1$s[BR]Anmeldename: %2$s[BR]Externes Konto: %3$s[BR][BR]Mit freundlichen Grüßen[BR]%1$s
-common#:#withdrawal_sure_account#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu den Nutzungsvereinbarungen widerrufen möchten?
-common#:#withdrawal_sure_account_deletion#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu den Nutzungsvereinbarungen widerrufen möchten? Ihr ILIAS-Konto wird in Folge dessen unwiderruflich gelöscht.
 common#:#withdrawal_sure_account_deletion_no_consent_yet#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu den Nutzungsvereinbarungen nicht erteilen möchten? Ihr ILIAS-Konto wird in Folge dessen unwiderruflich gelöscht.
 common#:#withdrawal_sure_account_no_consent_yet#:#Sind Sie sicher, dass Sie Ihr Einverständnis zu den Nutzungsvereinbarungen nicht erteilen möchten?
 common#:#wizard_search_list#:#Ihre Suche ergab folgende Ergebnisse. Bitte wählen Sie eines aus.
@@ -6578,6 +6654,7 @@ content#:#cont_linked_mobs#:#Verlinkte Medienobjekte
 content#:#cont_links#:#Links
 content#:#cont_list_files#:#Dateiverzeichnis
 content#:#cont_list_indent#:#Liste einrücken
+content#:#cont_list_item_style#:#Style Listeneintrag
 content#:#cont_list_outdent#:#Liste ausrücken
 content#:#cont_list_properties#:#Listen-Eigenschaften
 content#:#cont_lists#:#Listen
@@ -7259,6 +7336,9 @@ copg#:#copg_error_occured_modal#:#Es ist leider ein Fehler aufgetreten. Bitte dr
 copg#:#copg_est_reading_time#:#Geschätzte Lesezeit
 copg#:#copg_history_cleanup_cron#:#Seiteneditor Verlaufsbereinigung
 copg#:#copg_history_cleanup_cron_info#:#Löscht ältere Einträge aus dem Seiteneditorverlauf.
+copg#:#copg_list_item_style#:#Listeneintrag
+copg#:#copg_list_style#:#Liste
+copg#:#copg_list_styles#:#Listenformat
 copg#:#copg_page_element_not_found#:#Unbekanntes Seitenelement.
 copg#:#copg_page_type_stys#:#Seitenlayout
 copg#:#copg_questions_not_supported_here#:#In diesem Kontext werden keine Fragen unterstützt.
@@ -7587,7 +7667,7 @@ crs#:#crs_members_deleted#:#Die ausgewählten Mitglieder sind aus dem Kurs ausge
 crs#:#crs_members_groups#:#Gruppenmitgliedschaften
 crs#:#crs_members_map#:#Karte Kursmitglieder
 crs#:#crs_members_print_title#:#Kursmitglieder
-crs#:#crs_min_one_admin#:#Diesem Kurs muss mindestens ein Administrator zugeordnet bleiben.
+crs#:#crs_min_one_admin#:#Diesem Kurs muss mindestens ein Konto mit der Rolle „Kursadministration“ zugeordnet sein.
 crs#:#crs_my_courses_groups_enabled#:#Meine Kurse und Gruppen
 crs#:#crs_my_courses_groups_enabled_info#:#Wenn Sie diese Option aktivieren, wird die Option 'Meine Kurse und Gruppen' im Magazin angezeigt.
 crs#:#crs_new_status#:#Ihr Status:
@@ -7816,8 +7896,6 @@ crs#:#crs_timings_suggested_info#:#Empfohlene Bearbeitungszeit
 crs#:#crs_timings_time_frame#:#Zeitrahmen
 crs#:#crs_timings_time_frame_tt#:#Bearbeitungsdauer in Tagen
 crs#:#crs_timings_update_error#:#Die empfohlene Lernzeit folgender Kursmaterialien widerspricht dem angegebenen spätestmöglichen Lernzeitpunkt.
-crs#:#crs_timings_visibility#:#Wenn aktiviert, ist das Lernmaterial auch außerhalb der vorgesehenen Verfügbarkeit sichtbar.
-crs#:#crs_timings_visibility_short#:#Sichtbarkeit
 crs#:#crs_timings_warning_timing_exists#:#Achtung: für dieses Objekt existiert ein  aktiver Lernplan. Wenn sie die zeitlich begrenzte Verfügbarkeit aktivieren, werden die Lernplanungszeiten zurückgesetzt.
 crs#:#crs_to#:#Bis:
 crs#:#crs_tutor#:#Kursbetreuung
@@ -8744,6 +8822,19 @@ didactic#:#grp_closed_info#:#Die Gruppe ist für Nicht-Mitglieder unsichtbar.
 didactic#:#more_translations#:#Weitere Übersetzungen
 didactic#:#sess_closed#:#Geschlossene Sitzung
 didactic#:#sess_closed_info#:#Die Sitzung ist für Nicht-Teilnehmer unsichtbar.
+dpro#:#dpro_account_reg_not_possible#:#Eine Selbstregistrierung ist aktuell nicht möglich, da in dieser Installation keine Datenschutzerklärung angeboten wird. Bitte kontaktieren Sie Ihren <a href="%1$s">Systemadministrator</a> für weitere Informationen.
+dpro#:#dpro_agree_date#:#Datenschutzerklärung zugestimmt am
+dpro#:#dpro_last_reset_date#:#Die Datenschutzerklärung wurden zuletzt am %s zurückgesetzt. Setzen Sie die Datenschutzerklärung nur zurück, wenn sich diese in der Zwischenzeit geändert haben und eine Zustimmung zu dieser geänderten Vereinbarung gewünscht ist.
+dpro#:#dpro_mode#:#Modus
+dpro#:#dpro_mode_desc#:#Stellen Sie hier ein wann und wie die Datenschutzerklärung akzeptiert werden muss.
+dpro#:#dpro_no_acceptance#:#Nie aktzeptieren, nur anzeigen
+dpro#:#dpro_once#:#Einmalig akzeptieren
+dpro#:#dpro_reset_for_all_users#:#Datenschutzerklärung zurücksetzen
+dpro#:#dpro_status_enable#:#Datenschutzerklärung aktivieren
+dpro#:#dpro_status_enable_desc#:#Benutzer werden zum Unterzeichnen der Datenschutzerklärung aufgefordert, bevor sie ILIAS nutzen können.
+dpro#:#dpro_sure_reset_tos#:#Sind Sie sicher, dass die Datenschutzerklärung für alle Benutzer im System zurückgesetzt werden sollen? Dies betrifft auch jene Anmeldekonten, die z.B. für die SOAP Web-Services genutzt werden.
+dpro#:#dpro_withdrawal_usr_deletion#:#Löschung des ILIAS-Kontos beim Widerruf Datenschutzerklärung
+dpro#:#dpro_withdrawal_usr_deletion_desc#:#Wird die Zustimmung zur Datenschutzerklärung widerrufen, erfolgt automatisch die Löschung des ILIAS-Kontos.
 ecs#:#cert_serial#:#Seriennummer des Zertifikates
 ecs#:#ecs_abr#:#Kürzel
 ecs#:#ecs_account_duration#:#Verlängerung der Aktivierungszeit
@@ -9017,6 +9108,7 @@ etal#:#notification_talks_removed#:#Folgende Termine wurden abgesagt.
 etal#:#notification_talks_subject#:#Termineinladung: %s
 etal#:#notification_talks_subject_update#:#Terminaktualisierung: %s
 etal#:#notification_talks_updated#:#Folgende Gesprächstermine wurden angepasst.
+etal#:#pending_talks_warning#:#Die folgenden ausstehenden Gesprächstermine werden ersetzt:
 etal#:#talk_serial#:#Talk Serial
 etal#:#tals_add#:#Gespräche hinzufügen
 etal#:#tals_new#:#Neue Gesprächsserie
@@ -9038,6 +9130,7 @@ exc#:#exc_adopt_group_teams_blocked#:#%s Benutzer waren bereits vorhanden.
 exc#:#exc_adopt_group_teams_conflict#:#Benutzer "%1$s" ist bereits in Gruppe "%2$s" gewählt.
 exc#:#exc_adopt_group_teams_no_members#:#Keine Mitglieder
 exc#:#exc_after_submission#:#Nach der Abgabe
+exc#:#exc_all#:#Alle
 exc#:#exc_all_new_files_offered_already#:#Alle neuen Dateien wurden bereits zum Download angeboten. Für einen erneuten Download klicken Sie bitte auf die entsprechenden Aktionslinks in der untenstehenden Liste.
 exc#:#exc_ass_submission_zip#:#Abgaben
 exc#:#exc_ass_team_wiki#:#Team-Wiki
@@ -9086,6 +9179,8 @@ exc#:#exc_deadline#:#Abgabetermin
 exc#:#exc_deadline_ext_mismatch#:#Die Nachfrist muss nach dem Abgabetermin enden.
 exc#:#exc_deadline_extended#:#Nachfrist
 exc#:#exc_deadline_extended_info#:#Im Zeitraum zwischen dem Abgabetermin und dem Ende der Nachfrist können verspätete Abgaben vorgenommen werden.
+exc#:#exc_deadline_not_set_yet#:#Noch nicht gesetzt
+exc#:#exc_deadline_requested#:#Angefragt
 exc#:#exc_delete_team#:#Team löschen
 exc#:#exc_deleted_user#:#Gelöschter Benutzer
 exc#:#exc_denied_has_peer_reviews#:#Grund: Einige Übungseinheiten haben Peer-Reviewing aktiviert.
@@ -9096,12 +9191,17 @@ exc#:#exc_direct_submit#:#Abgeben
 exc#:#exc_direct_submit_blog#:#Möchten Sie die aktuelle Version Ihres Blogs jetzt abgeben? Sie können dies auch jederzeit im Blog-Editor tun.
 exc#:#exc_direct_submit_portfolio#:#Möchten Sie die aktuelle Version Ihres Portfolios jetzt abgeben? Sie können dies auch jederzeit im Portfolio-Editor tun.
 exc#:#exc_down_files_started_bg#:#Ein ZIP-Archiv mit allen Download-Dateien wird jetzt im Hintergrund erstellt. Den Status Ihrer Hintergrundprozesse sehen Sie oben rechts in der Nachrichtenzentrale. Dort können Sie das ZIP-Archiv auch herunterladen.
+exc#:#exc_download_selected#:#Ausgewählte Abgaben herunterladen
 exc#:#exc_download_zip_structure#:#ZIP-Verzeichnisstruktur herunterladen
 exc#:#exc_earliest_start_time#:#Frühester Starttermin
 exc#:#exc_edit_assignment#:#Einstellungen der Übungseinheit
 exc#:#exc_edit_assignments#:#Übungseinheiten bearbeiten
+exc#:#exc_edit_blog#:#Blog bearbeiten
 exc#:#exc_edit_criterias#:#Kriterien bearbeiten
+exc#:#exc_edit_portfolio#:#Edit Portfolio
 exc#:#exc_edit_submission#:#Eingereichte Lösungen ändern
+exc#:#exc_edit_wiki#:#Wiki bearbeiten
+exc#:#exc_ended#:#Beendet
 exc#:#exc_ended_on#:#Beendet am
 exc#:#exc_export_excel#:#Export (Excel)
 exc#:#exc_fb_files#:#Bewertungsdateien
@@ -9114,8 +9214,12 @@ exc#:#exc_feedback_notification_subject#:#Feedback für Übungseinheit der Übun
 exc#:#exc_files_returned_text#:#Abgegebener Text
 exc#:#exc_find_zip_error#:#Die Abgabe kann nicht geöffnet werden. Die Originaldateien wurden nicht gefunden.
 exc#:#exc_fixed_date#:#Festes Datum
+exc#:#exc_fixed_date_individual#:#Nur individuelle Termine
+exc#:#exc_fixed_date_individual_info#:#Es gibt keinen gemeinsamen Abgabetermin. Es müssen individuelle Termine für alle Teilnehmer gesetzt werden.
 exc#:#exc_fixed_date_info#:#Alle Teilnehmenden erhalten zunächst das gleiche feste Abgabedatum.
 exc#:#exc_fullscreen#:#Vollbild
+exc#:#exc_future#:#Kommende
+exc#:#exc_given_feedback#:#Gegebene Feedbacks
 exc#:#exc_global_feedback_file#:#Musterlösung
 exc#:#exc_global_feedback_file_after_date#:#Nach festem Datum
 exc#:#exc_global_feedback_file_cron#:#Benachrichtigung bei Verfügbarkeit
@@ -9128,6 +9232,9 @@ exc#:#exc_graded_mem_notified#:#Alle ausgewählten Teilnehmer mit einer Bewertun
 exc#:#exc_grades#:#Notenübersicht
 exc#:#exc_grades_overview#:#Notenübersicht
 exc#:#exc_hand_in#:#Datei abgeben
+exc#:#exc_hand_in_lead_text#:#In %s abzugeben
+exc#:#exc_idl_request_and_tutor_needed#:#Bitte senden Sie eine Anfrage an Ihren Tutor. Dieser muss Ihnen eine individuelle Abgabefrist zuweisen.
+exc#:#exc_idl_tutor_needed#:#Ihre Anfrage wurde bereits gesendet und ist noch offen. Sie werden benachrichtigt, sobald Ihr Tutor Ihnen einen individuelle Abgabefrist zugeordnet hat.
 exc#:#exc_import#:#Übung importieren
 exc#:#exc_individual_deadline#:#Individueller Abgabetermin
 exc#:#exc_individual_deadline_action#:#Individuellen Abgabetermin setzen
@@ -9135,6 +9242,8 @@ exc#:#exc_individual_deadline_before_global#:#Das Datum muss hinter der (letzten
 exc#:#exc_instruction_files#:#Dateien zur Arbeitsanweisung
 exc#:#exc_late_submission#:#Verspätete Abgabe
 exc#:#exc_late_submission_warning#:#Abgaben nach %s werden als verspätet gekennzeichnet.
+exc#:#exc_lead_request_idl#:#Abgabefrist anfragen
+exc#:#exc_lead_wait_for_idl#:#Wartet auf individuelle Abgabefrist
 exc#:#exc_limit_characters#:#Anzahl der Zeichen beschränken
 exc#:#exc_list_submission#:#Alle Lösungsabgaben
 exc#:#exc_list_text_assignment#:#Liste aller Abgaben
@@ -9163,15 +9272,23 @@ exc#:#exc_min_nr#:#Anzahl Übungseinheiten
 exc#:#exc_min_nr_info#:#Dieser Wert muss mindestens so hoch sein, wie die Anzahl der verpflichtenden Übungseinheiten.
 exc#:#exc_min_team_participants#:#Minimale Anzahl
 exc#:#exc_msg_all_mandatory_ass#:#Sie müssen alle verpflichtenden Übungseinheiten bestehen, um die Übung als ganze zu bestehen.
+exc#:#exc_msg_deadline_request_body#:#Der folgende Benutzer hat eine individuelle Abgabefrist angefragt.
+exc#:#exc_msg_deadline_request_subject#:#Es wurde eine Abgabefrist in Übung "%s" angefragt.
 exc#:#exc_msg_failed_mandatory#:#Sie haben mindestens eine obgligatorische Übungseinheit nicht bestanden.
 exc#:#exc_msg_grading_done#:#Es wurde eine Übungseinheit in Übung "%s" bewertet.
 exc#:#exc_msg_grading_done_body#:#Ein Tutor hat Ihre Lösungsabgabe in Übung "%s" bewertet.
+exc#:#exc_msg_idl_set_body#:#Es wurde eine individuelle Abgabefrist für Sie durch den Tutor gesetzt.
+exc#:#exc_msg_idl_set_subject#:#Es wurde eine Abgabefrist in Übung "%s" gesetzt.
 exc#:#exc_msg_min_number_ass#:#Sie müssen mindestens %s Übungseinheiten bestehen, um die Übung zu bestehen.
 exc#:#exc_msg_missed_minimum_number#:#Sie haben die Mindestanzahl an Übungseinheiten nicht bestanden.
 exc#:#exc_msg_new_feedback_file_uploaded#:#Es wurde eine neue Feedback-Datei zur Übung "%s" hinzugefügt.
 exc#:#exc_msg_new_feedback_file_uploaded2#:#Eine neue Feedback-Datei wurde für Sie hochgeladen.
 exc#:#exc_msg_new_feedback_text_uploaded#:#Es wurde ein neuer Kommentar zur Übung "%s" hinzugefügt.
-exc#:#exc_msg_new_feedback_text_uploaded2#:#für folgende Einreichung wurde in ILIAS ein neuer Kommentar für Sie abgegeben:
+exc#:#exc_msg_new_feedback_text_uploaded2#:#Ein Tutor hat einen neuen Kommentar für Sie eingestellt.
+exc#:#exc_msg_new_message_from_pf_giver#:#Es wurde eine neue Mitteilung zur Übung "%s" hinzugefügt.
+exc#:#exc_msg_new_message_from_pf_giver2#:#Ein Peer-Feedback-Geber hat eine neue Mitteilung für Sie eingestellt:
+exc#:#exc_msg_new_message_from_pf_recipient#:#Es wurde eine neue Mitteilung zur Übung "%s" hinzugefügt.
+exc#:#exc_msg_new_message_from_pf_recipient2#:#Ein Peer-Feedback-Nehmer hat eine neue Mitteilung für Sie eingestellt:
 exc#:#exc_msg_participants_removed#:#Die Teilnehmer wurden aus der Übung entfernt.
 exc#:#exc_msg_public_submission#:#Alle Lösungsabgaben werden nach dem Abgabetermin veröffentlicht.
 exc#:#exc_msg_saved_grades#:#Die Änderungen wurden gespeichert.###Modified as part of gender mainstreaming activities for ILIAS 8
@@ -9183,13 +9300,18 @@ exc#:#exc_multi_feedback_files#:#Multi-Feedback-Dateien
 exc#:#exc_needs_deadline#:#Diese Option benötigt einen Abgabetermin.
 exc#:#exc_needs_fixed_deadline#:#Diese Funktion benötigt ein festes Abgabedatum.
 exc#:#exc_new_assignment#:#Neue Übungseinheit
+exc#:#exc_no_assignments#:#Keine Übungseinheiten vorhanden.
 exc#:#exc_no_assignments_available#:#Keine Übungseinheiten vorhanden. Bitte wählen Sie "Übungseinheiten" und "Bearbeiten", um eine Übungseinheit zu erstellen.
+exc#:#exc_no_deadline#:#Keine Abgabefrist
+exc#:#exc_no_deadline_info#:#Es gibt keinen Abgabetermin für die Teilnehmer.
 exc#:#exc_no_deadline_specified#:#Es wurde kein Abgabetermin festgelegt.
 exc#:#exc_no_feedback_dir_found_in_zip#:#Die Verzeichnisstruktur des hochgeladenen Zip-Archivs konnte nicht verarbeitet werden.
 exc#:#exc_no_get_target#:#Kein gültiges Link-Ziel gefunden.
 exc#:#exc_no_graded_mem_selected#:#Bitte wählen Sie mindestens einen Teilnehmer mit Bewertung aus.
 exc#:#exc_no_participants#:#Zur Zeit gibt es keine Teilnehmer.
+exc#:#exc_no_peer_feedback_deadline#:#Keine Frist für Abgabe des Feedbacks
 exc#:#exc_no_portfolio_templates#:#Es sind keine Portfoliovorlagen vorhanden.
+exc#:#exc_no_submission_yet#:#Bisher keine Abgabe
 exc#:#exc_no_team_yet#:#Keinem Team zugeordnet
 exc#:#exc_no_team_yet_info#:#Sie können selbst ein Team erstellen oder in ein anderes Team von dessen Teammitgliedern hinzugefügt werden.
 exc#:#exc_no_team_yet_info_tutor#:#Sie werden später einem Team zugewiesen.
@@ -9198,6 +9320,7 @@ exc#:#exc_note_for_tutor#:#Interne Bemerkung
 exc#:#exc_notification#:#Persönliche Benachrichtigung
 exc#:#exc_nr_random_mand#:#Anzahl verpflichtender Übungseinheiten
 exc#:#exc_num_teams#:#Anzahl
+exc#:#exc_ongoing#:#Laufende
 exc#:#exc_order_by_deadline#:#Nach Abgabetermin sortieren
 exc#:#exc_overview#:#Übersicht
 exc#:#exc_participant#:#Teilnehmer
@@ -9211,6 +9334,7 @@ exc#:#exc_pass_mode#:#Anforderung
 exc#:#exc_pass_mode_not_changeable_info#:#Diese Option kann nicht mehr geändert werden.
 exc#:#exc_passed_status_determination#:#Bewertung als „Bestanden“
 exc#:#exc_passing_exc#:#Bestehen der Übung
+exc#:#exc_past#:#Vergangene
 exc#:#exc_peer_deadline_mismatch#:#Da das Feedback erst nach dem Abgabetermin der Übungseinheit gegeben werden kann, darf die Deadline für das Feedback nicht vor dem Abgabedatum liegen.
 exc#:#exc_peer_review#:#Peer-Feedback
 exc#:#exc_peer_review_ass_setting_info#:#Nachdem der Abgabetermin und ggfs. die Nachfrist verstrichen sind, können Teilnehmer ihre Arbeitsergebnisse gegenseitig bewerten. Genaue Einstellungen zum Peer-Feedback werden im gleichnamigen Reiter vorgenommen. Der Reiter wird eingeblendet, wenn diese Option aktiviert und gespeichert wurde.
@@ -9258,9 +9382,11 @@ exc#:#exc_peer_review_show_missing#:#Sie können das erhaltene Feedback nicht ei
 exc#:#exc_peer_review_show_received_none#:#Sie haben kein Feedback erhalten.
 exc#:#exc_peer_review_simple_unlock#:#Anzeige der erhaltenen Bewertungen
 exc#:#exc_peer_review_simple_unlock_active#:#Nach Abgabe einer Bewertung
+exc#:#exc_peer_review_simple_unlock_immed#:#Erhaltene Feedbacks immer anzeigen
 exc#:#exc_peer_review_simple_unlock_inactive#:#Nach Abgabe aller Bewertungen
 exc#:#exc_peer_review_text#:#Texteingabe
 exc#:#exc_peer_review_updated#:#Ihr Feedback wurde gespeichert.
+exc#:#exc_peer_reviews_in_lead_text#:#In %s Feedback geben
 exc#:#exc_peer_reviews_invalid_warning#:#Ungültige Peer-Gruppen
 exc#:#exc_portfolio_created#:#Portfolio wurde erstellt.
 exc#:#exc_portfolio_returned#:#Portfolio zur Übungseinheit
@@ -9279,8 +9405,11 @@ exc#:#exc_random_assignment_info#:#Wenn Sie die Übung starten, wird Ihnen eine 
 exc#:#exc_random_selection#:#Zufällige Auswahl
 exc#:#exc_random_selection_info#:#Jedem Benutzer wird eine zufällige Auswahl an verpflichtenden Übungseinheiten zugeordnet.
 exc#:#exc_random_selection_not_changeable_info#:#Diese Option kann nicht aktiviert werden.
+exc#:#exc_received_feedback#:#Erhaltene Feedbacks
 exc#:#exc_rel_last_submission#:#Letzt möglicher Abgabetermin
 exc#:#exc_rel_last_submission_info#:#Wird dieses Datum gesetzt, so müssen alle Abgaben vor diesem Datum getätigt werden.
+exc#:#exc_rel_start_latest_lead_text#:#spätestens am %s
+exc#:#exc_rel_start_lead_text#:#%s Tage nach Starten abgeben
 exc#:#exc_relative_date#:#Relatives Datum
 exc#:#exc_relative_date_info#:#Das Abgabedatum ergibt sich aus dem Bearbeitungszeitraum und dem durch den Teilnehmer gewählten Startzeitpunkt.
 exc#:#exc_rem_time_after_start#:#Bearbeitungszeitraum nach Start
@@ -9305,6 +9434,9 @@ exc#:#exc_reminder_submit_setting#:#Teilnehmer an Abgaben erinnern
 exc#:#exc_reminder_submit_subject#:#Übungseinheit "%s" wurde noch nicht abgegeben
 exc#:#exc_reminders_cron#:#Erinnerungen für Übungseinheiten
 exc#:#exc_reminders_cron_info#:#Bei Aktivierung werden drei Erinnerungen versendet: Ausstehende Abgaben, ausstehende Bewertungen und ausstehende Peer-Feedbacks
+exc#:#exc_request_deadline#:#Abgabefrist anfragen
+exc#:#exc_requirement#:#Anforderung
+exc#:#exc_review_anytime#:#Jederzeit Feedback geben
 exc#:#exc_save_all#:#Alle speichern
 exc#:#exc_save_order#:#Reihenfolge speichern
 exc#:#exc_save_selected#:#Ausgewählte Eingaben speichern
@@ -9321,6 +9453,8 @@ exc#:#exc_select_portfolio_info#:#Bitte wählen Sie eines Ihrer Portfolios, um e
 exc#:#exc_select_portfolio_unlink#:#Portfolio entfernen
 exc#:#exc_send_assignment#:#Übungseinheit per Mail verschicken
 exc#:#exc_send_grading_notification#:#Benachrichtigung über Bewertung schicken
+exc#:#exc_set_failed#:#Auf 'nicht bestanden' setzen
+exc#:#exc_set_passed#:#Auf 'bestanden' setzen
 exc#:#exc_settings_feedback#:#Rückmeldung
 exc#:#exc_settings_feedback_file#:#Datei
 exc#:#exc_settings_feedback_file_info#:#Rückmeldungen werden als Datei hochgeladen und im Reiter „Übungseinheiten“ angezeigt. Die Teilnehmerinnen und Teilnehmer werden darüber per Mail benachrichtigt.
@@ -9341,12 +9475,13 @@ exc#:#exc_submission_file#:#Dateiabgabe
 exc#:#exc_submission_no_new_files#:#Keine neuen Abgaben vorhanden.
 exc#:#exc_submission_notification#:#Benachrichtigung bei Abgabe
 exc#:#exc_submission_notification_body#:#Eine neue Abgabe für die Übung "%s" liegt vor.
-exc#:#exc_submission_notification_info#:#Sie werden per Mail benachrichtigt, sobald neue Lösungen abgegeben wurden. Dies ist eine persönliche Einstellung, die nur für Sie gilt. Andere Personen, die Abgaben bewerten erhalten nur dann eine Mail, wenn auch sie diese Checkbox aktivieren.
+exc#:#exc_submission_notification_info#:#Sie werden per Mail benachrichtigt, sobald neue Lösungen abgegeben wurden oder Abgabefristen beantragt werden. Dies ist eine persönliche Einstellung, die nur für Sie gilt. Andere Tutoren der Übung sind davon nicht betroffen.
 exc#:#exc_submission_notification_link#:#Link zur Übung: %s
 exc#:#exc_submission_notification_subject#:#Eine neue Abgabe für die Übung "%s" liegt vor
 exc#:#exc_submission_open_notification_link#:#Abgabe öffnen: %s
 exc#:#exc_submission_text#:#Textabgabe
 exc#:#exc_submissions_and_grades#:#Abgaben und Noten
+exc#:#exc_submit_anytime#:#Jederzeit abgeben
 exc#:#exc_submit_convenience_no_deadline#:#Geben Sie nach Bearbeitung der Übungseinheit ab. Es gibt keinen festen Abgabetermin.
 exc#:#exc_submitted_files_deleted#:#Die ausgewählten Dateien wurden gelöscht.
 exc#:#exc_sure_unlink_portfolio#:#Möchten Sie das Portfolio aus dieser Übungseinheit entfernen?
@@ -9371,6 +9506,8 @@ exc#:#exc_tbl_feedback_time#:#Rückmeldung am
 exc#:#exc_tbl_filter_has_no_submission#:#Hat noch nicht abgegeben
 exc#:#exc_tbl_filter_has_submission#:#Hat abgegeben
 exc#:#exc_tbl_filter_submission#:#Abgabe
+exc#:#exc_tbl_filter_submission_after#:#Abgabe nach
+exc#:#exc_tbl_filter_submission_before#:#Abgabe vor
 exc#:#exc_tbl_individual_deadline#:#Individueller Abgabetermin
 exc#:#exc_tbl_mark#:#Note
 exc#:#exc_tbl_notice#:#Interne Anmerkung
@@ -9430,12 +9567,14 @@ exc#:#exc_text_assignment_show#:#Text anzeigen
 exc#:#exc_text_saved#:#Der Text wurde gespeichert.
 exc#:#exc_total_exc#:#Gesamte Übung
 exc#:#exc_total_members#:#Gesamtanzahl an Teilnehmern
+exc#:#exc_type#:#Type
 exc#:#exc_type_blog#:#Blog
 exc#:#exc_type_portfolio#:#Portfolio
 exc#:#exc_type_text#:#Text
 exc#:#exc_type_upload#:#Datei
 exc#:#exc_type_upload_team#:#Datei als Team einreichen
 exc#:#exc_value_can_not_set#:#Dieser Wert kann nicht gesetzt werden
+exc#:#exc_view_portfolio#:#Portfolio anzeigen
 exc#:#exc_wait_for_files#:#Der Download sollte automatisch starten. Bei Problemen klicken Sie bitte hier.
 exc#:#exc_wiki_container#:#Wiki-Container
 exc#:#exc_wiki_container_info#:#Ort in dem neue Wikis der Teilnehmer angelegt werden.
@@ -9448,6 +9587,7 @@ exc#:#exc_without_template_info#:#Teilnehmer erstellen ihre Portfolios selbstst�
 exc#:#exc_without_wiki_template#:#Ohne Vorlage
 exc#:#exc_without_wiki_template_info#:#Teilnehmer starten mit leerem Wiki.
 exc#:#exc_work_instructions#:#Arbeitsanweisung
+exc#:#exc_x_of_y#:#von
 exc#:#exc_your_text#:#Ihr Text
 exc#:#feedback#:#Feedback
 exc#:#feedback_from#:#Feedback von
@@ -9509,19 +9649,29 @@ file#:#copyright_custom#:#Benutzerdefiniert
 file#:#copyright_custom_info#:#Benutzerdefiniertes Copyright auswählen, welches auf alle entpackten Dateien dieses Archivs angewandt wird.
 file#:#copyright_inherited#:#Vererbt
 file#:#copyright_inherited_info#:#Copyright des Zip-Archivs auf seine entpackten Dateien anwenden. <br \>Copyright des Zip-Archivs: %s.
+file#:#could_not_create_file_objs#:#Beim Erstellen der Datei-Objekte ist ein Fehler aufgetreten, wenden Sie sich an die Administrierenden der Plattform.
 file#:#de_activate_icon#:#(De-)Aktivieren
 file#:#download_ascii_filename#:#Verwende ASCII-Zeichen für Dateinamen von Downloads
 file#:#download_ascii_filename_info#:#Dateinamen von Heruntergeladenen Dateien sollten nur ASCII-Zeichen enthalten. Option deaktivieren, um alle Zeichen zu verwenden.
+file#:#file_btn_lp_toggle_state_completed#:#Auf "Nicht bearbeitet" setzen
+file#:#file_btn_lp_toggle_state_not_completed#:#Auf "Bearbeitet" setzen
 file#:#file_copy#:#Datei kopieren
 file#:#file_download#:#Datei herunterladen
 file#:#file_import#:#Dateiimport
 file#:#file_new_version#:#Neue Version anlegen
 file#:#file_new_version_info#:#Eine neue Dateiversion anlegen. Alte Versionen bleiben erhalten.
+file#:#file_publish#:#Entwurf veröffentlichen
+file#:#file_rollback_rollback_first#:#Die Version konnte nicht zurückgesetzt werden, weil ein unveröffentlichter Entwurf existiert.
+file#:#file_rollback_same_version#:#Dies ist bereits die aktuelle Version
+file#:#file_unpublish#:#Als Entwurf markieren
 file#:#file_upload_info_file_with_critical_extension#:#Mindestens eine Datei enthält eine kritische oder unbekannte Dateiendung. Die Dateiendung wird bei jedem Download zu .sec geändert. Kontaktieren Sie gegebenfalls Ihren Administrator. Dateiname(n): %s
 file#:#file_uploaded_by#:#Version hochgeladen von
+file#:#file_version_draft#:#Entwurf
+file#:#file_version_draft_info#:#Die aktuellste Version ist im Status "Entwurf". Solange die Version nicht veröffentlicht wurde, können keine neuen Versionen angelegt werden. Personen mit Leserecht auf die Datei erhalten die aktuellste veröffentlichte Version.
 file#:#form_icon_creation#:#Icon erstellen
 file#:#form_icon_updating#:#Icon aktualisieren
 file#:#general_upload_error_occured#:#Beim Verarbeiten der Datei ist ein unerwartetet Fehler aufgetreten.
+file#:#important_info#:#Wichtige Informationen
 file#:#input_active#:#Aktiv
 file#:#input_desc_active#:#Dieses Icon aktivieren.
 file#:#input_desc_icon#:#Bild welches als Icon für Dateien mit den spezifizierten Suffixen verwendet werden soll.
@@ -9529,6 +9679,8 @@ file#:#input_desc_suffixes#:#Liste Komma-separierter Suffixe (Nur Buchstaben und
 file#:#input_icon#:#Icon
 file#:#input_suffixes#:#Suffixe
 file#:#migrated#:#Status
+file#:#mime_type#:#MIME-Type
+file#:#msg_cant_unpublish#:#Aktion konnte nicht ausgeführt werden
 file#:#msg_confirm_entry_deletion#:#Wollen Sie den nachfolgenden Eintrag wirklich löschen?:
 file#:#msg_error_active_suffixes_blacklisted#:#Eine der gewählten Dateiendungen ist auf der globalen Blacklist und kann derzeit nciht genutzt werden.
 file#:#msg_error_active_suffixes_conflict#:#Fehler: Es dürfen nicht mehrere Icons für ein Suffix aktiv sein. Bitte deaktivieren Sie entweder dieses Icon oder das andere aktivierte Icon, dessen Suffixe sich mit jenen dieses Icons überschneiden.
@@ -9549,6 +9701,7 @@ file#:#preview_caption#:#Vorschau %svon %s
 file#:#preview_image_size_info#:#Maximale Seitenlänge der Vorschaubilder in px.
 file#:#preview_persisting#:#Vorschaubilder persistieren
 file#:#preview_persisting_info#:#Generierte vVorschaubilder werden gespeichert. Wenn deaktiviert, werden die Vorschaubilder jeweils beim Aufruf generiert.
+file#:#publish_before_delete#:#Version(en) konnte(n) nicht gelöscht werden, da ein noch unveröffentlichter Entwurf existiert.
 file#:#replace_file_info#:#Alle Dateiversionen werden gelöscht.
 file#:#resource_id#:#Ressourcen ID
 file#:#set_license_for_all_files#:#Lizenz für alle Dateien festlegen
@@ -9557,10 +9710,15 @@ file#:#show_amount_of_downloads_info#:#Wenn aktiv, wird die Anzahl Downloads auf
 file#:#storage_id#:#Storage ID
 file#:#suffix_specific_icons#:#Suffix-spezifische Icons
 file#:#suffixes#:#Suffixe
+file#:#upload_files#:#Dateien hochladen
+file#:#upload_files_limit#:#Die maximale Grösse einer Datei beträgt %s.
+file#:#upload_files_title#:#Dateien hochladen
 file#:#upload_info#:#Datei
 file#:#upload_info_desc#:#Sie können die Dateien und die Dateiversionen im Tab "Versionen" verwalten.
 file#:#version_uploaded#:#Version hochgeladen am
 file#:#versionname#:#Titel
+fils#:#add_upload_policy#:#Richtlinie hinzufügen
+fils#:#edit_upload_policy#:#Richtlinie bearbeiten
 fils#:#file_services#:#Datei-Services
 fils#:#file_services_description#:#Konfiguration der Datei-Service Einstellungen.
 fils#:#file_suffix_custom_expl_negative#:#Verbotene Dateiendungen
@@ -9573,6 +9731,24 @@ fils#:#file_suffix_default_positive#:#Dateiendungen: Positivliste (Ausgangsliste
 fils#:#file_suffix_default_positive_info#:#Voreingestellte Ausgangsliste für akzeptierte Dateiendungen.
 fils#:#file_suffix_overall_positive#:#Effektive Positivliste
 fils#:#file_suffix_overall_positive_info#:#Dies ist die endgültige Liste akzeptierter Dateiendungen.
+fils#:#policy_audience#:#Zielgruppe
+fils#:#policy_audience_all_users_option_desc#:#Richtlinie für alle Benutzer:innen anwenden.
+fils#:#policy_audience_global_roles_option_desc#:#Richtlinie für Benutzer:innen, welche bestimmte globale Rollen innehaben, anwenden.
+fils#:#policy_confirm_deletion#:#Wollen Sie die Richtlinie mit den nachfolgenden Eigenschaften wirklich löschen?:
+fils#:#policy_deletion_failure_not_found#:#Fehler: Die Richtlinie konnte nicht gelöscht werden, da sie nicht gefunden wurde.
+fils#:#policy_deletion_successful#:#Löschung der Richtlinie war erfolgreich.
+fils#:#policy_filter#:#Richtlinien-Filter
+fils#:#policy_no_validity_limitation_set#:#Unbefristet gültig
+fils#:#policy_scope#:#Anwendungsbereich
+fils#:#policy_table_info_no_policies#:#Es wurden noch keine Upload-Richtlinien angelegt.
+fils#:#policy_title_desc#:#Beschreibender Titel für die Richtlinie.
+fils#:#policy_upload_limit#:#Upload Limite
+fils#:#policy_upload_limit_desc#:#Upload Limite welche durch diese Richtlinie gesetzt wird in MB.
+fils#:#policy_valid_until#:#Gültig bis
+fils#:#policy_valid_until_desc#:#Legen Sie ein optionales "Gültig bis"-Datum fest, nach welchem die Richtlinie abläuft.
+fils#:#policy_validity#:#Gültigkeit
+fils#:#upload_limits#:#Upload Limits
+fils#:#upload_policies#:#Upload Richtlinien
 fold#:#fold_copy#:#Ordner kopieren
 fold#:#fold_import#:#Ordner importieren
 fold#:#fold_presentation#:#Darstellung
@@ -9651,6 +9827,7 @@ forum#:#deletePosting#:#Beitrag löschen
 forum#:#deletePostingDraft#:#Beitragsentwurf löschen
 forum#:#delete_draft_successfully#:#Der Entwurf wurde erfolgreich gelöscht.
 forum#:#delete_drafts_successfully#:#Die Entwürfe wurden erfolgreich gelöscht.
+forum#:#delete_thread#:#Thema löschen
 forum#:#descending_order#:#Neueste Beiträge oben
 forum#:#edit_thread_draft#:#Themenentwurf bearbeiten
 forum#:#empty_subject#:#Benutzer müssen Titel selbst angeben.
@@ -9781,7 +9958,7 @@ forum#:#frm_statistics_enabled#:#Statistik anzeigen
 forum#:#frm_statistics_enabled_desc#:#Alle können im Reiter „Statistik“ sehen, wer wie viele Beiträge geschrieben hat.
 forum#:#frm_statistics_ranking#:#Anzahl der öffentl. Beiträge
 forum#:#frm_subject_setting#:#Vorgabe Beitragstitel
-forum#:#frm_sure_delete_threads#:#Sind Sie sicher, dass die folgenden Themen gelöscht werden sollen?
+forum#:#frm_sure_delete_threads#:#Sind Sie sicher, dass das folgendende Thema gelöscht werden soll?
 forum#:#frm_sure_merge_threads#:#Sind Sie sicher, dass Sie diese beiden Themen zu einem Thema zusammenführen wollen? Achtung: Diese Aktion kann nicht rückgängig gemacht werden.
 forum#:#frm_task_publishing_draft_title#:#Veröffentlichen des Entwurfs "%s"
 forum#:#frm_wizard_page#:#Forum kopieren (Schritt 2/2)
@@ -9793,8 +9970,8 @@ forum#:#mark_moderator_posts_desc#:#Beiträge der Moderation werden farblich her
 forum#:#merge#:#Zusammenführen
 forum#:#merge_posts_into_thread#:#Verschmelze Posts mit anderem Thema
 forum#:#merged_threads_successfully#:#Die selektierten Themen wurden erfolgreich zusammengeführt
-forum#:#move_chosen_topics#:#Verschiebe gewählte Themen
-forum#:#move_thread_to_forum#:#Verschiebe Thema in anderes Forum
+forum#:#move_chosen_topics#:#Thema "%s" verschieben nach:
+forum#:#move_thread_to_forum#:#Verschiebe Thema in ein anderes Forum
 forum#:#new_post#:#Neuer Beitrag
 forum#:#new_thread_with_post#:#Neues Thema mit Beitrag
 forum#:#no_forum_selected#:#Kein Forum für die Verschiebeaktion ausgewählt!###Modified as part of gender mainstreaming activities for ILIAS 8
@@ -9818,7 +9995,8 @@ forum#:#post_uncensored_by#:#für folgenden Beitrag wurde die Zensur von "%1$s" 
 forum#:#post_updated_by#:#folgender Beitrag im Forum "%2$s" wurde von "%1$s" geändert
 forum#:#preset_subject#:#Titel des Beitrags wird für Antwort automatisch übernommen.
 forum#:#publish#:#Veröffentlichen
-forum#:#reopen_topics#:#Wiedereröffnen
+forum#:#relevance#:#Relevanz
+forum#:#reopen_topics#:#Thema wiedereröffnen
 forum#:#reply_to_postings#:#Antworten
 forum#:#reset_limited_view#:#Begrenzte Ansicht auf diesen Beitrag und alle darunter liegenden Beiträge
 forum#:#reset_limited_view_button#:#Gesamten Thread anzeigen
@@ -9828,12 +10006,12 @@ forum#:#restore_draft_from_autosave#:#Entwurf wiederherstellen
 forum#:#save_draft_successfully#:#Der Entwurf wurde erfolgreich gespeichert.
 forum#:#sel_threads_already_sticky#:#Mindestens eins der gewählten Themen ist bereits als Top-Thema markiert.
 forum#:#sel_threads_already_unsticky#:#Mindestens eins der gewählten Themen ist bereits kein Top-Thema mehr.
-forum#:#sel_threads_make_sticky#:#Die gewählten Themen wurden als Top-Thema markiert.
-forum#:#sel_threads_make_unsticky#:#Die gewählten Themen werden nicht mehr als Top-Thema markiert.
+forum#:#sel_threads_make_sticky#:#Das Thema wurde als Top-Thema markiert.
+forum#:#sel_threads_make_unsticky#:#Das Thema wird nicht mehr als Top-Thema markiert.
 forum#:#select_at_least_one_thread#:#Es muss mindestens ein Thema gewählt werden.
 forum#:#select_max_one_thread#:#Bitte wählen Sie nur ein Thema aus!
-forum#:#selected_threads_closed#:#Die gewählten Themen wurden geschlossen.
-forum#:#selected_threads_reopened#:#Die gewählten Themen wurden wiedereröffnet.
+forum#:#selected_threads_closed#:#Das Thema wurde geschlossen.
+forum#:#selected_threads_reopened#:#Das Thema wurde wiedereröffnet.
 forum#:#sort_by_date#:#Nach Datum sortieren
 forum#:#sort_by_date_desc#:#Das Thema wird in flacher Ansicht präsentiert. Die Beiträge werden in der zeitlichen Reihenfolge der Erstellung gezeigt.
 forum#:#sort_by_posts#:#Nach Beiträge sortieren
@@ -9843,9 +10021,12 @@ forum#:#sticky#:#'Top-Thema'
 forum#:#sure_delete_drafts#:#Sind Sie sicher, dass Sie die gewählten Entwürfe löschen möchten?
 forum#:#switch_threads_for_merge#:#Das ausgewählte Thema ist älter als das Zielthema. Um eine sinnvolle Zusammenführung zu schaffen, werden Quell- und Zielthema getauscht.
 forum#:#target_select#:#Beitrag für begrenzte Ansicht auswählen
+forum#:#thema#:#Themen
 forum#:#thread#:#Thema
 forum#:#thread_deleted_by#:#folgendes Thema im Forum "%2$s" wurde von "%1$s" gelöscht:
-forum#:#threads_moved_successfully#:#Die gewählten Themen wurden erfolgreich in ein anderes Forum verschoben.
+forum#:#thread_overview#:#Themenübersicht
+forum#:#threads_moved_successfully#:#Das gewählte Thema wurde erfolgreich in ein anderes Forum verschoben.
+forum#:#top_thema#:#Top-Themen
 forum#:#topic_close#:#geschlossen
 forum#:#topics_please_select_one_action#:#Bitte wählen Sie eine Aktion aus.
 forum#:#user_decides_notification#:#Mitglieder müssen Benachrichtigungen selbst aktivieren.
@@ -10017,6 +10198,7 @@ grp#:#grp_members#:#Mitglieder
 grp#:#grp_members_deleted#:#Die ausgewählten Mitglieder sind aus der Gruppe ausgetragen worden.
 grp#:#grp_members_map#:#Karte Gruppenmitglieder
 grp#:#grp_members_print_title#:#Gruppenmitglieder
+grp#:#grp_min_one_admin#:#Der Gruppe muss mindestens ein Konto mit der Rolle „Gruppenadministration“ zugeordnet sein.
 grp#:#grp_missing_grp_type#:#Bitte wählen Sie die Art der Gruppe aus.
 grp#:#grp_missing_password#:#Bitte geben Sie ein Gruppenpasswort ein.
 grp#:#grp_new_status#:#Ihr neuer Status:
@@ -10231,6 +10413,9 @@ irss#:#resource_id#:#Resource ID
 irss#:#resource_no_stakeholder_uri#:#Kein Stakeholder stellt einen Link zu der Nutzung dieser Resource zur Verfügung.
 irss#:#resource_overview#:#Ressourcen-Übersicht
 irss#:#revision#:#Revision
+irss#:#revision_status#:#Status
+irss#:#revision_status_10#:#Veröffentlicht
+irss#:#revision_status_20#:#Entwurf
 irss#:#revisions#:#Verfügbare Revisionen
 irss#:#rid_deleted#:#Datei entfernt
 irss#:#rids_appended#:#Ressource(n) hinzugefügt
@@ -10450,6 +10635,72 @@ ldap#:#ldap_user_sync_cron_info#:#Wenn aktiviert, werden Anmeldekonten aus dem L
 ldap#:#ldap_user_sync_info#:#Legt fest, ob noch nicht in ILIAS vorhandene Benutzer automatisch beim ersten Login oder aber regelmäßig per Cron-Job angelegt werden.
 ldap#:#ldap_username_filter#:#Anmeldenamen-Filter
 ldap#:#ldap_username_filter_info#:#Benutzen Sie * als Wildcard.
+ldoc#:#deleteDocument#:#Löschen
+ldoc#:#detachCriterionAssignment#:#Löschen
+ldoc#:#ldoc_acceptance_history#:#Zustimmungshistorie
+ldoc#:#ldoc_account_reg_not_possible#:#Eine Selbstregistrierung ist aktuell nicht möglich, da in dieser Installation keine Benutzervereinbarung angeboten wird. Bitte kontaktieren Sie Ihren <a href="%1$s">Systemadministrator</a> für weitere Informationen.
+ldoc#:#ldoc_add_document_btn_label#:#Dokument hinzufügen
+ldoc#:#ldoc_agreement_document#:#Dokument
+ldoc#:#ldoc_agreement_document_missing#:#Nicht vorhanden
+ldoc#:#ldoc_agreement_documents_tab_label#:#Dokumente
+ldoc#:#ldoc_agreement_exists#:#Vorhanden
+ldoc#:#ldoc_agreement_missing#:#Nicht vorhanden
+ldoc#:#ldoc_crit_type_usr_country#:#Benutzerland
+ldoc#:#ldoc_crit_type_usr_country_info#:#Das Dokument muss akzeptiert werden, wenn beim ersten Login dieses Land gewählt wurde. Eine nachträgliche Änderung der Benutzersprache führt nicht automatisch zur Vorlage eines neuen Dokuments.
+ldoc#:#ldoc_crit_type_usr_global_role#:#Globale Rolle
+ldoc#:#ldoc_crit_type_usr_global_role_info#:#Das Dokument muss akzeptiert werden, wenn ein Benutzer beim ersten Login in diese Rolle eingetragen ist. Eine nachträgliche Änderung der Rolle führt nicht automatisch zur Vorlage eines neuen Dokuments.
+ldoc#:#ldoc_crit_type_usr_language#:#Benutzersprache
+ldoc#:#ldoc_crit_type_usr_language_info#:#Das Dokument muss akzeptiert werden, wenn beim ersten Login diese Sprache gewählt wurde. Eine nachträgliche Änderung der Benutzersprache führt nicht automatisch zur Vorlage eines neuen Dokuments.
+ldoc#:#ldoc_criterion_assignment_cannot_match#:#Sie können das Vorlagekriterium mit der entsprechenden Konfiguration nicht zuweisen. Durch ein anderes Vorlagekriterium wird das Dokument niemals zutreffen können.
+ldoc#:#ldoc_criterion_assignment_must_be_unique#:#Sie können das Vorlagekriterium mit der entsprechenden Konfiguration nicht zuweisen. Es existiert bereits eine identische Zuweisung.
+ldoc#:#ldoc_deleted_documents_p#:#Die gewählten Dokumente wurden gelöscht.
+ldoc#:#ldoc_deleted_documents_s#:#Das Dokument wurde gelöscht.
+ldoc#:#ldoc_disabled#:#Deaktiviert
+ldoc#:#ldoc_doc_crit_attached#:#Das Vorlagekriterium wurde zugewiesen.
+ldoc#:#ldoc_doc_crit_changed#:#Das Vorlagekriterium wurde aktualisiert.
+ldoc#:#ldoc_doc_crit_detached#:#Das Vorlagekriterium wurde entfernt.
+ldoc#:#ldoc_doc_delete#:#Dokument löschen
+ldoc#:#ldoc_doc_detach_crit_confirm_title#:#Vorlagekriterium entfernen
+ldoc#:#ldoc_doc_sure_detach_crit#:#Sind Sie sicher, dass das Vorlagekriterium entfernt werden soll?
+ldoc#:#ldoc_document#:#Dokument
+ldoc#:#ldoc_enabled#:#Aktiviert
+ldoc#:#ldoc_form_attach_criterion_head#:#Vorlagekriterium hinzufügen
+ldoc#:#ldoc_form_criterion#:#Vorlagekriterium
+ldoc#:#ldoc_form_document#:#Dokument
+ldoc#:#ldoc_form_document_content_changed#:#Der Inhalt der hochgeladenenen Datei wurde durch ILIAS bereinigt. Bitte prüfen Sie das Ergebnis und laden Sie im Zweifel eine neue Datei hoch.
+ldoc#:#ldoc_form_document_info#:#Bitte wählen Sie eine entsprechende Datei von Ihrem lokalen Dateisystem. Sie können eine einfache Text-Datei oder eine HTML-Datei hochladen. Es wird nur ein Teil des HTML-Sprachumfangs unterstützt. Bitte beachten Sie, dass HTML-Dateien beim Hochladen bereinigt werden, und nur der Inhalt des body-Elements übernommen wird.
+ldoc#:#ldoc_form_document_new#:#Inhalt ändern
+ldoc#:#ldoc_form_document_new_info#:#Hier können Sie eine neue Datei von Ihrem lokalen Dateisystem wählen um das Dokument zu ändern. Sie können eine einfache Text-Datei oder eine HTML-Datei hochladen. Es wird nicht der komplette HTML-Sprachumfang unterstützt. Bitte beachten Sie, dass HTML-Dateien beim Hochladen bereinigt werden, und nur der Inhalt des body-Elements übernommen wird. Der bestehende Inhalt des Dokuments wird ausgetauscht, die Historie ist davon nicht betroffen.
+ldoc#:#ldoc_form_document_title#:#Titel
+ldoc#:#ldoc_form_document_title_info#:#Geben Sie hier einen Titel für das Dokument ein.
+ldoc#:#ldoc_form_edit_criterion_head#:#Vorlagekriterium bearbeiten
+ldoc#:#ldoc_form_edit_doc_head#:#Dokument bearbeiten
+ldoc#:#ldoc_form_new_doc_head#:#Dokument erstellen
+ldoc#:#ldoc_last_modified#:#Letzte Änderung
+ldoc#:#ldoc_ldoc_settings#:#Einstellungen
+ldoc#:#ldoc_period#:#Zeitraum
+ldoc#:#ldoc_period_from#:#Von
+ldoc#:#ldoc_period_until#:#Bis
+ldoc#:#ldoc_reevaluate_on_login#:#Erneut prüfen beim Login
+ldoc#:#ldoc_reevaluate_on_login_desc#:#Falls aktiviert, wird nach erfolgreicher Anmeldung über die Weboberfläche geprüft, ob ein ggf. bereits akzeptiertes Dokument keine Gültigkeit mehr hat, da sich die Vorlagekriterien des Benutzers geändert haben. Ist dies der Fall und kann ILIAS ein neues Dokument finden, so muss der Benutzer dieses neu akzeptieren.
+ldoc#:#ldoc_saved_sorting#:#Die Sortierung wurde gespeichert.
+ldoc#:#ldoc_sure_delete_documents_p#:#Sind Sie sicher, dass Sie die gewählten Dokumente löschen möchten?
+ldoc#:#ldoc_sure_delete_documents_s#:#Sind Sie sicher, dass Sie das gewählte Dokument löschen möchten?
+ldoc#:#ldoc_tbl_docs_action_add_criterion#:#Vorlagekriterium hinzufügen
+ldoc#:#ldoc_tbl_docs_cell_not_criterion#:#Kein Vorlagekriterium zugewiesen
+ldoc#:#ldoc_tbl_docs_head_created#:#Erstellungsdatum
+ldoc#:#ldoc_tbl_docs_head_criteria#:#Vorlagekriterien
+ldoc#:#ldoc_tbl_docs_head_last_change#:#Letzte Änderung
+ldoc#:#ldoc_tbl_docs_head_sorting#:#Sortierung
+ldoc#:#ldoc_tbl_docs_head_title#:#Titel
+ldoc#:#ldoc_tbl_docs_title#:#Dokumente
+ldoc#:#ldoc_tbl_hist_cell_not_criterion#:#Kein Vorlagekriterium zugewiesen
+ldoc#:#ldoc_tbl_hist_head_acceptance_date#:#Datum
+ldoc#:#ldoc_tbl_hist_head_criteria#:#Vorlagekriterien
+ldoc#:#ldoc_tbl_hist_head_document#:#Dokument
+ldoc#:#ldoc_tbl_hist_head_firstname#:#Vorname
+ldoc#:#ldoc_tbl_hist_head_lastname#:#Nachname
+ldoc#:#ldoc_tbl_hist_head_login#:#Anmeldename
 lhist#:#cont_create_lhist#:#Element für Lernverlauf erstellen
 lhist#:#cont_update_lhist#:#Element für Lernverlaufs bearbeiten
 lhist#:#lhist_all#:#All
@@ -10576,8 +10827,9 @@ lso#:#lso_member_administration#:#Teilnehmerverwaltung
 lso#:#lso_members_deleted#:#Die ausgewählten Mitglieder sind aus der Lernsequenz ausgetragen worden.
 lso#:#lso_members_gallery#:#Mitgliedergalerie
 lso#:#lso_members_print_title#:#Lernsequenzmitglieder
-lso#:#lso_min_one_admin#:#Dieser Lernsequenz muß mindestens ein Administrator zugeordnet bleiben.
+lso#:#lso_min_one_admin#:#Dieser Lernsequenz muss mindestens ein Konto mit der Rolle „Lernsequenzadministration“ zugeordnet sein.
 lso#:#lso_msg_member_assigned#:#Benutzer wurde(n) in die Lernsequenz aufgenommen
+lso#:#lso_multidownload_not_available#:#Das Herunterladen verschiedener Objekte ist derzeit nicht für Lernsequenz Objekten verfügbar.
 lso#:#lso_new_status#:#Ihr neuer Status:
 lso#:#lso_notification#:#Benachrichtigung
 lso#:#lso_notification_explanation_admin#:#Sie erhalten diese Mail, da für Sie als Lernsequenzbetreuung die Benachrichtigungen aktiviert sind.
@@ -10739,7 +10991,7 @@ lti#:#lti_con_prov_always_learner#:#LTI-Benutzer ist immer Lernender
 lti#:#lti_con_prov_always_learner_info#:#In der Regel wird die Rolle in ILIAS auf eine LTI-Rolle abgebildet. Die Kursadministration könnte im Provider mehr Rechte haben, z.B. um das Objekt zu manipulieren. Aktivieren Sie diese Option, um das Rollen-Mapping zu vermeiden.
 lti#:#lti_con_prov_authentication#:#Authentifizierung
 lti#:#lti_con_prov_availability#:#Verfügbarkeit
-lti#:#lti_con_prov_availability_create#:#für neue und bestehende Objekte
+lti#:#lti_con_prov_availability_create#:#in neuen und bestehenden Objekten
 lti#:#lti_con_prov_availability_existing#:#nur für bestehende Objekte
 lti#:#lti_con_prov_availability_non#:#nicht verfügbar
 lti#:#lti_con_prov_category#:#Kategorie
@@ -11069,10 +11321,10 @@ mail#:#mail_roles#:#alle Personen mit folgenden lokalen Rollen
 mail#:#mail_s#:#Mails
 mail#:#mail_salutation_anonymous#:#Hallo
 mail#:#mail_salutation_f#:#Sehr geehrte Frau
-mail#:#mail_salutation_female#:#Ausgabe für Platzhalter [MAIL_SALUTATION], wenn Anrede „Frau”###Modified as part of gender mainstreaming activities for ILIAS 8
-mail#:#mail_salutation_general#:#Ausgabe für Platzhalter [MAIL_SALUTATION], wenn keine Anrede angegeben oder gewünscht
+mail#:#mail_salutation_female#:#Ausgabe für Platzhalter &lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, wenn Anrede „Frau”###Modified as part of gender mainstreaming activities for ILIAS 8
+mail#:#mail_salutation_general#:#Ausgabe für Platzhalter&lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, wenn keine Anrede angegeben oder gewünscht
 mail#:#mail_salutation_m#:#Sehr geehrter Herr
-mail#:#mail_salutation_male#:#Ausgabe für Platzhalter [MAIL_SALUTATION], wenn Anrede „Herr”###Modified as part of gender mainstreaming activities for ILIAS 8
+mail#:#mail_salutation_male#:#Ausgabe für Platzhalter &lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, wenn Anrede „Herr”###Modified as part of gender mainstreaming activities for ILIAS 8
 mail#:#mail_salutation_n#:#Hallo
 mail#:#mail_saved#:#Ihre Mail wurde gespeichert
 mail#:#mail_second_email#:#Zweite E-Mail-Adresse
@@ -11435,6 +11687,8 @@ meta#:#md_adv_show#:#Anzeigen
 meta#:#md_adv_substitution_table#:#Darstellung im Magazin
 meta#:#md_adv_text_max_length#:#Maximale Länge
 meta#:#md_adv_text_multi#:#Mehrzeilig
+meta#:#md_adv_text_multi_val#:#Mehrsprachige Werte
+meta#:#md_adv_text_multi_val_info#:#Erlauben Sie mehrsprachige Feldwerte für dieses Datenfeld. Für Texte, die keiner Übersetzung bedürfen, wie z.B. Personennamen, empfiehlt sich die Deaktivierung dieser Option.
 meta#:#md_advanced#:#Benutzerdefinierte Metadaten
 meta#:#md_aria_language_selection#:#Sprachauswahl
 meta#:#md_copyright#:#Copyright
@@ -12130,6 +12384,7 @@ mme#:#move_to_top_item#:#In Haupteinträge verschieben
 mme#:#msg_languages_added#:#Sprachen hinzugefügt
 mme#:#msg_moved#:#Eintrag wurde erfolgreich verschoben.
 mme#:#msg_not_moved#:#Eintrag konnte nicht verschoben werden, wähle einen gültigen Haupteintrag aus.
+mme#:#msg_ref_id_not_callable#:#Diese Referenz-ID kann von Main-Menu nicht verwendet werden. Es werden nur Ziele im Magazin unterstützt.
 mme#:#msg_restore_confirm#:#Alle angelegten Einträge und Übersetzungen werden gelöscht, die Standardeinträge werden auf ihren Ursprungszustand zurückgesetzt. Alle Anpassungen am Hauptmenu gehen verloren.
 mme#:#msg_restored#:#Hauptmenu zurückgesetzt
 mme#:#msg_subitem_deleted#:#Eintrag gelöscht.
@@ -12357,11 +12612,16 @@ notes#:#note_add_note#:#Notiz hinzufügen
 notes#:#note_content_removed#:#Der Inhalt wurde entfernt.
 notes#:#note_text#:#Text
 notes#:#note_update_comment#:#Kommentar bearbeiten
+notes#:#note_update_message#:#Mitteilung bearbeiten
 notes#:#note_update_note#:#Notiz bearbeiten
 notes#:#note_without_object#:#Ohne Objektbezug
 notes#:#notes_activate_comments#:#Öffentliches Kommentieren aktivieren
 notes#:#notes_add_comment#:#Kommentar hinzufügen
 notes#:#notes_add_edit_comment#:#Kommentar hinzufügen/editieren
+notes#:#notes_add_edit_message#:#Mitteilung hinzufügen/editieren
+notes#:#notes_add_edit_note#:#Notiz hinzufügen/editieren
+notes#:#notes_add_message#:#Mitteilung hinzufügen
+notes#:#notes_add_note#:#Notiz hinzufügen
 notes#:#notes_all_comments#:#Alle Kommentare
 notes#:#notes_comment#:#Kommentar
 notes#:#notes_comment_deleted#:#Der Kommentar wurde gelöscht
@@ -12369,13 +12629,20 @@ notes#:#notes_comments#:#Kommentare
 notes#:#notes_comments_deleted#:#Die Kommentare wurden gelöscht.
 notes#:#notes_deactivate_comments#:#Öffentliches Kommentieren ausschalten
 notes#:#notes_delete_comment#:#Soll der folgende Kommentar wirklich gelöscht werden?
+notes#:#notes_delete_message#:#Soll die folgende Mitteilung wirklich gelöscht werden?
 notes#:#notes_delete_note#:#Soll die folgende Notiz wirklich gelöscht werden?
 notes#:#notes_hide_comments#:#Kommentare ausblenden
 notes#:#notes_html_export#:#HTML Export
 notes#:#notes_latest_comment#:#Letzter Kommentar
+notes#:#notes_latest_message#:#Letzte Mitteilung
+notes#:#notes_message_author_counterpart#:#Gesprächspartner
+notes#:#notes_message_author_you#:#Sie
+notes#:#notes_messages#:#Mitteilungen
 notes#:#notes_my_comments#:#Meine Kommentare
 notes#:#notes_no_comments#:#Bisher wurde noch kein Kommentar abgegeben.
 notes#:#notes_no_comments_found#:#Es wurden keine Kommentare gefunden, die den Suchkriterien entsprechen.
+notes#:#notes_no_messages#:#Bisher wurde noch keine Mitteilung hinzugefügt.
+notes#:#notes_no_messages_found#:#Es wurden keine Mitteilungen gefunden, die den Suchkriterien entsprechen.
 notes#:#notes_no_notes#:#Bisher wurde noch kein Notiz hinzugefügt.
 notes#:#notes_no_notes_found#:#Es wurden keine Notizen gefunden, die den Suchkriterien entsprechen.
 notes#:#notes_note_deleted#:#Die Notiz wurde gelöscht
@@ -12405,6 +12672,9 @@ notifications_adm#:#osd_play_sound_desc#:#Ton abspielen bei Erhalt einer neuen B
 notifications_adm#:#osd_settings#:#Popup Benachrichtigungen
 notifications_adm#:#osd_vanish#:#Anzeigedauer
 notifications_adm#:#osd_vanish_desc#:#Dauer der Anzeige von Benachrichtigungen in Millisekunden
+obj#:#activation_visible_when_disabled#:#Sichtbarkeit
+obj#:#activation_visible_when_disabled_info#:#Wenn aktiviert, ist das Lernmaterial auch außerhalb der vorgesehenen Verfügbarkeit sichtbar.
+obj#:#availability_period_changed#:#Die zeitliche Verfügbarkeit wurde für die ausgewählten Objekte erfolgreich angepasst.
 obj#:#cont_filter_empty#:#Bitte nutzen Sie den Filter zur Anzeige von Objekten.
 obj#:#cont_skll_published#:#Alle Kompetenzzuweisungen wurden veröffentlicht.
 obj#:#cont_skll_published_some_not#:#Alle gegebenen Kompetenzzuweisungen wurden veröffentlicht. Zu einigen Benutzern konnten keine Kompetenzen veröffentlicht werden, da keine Zuweisungen vorlagen.
@@ -12412,7 +12682,9 @@ obj#:#copy_container_page_no_label#:#Seitengestaltung nicht übernehmen
 obj#:#copy_container_page_yes_byline#:#Die komplette Seitengestaltung des Kurses, aus dem Sie Objekte kopieren, wird in den Zielkurs übernommen. Allfällig vorhandene Seitenelemente werden überschrieben.
 obj#:#copy_container_page_yes_label#:#Seitengestaltung übernehmen
 obj#:#custom_icon#:#Angepasstes Icon
+obj#:#edit_availability_period#:#Zeitliche Verfügbarkeit ändern
 obj#:#edit_questions#:#Fragen bearbeiten
+obj#:#no_objects_selected#:#Es muss mindestens ein Objekt ausgewählt werden.
 obj#:#obj_activate_content_lang#:#Mehrsprachigkeit für Seiteneditor aktivieren
 obj#:#obj_activate_multilang#:#Mehrsprachigkeit aktivieren
 obj#:#obj_activation#:#Aktivierung
@@ -12474,6 +12746,7 @@ obj#:#obj_user_not_disable_not#:#Mitglieder können die Benachrichtigung nicht d
 obj#:#online_input_byline#:#Objekt ist veröffentlicht und kann von allen Personen mit dem Recht „Lesezugriff“ genutzt werden. Die Verfügbarkeit kann aber noch durch Vorbedingungen oder zeitliche Zugriffsbeschränkungen eingeschränkt sein. Diese Einstellungen wirkt sich auf alle Referenzen des Objektes aus.
 obj#:#select_object_type#:#Objekttyp wählen
 obj#:#svy_results#:#Ergebnisse
+obj#:#unequal_items_for_availability_period_message#:#Es wurden Objekte ausgewählt, deren zeitliche Verfügbarkeit nicht übereinstimmt. Vorgenommene Änderungen überschreiben die zeitliche Verfügbarkeit aller ausgewählten Objekte. Bitte wählen sie "Abbrechen", wenn dies nicht Ihrer Intention entspricht.
 obj#:#user_owns_no_objects#:#Keine Magazin-Objekte vorhanden
 objref#:#objref_custom_title#:#Eigenen Titel eingeben
 objref#:#objref_edit_ref#:#Ziel des Links
@@ -12727,6 +13000,7 @@ prg#:#cont_ed_insert_prgstatusinfo#:#Studienprogamm Statusinformation einfügen
 prg#:#content_automation#:#Inhaltsautomatisierung
 prg#:#content_automation_title#:#Kurse dieser Kategorien automatisch hinzufügen/entfernen
 prg#:#could_not_add_users_no_permissons#:#Konnte %d Benutzer wegen mangelnder Berechtigung nicht hinzufügen.
+prg#:#deadline#:#Stichtag
 prg#:#deadline_information#:#Informationen zum Bearbeitungszeitraum
 prg#:#deadline_updated#:#Stichtag aktualisiert
 prg#:#edit_participants#:#Zuweisungen bearbeiten
@@ -12977,6 +13251,8 @@ prg#:#restart_period#:#Automatische Wiederaufnahme vor Ablauf der Qualifikation
 prg#:#restart_period_desc#:#Wiederaufnahme (in Tagen) vor Ablauf der Qualifikation
 prg#:#restart_period_info#:#Automatische Wiederaufnahme vor Ablauf der Qualifikation in Tagen
 prg#:#restart_period_label#:#Tage vor Ablauf der Qualifikation
+prg#:#restart_recheck_desc#:#Bei Zuweisungen, die über einen Automatismus vorgenommen wurden, wird erneut geprüft, ob Kriterien für die Zuweisung vorliegen.
+prg#:#restart_recheck_label#:#Voraussetzungen erneut prüfen
 prg#:#risky_to_fail_mail_body#:#%s %s,<br/><br/>der Stichtag für das Abschließen des Studienprogramm '%s' ist bald ereicht.
 prg#:#risky_to_fail_mail_subject#:#Erinnerung, das der Stichtag am Studienprogramm bald ereicht ist
 prg#:#rol#:#Rolle
@@ -13300,6 +13576,7 @@ rbac#:#activate_wiki_protection#:#Schreibschutz aktivieren
 rbac#:#active_preconditions#:#Definierte Vorbedingungen
 rbac#:#add_consultation_hours#:#Sprechstundentermine anlegen
 rbac#:#add_consume_provider#:#Eigene LTI-Provider-Einstellungen hinzufügen
+rbac#:#add_pages#:#Seiten erstellen
 rbac#:#add_reply#:#Antwort anlegen
 rbac#:#add_thread#:#Thema anlegen
 rbac#:#adm_edit_permission#:#Rechteeinstellungen für die Allgemeinen Einstellungen der Administration ändern
@@ -13486,6 +13763,7 @@ rbac#:#ecss_read#:#Lesezugriff auf Einstellungen der ECS-Administration
 rbac#:#ecss_visible#:#ECS-Administration ist sichtbar
 rbac#:#ecss_write#:#Einstellungen der ECS-Administration bearbeiten
 rbac#:#edit_event#:#Kalender bearbeiten
+rbac#:#edit_file#:#Datei bearbeiten
 rbac#:#edit_in_online_editor#:#In Online-Editor bearbeiten
 rbac#:#edit_learning_progress#:#Lernfortschrittseinstellungen bearbeiten
 rbac#:#edit_members#:#Teilnehmer bearbeiten
@@ -13524,6 +13802,7 @@ rbac#:#feed_read#:#Inhalt des Webfeeds lesen
 rbac#:#feed_write#:#Einstellungen des Webfeeds bearbeiten
 rbac#:#file_copy#:#Datei kopieren
 rbac#:#file_delete#:#Datei verschieben oder löschen
+rbac#:#file_edit_file#:#Bearbeitung in einem externen Editor erlauben, sofern vorhanden
 rbac#:#file_edit_learning_progress#:#Benutzer kann Lernfortschrittseinstellungen bearbeiten
 rbac#:#file_edit_permission#:#Rechteeinstellungen ändern
 rbac#:#file_read#:#Datei herunterladen
@@ -14160,10 +14439,11 @@ rbac#:#webr_read#:#Weblinks aufrufen
 rbac#:#webr_visible#:#Weblinks sind sichtbar
 rbac#:#webr_write#:#Einstellungen der Weblinks bearbeiten
 rbac#:#wiki_activate_wiki_protection#:#Schreibschutz für einzelne Wikiseiten aktivieren
+rbac#:#wiki_add_pages#:#Wiki-Seiten erstellen
 rbac#:#wiki_copy#:#Wiki kopieren
 rbac#:#wiki_delete#:#Wiki löschen oder verschieben
 rbac#:#wiki_delete_wiki_pages#:#Wikiseiten löschen
-rbac#:#wiki_edit_content#:#Wiki-Seiten anlegen und bearbeiten
+rbac#:#wiki_edit_content#:#Wiki-Seiten bearbeiten
 rbac#:#wiki_edit_page_meta#:#Wikiseitenmetadaten bearbeiten
 rbac#:#wiki_edit_permission#:#Rechteeinstellungen ändern
 rbac#:#wiki_edit_wiki_navigation#:#Wiki-Navigation bearbeiten
@@ -15341,6 +15621,8 @@ style#:#sty_lightness_header_text#:#Helligkeit Überschrift Text
 style#:#sty_line_height#:#Zeilenhöhe
 style#:#sty_link_char#:#Link
 style#:#sty_list_char#:#Liste
+style#:#sty_list_style_position#:#Listenstil/Position
+style#:#sty_list_style_type#:#Listenstil/Type
 style#:#sty_make_global_default#:#Standard-Style
 style#:#sty_make_global_fixed#:#Erzwungener Style für alle Objekte
 style#:#sty_margin#:#Außenrand
@@ -15359,6 +15641,7 @@ style#:#sty_name#:#Name
 style#:#sty_nr_learning_modules#:#Anzahl der Lernmodule
 style#:#sty_odd_col_class#:#Ungerade Spalten
 style#:#sty_odd_row_class#:#Ungerade Zeilen
+style#:#sty_ol#:#Geordnete Liste
 style#:#sty_opacity#:#Deckkraft
 style#:#sty_opt_saved#:#Einstellungen gespeichert
 style#:#sty_order#:#Reihenfolge
@@ -15522,6 +15805,7 @@ style#:#sty_type_va_icont#:#Vert. Akkordeonelement Inhalt
 style#:#sty_type_va_ihcap#:#Vert. Akkordeonelement Überschrift
 style#:#sty_type_va_ihead#:#Vert. Akkordeonelement Kopf
 style#:#sty_type_va_iheada#:#Vert. Akkordeonelement Kopf (aktiv)
+style#:#sty_ul#:#Ungeordnete Liste
 style#:#sty_va_cntr_class#:#Vert. Akkordeon Container
 style#:#sty_va_icntr_class#:#Vert. Akkordeonelement Container
 style#:#sty_va_icont_class#:#Vert. Akkordeonelement Inhalt
@@ -16402,83 +16686,21 @@ tbl#:#tbl_template_created#:#Die aktuelle Ansicht wurde gespeichert.
 tbl#:#tbl_template_delete#:#Gespeicherte Ansicht löschen
 tbl#:#tbl_template_deleted#:#Die gespeicherte Ansicht wurde gelöscht.
 tbl#:#tbl_templates#:#Ansicht
-tos#:#deleteDocument#:#Löschen
-tos#:#detachCriterionAssignment#:#Löschen
-tos#:#tos_acceptance_history#:#Zustimmungshistorie
 tos#:#tos_account_reg_not_possible#:#Eine Selbstregistrierung ist aktuell nicht möglich, da in dieser Installation keine Benutzervereinbarung angeboten wird. Bitte kontaktieren Sie Ihren <a href="%1$s">Systemadministrator</a> für weitere Informationen.
-tos#:#tos_add_document_btn_label#:#Dokument hinzufügen
+tos#:#tos_agree_date#:#Nutzungsvereinbarungen zugestimmt am
 tos#:#tos_agreement#:#Nutzungsvereinbarungen
-tos#:#tos_agreement_document#:#Dokument
-tos#:#tos_agreement_document_missing#:#Nicht vorhanden
-tos#:#tos_agreement_documents_tab_label#:#Nutzungsvereinbarungen
-tos#:#tos_agreement_exists#:#Vorhanden
-tos#:#tos_agreement_missing#:#Nicht vorhanden
-tos#:#tos_crit_type_usr_country#:#Benutzerland
-tos#:#tos_crit_type_usr_country_info#:#Das Dokument muss akzeptiert werden, wenn beim ersten Login dieses Land gewählt wurde. Eine nachträgliche Änderung der Benutzersprache führt nicht automatisch zur Vorlage eines neuen Dokuments.
-tos#:#tos_crit_type_usr_global_role#:#Globale Rolle
-tos#:#tos_crit_type_usr_global_role_info#:#Das Dokument muss akzeptiert werden, wenn ein Benutzer beim ersten Login in diese Rolle eingetragen ist. Eine nachträgliche Änderung der Rolle führt nicht automatisch zur Vorlage eines neuen Dokuments.
-tos#:#tos_crit_type_usr_language#:#Benutzersprache
-tos#:#tos_crit_type_usr_language_info#:#Das Dokument muss akzeptiert werden, wenn beim ersten Login diese Sprache gewählt wurde. Eine nachträgliche Änderung der Benutzersprache führt nicht automatisch zur Vorlage eines neuen Dokuments.
-tos#:#tos_criterion_assignment_must_be_unique_insert#:#Sie können das Vorlagekriterium mit der entsprechenden Konfiguration nicht zuweisen. Es existiert bereits eine identische Zuweisung.
-tos#:#tos_criterion_assignment_must_be_unique_update#:#Sie können die Konfiguration des Vorlagekriteriums nicht wie gewünscht ändern. Es existiert bereits eine identische Zuweisung.
-tos#:#tos_deleted_documents_p#:#Die gewählten Dokumente wurden gelöscht.
-tos#:#tos_deleted_documents_s#:#Das Dokument wurde gelöscht.
 tos#:#tos_disabled_no_docs_left#:#Die Nutzungsvereinbarungen wurden deaktiviert, da alle Dokumente gelöscht wurden. Erstellen Sie mindestens ein Dokument, bevor Sie die Nutzungsvereinbarungen wieder aktivieren.
-tos#:#tos_doc_crit_attached#:#Das Vorlagekriterium wurde zugewiesen.
-tos#:#tos_doc_crit_changed#:#Das Vorlagekriterium wurde aktualisiert.
-tos#:#tos_doc_crit_detached#:#Das Vorlagekriterium wurde entfernt.
-tos#:#tos_doc_delete#:#Dokument löschen
-tos#:#tos_doc_detach_crit_confirm_title#:#Vorlagekriterium entfernen
-tos#:#tos_doc_sure_detach_crit#:#Sind Sie sicher, dass das Vorlagekriterium entfernt werden soll?
-tos#:#tos_document#:#Dokument
-tos#:#tos_form_attach_criterion_head#:#Vorlagekriterium hinzufügen
-tos#:#tos_form_criterion#:#Vorlagekriterium
-tos#:#tos_form_document#:#Dokument
-tos#:#tos_form_document_content_changed#:#Der Inhalt der hochgeladenenen Datei wurde durch ILIAS bereinigt. Bitte prüfen Sie das Ergebnis und laden Sie im Zweifel eine neue Datei hoch.
-tos#:#tos_form_document_info#:#Bitte wählen Sie eine entsprechende Datei von Ihrem lokalen Dateisystem. Sie können eine einfache Text-Datei oder eine HTML-Datei hochladen. Es wird nur ein Teil des HTML-Sprachumfangs unterstützt. Bitte beachten Sie, dass HTML-Dateien beim Hochladen bereinigt werden, und nur der Inhalt des body-Elements übernommen wird.
-tos#:#tos_form_document_new#:#Inhalt ändern
-tos#:#tos_form_document_new_info#:#Hier können Sie eine neue Datei von Ihrem lokalen Dateisystem wählen um das Dokument zu ändern. Sie können eine einfache Text-Datei oder eine HTML-Datei hochladen. Es wird nicht der komplette HTML-Sprachumfang unterstützt. Bitte beachten Sie, dass HTML-Dateien beim Hochladen bereinigt werden, und nur der Inhalt des body-Elements übernommen wird. Der bestehende Inhalt des Dokuments wird ausgetauscht, die Historie ist davon nicht betroffen.
-tos#:#tos_form_document_title#:#Titel
-tos#:#tos_form_document_title_info#:#Geben Sie hier einen Titel für das Dokument ein.
-tos#:#tos_form_edit_criterion_head#:#Vorlagekriterium bearbeiten
-tos#:#tos_form_edit_doc_head#:#Dokument bearbeiten
-tos#:#tos_form_new_doc_head#:#Dokument erstellen
-tos#:#tos_last_modified#:#Letzte Änderung
 tos#:#tos_last_reset_date#:#Die Nutzungsvereinbarungen wurden zuletzt am %s zurückgesetzt. Setzen Sie die Nutzungsvereinbarungen nur zurück, wenn sich diese in der Zwischenzeit geändert haben und eine Zustimmung zu dieser geänderten Vereinbarung gewünscht ist.
 tos#:#tos_never_reset#:#Die Nutzungsvereinbarungen wurden bisher noch nicht zurückgesetzt. Setzen Sie die Nutzungsvereinbarungen nur zurück, wenn sich diese in der Zwischenzeit geändert haben und eine Zustimmung zu dieser geänderten Vereinbarung gewünscht ist.
 tos#:#tos_no_documents_exist#:#Aktuell liegen keine Nutzungsvereinbarungsdokumente vor.
 tos#:#tos_no_documents_exist_cant_save#:#Aktuell liegen keine Nutzungsvereinbarungen vor. Bitte erstellen Sie mindestens ein Dokument um den Service zu aktivieren.
-tos#:#tos_period#:#Zeitraum
-tos#:#tos_period_from#:#Von
-tos#:#tos_period_until#:#Bis
-tos#:#tos_reevaluate_on_login#:#Prüfe neue Nutzungsvereinbarung beim Login
-tos#:#tos_reevaluate_on_login_desc#:#Falls aktiviert, wird nach erfolgreicher Anmeldung über die Weboberfläche geprüft, ob ein ggf. bereits akzeptiertes Dokument keine Gültigkeit mehr hat, da sich die Vorlagekriterien des Benutzers geändert haben. Ist dies der Fall und kann ILIAS ein neues Dokument finden, so muss der Benutzer dieses neu akzeptieren.
+tos#:#tos_reset_for_all_users#:#Nutzungsvereinbarungen zurücksetzen
 tos#:#tos_reset_successful#:#Die Nutzungsvereinbarungen wurden erfolgreich zurückgesetzt.
-tos#:#tos_reset_tos_for_all_users#:#Nutzungsvereinbarungen zurücksetzen
-tos#:#tos_saved_sorting#:#Die Sortierung wurde gespeichert.
 tos#:#tos_status_desc#:#Benutzer werden zum Unterzeichnen der Nutzungsvereinbarung aufgefordert, bevor sie ILIAS nutzen können.
 tos#:#tos_status_enable#:#Nutzungsvereinbarungen aktivieren
-tos#:#tos_sure_delete_documents_p#:#Sind Sie sicher, dass Sie die gewählten Dokumente löschen möchten?
-tos#:#tos_sure_delete_documents_s#:#Sind Sie sicher, dass Sie das gewählte Dokument löschen möchten?
 tos#:#tos_sure_reset_tos#:#Sind Sie sicher, dass die Nutzungsvereinbarungen für alle Benutzer im System zurückgesetzt werden sollen? Dies betrifft auch jene Anmeldekonten, die z.B. für die SOAP Web-Services genutzt werden.
-tos#:#tos_tbl_docs_action_add_criterion#:#Vorlagekriterium hinzufügen
-tos#:#tos_tbl_docs_cell_not_criterion#:#Kein Vorlagekriterium zugewiesen
-tos#:#tos_tbl_docs_head_created#:#Erstellungsdatum
-tos#:#tos_tbl_docs_head_criteria#:#Vorlagekriterien
-tos#:#tos_tbl_docs_head_last_change#:#Letzte Änderung
-tos#:#tos_tbl_docs_head_sorting#:#Sortierung
-tos#:#tos_tbl_docs_head_title#:#Titel
-tos#:#tos_tbl_docs_title#:#Dokumente
-tos#:#tos_tbl_hist_cell_not_criterion#:#Kein Vorlagekriterium zugewiesen
-tos#:#tos_tbl_hist_head_acceptance_date#:#Datum
-tos#:#tos_tbl_hist_head_criteria#:#Vorlagekriterien
-tos#:#tos_tbl_hist_head_document#:#Dokument
-tos#:#tos_tbl_hist_head_firstname#:#Vorname
-tos#:#tos_tbl_hist_head_lastname#:#Nachname
-tos#:#tos_tbl_hist_head_login#:#Anmeldename
-tos#:#tos_tos_settings#:#Einstellungen
-tos#:#tos_withdrawal_usr_deletion#:#Löschung des ILIAS-Kontos beim Widerruf
-tos#:#tos_withdrawal_usr_deletion_info#:#Wird die Zustimmung zur Nutzungsvereinbarung widerrufen, erfolgt automatisch die Löschung des ILIAS-Kontos.
+tos#:#tos_withdrawal_usr_deletion#:#Löschung des ILIAS-Kontos beim Widerruf der ToS
+tos#:#tos_withdrawal_usr_deletion_desc#:#Wird die Zustimmung zur Nutzungsvereinbarung widerrufen, erfolgt automatisch die Löschung des ILIAS-Kontos.
 trac#:#cmix_lp_mode_deactivated#:#Lernfortschritt wird deaktiviert
 trac#:#cmix_lp_mode_deactivated_info#:#Der Lernfortschrittsstatus wird nicht angezeigt und hat keinen Einfluss auf übergeordnete Objekte.
 trac#:#cmix_lp_mode_when_completed#:#Abgeschlossen, wenn "completed".
@@ -16802,6 +17024,8 @@ user#:#interests#:#Interessen
 user#:#interests_general#:#Allgemeine Interessen
 user#:#interests_help_looking#:#Suche Hilfe
 user#:#interests_help_offered#:#Biete Hilfe
+user#:#ldoc_accepted_content#:#Akzeptierter Text
+user#:#ldoc_not_accepted_yet#:#Noch nicht akzeptiert
 user#:#msg_spoint_not_modified#:#Die Startseite wurde nicht geändert.
 user#:#no_deactivate_yourself#:#Sie können Ihr eigenes Benutzerkonto nicht deaktivieren.
 user#:#obj_ref_id_not_exist#:#Die eingegebene Referenz-ID existiert nicht.
@@ -16820,8 +17044,6 @@ user#:#starting_page#:#Startseite
 user#:#starting_point#:#Startseite
 user#:#starting_point_settings#:#Einstellungen Startseite
 user#:#starting_points#:#Startseiten
-user#:#tos_accepted_content#:#Akzeptierter Text
-user#:#tos_not_accepted_yet#:#Noch nicht akzeptiert
 user#:#user_access_limited#:#Zeitlich begrenzt
 user#:#user_access_unlimited#:#Unbegrenzt
 user#:#user_account_code#:#Code
@@ -17021,6 +17243,8 @@ wiki#:#wiki_link_md_values#:#Automatische Verlinkung
 wiki#:#wiki_link_md_values_info#:#Verlinkt automatisch Eigenschaftenwerte im Seitenblock mit gleichlautenden Wikiseiten (wenn vorhanden).
 wiki#:#wiki_link_text#:#Linktext
 wiki#:#wiki_mark#:#Note
+wiki#:#wiki_master_existing#:#Seite existiert in Basissprache
+wiki#:#wiki_master_title#:#Seitentitel in Basissprache
 wiki#:#wiki_navigation#:#Wiki-Navigation
 wiki#:#wiki_navigation_info#:#Hier können Sie bestehende Wikiseiten zum Navigationsblock hinzufügen und entfernen.
 wiki#:#wiki_new_page#:#Neue Seite
@@ -17028,9 +17252,11 @@ wiki#:#wiki_new_page_name#:#Neuer Seitentitel
 wiki#:#wiki_new_pages#:#Neue Seiten
 wiki#:#wiki_news_page_changed#:#Die Wikiseite wurde geändert.
 wiki#:#wiki_news_page_created#:#Die Wikiseite wurde erstellt.
+wiki#:#wiki_no_master#:#Seite existiert nicht in Basissprache
 wiki#:#wiki_no_page_found#:#Es wurden keine Seiten zum Suchbegriff '$1' gefunden.
 wiki#:#wiki_no_search_term#:#Es wurde kein Suchbegriff eingegeben. Nachfolgend werden alle Wikiseiten aufgelistet.
 wiki#:#wiki_no_start_page#:#Das Wiki hat keine gültige Startseite
+wiki#:#wiki_not_existing#:#existiert noch nicht
 wiki#:#wiki_notgraded#:#Nicht bewertet
 wiki#:#wiki_notification_activate_page#:#Benachrichtigung für Wiki-Seite aktivieren
 wiki#:#wiki_notification_activate_wiki#:#Benachrichtigung für Wiki aktivieren
@@ -17054,6 +17280,7 @@ wiki#:#wiki_page_deleted#:#Die Wiki-Seite wurde gelöscht.
 wiki#:#wiki_page_deletion_confirmation#:#Wollen Sie diese Wiki-Seite wirklich löschen?
 wiki#:#wiki_page_exists#:#Bestehende Seite
 wiki#:#wiki_page_hits#:#Seitenaufrufe
+wiki#:#wiki_page_in_master_language#:#Seite in Basissprache
 wiki#:#wiki_page_list_form_info#:#Fügt eine Liste mit Wiki-Seiten hinzu, die nachfolgenden Metadaten zugeordnet sind. Es werden nur durchsuchbare Metadatenfelder aus den Metadatensätzen des Wikis angeboten.
 wiki#:#wiki_page_list_mode#:#Listentyp
 wiki#:#wiki_page_list_mode_ordered#:#Nummeriert
@@ -17141,6 +17368,9 @@ wiki#:#wiki_templ_add_to_page#:#Verfügbar für bestehende Seite
 wiki#:#wiki_templ_new_pages#:#Verfügbar für neue Seite
 wiki#:#wiki_template_added#:#Inhaltsvorlage hinzugefügt
 wiki#:#wiki_template_status_removed#:#Nutzung als Inhaltsvorlage aufgehoben.
+wiki#:#wiki_translate_page_master_info#:#Sie erstellen eine neue Übersetzungsseite. Bitte geben Sie an, ob es sich um die Übersetzung einer bestehenden Seite handelt oder ob es eine komplett neue Seite ist. Im zweiten Fall müssen Sie den Titel in der Basissprache angeben.
+wiki#:#wiki_translation_page#:#Übersetzungsseite
+wiki#:#wiki_translations#:#Übersetzungen
 wiki#:#wiki_type_wiki_team#:#Team-Wiki
 wiki#:#wiki_unblock_page#:#Schreibschutz aufheben
 wiki#:#wiki_unhide_meta_adv_records#:#Benutzerdefinierte Metadaten anzeigen
@@ -17150,6 +17380,18 @@ wiki#:#wiki_whole_wiki#:#Gesamtes Wiki
 wiki#:#wiki_wiki_page#:#Wiki-Seite
 wiki#:#wiki_wiki_search#:#Suche im Wiki
 wiki#:#wiki_wpg#:#Wiki-Seite
+wopi#:#activate_wopi#:#WOPI aktivieren
+wopi#:#msg_error_wopi_invalid_discorvery_url#:#Die eingegebene Discovery-URL ist ungültig oder kann nicht erreicht werden.
+wopi#:#msg_wopi_settings_modified#:#Einstellungen gespeichert
+wopi#:#open_external_editor#:#In externem Editor öffnen
+wopi#:#wopi_crawler_cronjob_description#:#Aktualisiert die Informationen des angebundenen WOPI-Dienstes.
+wopi#:#wopi_crawler_cronjob_no_apps#:#Es wurden keine WOPI-Apps in der Discovery gefunden.
+wopi#:#wopi_crawler_cronjob_not_activated#:#WOPI ist nicht aktiviert.
+wopi#:#wopi_crawler_cronjob_success#:#WOPI Informationen erfolgreich aktualisiert.
+wopi#:#wopi_crawler_cronjob_title#:#Update WOPI Discovery
+wopi#:#wopi_settings#:#WOPI
+wopi#:#wopi_url#:#WOPI Discovery URL
+wopi#:#wopi_url_byline#:#Vollständige URL des WOPI-Discovery, diese muss über den ILIAS-Server erreichbar sein. Die XML-Daten des Discover werden von ILIAS eingelesen und gespeichert, die Informationen werden regelmäßig durch den Cronjob "Update WOPI Discovery" aktualisiert.
 wsp#:#element_already_shared#:#Die Ressource ist für diese Person bereits freigegeben.###Modified as part of gender mainstreaming activities for ILIAS 8
 wsp#:#element_shared#:#Die Ressource wurde freigegeben.
 wsp#:#error_creating_certificate_pdf#:#Das Zertifikat konnte nicht erstellt werden. Bitte lassen Sie den Zertifikatsserver durch einen Administrator prüfen.

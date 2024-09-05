@@ -635,27 +635,28 @@ abstract class assQuestionGUI
             $this->object->syncWithOriginal();
             $this->tpl->setOnScreenMessage('success', $this->lng->txt("msg_obj_modified"), true);
         }
-        if (strlen($this->request->raw("return_to"))) {
+        if ($this->request->raw("return_to") !== null) {
             $this->ctrl->redirect($this, $this->request->raw("return_to"));
         }
-        if (strlen($this->request->raw("return_to_fb"))) {
+        if ($this->request->raw("return_to_fb") !== null) {
             $this->ctrl->redirectByClass('ilAssQuestionFeedbackEditingGUI', 'showFeedbackForm');
+        }
+
+        if ($this->request->isset('calling_consumer')) {
+            if (
+                ($ref_id = $this->request->int('calling_consumer')) !== 0
+                && ($consumer = ilObjectFactory::getInstanceByRefId($ref_id)) instanceof ilQuestionEditingFormConsumer
+            ) {
+                ilUtil::redirect($consumer->getQuestionEditingFormBackTarget($this->request->raw('consumer_context')));
+            }
+
+            ilUtil::redirect(ilLink::_getLink($ref_id));
+        }
+
+        if ($this->request->raw('test_express_mode')) {
+            ilUtil::redirect(ilTestExpressPage::getReturnToPageLink($this->object->getId()));
         } else {
-            if ($this->request->isset('calling_consumer') && (int) $this->request->raw('calling_consumer')) {
-                $ref_id = (int) $this->request->raw('calling_consumer');
-                $consumer = ilObjectFactory::getInstanceByRefId($ref_id);
-                if ($consumer instanceof ilQuestionEditingFormConsumer) {
-                    ilUtil::redirect($consumer->getQuestionEditingFormBackTarget($this->request->raw('consumer_context')));
-                }
-
-                ilUtil::redirect(ilLink::_getLink($ref_id));
-            }
-
-            if ($this->request->raw('test_express_mode')) {
-                ilUtil::redirect(ilTestExpressPage::getReturnToPageLink($this->object->getId()));
-            } else {
-                ilUtil::redirect("ilias.php?baseClass=ilObjTestGUI&cmd=questions&ref_id=" . $this->request->raw("calling_test"));
-            }
+            ilUtil::redirect("ilias.php?baseClass=ilObjTestGUI&cmd=questions&ref_id=" . $this->request->raw("calling_test"));
         }
     }
 
@@ -1141,7 +1142,7 @@ abstract class assQuestionGUI
     /**
      * @param   int|null  $pass      Active pass
      */
-    public function getGenericFeedbackOutput(int $active_id, $pass): string
+    public function getGenericFeedbackOutput(int $active_id, ?int $pass): string
     {
         $output = "";
         $manual_feedback = ilObjTest::getManualFeedback($active_id, $this->object->getId(), $pass);
@@ -1236,19 +1237,6 @@ abstract class assQuestionGUI
                 $this->object->getId(),
                 assQuestionSuggestedSolution::TYPE_FILE
             );
-        } elseif (is_string($solution_type) && strcmp($solution_type, "text") == 0
-            && (!$solution || $solution->getType() !== assQuestionSuggestedSolution::TYPE_TEXT)
-        ) {
-            $oldsaveSuggestedSolutionOutputMode = $this->getRenderPurpose();
-            $this->setRenderPurpose(self::RENDER_PURPOSE_INPUT_VALUE);
-            $solution = $this->getSuggestedSolutionsRepo()->create(
-                $this->object->getId(),
-                assQuestionSuggestedSolution::TYPE_TEXT
-            )->withValue(
-                $this->getSolutionOutput(0, null, false, false, true, false, true)
-            );
-
-            $this->setRenderPurpose($oldsaveSuggestedSolutionOutputMode);
         }
 
         $solution_filename = $this->request->raw('filename');
@@ -1256,13 +1244,6 @@ abstract class assQuestionGUI
             is_string($solution_filename) &&
             strlen($solution_filename)) {
             $solution = $solution->withTitle($solution_filename);
-        }
-
-        $solution_text = $this->request->raw('solutiontext');
-        if ($save &&
-            is_string($solution_text) &&
-            strlen($solution_text)) {
-            $solution->withValue($solution_text);
         }
 
         if ($solution) {
@@ -1363,23 +1344,6 @@ abstract class assQuestionGUI
                 $hidden = new ilHiddenInputGUI("solutiontype");
                 $hidden->setValue("file");
                 $form->addItem($hidden);
-            } elseif ($solution->isOfTypeText()) {
-                $solutionContent = $solution->getValue();
-                $solutionContent = $this->object->fixSvgToPng($solutionContent);
-                $solutionContent = $this->object->fixUnavailableSkinImageSources($solutionContent);
-                $question = new ilTextAreaInputGUI($this->lng->txt("solutionText"), "solutiontext");
-                $question->setValue(ilLegacyFormElementsUtil::prepareTextareaOutput($solutionContent));
-                $question->setRequired(true);
-                $question->setRows(10);
-                $question->setCols(80);
-                $question->setUseRte(true);
-                $question->addPlugin("latex");
-                $question->addButton("latex");
-                $question->setRTESupport($this->object->getId(), "qpl", "assessment");
-                $hidden = new ilHiddenInputGUI("solutiontype");
-                $hidden->setValue("text");
-                $form->addItem($hidden);
-                $form->addItem($question);
             }
             if ($ilAccess->checkAccess("write", "", $this->request->getRefId())) {
                 $form->addCommandButton('cancelSuggestedSolution', $this->lng->txt('cancel'));
@@ -1397,7 +1361,7 @@ abstract class assQuestionGUI
                     }
 
                     $originalexists = !is_null($this->object->getOriginalId()) &&
-                        $this->object->_questionExistsInPool($this->object->getOriginalId());
+                        $this->questioninfo->questionExistsInPool($this->object->getOriginalId());
                     if (($this->request->raw("calling_test") || ($this->request->isset('calling_consumer')
                                 && (int) $this->request->raw('calling_consumer'))) && $originalexists
                         && assQuestion::_isWriteable($this->object->getOriginalId(), $ilUser->getId())) {
@@ -2051,10 +2015,18 @@ abstract class assQuestionGUI
      * @access public
      *
      */
-    public static function prepareTextareaOutput($txt_output, $prepare_for_latex_output = false, $omitNl2BrWhenTextArea = false)
-    {
+    public static function prepareTextareaOutput(
+        ?string $txt_output,
+        bool $prepare_for_latex_output = false,
+        bool $omitNl2BrWhenTextArea = false
+    ): string {
+        if ($txt_output === null || $txt_output === '') {
+            return '';
+        }
+
         $result = $txt_output;
         $is_html = false;
+
         if (strlen(strip_tags($result)) < strlen($result)) {
             $is_html = true;
         }

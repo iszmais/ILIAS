@@ -43,6 +43,10 @@ $il-item-gap-xs: 1px;
 		}
 	}
 
+	.il-item-actions {
+		float: right;
+	}
+
 	.il-item-divider {
 		clear: both;
 		padding: $il-item-divider-padding;
@@ -255,12 +259,6 @@ $il-item-gap-xs: 1px;
 	.il-panel-listing-std-container{
 		.il-item .media-left{
 			min-width: calc($il-icon-size-small + 2 * $il-padding-xlarge-horizontal);
-		}
-	}
-
-	.panel-secondary .il-item  {
-		.media-body{
-			width: auto;
 		}
 	}
 }

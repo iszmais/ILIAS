@@ -262,6 +262,21 @@ class FormAdapterGUI
 
         $format = $this->user->getDateFormat();
         $dt_format = (string) $format;
+        /*
+        switch ((int) $this->user->getDateFormat()) {
+            case \ilCalendarSettings::DATE_FORMAT_DMY:
+                $format = $this->data->dateFormat()->germanShort();
+                $dt_format = "d.m.Y";
+                break;
+            case \ilCalendarSettings::DATE_FORMAT_MDY:
+                $format = $this->data->dateFormat()->custom()->month()->slash()->day()->slash()->year();
+                $dt_format = "m/d/Y";
+                break;
+            default:
+                $format = $this->data->dateFormat()->standard();
+                $dt_format = "Y-m-d";
+                break;
+        }*/
 
         $field = $field->withFormat($format);
         if (!is_null($value)) {
@@ -399,7 +414,7 @@ class FormAdapterGUI
         \Closure $result_handler,
         string $id_parameter,
         string $description = "",
-        int $max_files = 1,
+        ?int $max_files = null,
         array $mime_types = [],
         array $ctrl_path = [],
         string $logger_id = ""
@@ -421,8 +436,10 @@ class FormAdapterGUI
             $title,
             $description
         )
-                          ->withMaxFileSize((int) \ilFileUtils::getUploadSizeLimitBytes())
-                          ->withMaxFiles($max_files);
+            ->withMaxFileSize((int) \ilFileUtils::getPhpUploadSizeLimitInBytes());
+        if (!is_null($max_files)) {
+            $field = $field->withMaxFiles($max_files);
+        }
         if (count($mime_types) > 0) {
             $field = $field->withAcceptedMimeTypes($mime_types);
         }

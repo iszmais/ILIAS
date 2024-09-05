@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -17,6 +15,8 @@ declare(strict_types=1);
  * https://github.com/ILIAS-eLearning
  *
  *********************************************************************/
+
+declare(strict_types=1);
 
 namespace ILIAS\Exercise;
 
@@ -62,21 +62,18 @@ class InternalService
             $this->db
         );
         $this->domain = new InternalDomainService(
+            $this->dic,
             $this->data,
             $this->repo
         );
     }
 
     public function gui(
-        array $query_params = null,
-        array $post_data = null
     ): InternalGUIService {
         return new InternalGUIService(
             $this->dic,
-            $this,
-            $this->refinery,
-            $query_params,
-            $post_data
+            $this->data,
+            $this->domain
         );
     }
 

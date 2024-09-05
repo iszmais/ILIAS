@@ -17,7 +17,6 @@
  *********************************************************************/
 
 use ILIAS\Exercise\Assignment\Mandatory;
-use ILIAS\Services\ResourceStorage\Collections\View\Configuration;
 use ILIAS\ResourceStorage\Identification\ResourceCollectionIdentification;
 use ILIAS\Filesystem\Stream\Streams;
 use ILIAS\Services\ResourceStorage\Collections\View\Mode;
@@ -32,6 +31,8 @@ use ILIAS\Services\ResourceStorage\Collections\View\Mode;
  */
 class ilExAssignmentEditorGUI
 {
+    protected \ILIAS\Exercise\InternalDomainService $domain;
+    protected \ILIAS\Exercise\InstructionFile\InstructionFileManager $instruction_files;
     protected ?int $ref_id = null;
     protected ilAccessHandler $access;
     protected \ILIAS\Exercise\InternalGUIService $gui;
@@ -92,10 +93,10 @@ class ilExAssignmentEditorGUI
         $this->random_manager = $DIC->exercise()->internal()->domain()->assignment()->randomAssignments(
             $request->getExercise()
         );
+        $this->domain = $DIC->exercise()->internal()->domain();
         $this->requested_ass_ids = $request->getAssignmentIds();
         $this->requested_order = $request->getOrder();
         $this->irss = $DIC->resourceStorage();
-        $this->upload = $DIC->upload();
         $this->access = $DIC->access();
         $this->ref_id = $DIC->http()->wrapper()->query()->has('ref_id')
             ? $DIC->http()->wrapper()->query()->retrieve(
@@ -125,28 +126,13 @@ class ilExAssignmentEditorGUI
             case strtolower(ilResourceCollectionGUI::class):
                 $this->setAssignmentHeader();
                 $ilTabs->activateTab("ass_files");
-                if (!$this->assignment->hasInstructionFileRCID()) {
-                    throw new LogicException("No resource collection id found for assignment " . $this->assignment->getId());
-                }
-                $collection_id = $this->assignment->getInstructionFileRCID();
-                $collection = $this->irss->collection()->get($collection_id);
-
-                $write_permission = $this->access->checkAccess('write', '', $this->ref_id ?? -1);
-                $overview = new ilResourceCollectionGUI(
-                    new Configuration(
-                        $collection,
-                        new ilExcInstructionFilesStakeholder(),
-                        $this->lng->txt('exc_instruction_files'),
-                        Mode::DATA_TABLE,
-                        100,
-                        $write_permission,
-                        $write_permission
-                    )
+                $gui = $this->gui->assignment()->getInstructionFileResourceCollectionGUI(
+                    (int) $this->ref_id,
+                    $this->assignment->getId()
                 );
-
-                $this->ctrl->forwardCommand($overview);
-
+                $this->ctrl->forwardCommand($gui);
                 break;
+
                 // instruction files
             case "ilexassignmentfilesystemgui":
                 $this->setAssignmentHeader();
@@ -439,14 +425,21 @@ class ilExAssignmentEditorGUI
         // Deadline Mode
         $radg = new ilRadioGroupInputGUI($lng->txt("exc_deadline"), "deadline_mode");
         $radg->setValue(0);
+        $op0 = new ilRadioOption($lng->txt("exc_no_deadline"), -1, $lng->txt("exc_no_deadline_info"));
+        $radg->addOption($op0);
         $op1 = new ilRadioOption($lng->txt("exc_fixed_date"), 0, $lng->txt("exc_fixed_date_info"));
         $radg->addOption($op1);
+        if (!$ass_type->usesTeams()) {
+            $op3 = new ilRadioOption($lng->txt("exc_fixed_date_individual"), 2, $lng->txt("exc_fixed_date_individual_info"));
+            $radg->addOption($op3);
+        }
         $op2 = new ilRadioOption($lng->txt("exc_relative_date"), 1, $lng->txt("exc_relative_date_info"));
         $radg->addOption($op2);
         $form->addItem($radg);
 
         // Deadline fixed date
         $deadline = new ilDateTimeInputGUI($lng->txt("date"), "deadline");
+        $deadline->setRequired(true);
         $deadline->setShowTime(true);
         $op1->addSubItem($deadline);
 
@@ -558,6 +551,7 @@ class ilExAssignmentEditorGUI
 
         $fb_date = new ilRadioGroupInputGUI($lng->txt("exc_global_feedback_file_date"), "fb_date");
         $fb_date->setRequired(true);
+        $fb_date->setValue(ilExAssignment::FEEDBACK_DATE_DEADLINE);
         $fb_date->addOption(new ilRadioOption($lng->txt("exc_global_feedback_file_date_deadline"), ilExAssignment::FEEDBACK_DATE_DEADLINE));
         $fb_date->addOption(new ilRadioOption($lng->txt("exc_global_feedback_file_date_upload"), ilExAssignment::FEEDBACK_DATE_SUBMISSION));
 
@@ -684,7 +678,12 @@ class ilExAssignmentEditorGUI
             $time_deadline = null;
             $time_deadline_ext = null;
 
-            if ((int) $a_form->getInput("deadline_mode") == ilExAssignment::DEADLINE_ABSOLUTE) {
+            $deadline_mode = (int) $a_form->getInput("deadline_mode");
+            if ($deadline_mode === -1) {
+                $deadline_mode = 0;
+            }
+
+            if ($deadline_mode === ilExAssignment::DEADLINE_ABSOLUTE) {
                 $time_deadline = $a_form->getItemByPostVar("deadline")->getDate();
                 $time_deadline = $time_deadline
                     ? $time_deadline->get(IL_CAL_UNIX)
@@ -799,7 +798,7 @@ class ilExAssignmentEditorGUI
                     }
                 }
 
-                $res["deadline_mode"] = $a_form->getInput("deadline_mode");
+                $res["deadline_mode"] = $deadline_mode;
 
                 if ($res["deadline_mode"] == ilExAssignment::DEADLINE_RELATIVE) {
                     $res["relative_deadline"] = $a_form->getInput("relative_deadline");
@@ -896,7 +895,7 @@ class ilExAssignmentEditorGUI
         // peer review default values (on separate form)
         if ($is_create) {
             $a_ass->setPeerReviewMin(2);
-            $a_ass->setPeerReviewSimpleUnlock(false);
+            $a_ass->setPeerReviewSimpleUnlock(0);
             $a_ass->setPeerReviewValid(ilExAssignment::PEER_REVIEW_VALID_NONE);
             $a_ass->setPeerReviewPersonalized(false);
             $a_ass->setPeerReviewFileUpload(false);
@@ -910,42 +909,13 @@ class ilExAssignmentEditorGUI
             $a_ass->setFeedbackDateCustom((int) $a_input["fb_date_custom"]);
         }
 
-        // Create Collection ID
-        $rcid = $this->irss->collection()->id();
-        $a_ass->setInstructionFileRCID($rcid);
-        $a_ass->update();
-
         // id needed for file handling
         if ($is_create) {
             $a_ass->save();
 
             // #15994 - assignment files
             if (is_array($a_input["files"])) {
-                if (!$this->upload->hasBeenProcessed()) {
-                    $this->upload->process();
-                }
-                $stakeholder = new ilExcInstructionFilesStakeholder();
-                $collection = $this->irss->collection()->get($rcid);
-
-                foreach ($this->upload->getResults() as $name => $result) {
-                    // we must check if these are files from this input
-                    if (!in_array($name, $a_input["files"]["tmp_name"] ?? [], true)) {
-                        continue;
-                    }
-                    // if the result is not OK, we skip it
-                    if (!$result->isOK()) {
-                        continue;
-                    }
-                    // we store the file in the IRSS
-                    $rid = $this->irss->manage()->upload(
-                        $result,
-                        $stakeholder
-                    );
-                    // and add its identification to the collection
-                    $collection->add($rid);
-                }
-                // we store the collection after all files have been added
-                $this->irss->collection()->store($collection);
+                $this->domain->assignment()->instructionFiles($a_ass->getId())->importFromLegacyUpload($a_input["files"]);
             }
         } else {
             // remove global feedback file?
@@ -959,7 +929,7 @@ class ilExAssignmentEditorGUI
 
         // add global feedback file?
         if (isset($a_input["fb"], $a_input["fb_file"])) {
-            $a_ass->handleGlobalFeedbackFileUpload($a_input["fb_file"]);
+            $a_ass->handleGlobalFeedbackFileUpload($a_ass->getId(), $a_input["fb_file"]);
             $a_ass->update();
         }
         $this->importFormToAssignmentReminders($a_input, $a_ass->getId());
@@ -1120,6 +1090,9 @@ class ilExAssignmentEditorGUI
 
 
         $values["deadline_mode"] = $this->assignment->getDeadlineMode();
+        if ($values["deadline_mode"] === 0 && !$this->assignment->getDeadline()) {
+            $values["deadline_mode"] = -1;
+        }
         $values["relative_deadline"] = $this->assignment->getRelativeDeadline();
         $dt = new ilDateTime($this->assignment->getRelDeadlineLastSubmission(), IL_CAL_UNIX);
         $values["rel_deadline_last_subm"] = $dt->get(IL_CAL_DATETIME);
@@ -1371,8 +1344,7 @@ class ilExAssignmentEditorGUI
             !$this->assignment->getFeedbackFile()) {
             $ilCtrl->redirect($this, "returnToParent");
         }
-
-        ilFileDelivery::deliverFileLegacy($this->assignment->getGlobalFeedbackFilePath(), $this->assignment->getFeedbackFile());
+        $this->domain->assignment()->sampleSolution($this->assignment->getId())->deliver();
     }
 
 
@@ -1397,6 +1369,7 @@ class ilExAssignmentEditorGUI
         $form->addItem($peer_min);
 
         $peer_unlock = new ilRadioGroupInputGUI($lng->txt("exc_peer_review_simple_unlock"), "peer_unlock");
+        $peer_unlock->addOption(new ilRadioOption($lng->txt("exc_peer_review_simple_unlock_immed"), 2));
         $peer_unlock->addOption(new ilRadioOption($lng->txt("exc_peer_review_simple_unlock_active"), 1));
         $peer_unlock->addOption(new ilRadioOption($lng->txt("exc_peer_review_simple_unlock_inactive"), 0));
         $peer_unlock->setRequired(true);
@@ -1560,7 +1533,7 @@ class ilExAssignmentEditorGUI
     {
         $a_form->getItemByPostVar("peer_min")->setValue($this->assignment->getPeerReviewMin());
         $a_form->getItemByPostVar("peer_prsl")->setChecked($this->assignment->hasPeerReviewPersonalized());
-        $a_form->getItemByPostVar("peer_unlock")->setValue((int) $this->assignment->getPeerReviewSimpleUnlock());
+        $a_form->getItemByPostVar("peer_unlock")->setValue($this->assignment->getPeerReviewSimpleUnlock());
 
         if ($this->enable_peer_review_completion) {
             $a_form->getItemByPostVar("peer_valid")->setValue($this->assignment->getPeerReviewValid());
@@ -1723,7 +1696,7 @@ class ilExAssignmentEditorGUI
     ): void {
         $a_ass->setPeerReviewMin((int) $a_input["peer_min"]);
         $a_ass->setPeerReviewDeadline((int) $a_input["peer_dl"]);
-        $a_ass->setPeerReviewSimpleUnlock((bool) $a_input["peer_unlock"]);
+        $a_ass->setPeerReviewSimpleUnlock((int) $a_input["peer_unlock"]);
         $a_ass->setPeerReviewPersonalized((bool) $a_input["peer_prsl"]);
 
         // #18964

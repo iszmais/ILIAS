@@ -25,9 +25,8 @@ use ILIAS\EmployeeTalk\UI\ControlFlowCommand;
 use ILIAS\Modules\EmployeeTalk\Talk\DAO\EmployeeTalk;
 use ILIAS\Modules\EmployeeTalk\Talk\Repository\EmployeeTalkRepository;
 use ILIAS\Modules\EmployeeTalk\Talk\EmployeeTalkPeriod;
-use ILIAS\EmployeeTalk\Service\EmployeeTalkEmailNotificationService;
-use ILIAS\EmployeeTalk\Service\VCalendarFactory;
-use ILIAS\EmployeeTalk\Service\EmployeeTalkEmailNotification;
+use ILIAS\EmployeeTalk\Notification\NotificationHandlerInterface;
+use ILIAS\EmployeeTalk\Notification\NotificationType;
 
 /**
  * Class ilEmployeeTalkAppointmentGUI
@@ -46,6 +45,7 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
     private HttpServices $http;
     private Refinery $refinery;
     private ilTabsGUI $tabs;
+    protected NotificationHandlerInterface $notif_handler;
     private ilObjEmployeeTalk $talk;
 
     /**
@@ -63,6 +63,7 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
         HttpServices $http,
         Refinery $refinery,
         ilTabsGUI $tabs,
+        NotificationHandlerInterface $notif_handler,
         ilObjEmployeeTalk $talk
     ) {
         $this->template = $template;
@@ -71,6 +72,7 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
         $this->http = $http;
         $this->refinery = $refinery;
         $this->tabs = $tabs;
+        $this->notif_handler = $notif_handler;
         $this->talk = $talk;
 
         $this->language->loadLanguageModule('cal');
@@ -144,9 +146,37 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
 
     private function editSeries(): void
     {
+        if (($dates_string = $this->getPendingTalkDates()) !== '') {
+            $message = $this->language->txt('pending_talks_warning');
+            $this->template->setOnScreenMessage('info', $message . $dates_string);
+        }
         $form = $this->initSeriesEditForm($this->talk->getData());
 
         $this->template->setContent($form->getHTML());
+    }
+
+    protected function getPendingTalkDates(): string
+    {
+        $parent = $this->talk->getParent();
+        $talks = $this->getPendingTalksInSeries($parent);
+
+        usort($talks, function (ilObjEmployeeTalk $a, ilObjEmployeeTalk $b) {
+            $a = $a->getData()->getStartDate()->getUnixTime();
+            $b = $b->getData()->getStartDate()->getUnixTime();
+            if ($a === $b) {
+                return 0;
+            }
+            return $a < $b ? -1 : 1;
+        });
+
+        $dates = '';
+        $rel = ilDatePresentation::useRelativeDates();
+        ilDatePresentation::setUseRelativeDates(false);
+        foreach ($talks as $talk) {
+            $dates .= "</br>" . ilDatePresentation::formatDate($talk->getData()->getStartDate());
+        }
+        ilDatePresentation::setUseRelativeDates($rel);
+        return $dates;
     }
 
     private function updateSeries(): void
@@ -155,9 +185,9 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
         if ($form->checkInput()) {
             $reoccurrence = $this->loadRecurrenceSettings($form);
             $parent = $this->talk->getParent();
-            $old_talks = $this->getTalksInSeries($parent);
+            $old_talks = $this->getPendingTalksInSeries($parent);
             $this->createRecurringTalks($form, $reoccurrence, $parent);
-            $this->deletePendingTalks($old_talks);
+            $this->deleteTalks($old_talks);
 
             $this->template->setOnScreenMessage('success', $this->language->txt('saved_successfully'), true);
         }
@@ -278,7 +308,7 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
             $this->talk->setData($data);
             $this->talk->update();
 
-            $this->sendNotification([$this->talk]);
+            $this->sendNotification($this->talk);
 
             $this->template->setOnScreenMessage('success', $this->language->txt('saved_successfully'), true);
         }
@@ -292,61 +322,9 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
         );
     }
 
-    /**
-     * @param ilObjEmployeeTalk[] $talks
-     */
-    private function sendNotification(array $talks): void
+    private function sendNotification(ilObjEmployeeTalk ...$talks): void
     {
-        if (count($talks) === 0) {
-            return;
-        }
-
-        $firstTalk = $talks[0];
-        $talk_title = $firstTalk->getTitle();
-        $superior = new ilObjUser($firstTalk->getOwner());
-        $employee = new ilObjUser($firstTalk->getData()->getEmployee());
-        $superiorName = $superior->getFullname();
-
-        $dates = array_map(
-            fn(ilObjEmployeeTalk $t) => $t->getData()->getStartDate(),
-            $talks
-        );
-        usort($dates, function (ilDateTime $a, ilDateTime $b) {
-            $a = $a->getUnixTime();
-            $b = $b->getUnixTime();
-            if ($a === $b) {
-                return 0;
-            }
-            return $a < $b ? -1 : 1;
-        });
-
-        $add_time = $firstTalk->getData()->isAllDay() ? 0 : 1;
-        $format = ilCalendarUtil::getUserDateFormat($add_time, true);
-        $timezone = $employee->getTimeZone();
-        $dates = array_map(function (ilDateTime $d) use ($add_time, $format, $timezone) {
-            return $d->get(IL_CAL_FKT_DATE, $format, $timezone);
-        }, $dates);
-
-        $message = new EmployeeTalkEmailNotification(
-            $firstTalk->getRefId(),
-            $talk_title,
-            $firstTalk->getDescription(),
-            $firstTalk->getData()->getLocation(),
-            'notification_talks_subject_update',
-            'notification_talks_updated',
-            $superiorName,
-            $dates
-        );
-
-        $vCalSender = new EmployeeTalkEmailNotificationService(
-            $message,
-            $talk_title,
-            $employee,
-            $superior,
-            VCalendarFactory::getInstanceFromTalks($firstTalk->getParent())
-        );
-
-        $vCalSender->send();
+        $this->notif_handler->send(NotificationType::UPDATE, ...$talks);
     }
 
     private function editMode(): string
@@ -517,7 +495,7 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
         $talks[] = $talkSession;
 
         if (!$recurrence->getFrequenceType()) {
-            $this->sendNotification($talks);
+            $this->sendNotification(...$talks);
             return true;
         }
 
@@ -548,7 +526,7 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
             $talks[] = $cloneObject;
         }
 
-        $this->sendNotification($talks);
+        $this->sendNotification(...$talks);
 
         return true;
     }
@@ -556,7 +534,7 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
     /**
      * @return ilObjEmployeeTalk[]
      */
-    private function getTalksInSeries(ilObjEmployeeTalkSeries $series): array
+    private function getPendingTalksInSeries(ilObjEmployeeTalkSeries $series): array
     {
         $talks = [];
         $subItems = $series->getSubItems()['_all'];
@@ -565,6 +543,10 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
             if ($subItem['type'] === 'etal') {
                 $refId = intval($subItem['ref_id']);
                 $talk = new ilObjEmployeeTalk($refId, true);
+                $talk_data = $talk->getData();
+                if ($talk_data->isStandalone() || $talk_data->isCompleted()) {
+                    continue;
+                }
                 $talks[] = $talk;
             }
         }
@@ -575,14 +557,9 @@ final class ilEmployeeTalkAppointmentGUI implements ControlFlowCommandHandler
     /**
      * @param ilObjEmployeeTalk[] $talks
      */
-    private function deletePendingTalks(array $talks): void
+    private function deleteTalks(array $talks): void
     {
         foreach ($talks as $talk) {
-            $talkData = $talk->getData();
-            if ($talkData->isStandalone() || $talkData->isCompleted()) {
-                continue;
-            }
-
             $talk->delete();
         }
     }

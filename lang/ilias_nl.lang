@@ -1723,7 +1723,6 @@ assessment#:#tst_results_grading_opt_show_status_desc#:#Information on the ‘Pa
 assessment#:#tst_results_overview#:#Overzicht van de toets resultaten
 assessment#:#tst_results_print_best_solution#:#Beste oplossing in toets resultaten
 assessment#:#tst_results_print_best_solution_info#:#Als ingeschakeld en toegankelijk voor de deelnemer, zal de beste oplossing verschijnen in de samengevoegde toetsresultaten.
-assessment#:#tst_results_tax_filters#:#Resultaat Filter
 assessment#:#tst_resume_dyn_test_with_cur_quest_sel#:#Resume test with Current Question Selection
 assessment#:#tst_resume_test#:#Hervat toets
 assessment#:#tst_revert_changes#:#Undo Editing###fau: testNav
@@ -7641,8 +7640,6 @@ crs#:#crs_timings_suggested_info#:#Voorgestelde wijzigeningstijd
 crs#:#crs_timings_time_frame#:#Tijdsframe
 crs#:#crs_timings_time_frame_tt#:#Time frame in days###10 11 2018 new variable
 crs#:#crs_timings_update_error#:#Je instellingen zijn ongeldig, gelieve de timing voor de volgende cursusonderdelen te verifiëren:
-crs#:#crs_timings_visibility#:#Zichtbaarheid
-crs#:#crs_timings_visibility_short#:#Zichtbaarheid
 crs#:#crs_timings_warning_timing_exists#:#Timings are configured for this object. If you active the availability settings, these timing settings will be reseted.###10 11 2018 new variable
 crs#:#crs_to#:#Tot:
 crs#:#crs_tutor#:#Leerkracht
@@ -11930,6 +11927,8 @@ notification_adm#:#osd_vanish#:#Presentation Time###29 07 2022 new variable
 notification_adm#:#osd_vanish_desc#:#Visible time of a notification on the screen in seconds.###29 07 2022 new variable
 notification_adm#:#play_sound#:#Play a Sound###29 07 2022 new variable
 notification_adm#:#play_sound_desc#:#Play a sound when receiving a new notficiation.###29 07 2022 new variable
+obj#:#activation_visible_when_disabled#:#Zichtbaarheid
+obj#:#activation_visible_when_disabled_info#:#Zichtbaarheid
 obj#:#cont_filter_empty#:#Please use the filter to see any objects.###07 02 2020 new variable
 obj#:#cont_skll_published#:#All assignments have been published.###31 08 2017 new variable
 obj#:#cont_skll_published_some_not#:#All given assignments have been published. Some users lacked competence assignments, thus no assignments could be published for them.###31 08 2017 new variable

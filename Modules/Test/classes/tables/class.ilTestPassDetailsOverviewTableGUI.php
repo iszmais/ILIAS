@@ -18,6 +18,9 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Factory as UIFactory;
+use ILIAS\UI\Renderer as UIRenderer;
+
 /**
  * @author	Björn Heyser <bheyser@databay.de>
  * @version	$Id$
@@ -44,11 +47,14 @@ class ilTestPassDetailsOverviewTableGUI extends ilTable2GUI
     );
 
     private ?ilTestQuestionRelatedObjectivesList $questionRelatedObjectivesList = null;
-    private \ILIAS\UI\Renderer $ui_renderer;
-    private \ILIAS\UI\Factory $ui_factory;
+    private UIFactory $ui_factory;
+    private UIRenderer $ui_renderer;
 
-    public function __construct(ilCtrl $ctrl, $parent, $cmd)
-    {
+    public function __construct(
+        ilCtrl $ctrl,
+        ilTestServiceGUI|ilParticipantsTestResultsGUI $parent,
+        string $cmd
+    ) {
         $tableId = 0;
         if (isset($this->tableIdsByParentClasses[get_class($parent)])) {
             $tableId = $this->tableIdsByParentClasses[get_class($parent)];
@@ -122,20 +128,6 @@ class ilTestPassDetailsOverviewTableGUI extends ilTable2GUI
 
         if ($this->areActionListsRequired()) {
             $this->addColumn($this->lng->txt('actions'), '', '1');
-        }
-    }
-
-    public function initFilter(): void
-    {
-        if (count($this->parent_obj->getObject()->getResultFilterTaxIds())) {
-            foreach ($this->parent_obj->getObject()->getResultFilterTaxIds() as $taxId) {
-                $postvar = "tax_$taxId";
-
-                $inp = new ilTaxSelectInputGUI($taxId, $postvar, true);
-                $this->addFilterItem($inp);
-                $inp->readFromSession();
-                $this->filter[$postvar] = $inp->getValue();
-            }
         }
     }
 

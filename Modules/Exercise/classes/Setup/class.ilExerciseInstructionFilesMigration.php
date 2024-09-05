@@ -34,7 +34,7 @@ class ilExerciseInstructionFilesMigration implements Migration
 
     public function getLabel(): string
     {
-        return "Migration of Exercise Instructions Files to the Resource Storage Service.";
+        return "Migration of exercise instructions files to the resource storage service.";
     }
 
     public function getDefaultAmountOfStepsPerRun(): int
@@ -77,7 +77,7 @@ class ilExerciseInstructionFilesMigration implements Migration
             ],
             [
                 'id' => ['integer', $assignment_id],
-                'exc_id' => ['integer', $exec_id],
+                'exc_id' => ['integer', $exec_id]
             ]
         );
     }

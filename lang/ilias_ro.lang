@@ -1725,7 +1725,6 @@ assessment#:#tst_results_grading_opt_show_status_desc#:#Information on the "Pass
 assessment#:#tst_results_overview#:#Pass Overview of the Test Results ###12 11 2006 new variable
 assessment#:#tst_results_print_best_solution#:#Best Solution in Test Results###18 01 2012 new variable
 assessment#:#tst_results_print_best_solution_info#:#If activated and accessible by the participant, the best solution appears in the test result summary.###18 01 2012 new variable
-assessment#:#tst_results_tax_filters#:#Result Filter###26 09 2014 new variable
 assessment#:#tst_resume_dyn_test_with_cur_quest_sel#:#Resume Test with Current Question Selection###24 10 2013 new variable
 assessment#:#tst_resume_test#:#Revenire la test
 assessment#:#tst_revert_changes#:#Undo Editing###fau: testNav
@@ -7643,8 +7642,6 @@ crs#:#crs_timings_suggested_info#:#Suggested Editing Time###15 Jul 2006 new vari
 crs#:#crs_timings_time_frame#:#Time Frame###13 Jul 2006 new variable
 crs#:#crs_timings_time_frame_tt#:#Time frame in days###10 11 2018 new variable
 crs#:#crs_timings_update_error#:#Your settings are not valid, please verify the timings for the following course materials:###10 Jul 2006 new variable
-crs#:#crs_timings_visibility#:#Visibility###10 Jul 2006 new variable
-crs#:#crs_timings_visibility_short#:#Visibility###06 11 2008 new variable
 crs#:#crs_timings_warning_timing_exists#:#Timings are configured for this object. If you active the availability settings, these timing settings will be reseted.###10 11 2018 new variable
 crs#:#crs_to#:#Catre:###03 Nov 2005 content changed
 crs#:#crs_tutor#:#Profesor
@@ -11932,6 +11929,8 @@ notification_adm#:#osd_vanish#:#Presentation Time###29 07 2022 new variable
 notification_adm#:#osd_vanish_desc#:#Visible time of a notification on the screen in seconds.###29 07 2022 new variable
 notification_adm#:#play_sound#:#Play a Sound###29 07 2022 new variable
 notification_adm#:#play_sound_desc#:#Play a sound when receiving a new notficiation.###29 07 2022 new variable
+obj#:#activation_visible_when_disabled#:#Visibility###06 11 2008 new variable
+obj#:#activation_visible_when_disabled_info#:#Visibility###10 Jul 2006 new variable
 obj#:#cont_filter_empty#:#Please use the filter to see any objects.###07 02 2020 new variable
 obj#:#cont_skll_published#:#All assignments have been published.###31 08 2017 new variable
 obj#:#cont_skll_published_some_not#:#All given assignments have been published. Some users lacked competence assignments, thus no assignments could be published for them.###31 08 2017 new variable

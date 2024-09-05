@@ -349,6 +349,7 @@ adn#:#administrative_notification_description#:#Provide system-wide notification
 adn#:#btn_cancel#:#Cancel
 adn#:#btn_delete#:#Delete
 adn#:#btn_delete_confirm#:#Would you like to delete this Notification?
+adn#:#btn_duplicate#:#Duplicate
 adn#:#btn_edit#:#Edit
 adn#:#btn_reset#:#Reset
 adn#:#btn_reset_confirm#:#Would you like to reset this Notification for all Users?
@@ -365,6 +366,9 @@ adn#:#msg_error_false_date_configuration#:#Can't create a notification with this
 adn#:#msg_event_date_end#:#Event Ends
 adn#:#msg_event_date_start#:#Event Starts
 adn#:#msg_form_title#:#Notification
+adn#:#msg_has_language_limitation#:#Limited to selected languages
+adn#:#msg_has_language_limitation_info#:#Only selected languages will see the notification.
+adn#:#msg_languages#:#Languages
 adn#:#msg_limit_to_roles#:#Limited to Selected Roles
 adn#:#msg_limit_to_roles_info#:#Only selected roles will see the notification.
 adn#:#msg_limited_to_role_ids#:#Presentation
@@ -373,10 +377,12 @@ adn#:#msg_permanent_info#:#Display Notifications permanently or temporarily
 adn#:#msg_permanent_no#:#Show Temporarily
 adn#:#msg_permanent_yes#:#Show Permanently
 adn#:#msg_presentation#:#Presentation
+adn#:#msg_show_to_all_languages#:#Show to all languages
 adn#:#msg_show_to_all_roles#:#Show to all roles
 adn#:#msg_show_to_all_roles_info#:#All users even when not logged-in will see notification.
 adn#:#msg_success_created#:#Notification created
 adn#:#msg_success_deleted#:#Notification sucessfully deleted
+adn#:#msg_success_duplicated#:#Notification sucessfully duplicated
 adn#:#msg_success_reset#:#Notification reset
 adn#:#msg_success_updated#:#Notification updated
 adn#:#msg_table_title#:#Notifications
@@ -606,7 +612,7 @@ assessment#:#delete_image_header#:#Remove image
 assessment#:#delete_image_question#:#Do you really want to remove the image?
 assessment#:#delete_user_data#:#Remove Test Data of Selected Users
 assessment#:#description_maxchars#:#If nothing entered the maximum number of characters for this text answer is unlimited.
-assessment#:#detail_ending_time_reached#:#The maximum time available for completing this test has expired. This test has not been available since %s .
+assessment#:#detail_ending_time_reached#:#The maximum time available for completing this test has expired. This test has not been available since %s.
 assessment#:#detail_max_processing_time_reached#:#You have exceeded the maximum time available for completing this test! You are no longer allowed to continue with the test.
 assessment#:#detail_starting_time_not_reached#:#You cannot start the test yet. The test will be available from %s onwards.
 assessment#:#detailed_evaluation#:#Detailed Evaluation
@@ -1031,6 +1037,7 @@ assessment#:#qpl_question_is_in_use#:#The question you are about to edit exists 
 assessment#:#qpl_questions_deleted#:#Question(s) removed.
 assessment#:#qpl_reset_preview#:#Reset Preview
 assessment#:#qpl_save_skill_assigns_update#:#Save Competence Assignments
+assessment#:#qpl_settings_availability#:#Availability
 assessment#:#qpl_settings_general_form_prop_show_tax_desc#:#Existing taxonomies in this pool are offered for question filtering.
 assessment#:#qpl_settings_general_form_property_nav_taxonomy#:#Taxonomy Filter as Navigation Tree
 assessment#:#qpl_settings_general_form_property_nav_taxonomy_description#:#When a taxonomy is selected, it well be presented as navigation tree instead of a table filter item.
@@ -1075,7 +1082,7 @@ assessment#:#question_id_short#:#ID
 assessment#:#question_instances_title#:#This question is used in the following tests
 assessment#:#question_is_part_of_running_test#:#Question is part of a running test and may not be edited.
 assessment#:#question_marking#:#Flagging Questions
-assessment#:#question_marking_description#:#Participants are given the option to flag test questions for themselves. The flags are shown in the ‘List of Questions’, if that feature it has been activated.
+assessment#:#question_marking_description#:#Participants are given the option to flag test questions for themselves. The flags are shown in the ‘Test Attempt Overview’, if that feature it has been activated.
 assessment#:#question_not_answered#:#The question was not answered
 assessment#:#question_saved_for_upload#:#The question was saved automatically in order to reserve hard disk space to store the uploaded file. If you cancel this form now, be aware that you must delete the question in the question pool if you do not want to keep it!
 assessment#:#question_summary#:#Test Attempt Overview
@@ -1288,6 +1295,7 @@ assessment#:#tst_answered_questions_of_total#:#%s of %s
 assessment#:#tst_answered_questions_test#:#Questions answered in this test
 assessment#:#tst_attached_xls_file#:#You can find the test results for this participant in the attached Excel file.
 assessment#:#tst_attempt#:#Attempt
+assessment#:#tst_attempt_limit_message#:#Your limit of test attempts is <b>%s</b>.
 assessment#:#tst_back_to_pass_details#:#Back to Pass Details
 assessment#:#tst_back_to_question_list#:#Back to Question List
 assessment#:#tst_back_to_top#:#Back to Top
@@ -1309,6 +1317,8 @@ assessment#:#tst_change_workingtime#:#Add extra time for a participant
 assessment#:#tst_comp_eval_mode#:#Evaluation by
 assessment#:#tst_comp_points#:#Competence Points
 assessment#:#tst_competence#:#Competence
+assessment#:#tst_conditions_checkbox_enabled#:#Exam Conditions
+assessment#:#tst_conditions_checkbox_enabled_desc#:#Participants must select a checkbox to start the test. Please use the introductory message to present the exam to the participants.
 assessment#:#tst_confirm_submit_answers#:#Please confirm your submission of your solution. You won't be able to revert your answers after pressing the submit button.
 assessment#:#tst_conflicting_setting#:#This setting does conflict with another setting.
 assessment#:#tst_copy#:#Copy Test
@@ -1362,6 +1372,23 @@ assessment#:#tst_eval_total_passed#:#Total passed tests
 assessment#:#tst_eval_total_passed_average_points#:#Average points of passed tests
 assessment#:#tst_eval_total_passed_average_time#:#Average processing time of all passed tests
 assessment#:#tst_eval_total_persons#:#Total number of participants who started the test
+assessment#:#tst_exam_access_code#:#Access Code
+assessment#:#tst_exam_access_code_label#:#Enter access code to continue your already started test.
+assessment#:#tst_exam_conditions#:#Exam Conditions
+assessment#:#tst_exam_conditions_label#:#Check to accept the conditions.
+assessment#:#tst_exam_conditions_not_checked_message#:#You need to accept the exam conditions!
+assessment#:#tst_exam_ending_time_message#:#The test cannot be started after %s.
+assessment#:#tst_exam_modal_message_conditions#:#Please confirm the conditions to start the test.
+assessment#:#tst_exam_modal_message_conditions_and_password#:#Please confirm the conditions and enter the password to start the test.
+assessment#:#tst_exam_modal_message_password#:#Please enter the password to start the test.
+assessment#:#tst_exam_not_assigned_participant_disclaimer#:#You cannot start this test, as you are not an assigned participant.
+assessment#:#tst_exam_password#:#Test Password
+assessment#:#tst_exam_password_invalid_message#:#The given password is not valid!
+assessment#:#tst_exam_password_label#:#Password
+assessment#:#tst_exam_required_fields_not_filled_message#:#You need to fill out all required fields!
+assessment#:#tst_exam_start#:#Start Test
+assessment#:#tst_exam_use_previous_answers#:#Previous Answers
+assessment#:#tst_exam_use_previous_answers_label#:#If enabled answers from previous tests will be prefilled.
 assessment#:#tst_extratime_added#:#The working time of the participant has been increased by %s minutes.
 assessment#:#tst_extratime_info#:#If you want to add the working time multiple times for the same participant, please insert the total amount of time you want to add.
 assessment#:#tst_extratime_notavailable#:#Extra time can be added only for tests with one pass and a maximum processing time.
@@ -1394,6 +1421,8 @@ assessment#:#tst_general_properties#:#General Settings
 assessment#:#tst_header_participant#:#Your Answer:
 assessment#:#tst_header_solution#:#Best Solution:
 assessment#:#tst_heading_scoring#:#Scoring
+assessment#:#tst_hide_info_tab#:#Hide Info Tab
+assessment#:#tst_hide_info_tab_desc#:#Hides the tab ‘Info’ of the test.
 assessment#:#tst_hide_pagecontents#:#Hide page content
 assessment#:#tst_hide_pagecontents_desc#:#ILIAS content placed before and after the actual question text via the "Edit Page" button will not be displayed in the result views and print output.
 assessment#:#tst_hide_side_list#:#Hide List of Questions
@@ -1473,6 +1502,10 @@ assessment#:#tst_introduction_desc#:#Shows an introductory message on the tab �
 assessment#:#tst_introduction_text#:#Introductory Message
 assessment#:#tst_invited_nobody#:#No users, groups or roles have been added as fixed test participants
 assessment#:#tst_invited_selected_users#:#The selected users have been added as fixed test participants
+assessment#:#tst_launcher_button_label_passes_limit_reached#:#You have reached the limit of possible test passes
+assessment#:#tst_launcher_status_message_conditions#:#You will be asked for your approval of the exam conditions when you start the test.
+assessment#:#tst_launcher_status_message_conditions_and_password#:#You will be asked for the password and your approval of the exam conditions when you start the test.
+assessment#:#tst_launcher_status_message_password#:#You will be asked for the password when you start the test.
 assessment#:#tst_level#:#Competence Level
 assessment#:#tst_limit_nr_of_tries#:#Limit Number of Test Attempts
 assessment#:#tst_link_only_unassigned#:#You have selected at least one question that is already linked to a question pool. Only unassigned questions can be added to a question pool.
@@ -1568,6 +1601,7 @@ assessment#:#tst_objectives_progress_header#:#Learning Objectives Progress
 assessment#:#tst_old_style_rnd_quest_set_broken#:#This random test is in a irreparable state, because one or more connected question pools have been deleted. Therefor participants cannot take the test any longer.
 assessment#:#tst_optional_questions_confirmation_fixed_test#:#<b>Question related to already passed learning objectives were answered in previous passes.</b><br /><br />You want to navigate to a question, that relates to an already passed learning objective.<br />You can choose:<br /><br />I you proceed, you can work on or simply review these questions. If you change your answers that were adopted from previous passes, you can also degrade your learning objective result.<br /><br />If you decide to not work on or review these questions, you can go back. The questions will be considered in the evaluation in every case.
 assessment#:#tst_optional_questions_confirmation_non_fixed_test#:#<b>Question related to already passed learning objectives are optional.</b><br /><br />You want to navigate to a question, that relates to an already passed learning objective.<br />You can choose:<br /><br />I you proceed, you can work on these questions. Your answers from previous attempts were not adopted, since new random questions were selected for this attempt. With working on this questions you can also degrade your learning objective result.<br /><br />If you decide to not work on these questions, you can go back. In this case these questions won't be considered in the evaluation.
+assessment#:#tst_out_of_time_message#:#You have reached the maximum allowed processing time of the test!
 assessment#:#tst_participant#:#Participant
 assessment#:#tst_participant_fullname_pattern#:#%2$s, %1$s
 assessment#:#tst_participant_status#:#Participant Status
@@ -1616,6 +1650,7 @@ assessment#:#tst_postpone_on#:#Unanswered questions will be enqueued
 assessment#:#tst_postpone_on_desc#:#Question that users just look at and flip over without answering them, will be enqueued to be presented again automatically the end of the test.
 assessment#:#tst_presentation_properties#:#Administering the Test: Behavior of the Question
 assessment#:#tst_presentation_settings_section#:#Presentation
+assessment#:#tst_previous_access_code_not_available#:#No previous code available!
 assessment#:#tst_print#:#Test and Assessment - Print View
 assessment#:#tst_proceed#:#Proceed
 assessment#:#tst_processing_time#:#Limit Duration of Test
@@ -1758,7 +1793,6 @@ assessment#:#tst_results_grading_opt_show_status_desc#:#Information on the ‘Pa
 assessment#:#tst_results_overview#:#Pass Overview of the Test Results
 assessment#:#tst_results_print_best_solution#:#Best Solution
 assessment#:#tst_results_print_best_solution_info#:#Additionally for each question the best possible solution will be displayed.
-assessment#:#tst_results_tax_filters#:#Result Filter
 assessment#:#tst_resume_dyn_test_with_cur_quest_sel#:#Resume Test with Current Question Selection
 assessment#:#tst_resume_test#:#Resume the Test
 assessment#:#tst_revert_changes#:#Undo Editing###fau: testNav
@@ -1797,6 +1831,7 @@ assessment#:#tst_setting_offer_hints_label#:#Hints
 assessment#:#tst_settings_conflict_compulsory_and_lock#:#"Compulsory Questions" cannot be used together with "Answer Lock".
 assessment#:#tst_settings_conflict_postpone_and_lock#:#"Unanswered questions will be enqueued" cannot be used together with "Lock Answers After Moving to Next Question".
 assessment#:#tst_settings_conflict_shuffle_and_lock#:#"Shuffle Questions" cannot be used together with "Lock Answers After Moving to Next Question".
+assessment#:#tst_settings_header_additional#:#Additional Features
 assessment#:#tst_settings_header_execution#:#Administering the Test: Access
 assessment#:#tst_settings_header_intro#:#Information Before Start of Test
 assessment#:#tst_settings_header_test_run#:#Administering the Test: Test Run
@@ -1887,10 +1922,12 @@ assessment#:#tst_text_count_system#:#Scoring System
 assessment#:#tst_threshold#:#Thresholds (in %)
 assessment#:#tst_time_already_spent#:#You started the test at: %s. Your maximum processing time is %s.
 assessment#:#tst_time_already_spent_left#:#You have %s left.
+assessment#:#tst_time_limit_message#:#You will have <b>%s minutes</b> to answer all questions.
 assessment#:#tst_title_output#:#Show Question Title
 assessment#:#tst_title_output_full#:#Question Titles and Available Points
 assessment#:#tst_title_output_hide_points#:#Only Question Titles
 assessment#:#tst_title_output_no_title#:#Neither Question Titles nor Available Points
+assessment#:#tst_title_output_only_points#:#Only Available Points
 assessment#:#tst_trigger_result_refreshing#:#Results need to be recalculated. This may take a while.
 assessment#:#tst_type#:#Test Type
 assessment#:#tst_unchanged_answer_is_correct#:#The preset answer is correct###fau: testNav
@@ -2113,6 +2150,7 @@ background_tasks#:#ui_msg_no_files_found#:#No files have been found. The downloa
 background_tasks#:#ui_msg_num_files#:#%s file(-s) were detected for download, do you want to continue?
 background_tasks#:#ui_msg_sum_file_sizes#:#The total download size before creating the zip-folder is %s. Do you want to continue?
 background_tasks#:#waiting#:#Waiting
+badge#:#awarded_by#:#Awarded by
 badge#:#badge_activity_badges#:#Activity Badges
 badge#:#badge_add_template#:#Add Template
 badge#:#badge_add_to_backpack#:#Add to Backpack
@@ -2179,6 +2217,17 @@ badge#:#badge_template_types_specific#:#Specific
 badge#:#badge_types#:#Types
 badge#:#badge_user_profile#:#User Profil
 badge#:#badge_valid#:#Valid until
+badge#:#criteria#:#Criteria
+badge#:#endless#:#Always
+badge#:#issued_on#:#Issued on
+badge#:#position_updated#:#Profil assignment updated.
+badge#:#sort_by_date_asc#:#Sort by Date Ascending
+badge#:#sort_by_date_desc#:#Sort by Date Descending
+badge#:#sort_by_title_asc#:#Sort by Title Ascending
+badge#:#sort_by_title_desc#:#Sort by Title Descending
+badge#:#table_view#:#Table View
+badge#:#tile_view#:#Tile View
+badge#:#valid_until#:#Valid until
 bgtask#:#bgtask_blocked#:#Concurrent download
 bgtask#:#bgtask_blocked_cancel_new#:#Cancel new download
 bgtask#:#bgtask_blocked_cancel_old#:#Cancel existing download
@@ -2263,6 +2312,8 @@ bibl#:#not_yet_migrated#:#This Object has not et been migrated. Please contact t
 bibl#:#obj_bibl_duplicate#:#Duplicate Bibliography
 bibl#:#order#:#Order
 bibl#:#override_entries#:#Override Entries
+bibl#:#replace_bibliography_file#:#Replace Bibliography File
+bibl#:#replace_bibliography_file_info#:#The current bibliography file will be replaced by the new file. All existing entries from the current file will be deleted.
 bibl#:#ris#:#Ris
 bibl#:#ris_default_a2#:#Location in Archives
 bibl#:#ris_default_au#:#Author
@@ -2467,6 +2518,8 @@ book#:#book_is_used#:#Is Used
 book#:#book_limit_objects_available#:#You can not assign %s participants to "%s" because it has only %s items available.
 book#:#book_list#:#List
 book#:#book_log#:#Reservations
+book#:#book_mail_permanent_link#:#Link to Booking Pool
+book#:#book_mail_to_booker#:#Mail to User
 book#:#book_message#:#Message
 book#:#book_message_info#:#You may enter a message for the booking organisator here.
 book#:#book_messages#:#Messages
@@ -2502,7 +2555,7 @@ book#:#book_period#:#Period
 book#:#book_pool_added#:#A booking pool has been added.
 book#:#book_pool_selection#:#Booking Pool Selection
 book#:#book_post_booking_file#:#File
-book#:#book_post_booking_information#:#Post Booking Information
+book#:#book_post_booking_information#:#Reservation Information
 book#:#book_post_booking_text#:#Text
 book#:#book_post_booking_text_info#:#Use placeholders to communicate specifics on reservations. <br />[OBJECT] will be replaced by the respective Booking Object. <br />[PERIOD] will be replaced by the respective schedule.
 book#:#book_pref_book_cron#:#Booking with Preferences
@@ -3338,9 +3391,7 @@ cntr#:#sorting_new_items_position#:#Position for New Objects
 cntr#:#tab_back_to_repository#:#Back to Repository
 common#:#HH#:#HH:MM
 common#:#absolute_path#:#Absolute Path
-common#:#accept_usr_agreement#:#Accept Terms of Service?
 common#:#accept_usr_agreement_btn#:#Accept
-common#:#accept_usr_agreement_intro#:#There are new terms of service. You need to accept them before proceeding with the use of ILIAS. Read the following document carefully and give your consent or dissent at the bottom of the page.
 common#:#access#:#Access
 common#:#accessFree#:#Remove 'Valid Until' Date
 common#:#accessRestrict#:#Set 'Valid Until' Date
@@ -3401,7 +3452,6 @@ common#:#adve_assessment_settings#:#Test and Assessment Settings
 common#:#adve_frm_post_settings#:#Forum Posts
 common#:#adve_general_settings#:#General Settings
 common#:#adve_survey_settings#:#Survey Settings
-common#:#agree_date#:#Agreed on
 common#:#all#:#All
 common#:#all_global_roles#:#Global roles
 common#:#all_local_roles#:#Local roles (all)
@@ -3852,6 +3902,18 @@ common#:#download_selected_items#:#Download
 common#:#download_with_uploaded_filename#:#Download with uploaded filename
 common#:#download_with_uploaded_filename_info#:#Select this option exclusively for backwards compatibility with ILIAS 3.9 and older versions: When this option is selected, the filename of a downloaded file is equal to the filename that was used for uploading the file into ILIAS. If this option is not selected, the filename of a downloaded file is equal to the title of the file object in ILIAS. This option does not affect WebDAV. For WebDAV the filename of a downloaded file is always equal to the title of the file object.
 common#:#downloading_settings#:#Download Settings
+common#:#dpro_accept_usr_agreement#:#Accept Declaration of Data Protection?
+common#:#dpro_accept_usr_agreement_intro#:#There is a new data protection. You need to accept it before proceeding with the use of ILIAS. Read the following document carefully and give your consent or dissent at the bottom of the page.
+common#:#dpro_force_accept_usr_agreement#:#You must accept the Data Protection!
+common#:#dpro_refuse_acceptance#:#Refuse to Accept Data Protection
+common#:#dpro_usr_agreement#:#Data Protection
+common#:#dpro_usr_agreement_footer_intro#:#You have declared your consent to this Declaration of Data Protection.
+common#:#dpro_withdraw_consent_description#:#Withdraw your consent to our Declaration of Data Protection here.
+common#:#dpro_withdraw_consent_description_external#:#Please return to your ILIAS installation and log in again to complete the process of withdrawing your consent to the Data Protection.
+common#:#dpro_withdraw_consent_description_internal#:#Please log in again to complete the process of withdrawing your consent to the Data Protection.
+common#:#dpro_withdraw_consent_header#:#Withdraw to Consent of Declaration of Data Protection
+common#:#dpro_withdraw_consent_info#:#Withdraw your consent to our Data Protection.
+common#:#dpro_withdraw_consent_info_external#:#Please contact the administrator of your authentication system and inform them of your intention to withdraw your consent to the Data Protection.
 common#:#drafts#:#Drafts
 common#:#drag_file_here#:#Drag-and-drop your file here
 common#:#drag_files_here#:#Drag-and-drop your files here
@@ -3955,6 +4017,7 @@ common#:#exc_files#:#Files
 common#:#exc_files_returned#:#Submitted Files
 common#:#exc_instruction#:#Work Instructions
 common#:#exc_last_submission#:#Last Submission
+common#:#exc_member_of_crs_grp#:#Member in Course/Group
 common#:#exc_members_already_assigned#:#These users are already assigned to the assignment.
 common#:#exc_members_assigned#:#Members assigned
 common#:#exc_members_comments_saved#:#The exercise comments for the selected user have been saved
@@ -4061,7 +4124,6 @@ common#:#fold_wizard_page#:#Copy Folder (Step 2/2)
 common#:#folder#:#Folder
 common#:#folders#:#Folders
 common#:#follow_link_to_read_mails#:#click the following link to read these mails:
-common#:#force_accept_usr_agreement#:#You must accept the Terms of Service!
 common#:#forgot_password#:#Forgot your password?
 common#:#forgot_username#:#Forgot your username?
 common#:#form_input_not_valid#:#Some of the information entered is incomplete or invalid. Please correct your entry.
@@ -4073,11 +4135,18 @@ common#:#forums#:#Forums
 common#:#forums_anonymized#:#Forum anonymized
 common#:#forums_anonymous#:#anonym
 common#:#forums_articles#:#Articles
+common#:#forums_closed#:#closed
 common#:#forums_disable_forum_notification#:#Disable Notification for this Forum
 common#:#forums_enable_forum_notification#:#Enable Notification for this Forum
 common#:#forums_forum_notification_enabled#:#You will be notified about new messages in this forum.
 common#:#forums_last_post#:#Latest Article
+common#:#forums_last_posting_asc#:#Last Posting Ascending
+common#:#forums_last_posting_dsc#:#Last Posting Descending
 common#:#forums_notification_settings#:#Forums Notification Settings
+common#:#forums_rating_asc#:#Rating Ascending
+common#:#forums_rating_dsc#:#Rating Descending
+common#:#forums_thread_sorting_asc#:#Thread Title A→Z
+common#:#forums_thread_sorting_dsc#:#Thread Title Z→A
 common#:#forums_threads#:#Threads
 common#:#forums_use_alias#:#You may use a pseudonym for your posting. If you leave this field blank, your posting will be marked as written by ‘%s’.
 common#:#forums_your_name#:#Your Name
@@ -4560,7 +4629,6 @@ common#:#mm_personal_and_shared_r#:#Personal and Shared Resources
 common#:#mm_personal_workspace#:#Personal Workspace
 common#:#mm_portfolio#:#Portfolio
 common#:#mm_private_chats#:#Private Chats
-common#:#mm_rep_tree_view#:#Tree View
 common#:#mm_repo_tree_view#:#Tree View
 common#:#mm_repo_tree_view_act#:#Activate Tree
 common#:#mm_repo_tree_view_deact#:#Deactivate Tree
@@ -4803,6 +4871,8 @@ common#:#obj_crsv#:#Course Certificate
 common#:#obj_dbk#:#Digilib Book
 common#:#obj_dcl#:#Data Collection
 common#:#obj_dcl_duplicate#:#Copy Data Collection
+common#:#obj_dpro#:#Data Protection
+common#:#obj_dpro_desc#:#Data Protection Settings
 common#:#obj_dshs#:#Dashboard
 common#:#obj_dshs_desc#:#Dashboard settings
 common#:#obj_ecss#:#ECS
@@ -5276,7 +5346,6 @@ common#:#referral_comment#:#How did you hear about ILIAS?
 common#:#refresh#:#Refresh
 common#:#refresh_languages#:#Refresh All Languages
 common#:#refuse#:#Refuse
-common#:#refuse_tos_acceptance#:#Refuse to Accept Terms of Service
 common#:#reg_account_confirmation_successful#:#Your user account has been activated.
 common#:#reg_goto_parent_membership_info#:#Only members can access the target object.
 common#:#reg_mail_body_2_confirmation#:#This link is only valid for %s. After this period has passed, the link will expire and you will have to restart the registration process from the beginning.
@@ -5651,6 +5720,18 @@ common#:#tomorrow#:#Tomorrow
 common#:#toolbar_more_actions#:#More Actions
 common#:#tools#:#Tools
 common#:#top_of_page#:#Top of page
+common#:#tos_accept_usr_agreement#:#Accept Terms of Service?
+common#:#tos_accept_usr_agreement_intro#:#There are new terms of service. You need to accept them before proceeding with the use of ILIAS. Read the following document carefully and give your consent or dissent at the bottom of the page.
+common#:#tos_force_accept_usr_agreement#:#You must accept the Terms of Service!
+common#:#tos_refuse_acceptance#:#Refuse to Accept Terms of Service
+common#:#tos_usr_agreement#:#Terms of Service
+common#:#tos_usr_agreement_footer_intro#:#You have declared your consent to these terms of service.
+common#:#tos_withdraw_consent_description#:#Withdraw your consent to our Terms of Service here.
+common#:#tos_withdraw_consent_description_external#:#Please return to your ILIAS installation and log in again to complete the process of withdrawing your consent to the Terms of Service.
+common#:#tos_withdraw_consent_description_internal#:#Please log in again to complete the process of withdrawing your consent to the Terms of Service.
+common#:#tos_withdraw_consent_header#:#Withdraw Terms of Service Consent
+common#:#tos_withdraw_consent_info#:#Withdraw your consent to our Terms of Service.
+common#:#tos_withdraw_consent_info_external#:#Please contact the administrator of your authentication system and inform them of your intention to withdraw your consent to the Terms of Service.
 common#:#total#:#Total
 common#:#tracking_settings#:#Learning Progress Settings
 common#:#translation#:#Translation
@@ -5712,8 +5793,6 @@ common#:#update_orgunits#:#Update assigned organisational units
 common#:#update_orgunits_desc#:#If enabled, the field 'Organisational Units' will be updated for all user accounts.
 common#:#upload#:#Upload
 common#:#upload_error_file_not_found#:#Upload error: File not found.
-common#:#upload_files#:#Upload files
-common#:#upload_files_title#:#Upload files
 common#:#upload_pending#:#Pending
 common#:#upload_settings#:#Upload Settings
 common#:#uploaded_and_checked#:#The file has been uploaded and checked, you can now start to import it.
@@ -5764,6 +5843,7 @@ common#:#userfolder_export_file_size#:#File size
 common#:#userfolder_export_files#:#Files
 common#:#userfolder_export_xml#:#XML
 common#:#username#:#Username
+common#:#username_assistance#:#Username Assistance
 common#:#users#:#Users
 common#:#users_not_imported#:#The following users do not exist, their messages cannot become imported
 common#:#users_online#:#Active Users
@@ -5771,8 +5851,6 @@ common#:#usr#:#User
 common#:#usr_account_inactive#:#Inactive Account
 common#:#usr_active_only#:#Active Users only
 common#:#usr_add#:#Add User
-common#:#usr_agreement#:#Terms of Service
-common#:#usr_agreement_footer_intro#:#You have declared your consent to these terms of service.
 common#:#usr_edit#:#Edit User
 common#:#usr_field_change_components_listening#:#There is at least one component which is interested in the changed configuration. Would you like to confirm the changes with the consequences the component(s) announced below?
 common#:#usr_filter_coursemember#:#Member of course
@@ -5883,12 +5961,6 @@ common#:#wiki_add#:#Add Wiki
 common#:#wiki_new#:#New Wiki
 common#:#with#:#with
 common#:#withdraw_consent#:#Withdraw Consent
-common#:#withdraw_consent_description#:#Withdraw your consent to our Terms of Service here.
-common#:#withdraw_consent_description_external#:#Please return to your ILIAS installation and log in again to complete the process of withdrawing your consent to the Terms of Service.
-common#:#withdraw_consent_description_internal#:#Please log in again to complete the process of withdrawing your consent to the Terms of Service.
-common#:#withdraw_consent_header#:#Withdraw Terms of Service Consent
-common#:#withdraw_consent_info#:#Withdraw your consent to our Terms of Service.
-common#:#withdraw_consent_info_external#:#Please contact the administrator of your authentication system and inform them of your intention to withdraw your consent to the Terms of Service.
 common#:#withdraw_consent_info_internal#:#If you click on ‘Withdraw Consent’, your account will be deleted.
 common#:#withdraw_usr_agreement#:#Withdraw Consent
 common#:#withdrawal_complete#:#Withdrawal of consent complete.
@@ -6573,6 +6645,7 @@ content#:#cont_linked_mobs#:#Linked media objects
 content#:#cont_links#:#Links
 content#:#cont_list_files#:#List Files
 content#:#cont_list_indent#:#Indent List
+content#:#cont_list_item_style#:#List Item Style
 content#:#cont_list_outdent#:#Outdent List
 content#:#cont_list_properties#:#List Properties
 content#:#cont_lists#:#Lists
@@ -7252,6 +7325,9 @@ copg#:#copg_error_occured_modal#:#An error occured while processing the page. Hi
 copg#:#copg_est_reading_time#:#Estimated Reading Time
 copg#:#copg_history_cleanup_cron#:#Page Editor History Cleanup
 copg#:#copg_history_cleanup_cron_info#:#Removes older entries from the page history.
+copg#:#copg_list_item_style#:#List Item
+copg#:#copg_list_style#:#List
+copg#:#copg_list_styles#:#List Formats
 copg#:#copg_page_element_not_found#:#Page element not found.
 copg#:#copg_page_type_stys#:#Layout Page
 copg#:#copg_questions_not_supported_here#:#Questions are not supported in this context.
@@ -7809,8 +7885,6 @@ crs#:#crs_timings_suggested_info#:#Suggested Editing Time
 crs#:#crs_timings_time_frame#:#Time Frame
 crs#:#crs_timings_time_frame_tt#:#Time frame in days
 crs#:#crs_timings_update_error#:#Your settings are not valid, please verify the timings for the following course materials:
-crs#:#crs_timings_visibility#:#If chosen, the material is visible even outside of the given availability.
-crs#:#crs_timings_visibility_short#:#Visibility
 crs#:#crs_timings_warning_timing_exists#:#Timings are configured for this object. If you active the availability settings, these timing settings will be reseted.
 crs#:#crs_to#:#Until
 crs#:#crs_tutor#:#Tutor
@@ -8736,6 +8810,19 @@ didactic#:#grp_closed_info#:#Group is not visible for non-members.
 didactic#:#more_translations#:#More Translations
 didactic#:#sess_closed#:#Closed Session
 didactic#:#sess_closed_info#:#Session is not visible for non-participants.
+dpro#:#dpro_account_reg_not_possible#:#Self-registration is currently not possible because there is no Data Protection agreement available. Please contact your <a href="%1$s">system administrator</a> for further information.
+dpro#:#dpro_agree_date#:#Data Protection agreed on
+dpro#:#dpro_last_reset_date#:#The Data Protection were reset on %s. Only reset the Data Protection if changes have been made to the document(s) and you require all users to agree to the documents.
+dpro#:#dpro_mode#:#Mode
+dpro#:#dpro_mode_desc#:#Please configure when and how the Data Protection should be accepted.
+dpro#:#dpro_no_acceptance#:#Never, only informative
+dpro#:#dpro_once#:#Accept once
+dpro#:#dpro_reset_for_all_users#:#Reset Data Protection
+dpro#:#dpro_status_enable#:#Enable Data Protection
+dpro#:#dpro_status_enable_desc#:#Display relevant language-based Data Protection documents at the end of the registration form for new users and, if applicable, upon the user’s first login. Users are required to accept the Data Protection before they can enter ILIAS.
+dpro#:#dpro_sure_reset_tos#:#Are you sure you want to reset the Data Protection for all users in the system? This also applies, for example, to those accounts that are used for the SOAP web services.
+dpro#:#dpro_withdrawal_usr_deletion#:#Account deletion upon Data Protection withdrawal
+dpro#:#dpro_withdrawal_usr_deletion_desc#:#If a user withdraws their acceptance from a previously accepted Data Protection document, this will result in the deletion of the user’s account.
 ecs#:#cert_serial#:#Certificate Serial Number
 ecs#:#ecs_abr#:#Abbreviation
 ecs#:#ecs_account_duration#:#Activation Period Extension
@@ -9009,6 +9096,7 @@ etal#:#notification_talks_removed#:#The following appointments have been cancele
 etal#:#notification_talks_subject#:#Invitation: %s
 etal#:#notification_talks_subject_update#:#Update: %s
 etal#:#notification_talks_updated#:#The following talk appointments have been changed.
+etal#:#pending_talks_warning#:#The following pending talk appointments will be replaced:
 etal#:#talk_serial#:#Talk Serial
 etal#:#tals_add#:#Add Talks
 etal#:#tals_new#:#New Talks
@@ -9030,6 +9118,7 @@ exc#:#exc_adopt_group_teams_blocked#:#%s User were already assigned.
 exc#:#exc_adopt_group_teams_conflict#:#User "%1$s" is already selected for group "%2$s".
 exc#:#exc_adopt_group_teams_no_members#:#No members
 exc#:#exc_after_submission#:#After submission
+exc#:#exc_all#:#All
 exc#:#exc_all_new_files_offered_already#:#All new files have already been offered for download. For another download, please click on the action links below.
 exc#:#exc_ass_submission_zip#:#Submissions
 exc#:#exc_ass_team_wiki#:#Assignment Team Wiki
@@ -9078,6 +9167,8 @@ exc#:#exc_deadline#:#Deadline
 exc#:#exc_deadline_ext_mismatch#:#The grace period has to end after the deadline.
 exc#:#exc_deadline_extended#:#Grace Period
 exc#:#exc_deadline_extended_info#:#Late submission are possible between the deadline and the end of the grace period.
+exc#:#exc_deadline_not_set_yet#:#Not Set Yet
+exc#:#exc_deadline_requested#:#Requested
 exc#:#exc_delete_team#:#Delete Team
 exc#:#exc_deleted_user#:#Deleted User
 exc#:#exc_denied_has_peer_reviews#:#Reason: Some assignments have peer reviewing activated.
@@ -9088,12 +9179,17 @@ exc#:#exc_direct_submit#:#Submit
 exc#:#exc_direct_submit_blog#:#Would you like to submit the current version of the blog right now? You can do it anytime from the blog editor later on.
 exc#:#exc_direct_submit_portfolio#:#Would you like to submit the current version of the portfolio right now? You can do it anytime from the portfolio editor later on.
 exc#:#exc_down_files_started_bg#:#A ZIP archive with all download files is now created in the background. You can see the status of your background processes at the top right in the Notification Centre. You can also download the ZIP archive there.
+exc#:#exc_download_selected#:#Download Selected Submission
 exc#:#exc_download_zip_structure#:#Download ZIP Structure
 exc#:#exc_earliest_start_time#:#Earliest Start Time
 exc#:#exc_edit_assignment#:#Edit Assignment
 exc#:#exc_edit_assignments#:#Edit Assignments
+exc#:#exc_edit_blog#:#Edit Blog
 exc#:#exc_edit_criterias#:#Edit Criteria
+exc#:#exc_edit_portfolio#:#Edit Portfolio
 exc#:#exc_edit_submission#:#Edit Submission
+exc#:#exc_edit_wiki#:#Edit Wiki
+exc#:#exc_ended#:#Ended
 exc#:#exc_ended_on#:#Ended On
 exc#:#exc_export_excel#:#Export (Excel)
 exc#:#exc_fb_files#:#Evaluation Files
@@ -9106,8 +9202,12 @@ exc#:#exc_feedback_notification_subject#:#Feedback is available for assignment o
 exc#:#exc_files_returned_text#:#Assignment Text
 exc#:#exc_find_zip_error#:#The submission can not be opened. The original files are not found.
 exc#:#exc_fixed_date#:#Fixed Date
+exc#:#exc_fixed_date_individual#:#Individual Deadlines Only
+exc#:#exc_fixed_date_individual_info#:#There is no common deadline. Tutors must set individual deadlines for each participant individually.
 exc#:#exc_fixed_date_info#:#Initially all users get the same fixed deadline.
 exc#:#exc_fullscreen#:#Fullscreen
+exc#:#exc_future#:#Upcoming
+exc#:#exc_given_feedback#:#Given Feedback
 exc#:#exc_global_feedback_file#:#Sample Solution
 exc#:#exc_global_feedback_file_after_date#:#After set Date
 exc#:#exc_global_feedback_file_cron#:#Notification
@@ -9120,6 +9220,9 @@ exc#:#exc_graded_mem_notified#:#All graded participants have been notified.
 exc#:#exc_grades#:#Grades Overview
 exc#:#exc_grades_overview#:#Grades View
 exc#:#exc_hand_in#:#Hand In
+exc#:#exc_hand_in_lead_text#:#%s to Submit
+exc#:#exc_idl_request_and_tutor_needed#:#Please send a request to your tutor for setting an individual deadline for you.
+exc#:#exc_idl_tutor_needed#:#You already requested a deadline. The request is still pending. You will be notified once the individual deadline is set.
 exc#:#exc_import#:#Import Exercise
 exc#:#exc_individual_deadline#:#Individual Deadline
 exc#:#exc_individual_deadline_action#:#Set Individual Deadline
@@ -9127,6 +9230,8 @@ exc#:#exc_individual_deadline_before_global#:#The date has to be after the (last
 exc#:#exc_instruction_files#:#Instruction Files
 exc#:#exc_late_submission#:#Late Submission
 exc#:#exc_late_submission_warning#:#Submissions after %s are marked as late.
+exc#:#exc_lead_request_idl#:#Request Deadline
+exc#:#exc_lead_wait_for_idl#:#Waiting For Individual Deadline
 exc#:#exc_limit_characters#:#Limit of characters
 exc#:#exc_list_submission#:#List All Submissions
 exc#:#exc_list_text_assignment#:#List All Submissions
@@ -9155,15 +9260,23 @@ exc#:#exc_min_nr#:#Number of Assignments
 exc#:#exc_min_nr_info#:#This value must be equal or higher than the number of compulsory assignments.
 exc#:#exc_min_team_participants#:#Minimal Number
 exc#:#exc_msg_all_mandatory_ass#:#You must pass all mandatory assignments to pass the exercise.
+exc#:#exc_msg_deadline_request_body#:#the following user requested an individual deadline.
+exc#:#exc_msg_deadline_request_subject#:#A deadline has been requested in exercise "%s".
 exc#:#exc_msg_failed_mandatory#:#You failed in at least one mandatory assignment.
 exc#:#exc_msg_grading_done#:#An assignment has been graded in exercise "%s".
 exc#:#exc_msg_grading_done_body#:#a tutor has graded your submission in exercise "%s".
+exc#:#exc_msg_idl_set_body#:#a new individual deadline has been set.
+exc#:#exc_msg_idl_set_subject#:#A new deadline has been set in exercise "%s".
 exc#:#exc_msg_min_number_ass#:#You must pass a minimum of %s assignments to pass the exercise.
 exc#:#exc_msg_missed_minimum_number#:#You did not pass the minimum number of assignments.
 exc#:#exc_msg_new_feedback_file_uploaded#:#A new feedback file has been added to exercise "%s".
 exc#:#exc_msg_new_feedback_file_uploaded2#:#a tutor has uploaded a new feedback file for you.
 exc#:#exc_msg_new_feedback_text_uploaded#:#A new comment has been added to exercise "%s".
 exc#:#exc_msg_new_feedback_text_uploaded2#:#a tutor has added a new comment for you.
+exc#:#exc_msg_new_message_from_pf_giver#:#A new message from a peer feedback giver has been added to exercise "%s".
+exc#:#exc_msg_new_message_from_pf_giver2#:#a peer feedback giver has added a new message for you:
+exc#:#exc_msg_new_message_from_pf_recipient#:#A new message from a peer feedback recipient has been added to exercise "%s".
+exc#:#exc_msg_new_message_from_pf_recipient2#:#a peer feedback recipient has added a new message for you:
 exc#:#exc_msg_participants_removed#:#The participants have been removed from the exercise.
 exc#:#exc_msg_public_submission#:#All submissions will be published after the deadline.
 exc#:#exc_msg_saved_grades#:#Grades and comments have been saved.
@@ -9175,13 +9288,18 @@ exc#:#exc_multi_feedback_files#:#Multi-Feedback Files
 exc#:#exc_needs_deadline#:#This feature does only work with an assignment deadline.
 exc#:#exc_needs_fixed_deadline#:#This feature only works with a fixed deadline.
 exc#:#exc_new_assignment#:#New Assignment
+exc#:#exc_no_assignments#:#No assignments available.
 exc#:#exc_no_assignments_available#:#No assignments created yet. Please open ‘Assignments’ and ‘Edit’ to create a first assignment.
+exc#:#exc_no_deadline#:#No Deadline
+exc#:#exc_no_deadline_info#:#There is no submission deadline for participants.
 exc#:#exc_no_deadline_specified#:#No deadline specified.
 exc#:#exc_no_feedback_dir_found_in_zip#:#The directory structure of the uploaded zip-archive could not be processed.
 exc#:#exc_no_get_target#:#A valid target has not been sent.
 exc#:#exc_no_graded_mem_selected#:#Please select at least one graded participant.
 exc#:#exc_no_participants#:#There are currently no participants.
+exc#:#exc_no_peer_feedback_deadline#:#No Deadline for Giving Feedback
 exc#:#exc_no_portfolio_templates#:#There are no Portfolio Templates available.
+exc#:#exc_no_submission_yet#:#No submission yet.
 exc#:#exc_no_team_yet#:#Not assigned to a team
 exc#:#exc_no_team_yet_info#:#You can create a team yourself or be added to an existing team by its team members.
 exc#:#exc_no_team_yet_info_tutor#:#Teams are managed by the exercise tutors.
@@ -9190,6 +9308,7 @@ exc#:#exc_note_for_tutor#:#Note for Tutors
 exc#:#exc_notification#:#Personal Notification
 exc#:#exc_nr_random_mand#:#Number of Mandatory Assignments
 exc#:#exc_num_teams#:#Number
+exc#:#exc_ongoing#:#Ongoing
 exc#:#exc_order_by_deadline#:#Order by Deadline
 exc#:#exc_overview#:#Overview
 exc#:#exc_participant#:#Participant
@@ -9203,6 +9322,7 @@ exc#:#exc_pass_mode#:#Pass Mode
 exc#:#exc_pass_mode_not_changeable_info#:#The pass mode cannot be changed anymore.
 exc#:#exc_passed_status_determination#:#Determination of Status ‘Passed’
 exc#:#exc_passing_exc#:#Passing the Exercise
+exc#:#exc_past#:#Past
 exc#:#exc_peer_deadline_mismatch#:#As feedback is given after the deadline has passed the feedback deadline must not be earlier than the assignment deadline.
 exc#:#exc_peer_review#:#Peer-Feedback
 exc#:#exc_peer_review_ass_setting_info#:#Users can rate the solutions of their peers after the deadline and if granted the grace period lapsed. Specific settings on peer-feedback are made in the respective tab. After activation this option and saving it, the tab 'Peer-Feedback' will be displayed.
@@ -9250,9 +9370,11 @@ exc#:#exc_peer_review_show_missing#:#You cannot view your received feedback as y
 exc#:#exc_peer_review_show_received_none#:#You received no feedback.
 exc#:#exc_peer_review_simple_unlock#:#Access to received feedback
 exc#:#exc_peer_review_simple_unlock_active#:#After giving at least 1 valid feedback
+exc#:#exc_peer_review_simple_unlock_immed#:#Always show received peer feedback
 exc#:#exc_peer_review_simple_unlock_inactive#:#After giving all required feedbacks
 exc#:#exc_peer_review_text#:#Text Input
 exc#:#exc_peer_review_updated#:#Your feedback has been saved.
+exc#:#exc_peer_reviews_in_lead_text#:#%s to Give Feedback
 exc#:#exc_peer_reviews_invalid_warning#:#Invalid Peer Groups
 exc#:#exc_portfolio_created#:#Portfolio was created.
 exc#:#exc_portfolio_returned#:#Assignment Portfolio
@@ -9271,8 +9393,11 @@ exc#:#exc_random_assignment_info#:#When starting the exercise some assignments w
 exc#:#exc_random_selection#:#Random Selection
 exc#:#exc_random_selection_info#:#Each user gets assigned a random selection of mandatory assignments.
 exc#:#exc_random_selection_not_changeable_info#:#This mode cannot be activated.
+exc#:#exc_received_feedback#:#Received Feedbacks
 exc#:#exc_rel_last_submission#:#Last Possible Submission
 exc#:#exc_rel_last_submission_info#:#If this optional date is set, all user have to submit until this deadline is reached.
+exc#:#exc_rel_start_latest_lead_text#:#%s the Latest
+exc#:#exc_rel_start_lead_text#:#Submit %s Days After Start
 exc#:#exc_relative_date#:#Relative Date
 exc#:#exc_relative_date_info#:#The deadline is set individually relative to the time when a user started the assignment.
 exc#:#exc_rem_time_after_start#:#Remaining Time after Start
@@ -9297,6 +9422,9 @@ exc#:#exc_reminder_submit_setting#:#Remind Users to Submit
 exc#:#exc_reminder_submit_subject#:#Assignment "%s" was not finished
 exc#:#exc_reminders_cron#:#Reminders for Assignments
 exc#:#exc_reminders_cron_info#:#If enabled, 3 reminders will be active: Users to Submit, Tutors to Grade and Participants to Feedback.
+exc#:#exc_request_deadline#:#Request Deadline
+exc#:#exc_requirement#:#Requirement
+exc#:#exc_review_anytime#:#Give Feedback Anytime
 exc#:#exc_save_all#:#Save All
 exc#:#exc_save_order#:#Save Order
 exc#:#exc_save_selected#:#Save Selected
@@ -9313,6 +9441,8 @@ exc#:#exc_select_portfolio_info#:#Please select one of your portfolios to use it
 exc#:#exc_select_portfolio_unlink#:#Remove Portfolio
 exc#:#exc_send_assignment#:#Send Assignment by Mail
 exc#:#exc_send_grading_notification#:#Send Grading Notification
+exc#:#exc_set_failed#:#Set as Failed
+exc#:#exc_set_passed#:#Set as Passed
 exc#:#exc_settings_feedback#:#Evaluation
 exc#:#exc_settings_feedback_file#:#By File
 exc#:#exc_settings_feedback_file_info#:#Tutors upload a file. The participant receives a notification about it and can access the file at the assignment overview.
@@ -9333,12 +9463,13 @@ exc#:#exc_submission_file#:#Submission File
 exc#:#exc_submission_no_new_files#:#No new submissions available.
 exc#:#exc_submission_notification#:#E-Mail Notification on Submissions
 exc#:#exc_submission_notification_body#:#A new submission for exercise "%s" has been uploaded.
-exc#:#exc_submission_notification_info#:#You will be notified when submissions are uploaded. This is a personal setting which does not affect other administrators of the exercise.
+exc#:#exc_submission_notification_info#:#You will be notified when submissions are uploaded or individual deadlines are requested. This is a personal setting which does not affect other administrators of the exercise.
 exc#:#exc_submission_notification_link#:#Link to exercise: %s
 exc#:#exc_submission_notification_subject#:#Exercise "%s" - New submission uploaded
 exc#:#exc_submission_open_notification_link#:#Open submission: %s
 exc#:#exc_submission_text#:#Submission Text
 exc#:#exc_submissions_and_grades#:#Submissions and Grades
+exc#:#exc_submit_anytime#:#Submit Anytime
 exc#:#exc_submit_convenience_no_deadline#:#Submit your at your convenience. There is no  specific  deadline.
 exc#:#exc_submitted_files_deleted#:#The selected files have been deleted.
 exc#:#exc_sure_unlink_portfolio#:#Are you sure to remove this portfolio form this assignment?
@@ -9363,6 +9494,8 @@ exc#:#exc_tbl_feedback_time#:#Evaluation on
 exc#:#exc_tbl_filter_has_no_submission#:#Has not submitted yet
 exc#:#exc_tbl_filter_has_submission#:#Has submitted
 exc#:#exc_tbl_filter_submission#:#Submission
+exc#:#exc_tbl_filter_submission_after#:#Submission After
+exc#:#exc_tbl_filter_submission_before#:#Submission Before
 exc#:#exc_tbl_individual_deadline#:#Individual Deadline
 exc#:#exc_tbl_mark#:#Mark
 exc#:#exc_tbl_notice#:#Note for Tutors
@@ -9422,12 +9555,14 @@ exc#:#exc_text_assignment_show#:#Show Text
 exc#:#exc_text_saved#:#Text has been saved.
 exc#:#exc_total_exc#:#Total Exercise
 exc#:#exc_total_members#:#Total Exercise Participants
+exc#:#exc_type#:#Type
 exc#:#exc_type_blog#:#Blog
 exc#:#exc_type_portfolio#:#Portfolio
 exc#:#exc_type_text#:#Text
 exc#:#exc_type_upload#:#Upload
 exc#:#exc_type_upload_team#:#Team Upload
 exc#:#exc_value_can_not_set#:#This value can not be set.
+exc#:#exc_view_portfolio#:#View Portfolio
 exc#:#exc_wait_for_files#:#Your download should start automatically. If the download doesn't start in 5 secs, please click here
 exc#:#exc_wiki_container#:#Wiki Container
 exc#:#exc_wiki_container_info#:#Location where wikis of participants will be created.
@@ -9440,6 +9575,7 @@ exc#:#exc_without_template_info#:#Participants will create their Portfolio from 
 exc#:#exc_without_wiki_template#:#Without Wiki Template
 exc#:#exc_without_wiki_template_info#:#Participants will create their wiki from scratch.
 exc#:#exc_work_instructions#:#Work instructions
+exc#:#exc_x_of_y#:#of
 exc#:#exc_your_text#:#Your Text
 exc#:#feedback#:#Feedback
 exc#:#feedback_from#:#Feedback from
@@ -9501,19 +9637,29 @@ file#:#copyright_custom#:#Custom
 file#:#copyright_custom_info#:#Choose a custom copyright which will be applied to all unzipped files of this archive.
 file#:#copyright_inherited#:#Inherited
 file#:#copyright_inherited_info#:#Apply the copyright of the zip archive to its unzipped files. <br \>Copyright of zip archive: %s.
+file#:#could_not_create_file_objs#:#An error occurred while creating the file objects, contact the administrators of the platform.
 file#:#de_activate_icon#:#(De-)Activate
 file#:#download_ascii_filename#:#Use ASCII-only characters for downloaded filenames
 file#:#download_ascii_filename_info#:#Downloaded files should only have ASCII-characters in their filename. Deactivate to use all characters.
+file#:#file_btn_lp_toggle_state_completed#:#Set Not Completed
+file#:#file_btn_lp_toggle_state_not_completed#:#Set Completed
 file#:#file_copy#:#Copy File
 file#:#file_download#:#Download File
 file#:#file_import#:#Import File
 file#:#file_new_version#:#Create New Version
 file#:#file_new_version_info#:#Create new file version. Previous versions will not be modified.
+file#:#file_publish#:#Publish Draft
+file#:#file_rollback_rollback_first#:#The version could not be reset because an unpublished draft exists.
+file#:#file_rollback_same_version#:#This is already the current version
+file#:#file_unpublish#:#Mark as Draft
 file#:#file_upload_info_file_with_critical_extension#:#At least one uploaded file contains a critical or unknown file ending. The file ending will be changed to .sec for every download. If necessary, contact your administrator. Filename(s): %s
 file#:#file_uploaded_by#:#Version uploaded by
+file#:#file_version_draft#:#Draft Version
+file#:#file_version_draft_info#:#The latest version is in "Draft" status. As long as the version has not been published, no new versions can be created. People with read permission on the file get the latest published version.
 file#:#form_icon_creation#:#Create Icon
 file#:#form_icon_updating#:#Update Icon
 file#:#general_upload_error_occured#:#An unexpected error occured during upload.
+file#:#important_info#:#Important Information
 file#:#input_active#:#Active
 file#:#input_desc_active#:#Activate this icon.
 file#:#input_desc_icon#:#Image which shall be shown as an icon for files with the specified suffixes.
@@ -9521,6 +9667,8 @@ file#:#input_desc_suffixes#:#List of comma-separated suffixes (characters and nu
 file#:#input_icon#:#Icon
 file#:#input_suffixes#:#Suffixes
 file#:#migrated#:#Status
+file#:#mime_type#:#MIME Type
+file#:#msg_cant_unpublish#:#Action could not be executed
 file#:#msg_confirm_entry_deletion#:#Are you sure you want to delete the following entry?:
 file#:#msg_error_active_suffixes_blacklisted#:#One of the selected file extensions is on the global blacklist and cannot be used at the moment.
 file#:#msg_error_active_suffixes_conflict#:#Error: there must not be multiple activated icons for the same suffix. Please deactivate either this icon or the other activated icon whose suffixes overlap with the suffixes of this icon.
@@ -9541,6 +9689,7 @@ file#:#preview_caption#:#Preview %sof %s
 file#:#preview_image_size_info#:#Maximum length of the preview images in px.
 file#:#preview_persisting#:#Persist Preview Images
 file#:#preview_persisting_info#:#Generated previews will be stored, otherwise the previews will be generated on the fly
+file#:#publish_before_delete#:#Version(s) could not be deleted because an unpublished draft exists.
 file#:#replace_file_info#:#All previous file versions will be deleted.
 file#:#resource_id#:#Resource ID
 file#:#set_license_for_all_files#:#Set License for all Files
@@ -9549,10 +9698,15 @@ file#:#show_amount_of_downloads_info#:#When active, the number of downloads will
 file#:#storage_id#:#Storage ID
 file#:#suffix_specific_icons#:#Suffix-specific Icons
 file#:#suffixes#:#Suffixes
+file#:#upload_files#:#Upload files
+file#:#upload_files_limit#:#The maximum size of a file is %s.
+file#:#upload_files_title#:#Upload files
 file#:#upload_info#:#File
 file#:#upload_info_desc#:#Manage Uploads and Versions in Tab "Versions"
 file#:#version_uploaded#:#Version uploaded
 file#:#versionname#:#Title
+fils#:#add_upload_policy#:#Add Policy
+fils#:#edit_upload_policy#:#Edit Policy
 fils#:#file_services#:#File Services
 fils#:#file_services_description#:#Configuration of File Service Settings.
 fils#:#file_suffix_custom_expl_negative#:#Prohibited File Suffixes
@@ -9565,6 +9719,24 @@ fils#:#file_suffix_default_positive#:#File Suffixes: Positive List (Default List
 fils#:#file_suffix_default_positive_info#:#Preset default list of accepted file suffixes.
 fils#:#file_suffix_overall_positive#:#Overall Positive List
 fils#:#file_suffix_overall_positive_info#:#This is the final list of accepted file suffixes.
+fils#:#policy_audience#:#Audience
+fils#:#policy_audience_all_users_option_desc#:#Apply policy for all users.
+fils#:#policy_audience_global_roles_option_desc#:#Apply policy for users with specific global roles.
+fils#:#policy_confirm_deletion#:#Are you sure you want to delete the policy with the following properties?:
+fils#:#policy_deletion_failure_not_found#:#Error: Deletion failed due to policy not being found.
+fils#:#policy_deletion_successful#:#Deletion of policy was successful.
+fils#:#policy_filter#:#Policy Filter
+fils#:#policy_no_validity_limitation_set#:#Valid indefinitely
+fils#:#policy_scope#:#Scope
+fils#:#policy_table_info_no_policies#:#No upload policies have been created yet.
+fils#:#policy_title_desc#:#Descriptive title for the policy.
+fils#:#policy_upload_limit#:#Upload Limit
+fils#:#policy_upload_limit_desc#:#Upload limit which is set by this policy in MB.
+fils#:#policy_valid_until#:#Valid Until
+fils#:#policy_valid_until_desc#:#Set an optional 'valid until' date after which the policy expires.
+fils#:#policy_validity#:#Validity
+fils#:#upload_limits#:#Upload Limits
+fils#:#upload_policies#:#Upload Policies
 fold#:#fold_copy#:#Copy Folder
 fold#:#fold_import#:#Import Folder
 fold#:#fold_presentation#:#Folder Presentation
@@ -9643,6 +9815,7 @@ forum#:#deletePosting#:#Delete Posting
 forum#:#deletePostingDraft#:#Delete Draft
 forum#:#delete_draft_successfully#:#The draft was deleted successfully.
 forum#:#delete_drafts_successfully#:#The drafts were deleted successfully.
+forum#:#delete_thread#:#Delete Thread
 forum#:#descending_order#:#Latest postings at the top
 forum#:#edit_thread_draft#:#Edit thread draft postings created in forums.
 forum#:#empty_subject#:#On reply the user has to enter a new title.
@@ -9773,7 +9946,7 @@ forum#:#frm_statistics_enabled#:#Enable Statistics
 forum#:#frm_statistics_enabled_desc#:#Enable posting statistics for all participants
 forum#:#frm_statistics_ranking#:#Number of Postings
 forum#:#frm_subject_setting#:#Subject setting
-forum#:#frm_sure_delete_threads#:#Are you sure you want to delete the following threads?
+forum#:#frm_sure_delete_threads#:#Are you sure you want to delete the following thread?
 forum#:#frm_sure_merge_threads#:#Are you sure you want to merge these threads? Warning: This action can not be undone.
 forum#:#frm_task_publishing_draft_title#:#Publishing of Draft "%s"
 forum#:#frm_wizard_page#:#Copy Forum (Step 2/2)
@@ -9785,7 +9958,7 @@ forum#:#mark_moderator_posts_desc#:#If activated moderator posts will be highlig
 forum#:#merge#:#Merge
 forum#:#merge_posts_into_thread#:#Merge Postings into other Thread
 forum#:#merged_threads_successfully#:#The selected threads were merged successfully
-forum#:#move_chosen_topics#:#Move Chosen Threads
+forum#:#move_chosen_topics#:#Move thread "%s" to:
 forum#:#move_thread_to_forum#:#Move Thread to other Forum
 forum#:#new_post#:#New Post
 forum#:#new_thread_with_post#:#New Thread with Posting
@@ -9810,6 +9983,7 @@ forum#:#post_uncensored_by#:#a posting was uncensored by "%1$s"
 forum#:#post_updated_by#:#subsequently edited posting in forum by "%1$s": "%2$s"
 forum#:#preset_subject#:#Preset subject on reply
 forum#:#publish#:#Publish
+forum#:#relevance#:#Relevance
 forum#:#reopen_topics#:#Reopen
 forum#:#reply_to_postings#:#Reply
 forum#:#reset_limited_view#:#Limited view on this post an all posts below it.
@@ -9835,9 +10009,12 @@ forum#:#sticky#:#Sticky
 forum#:#sure_delete_drafts#:#Are you sure, you want to delete the selected drafts?
 forum#:#switch_threads_for_merge#:#The selected thread is older than the target thread. To ensure a successful merge, the source and target thread will be switched.
 forum#:#target_select#:#Select posting for limited view
+forum#:#thema#:#Threads
 forum#:#thread#:#Thread
 forum#:#thread_deleted_by#:#following thread in forum "%2$s"was deleted by "%1$s":
-forum#:#threads_moved_successfully#:#The chosen threads were moved to another forum successfully.
+forum#:#thread_overview#:#Thread-Overview
+forum#:#threads_moved_successfully#:#The chosen thread was moved to another forum successfully.
+forum#:#top_thema#:#Top-Threads
 forum#:#topic_close#:#Closed
 forum#:#topics_please_select_one_action#:#Please select an action.
 forum#:#user_decides_notification#:#Members have to manually activate notifications
@@ -10009,6 +10186,7 @@ grp#:#grp_members#:#Members
 grp#:#grp_members_deleted#:#Selected members were successfully removed from group.
 grp#:#grp_members_map#:#Group Members Map
 grp#:#grp_members_print_title#:#Group Members
+grp#:#grp_min_one_admin#:#There has to be at least one administrator assigned to this group.
 grp#:#grp_missing_grp_type#:#Please choose a group type.
 grp#:#grp_missing_password#:#Please enter a group password.
 grp#:#grp_new_status#:#Your new status is:
@@ -10223,6 +10401,9 @@ irss#:#resource_id#:#Resource ID
 irss#:#resource_no_stakeholder_uri#:#No Stakeholder provides a valid Link to the usage of this Resource.
 irss#:#resource_overview#:#Resource Overview
 irss#:#revision#:#Revision
+irss#:#revision_status#:#Status
+irss#:#revision_status_10#:#Published
+irss#:#revision_status_20#:#Draft
 irss#:#revisions#:#Available Revisions
 irss#:#rid_deleted#:#File removed
 irss#:#rids_appended#:#Resource(s) added
@@ -10442,6 +10623,72 @@ ldap#:#ldap_user_sync_cron_info#:#If activated, user accounts will be imported f
 ldap#:#ldap_user_sync_info#:#Defines whether new users are automatically created on login or regularly per Cron-Job.
 ldap#:#ldap_username_filter#:#Username Filter
 ldap#:#ldap_username_filter_info#:#Use * as wildcard.
+ldoc#:#deleteDocument#:#Delete
+ldoc#:#detachCriterionAssignment#:#Delete
+ldoc#:#ldoc_acceptance_history#:#Acceptance History
+ldoc#:#ldoc_account_reg_not_possible#:#Self-registration is currently not possible. Please contact your <a href="%1$s">system administrator</a> for further information.
+ldoc#:#ldoc_add_document_btn_label#:#Add Document
+ldoc#:#ldoc_agreement_document#:#Document
+ldoc#:#ldoc_agreement_document_missing#:#Missing
+ldoc#:#ldoc_agreement_documents_tab_label#:#Documents
+ldoc#:#ldoc_agreement_exists#:#Existent
+ldoc#:#ldoc_agreement_missing#:#Missing
+ldoc#:#ldoc_crit_type_usr_country#:#Profile Country
+ldoc#:#ldoc_crit_type_usr_country_info#:#Your document is displayed (and must be accepted the first time a user logs in) if the country set in their user profile matches the country criterion selected from the list below.  Subsequent changes to the country in a user’s profile do not automatically lead to a new document being displayed. You cannot use the same country as the display criterion for more than one document.
+ldoc#:#ldoc_crit_type_usr_global_role#:#User Has Global Role
+ldoc#:#ldoc_crit_type_usr_global_role_info#:#The document is displayed (and must be accepted the first time a user logs in) if the global role the user has matches the global role selected from the list below.  Subsequent changes to a user’s global role do not automatically lead to a new ToS document being displayed.
+ldoc#:#ldoc_crit_type_usr_language#:#Profile Language
+ldoc#:#ldoc_crit_type_usr_language_info#:#Your document is displayed (and must be accepted) during registration if the user’s language (selected from the list below) matches the language used during registration; or upon login if the user switches to this language in their preferences.  Please note that each language can only be set as the display criterion for a single document.
+ldoc#:#ldoc_criterion_assignment_cannot_match#:#It is not possible to use this particular criterion for displaying your document. Because of another criterion this document would never match.
+ldoc#:#ldoc_criterion_assignment_must_be_unique#:#It is not possible to use this particular criterion for displaying your document. This criterion already exists.
+ldoc#:#ldoc_deleted_documents_p#:#The documents have been deleted.
+ldoc#:#ldoc_deleted_documents_s#:#The document has been deleted.
+ldoc#:#ldoc_disabled#:#Disabled
+ldoc#:#ldoc_doc_crit_attached#:#The criterion for displaying your document has been set successfully.
+ldoc#:#ldoc_doc_crit_changed#:#The criterion for displaying your document has been changed.
+ldoc#:#ldoc_doc_crit_detached#:#The criterion has been removed.
+ldoc#:#ldoc_doc_delete#:#Delete Document
+ldoc#:#ldoc_doc_detach_crit_confirm_title#:#Remove Criterion
+ldoc#:#ldoc_doc_sure_detach_crit#:#Are you sure that you want to remove this as the criterion for displaying your Terms of Service document?
+ldoc#:#ldoc_document#:#Document
+ldoc#:#ldoc_enabled#:#Enabled
+ldoc#:#ldoc_form_attach_criterion_head#:#Select Criterion for Displaying your Document
+ldoc#:#ldoc_form_criterion#:#Criterion
+ldoc#:#ldoc_form_document#:#Document
+ldoc#:#ldoc_form_document_content_changed#:#The uploaded file has had its html &lt;head&gt; information removed by ILIAS. Please check the result and upload a new file if necessary.
+ldoc#:#ldoc_form_document_info#:#Please select a file from your local filesystem. You can either upload a plain text file, or a simple HTML file. HTML files will have their &lt;head/gt; information removed – only the contents of the body element will be used.
+ldoc#:#ldoc_form_document_new#:#Change Content
+ldoc#:#ldoc_form_document_new_info#:#Here you can select a file from your local filesystem to change the contents of the document. You can either upload a plain text file, or a simple HTML file. HTML files will have their &lt;head&gt; information removed - only the contents of the body element will be used. The existing contents of the document will be replaced. The acceptance history will not be affected.
+ldoc#:#ldoc_form_document_title#:#Title
+ldoc#:#ldoc_form_document_title_info#:#Please enter a title for the document.
+ldoc#:#ldoc_form_edit_criterion_head#:#Edit Criterion for Displaying Your Document
+ldoc#:#ldoc_form_edit_doc_head#:#Edit Document
+ldoc#:#ldoc_form_new_doc_head#:#Create Document
+ldoc#:#ldoc_last_modified#:#Last Change
+ldoc#:#ldoc_ldoc_settings#:#Settings
+ldoc#:#ldoc_period#:#Period
+ldoc#:#ldoc_period_from#:#From
+ldoc#:#ldoc_period_until#:#Until
+ldoc#:#ldoc_reevaluate_on_login#:#Re-evaluate on Successful Login
+ldoc#:#ldoc_reevaluate_on_login_desc#:#After a successful login, automatically have ILIAS check whether a previously-accepted document is still valid or not. If, for example, a user has changed a setting that is the criterion for displaying a particular document (for example their language setting or country], and ILIAS can find a document with that criterion, then the user has to accept the new agreement.
+ldoc#:#ldoc_saved_sorting#:#The new order has been saved.
+ldoc#:#ldoc_sure_delete_documents_p#:#Are you sure you want to delete the selected documents?
+ldoc#:#ldoc_sure_delete_documents_s#:#Are you sure you want to delete this document?
+ldoc#:#ldoc_tbl_docs_action_add_criterion#:#Add Criterion
+ldoc#:#ldoc_tbl_docs_cell_not_criterion#:#No criterion assigned
+ldoc#:#ldoc_tbl_docs_head_created#:#Creation Date
+ldoc#:#ldoc_tbl_docs_head_criteria#:#Criterion
+ldoc#:#ldoc_tbl_docs_head_last_change#:#Last Change
+ldoc#:#ldoc_tbl_docs_head_sorting#:#Order
+ldoc#:#ldoc_tbl_docs_head_title#:#Title
+ldoc#:#ldoc_tbl_docs_title#:#Documents
+ldoc#:#ldoc_tbl_hist_cell_not_criterion#:#No criterion assigned
+ldoc#:#ldoc_tbl_hist_head_acceptance_date#:#Date
+ldoc#:#ldoc_tbl_hist_head_criteria#:#Criterion
+ldoc#:#ldoc_tbl_hist_head_document#:#Document
+ldoc#:#ldoc_tbl_hist_head_firstname#:#First Name
+ldoc#:#ldoc_tbl_hist_head_lastname#:#Last Name
+ldoc#:#ldoc_tbl_hist_head_login#:#Username (Login)
 lhist#:#cont_create_lhist#:#Create Learning History Element
 lhist#:#cont_update_lhist#:#Edit Learning History Element
 lhist#:#lhist_all#:#All
@@ -10570,6 +10817,7 @@ lso#:#lso_members_gallery#:#Learning Sequence Members Gallery
 lso#:#lso_members_print_title#:#Learning sequence members
 lso#:#lso_min_one_admin#:#There has to be at least one administrator assigned to this learning sequence.
 lso#:#lso_msg_member_assigned#:#User(s) assigned as learning sequence member(s)
+lso#:#lso_multidownload_not_available#:#Downloading multiple objects is currently not available for Learning Sequence Objects.
 lso#:#lso_new_status#:#Your new status is:
 lso#:#lso_notification#:#Notification
 lso#:#lso_notification_explanation_admin#:#You receive mail from ILIAS because you are learning sequence administrator with notification enabled.
@@ -11061,10 +11309,10 @@ mail#:#mail_roles#:#Users with the following local roles
 mail#:#mail_s#:#Mail(s)
 mail#:#mail_salutation_anonymous#:#Hello
 mail#:#mail_salutation_f#:#Dear Mrs.
-mail#:#mail_salutation_female#:#Output for placeholder [MAIL_SALUTATION], if salutation is 'Ms.'
-mail#:#mail_salutation_general#:#Output for placeholder [MAIL_SALUTATION], if no salutation is desired or specified
+mail#:#mail_salutation_female#:#Output for placeholder &lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, if salutation is 'Ms.'
+mail#:#mail_salutation_general#:#Output for placeholder &lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, if no salutation is desired or specified
 mail#:#mail_salutation_m#:#Dear Mr.
-mail#:#mail_salutation_male#:#Output for placeholder [MAIL_SALUTATION], if salutation is 'Mr.'
+mail#:#mail_salutation_male#:#Output for placeholder &lbrace;&lbrace;MAIL_SALUTATION&rbrace;&rbrace;, if salutation is 'Mr.'
 mail#:#mail_salutation_n#:#Hello
 mail#:#mail_saved#:#The message has been saved
 mail#:#mail_second_email#:#Second E-Mail Address
@@ -11115,7 +11363,7 @@ mail#:#mail_system_usr_env_from_addr_info#:#If you leave this field empty, the s
 mail#:#mail_system_usr_from_addr#:#Sender E-Mail (From)
 mail#:#mail_system_usr_from_addr_info#:#Please enter the e-mail address to be put in the 'FROM' header. The 'FROM' header is used to display the sender in the recipient e-mail client. The e-mail address of the user sending an e-mail via ILIAS will be automatically put in the 'Reply-To' header.<br /><br />Examples: <span style="font-style: italic">info@institution.de</span> or <span style="font-style: italic">no-reply@institution.de</span>
 mail#:#mail_system_usr_from_name#:#Sender Fullname (From)
-mail#:#mail_system_usr_from_name_info#:#You can use the placeholders [FULLNAME], [FIRSTNAME] and [LASTNAME]. These will then be replaced by the respective data of the e-mail initiator.
+mail#:#mail_system_usr_from_name_info#:#You can use the placeholders &lbrace;&lbrace;FULLNAME&rbrace;&rbrace;, &lbrace;&lbrace;FIRSTNAME&rbrace;&rbrace; and &lbrace;&lbrace;LASTNAME&rbrace;&rbrace;. These will then be replaced by the respective data of the e-mail initiator.
 mail#:#mail_tbl_head_attachments#:#Attachment
 mail#:#mail_template_client#:#Text Template
 mail#:#mail_template_client_info#:#Choose one of the available text templates and make use of it's placeholders. If you choose a text template, body and subject of this form (if defined in the text template) will be replaced.
@@ -11427,6 +11675,8 @@ meta#:#md_adv_show#:#Show
 meta#:#md_adv_substitution_table#:#Display Options for Custom Metadata in the Repository
 meta#:#md_adv_text_max_length#:#Maximum Length
 meta#:#md_adv_text_multi#:#Multiline
+meta#:#md_adv_text_multi_val#:#Multilingual Values
+meta#:#md_adv_text_multi_val_info#:#Allow multilingual field values for this data field. Deactivating this option is recommended for texts that do not need translating, such as personal names.
 meta#:#md_advanced#:#Custom Metadata
 meta#:#md_aria_language_selection#:#Language Selection
 meta#:#md_copyright#:#Copyright
@@ -12122,6 +12372,7 @@ mme#:#move_to_top_item#:#Move to Top Items
 mme#:#msg_languages_added#:#Added languages
 mme#:#msg_moved#:#Item successfully moved
 mme#:#msg_not_moved#:#Item could not be moved, please select a valid parent.
+mme#:#msg_ref_id_not_callable#:#This reference ID cannot be used by Main-Menu. Only targets in the magazine are supported.
 mme#:#msg_restore_confirm#:#All Custom Items and Translations will be deleted, all Standard items will be reset to factory default. All customization will be lost.
 mme#:#msg_restored#:#Main Menu completely reset
 mme#:#msg_subitem_deleted#:#Item deleted.
@@ -12345,15 +12596,19 @@ note#:#note_enable_notes#:#Enable Notes
 note#:#note_html_export_include_comments#:#Should comments be included in the export?
 notes#:#comments_feature_currently_not_activated_for_object#:#The public comments feature is currently not activated for this resource.
 notes#:#note_add_comment#:#Add Comment
+notes#:#note_add_message#:#Add Message
 notes#:#note_add_note#:#Add Note
 notes#:#note_content_removed#:#The content has been removed.
 notes#:#note_text#:#Text
 notes#:#note_update_comment#:#Update Comment
+notes#:#note_update_message#:#Update Message
 notes#:#note_update_note#:#Update Note
 notes#:#note_without_object#:#Without reference
 notes#:#notes_activate_comments#:#Activate Public Comments
 notes#:#notes_add_comment#:#Add Comment
 notes#:#notes_add_edit_comment#:#Add/Edit Comment
+notes#:#notes_add_edit_message#:#Add/Edit Message
+notes#:#notes_add_edit_note#:#Add/Edit Note
 notes#:#notes_all_comments#:#All Comments
 notes#:#notes_comment#:#Comment
 notes#:#notes_comment_deleted#:#The comment has been deleted.
@@ -12361,13 +12616,20 @@ notes#:#notes_comments#:#Comments
 notes#:#notes_comments_deleted#:#The comments have been deleted.
 notes#:#notes_deactivate_comments#:#Deactivate Public Comments
 notes#:#notes_delete_comment#:#Do you really want to delete this comment?
+notes#:#notes_delete_message#:#Do you really want to delete this message?
 notes#:#notes_delete_note#:#Do you really want to delete this note?
 notes#:#notes_hide_comments#:#Hide Comments
 notes#:#notes_html_export#:#HTML Export
 notes#:#notes_latest_comment#:#Latest Comment
+notes#:#notes_latest_message#:#Latest Message
+notes#:#notes_message_author_counterpart#:#Respondent
+notes#:#notes_message_author_you#:#You
+notes#:#notes_messages#:#Messages
 notes#:#notes_my_comments#:#My Comments
 notes#:#notes_no_comments#:#No comment has been posted yet.
 notes#:#notes_no_comments_found#:#No comments found that match your seach criteria.
+notes#:#notes_no_messages#:#No messages have been attached yet.
+notes#:#notes_no_messages_found#:#No messages found that match your seach criteria.
 notes#:#notes_no_notes#:#No notes have been attached yet.
 notes#:#notes_no_notes_found#:#No notes found that match your seach criteria.
 notes#:#notes_note_deleted#:#The note has been deleted.
@@ -12397,6 +12659,9 @@ notifications_adm#:#osd_play_sound_desc#:#Play a sound when receiving a new notf
 notifications_adm#:#osd_settings#:#On-Screen Notifications
 notifications_adm#:#osd_vanish#:#Presentation Time
 notifications_adm#:#osd_vanish_desc#:#Visible time of a notification on the screen in miliseconds.
+obj#:#activation_visible_when_disabled#:#Visibility
+obj#:#activation_visible_when_disabled_info#:#If chosen, the material is visible even outside of the given availability.
+obj#:#availability_period_changed#:#The availability period for the selected objects has been changed successfully.
 obj#:#cont_filter_empty#:#Please use the filter to see any objects.
 obj#:#cont_skll_published#:#All assignments have been published.
 obj#:#cont_skll_published_some_not#:#All given assignments have been published. Some users lacked competence assignments, thus no assignments could be published for them.
@@ -12404,7 +12669,9 @@ obj#:#copy_container_page_no_label#:#Don't Copy Content Page
 obj#:#copy_container_page_yes_byline#:#The content page and corresponding style settings of the source object will be copied to this object. Pre-existing page elements will be overwritten.
 obj#:#copy_container_page_yes_label#:#Copy Content Page
 obj#:#custom_icon#:#Custom Icon
+obj#:#edit_availability_period#:#Edit Availability Period
 obj#:#edit_questions#:#Edit Questions
+obj#:#no_objects_selected#:#At least one object needs to be selected.
 obj#:#obj_activate_content_lang#:#Activate Translation for Page Editing
 obj#:#obj_activate_multilang#:#Activate Multilingualism
 obj#:#obj_activation#:#Activation
@@ -12466,6 +12733,7 @@ obj#:#obj_user_not_disable_not#:#Member are not allowed to deactivate notificati
 obj#:#online_input_byline#:#The object has been published and can be accessed by anyone with read access. Other access prerequisites or time-based access restrictions may still apply. This settings applies to the object wherever it is used in the repository.
 obj#:#select_object_type#:#Select Object Type
 obj#:#svy_results#:#Results
+obj#:#unequal_items_for_availability_period_message#:#You have selected items with different availability periods. Overwrite existing settings below or cancel action to keep current availability periods.
 obj#:#user_owns_no_objects#:#No Repository Objects Available
 objref#:#objref_custom_title#:#Use Own Title
 objref#:#objref_edit_ref#:#Link Target
@@ -12720,6 +12988,7 @@ prg#:#content_automation#:#Content Automation
 prg#:#content_automation_title#:#Automatically add and remove Courses from these categories
 prg#:#could_not_add_users_no_permissons#:#Could not assign %d Users due to lacking permissions.
 prg#:#crs_affiliation_to_prg#:#Affiliation to study programmes
+prg#:#deadline#:#Deadline
 prg#:#deadline_information#:#Information regarding processing period
 prg#:#deadline_updated#:#Updated deadline
 prg#:#edit_participants#:#Edit Members
@@ -12971,6 +13240,8 @@ prg#:#restart_period#:#Restart obligatory
 prg#:#restart_period_desc#:#automatic reassignment before expiry
 prg#:#restart_period_info#:#Days before qualification expiration to restart qualification
 prg#:#restart_period_label#:#Days before expiry
+prg#:#restart_recheck_desc#:#For assignments made via an automatism, the system rechecks whether criteria for the assignment still exist.
+prg#:#restart_recheck_label#:#Check prerequisites again
 prg#:#risky_to_fail_mail_body#:#%s %s,<br/><br/>the deadline for completing the study program '%s' will soon be reached.
 prg#:#risky_to_fail_mail_subject#:#Reminder, that the deadline for the study program will soon be reached
 prg#:#rol#:#Role
@@ -13294,6 +13565,7 @@ rbac#:#activate_wiki_protection#:#Set Read-Only
 rbac#:#active_preconditions#:#Preconditions
 rbac#:#add_consultation_hours#:#Add Consultation Hours
 rbac#:#add_consume_provider#:#Add Own LTI Provider Settings
+rbac#:#add_pages#:#Add Pages
 rbac#:#add_reply#:#Add Reply
 rbac#:#add_thread#:#Add Thread
 rbac#:#adm_edit_permission#:#User can change permissions of General Settings in Administration.
@@ -13480,6 +13752,7 @@ rbac#:#ecss_read#:#User can read general ECS settings
 rbac#:#ecss_visible#:#ECS settings are visible
 rbac#:#ecss_write#:#User can edit ECS settings
 rbac#:#edit_event#:#Edit Calendar
+rbac#:#edit_file#:#Edit File
 rbac#:#edit_in_online_editor#:#Open in online editor
 rbac#:#edit_learning_progress#:#Edit Learning Progress Settings
 rbac#:#edit_members#:#Manage members
@@ -13518,6 +13791,7 @@ rbac#:#feed_read#:#User can read content of web feed
 rbac#:#feed_write#:#User can edit web feed settings
 rbac#:#file_copy#:#User can copy file
 rbac#:#file_delete#:#User can move or delete file
+rbac#:#file_edit_file#:#Allow to edit the file in an external editor, if available
 rbac#:#file_edit_learning_progress#:#User can edit learning progress settings
 rbac#:#file_edit_permission#:#User can change permission settings
 rbac#:#file_read#:#User can download file
@@ -14154,10 +14428,11 @@ rbac#:#webr_read#:#User can read and use weblinks
 rbac#:#webr_visible#:#Weblink is visible
 rbac#:#webr_write#:#User can edit settings of weblinks
 rbac#:#wiki_activate_wiki_protection#:#Set Wiki Pages to Read-Only
+rbac#:#wiki_add_pages#:#User can create wiki pages
 rbac#:#wiki_copy#:#User can copy wiki
 rbac#:#wiki_delete#:#User can move or delete wiki
 rbac#:#wiki_delete_wiki_pages#:#Delete Wiki Pages
-rbac#:#wiki_edit_content#:#User can create and edit wiki pages
+rbac#:#wiki_edit_content#:#User can edit wiki pages
 rbac#:#wiki_edit_page_meta#:#Edit Wiki Page Metadata
 rbac#:#wiki_edit_permission#:#User can change permission settings
 rbac#:#wiki_edit_wiki_navigation#:#Edit Wiki Navigation
@@ -15338,6 +15613,8 @@ style#:#sty_lightness_header_text#:#Lightness Header Text
 style#:#sty_line_height#:#Line Height
 style#:#sty_link_char#:#Link
 style#:#sty_list_char#:#List
+style#:#sty_list_style_position#:#List Style Position
+style#:#sty_list_style_type#:#List Style Type
 style#:#sty_make_global_default#:#Set as default style
 style#:#sty_make_global_fixed#:#Force this style on all objects
 style#:#sty_margin#:#Margin
@@ -15356,6 +15633,7 @@ style#:#sty_name#:#Name
 style#:#sty_nr_learning_modules#:#Number of Learning Modules
 style#:#sty_odd_col_class#:#Odd Columns
 style#:#sty_odd_row_class#:#Odd Rows
+style#:#sty_ol#:#Ordered List
 style#:#sty_opacity#:#Opacity
 style#:#sty_opt_saved#:#Options saved
 style#:#sty_order#:#Order
@@ -15519,6 +15797,7 @@ style#:#sty_type_va_icont#:#Vert. Accordion Item Content
 style#:#sty_type_va_ihcap#:#Vert. Accordion Caption
 style#:#sty_type_va_ihead#:#Vert. Accordion Item Header
 style#:#sty_type_va_iheada#:#Vert. Accordion Header (active)
+style#:#sty_ul#:#Unordered List
 style#:#sty_va_cntr_class#:#Vert. Accordion Container
 style#:#sty_va_icntr_class#:#Vert. Accordion Item Container
 style#:#sty_va_icont_class#:#Vert. Accordion Item Content
@@ -16273,7 +16552,7 @@ svy#:#svy_invite_participants#:#Invite Participants
 svy#:#svy_link_to_svy#:#Link to Survey
 svy#:#svy_part_overview#:#Overview
 svy#:#svy_print_selection#:#Print View Selection
-svy#:#svy_remove_all_participants#:#Remove all Participants
+svy#:#svy_remove_all_participants#:#Delete all Participant Data
 svy#:#svy_remove_participants#:#Remove Participants
 svy#:#svy_selected_participants#:#Selected Participants
 svy#:#svy_selected_questions#:#Selected Questions
@@ -16399,83 +16678,21 @@ tbl#:#tbl_template_created#:#The current view has been saved.
 tbl#:#tbl_template_delete#:#Delete Saved View
 tbl#:#tbl_template_deleted#:#The saved view has been deleted.
 tbl#:#tbl_templates#:#View
-tos#:#deleteDocument#:#Delete
-tos#:#detachCriterionAssignment#:#Delete
-tos#:#tos_acceptance_history#:#Acceptance History
 tos#:#tos_account_reg_not_possible#:#Self-registration is currently not possible because there is no Terms of Service agreement available. Please contact your <a href="%1$s">system administrator</a> for further information.
-tos#:#tos_add_document_btn_label#:#Add Document
+tos#:#tos_agree_date#:#ToS agreed on
 tos#:#tos_agreement#:#Terms of Service
-tos#:#tos_agreement_document#:#Document
-tos#:#tos_agreement_document_missing#:#Missing
-tos#:#tos_agreement_documents_tab_label#:#Documents
-tos#:#tos_agreement_exists#:#Existent
-tos#:#tos_agreement_missing#:#Missing
-tos#:#tos_crit_type_usr_country#:#Profile Country
-tos#:#tos_crit_type_usr_country_info#:#Your ToS document is displayed (and must be accepted the first time a user logs in) if the country set in their user profile matches the country criterion selected from the list below.  Subsequent changes to the country in a user’s profile do not automatically lead to a new ToS document being displayed. You cannot use the same country as the display criterion for more than one ToS document.
-tos#:#tos_crit_type_usr_global_role#:#User Has Global Role
-tos#:#tos_crit_type_usr_global_role_info#:#The document is displayed (and must be accepted the first time a user logs in) if the global role the user has matches the global role selected from the list below.  Subsequent changes to a user’s global role do not automatically lead to a new ToS document being displayed.
-tos#:#tos_crit_type_usr_language#:#Profile Language
-tos#:#tos_crit_type_usr_language_info#:#Your ToS document is displayed (and must be accepted) during registration if the user’s language (selected from the list below) matches the language used during registration; or upon login if the user switches to this language in their preferences.  Please note that each language can only be set as the display criterion for a single ToS document.
-tos#:#tos_criterion_assignment_must_be_unique_insert#:#It is not possible to use this particular language/country as the criterion for displaying your ToS document. This language/country is already being used as the display criterion for a different ToS document.
-tos#:#tos_criterion_assignment_must_be_unique_update#:#It is not possible to change the criterion for displaying your ToS document to the language/country you have chosen. This language/country is already being used as the display criterion for a different ToS document.
-tos#:#tos_deleted_documents_p#:#The documents have been deleted.
-tos#:#tos_deleted_documents_s#:#The document has been deleted.
 tos#:#tos_disabled_no_docs_left#:#Terms of Service documents can no longer be displayed, because all ToS documents have been deleted. Users will no longer be required to agree to a ToS document when registering an account. Please create at least one document before re-checking the ‘Display Terms of Service’ box.
-tos#:#tos_doc_crit_attached#:#The criterion for displaying your ToS document has been set successfully.
-tos#:#tos_doc_crit_changed#:#The criterion for displaying your ToS document has been changed.
-tos#:#tos_doc_crit_detached#:#The criterion for displaying your ToS document has been removed.
-tos#:#tos_doc_delete#:#Delete Document
-tos#:#tos_doc_detach_crit_confirm_title#:#Remove Criterion
-tos#:#tos_doc_sure_detach_crit#:#Are you sure that you want to remove this as the criterion for displaying your Terms of Service document?
-tos#:#tos_document#:#Document
-tos#:#tos_form_attach_criterion_head#:#Select Criterion for Displaying your Terms of Service Document
-tos#:#tos_form_criterion#:#Criterion
-tos#:#tos_form_document#:#Document
-tos#:#tos_form_document_content_changed#:#The uploaded file has had its html &lt;head&gt; information removed by ILIAS. Please check the result and upload a new file if necessary.
-tos#:#tos_form_document_info#:#Please select a file from your local filesystem. You can either upload a plain text file, or a simple HTML file. HTML files will have their &lt;head/gt; information removed – only the contents of the body element will be used.
-tos#:#tos_form_document_new#:#Change Content
-tos#:#tos_form_document_new_info#:#Here you can select a file from your local filesystem to change the contents of the TOS document. You can either upload a plain text file, or a simple HTML file. HTML files will have their &lt;head&gt; information removed - only the contents of the body element will be used. The existing contents of the TOS document will be replaced. The acceptance history will not be affected.
-tos#:#tos_form_document_title#:#Title
-tos#:#tos_form_document_title_info#:#Please enter a title for the document.
-tos#:#tos_form_edit_criterion_head#:#Edit Criterion for Displaying Your Terms of Service Document
-tos#:#tos_form_edit_doc_head#:#Edit Document
-tos#:#tos_form_new_doc_head#:#Create Document
-tos#:#tos_last_modified#:#Last Change
 tos#:#tos_last_reset_date#:#The Terms of Service were reset on %s. Only reset the Terms of Service if changes have been made to the ToS document(s) and you require all users to agree to the new ToS.
 tos#:#tos_never_reset#:#The Terms of Service have not yet been reset. Only reset the Terms of Service if changes have been made to the ToS document(s) and you require all users to agree to the new ToS.
 tos#:#tos_no_documents_exist#:#There are currently no Terms of Service documents available.
 tos#:#tos_no_documents_exist_cant_save#:#There are currently no Terms of Service documents available. Please add at least one document in order to activate this service.
-tos#:#tos_period#:#Period
-tos#:#tos_period_from#:#From
-tos#:#tos_period_until#:#Until
-tos#:#tos_reevaluate_on_login#:#Re-evaluate on Successful Login
-tos#:#tos_reevaluate_on_login_desc#:#After a successful login, automatically have ILIAS check whether a previously-accepted Terms of Service document is still valid or not. If, for example, a user has changed a setting that is the criterion for displaying a particular ToS document (for example their language setting or country], and ILIAS can find a document with that criterion, then the user has to accept the new TOS agreement.
+tos#:#tos_reset_for_all_users#:#Reset Terms of Service
 tos#:#tos_reset_successful#:#Terms of Service successfully reset.
-tos#:#tos_reset_tos_for_all_users#:#Reset Terms of Service
-tos#:#tos_saved_sorting#:#The new order has been saved.
-tos#:#tos_status_desc#:#Display relevant language-based Terms of Service document at the end of the registration form for new users and, if applicable, upon the user’s first login. Users are required to accept the Terms of Service before they can enter ILIAS.
+tos#:#tos_status_desc#:#Display relevant language-based Terms of Service documents at the end of the registration form for new users and, if applicable, upon the user’s first login. Users are required to accept the Terms of Service before they can enter ILIAS.
 tos#:#tos_status_enable#:#Display Terms of Service
-tos#:#tos_sure_delete_documents_p#:#Are you sure you want to delete the selected documents?
-tos#:#tos_sure_delete_documents_s#:#Are you sure you want to delete this document?
 tos#:#tos_sure_reset_tos#:#Are you sure you want to reset the Terms of Service for all users in the system? This also applies, for example, to those accounts that are used for the SOAP web services.
-tos#:#tos_tbl_docs_action_add_criterion#:#Add Criterion
-tos#:#tos_tbl_docs_cell_not_criterion#:#No criterion assigned
-tos#:#tos_tbl_docs_head_created#:#Creation Date
-tos#:#tos_tbl_docs_head_criteria#:#Criterion
-tos#:#tos_tbl_docs_head_last_change#:#Last Change
-tos#:#tos_tbl_docs_head_sorting#:#Order
-tos#:#tos_tbl_docs_head_title#:#Title
-tos#:#tos_tbl_docs_title#:#Documents
-tos#:#tos_tbl_hist_cell_not_criterion#:#No criterion assigned
-tos#:#tos_tbl_hist_head_acceptance_date#:#Date
-tos#:#tos_tbl_hist_head_criteria#:#Criterion
-tos#:#tos_tbl_hist_head_document#:#Document
-tos#:#tos_tbl_hist_head_firstname#:#First Name
-tos#:#tos_tbl_hist_head_lastname#:#Last Name
-tos#:#tos_tbl_hist_head_login#:#Username (Login)
-tos#:#tos_tos_settings#:#Settings
-tos#:#tos_withdrawal_usr_deletion#:#Account Deletion Upon Withdrawal From Terms of Service
-tos#:#tos_withdrawal_usr_deletion_info#:#If a user withdraws their acceptance from  a previously accepted Terms of Service document, this will result in the deletion of the user’s account.
+tos#:#tos_withdrawal_usr_deletion#:#Account deletion upon ToS withdrawal
+tos#:#tos_withdrawal_usr_deletion_desc#:#If a user withdraws their acceptance from  a previously accepted Terms of Service document, this will result in the deletion of the user’s account.
 trac#:#cmix_lp_mode_deactivated#:#Learning Progress is Deactivated
 trac#:#cmix_lp_mode_deactivated_info#:#The learning progress status is not displayed and does not influence parent objects.
 trac#:#cmix_lp_mode_when_completed#:#Completed when 'completed'
@@ -16799,6 +17016,8 @@ user#:#interests#:#Interests
 user#:#interests_general#:#General Interests
 user#:#interests_help_looking#:#Looking For Help
 user#:#interests_help_offered#:#Offering Help
+user#:#ldoc_accepted_content#:#Accepted Content
+user#:#ldoc_not_accepted_yet#:#Not accepted yet
 user#:#msg_spoint_not_modified#:#Starting point not modified
 user#:#no_deactivate_yourself#:#You cannot deactivate your own user account.
 user#:#obj_ref_id_not_exist#:#The entered Reference-Id does not exist
@@ -16817,8 +17036,6 @@ user#:#starting_page#:#Starting Point
 user#:#starting_point#:#Starting Point
 user#:#starting_point_settings#:#Starting Point Settings
 user#:#starting_points#:#Starting Points
-user#:#tos_accepted_content#:#Accepted Content
-user#:#tos_not_accepted_yet#:#Not accepted yet
 user#:#user_access_limited#:#Limited
 user#:#user_access_unlimited#:#Unlimited
 user#:#user_account_code#:#Code
@@ -17018,6 +17235,8 @@ wiki#:#wiki_link_md_values#:#Automatic Linking
 wiki#:#wiki_link_md_values_info#:#Autmatically links properties presented in the side block to wiki pages with the same name.
 wiki#:#wiki_link_text#:#Link Text
 wiki#:#wiki_mark#:#Mark
+wiki#:#wiki_master_existing#:#Page Exists in Master Language
+wiki#:#wiki_master_title#:#Title of Page in Master Language
 wiki#:#wiki_navigation#:#Wiki Navigation
 wiki#:#wiki_navigation_info#:#Here you can add and remove links to existing wiki pages to the navigation block in the wiki.
 wiki#:#wiki_new_page#:#New Page
@@ -17025,9 +17244,11 @@ wiki#:#wiki_new_page_name#:#New Title
 wiki#:#wiki_new_pages#:#New Pages
 wiki#:#wiki_news_page_changed#:#Wiki page has been updated.
 wiki#:#wiki_news_page_created#:#New wiki page has been created.
+wiki#:#wiki_no_master#:#Page Does Not Exist in Master Language
 wiki#:#wiki_no_page_found#:#No wiki page has been found for search term '$1'.
 wiki#:#wiki_no_search_term#:#No search term has been entered. All pages of the wiki are listed below.
 wiki#:#wiki_no_start_page#:#Wiki is missing a valid starting page.
+wiki#:#wiki_not_existing#:#not existing yet
 wiki#:#wiki_notgraded#:#Not Graded
 wiki#:#wiki_notification_activate_page#:#Activate Notification for Page
 wiki#:#wiki_notification_activate_wiki#:#Activate Notification for Wiki
@@ -17051,6 +17272,7 @@ wiki#:#wiki_page_deleted#:#Wiki page deleted.
 wiki#:#wiki_page_deletion_confirmation#:#Do you really want to delete this wiki page?
 wiki#:#wiki_page_exists#:#Existing Page
 wiki#:#wiki_page_hits#:#Page Hits
+wiki#:#wiki_page_in_master_language#:#Page in Master Language
 wiki#:#wiki_page_list_form_info#:#Adds a list of pages of this wiki that are all assigned to the selected metadata below. Only searchable metadata fields are listed.
 wiki#:#wiki_page_list_mode#:#Type of List
 wiki#:#wiki_page_list_mode_ordered#:#Numbered
@@ -17138,6 +17360,9 @@ wiki#:#wiki_templ_add_to_page#:#Available for Being Added to Existing Pages
 wiki#:#wiki_templ_new_pages#:#Available on Page Creation
 wiki#:#wiki_template_added#:#Template page added.
 wiki#:#wiki_template_status_removed#:#Template status removed.
+wiki#:#wiki_translate_page_master_info#:#You are creating a new wiki page translation. Please specify, if this translation belongs to an existing master version of the page, or if a completely new page is being created. In the second case you need to specify a page title for the master version.
+wiki#:#wiki_translation_page#:#Translation Page
+wiki#:#wiki_translations#:#Translations
 wiki#:#wiki_type_wiki_team#:#Team Wiki
 wiki#:#wiki_unblock_page#:#Grant Write Access
 wiki#:#wiki_unhide_meta_adv_records#:#Show additional properties
@@ -17147,6 +17372,18 @@ wiki#:#wiki_whole_wiki#:#Whole Wiki
 wiki#:#wiki_wiki_page#:#Wiki Page
 wiki#:#wiki_wiki_search#:#Wiki Search
 wiki#:#wiki_wpg#:#Wiki Page
+wopi#:#activate_wopi#:#Activate WOPI
+wopi#:#msg_error_wopi_invalid_discorvery_url#:#The Discovery URL entered is invalid or cannot be accessed.
+wopi#:#msg_wopi_settings_modified#:#Settings stored
+wopi#:#open_external_editor#:#Open in external Editor
+wopi#:#wopi_crawler_cronjob_description#:#Updates the information of the connected WOPI service.
+wopi#:#wopi_crawler_cronjob_no_apps#:#No WOPI apps were found in the discovery.
+wopi#:#wopi_crawler_cronjob_not_activated#:#WOPI is not activated.
+wopi#:#wopi_crawler_cronjob_success#:#WOPI information updated successfully.
+wopi#:#wopi_crawler_cronjob_title#:#Update WOPI Discovery
+wopi#:#wopi_settings#:#WOPI
+wopi#:#wopi_url#:#WOPI Discovery URL
+wopi#:#wopi_url_byline#:#Complete URL of the WOPI-Discovery, this must be accessible through the ILIAS server. The XML data of the Discover is read in and stored by ILIAS, the information is regularly updated by the cronjob "Update WOPI Discovery".
 wsp#:#element_already_shared#:#This object is already shared with this user.
 wsp#:#element_shared#:#Object shared.
 wsp#:#error_creating_certificate_pdf#:#The certificate could not be created. Please contact the administrator to check the certificate server.

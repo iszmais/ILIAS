@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of ILIAS, a powerful learning management system
  * published by ILIAS open source e-Learning e.V.
@@ -18,12 +16,17 @@ declare(strict_types=1);
  *
  *********************************************************************/
 
+declare(strict_types=1);
+
 namespace ILIAS\Object;
 
 use ILIAS\Object\Properties\ObjectTypeSpecificProperties\Factory as ObjectTypeSpecificPropertiesFactory;
 use ILIAS\Object\Properties\ObjectTypeSpecificProperties\ilObjectTypeSpecificPropertiesArtifactObjective;
+use ILIAS\Object\Properties\MultiObjectPropertiesManipulator;
 use ILIAS\Object\Properties\CoreProperties\TileImage\ilObjectTileImageStakeholder;
 use ILIAS\Object\Properties\CoreProperties\TileImage\ilObjectTileImageFlavourDefinition;
+use ILIAS\Object\Properties\ObjectReferenceProperties\ObjectReferencePropertiesCachedRepository;
+use ILIAS\Object\Properties\ObjectReferenceProperties\ObjectAvailabilityPeriodPropertiesCachedRepository;
 use Pimple\Container as PimpleContainer;
 use ILIAS\DI\Container as ILIASContainer;
 
@@ -54,7 +57,7 @@ class ilObjectDIC extends PimpleContainer
             $c['additional_properties_repository']
         );
 
-        $this['object_properties'] = fn($c): \ilObjectPropertiesAgregator => new \ilObjectPropertiesAgregator(
+        $this['object_properties_agregator'] = fn($c): \ilObjectPropertiesAgregator => new \ilObjectPropertiesAgregator(
             $c['core_properties_repository'],
             $c['additional_properties_repository'],
             $c['object_type_specific_properties_factory']
@@ -68,6 +71,18 @@ class ilObjectDIC extends PimpleContainer
                 $c['tile_image_stackholder'],
                 new ilObjectTileImageFlavourDefinition(),
                 $c['object_type_specific_properties_factory']
+            );
+
+        $this['multi_object_properties_manipulator'] = fn($c): MultiObjectPropertiesManipulator
+            => new MultiObjectPropertiesManipulator(
+                $c['object_reference_repository'],
+                $c['object_properties_agregator'],
+                $DIC['lng'],
+                $DIC['ilCtrl'],
+                $DIC['ilUser'],
+                $DIC['ui.factory'],
+                $DIC['tpl'],
+                $DIC['refinery']
             );
 
         $this['additional_properties_repository'] = fn($c): \ilObjectAdditionalPropertiesRepository
@@ -88,6 +103,18 @@ class ilObjectDIC extends PimpleContainer
                     include ilObjectTypeSpecificPropertiesArtifactObjective::PATH
                     : [],
                 $DIC['ilDB']
+            );
+
+        $this['object_reference_repository'] = fn($c): ObjectReferencePropertiesCachedRepository
+            => new ObjectReferencePropertiesCachedRepository(
+                $c['availability_period_repository'],
+                $DIC['ilDB']
+            );
+
+        $this['availability_period_repository'] = fn($c): ObjectAvailabilityPeriodPropertiesCachedRepository
+            => new ObjectAvailabilityPeriodPropertiesCachedRepository(
+                $DIC['ilDB'],
+                $DIC['tree']
             );
     }
 }

@@ -470,7 +470,8 @@ class assImagemapQuestion extends assQuestion implements ilObjQuestionScoringAdj
                 ilFileUtils::makeDirParents($imagepath);
             }
             if (!ilFileUtils::moveUploadedFile($image_tempfilename, $image_filename, $imagepath . $image_filename)) {
-                $this->ilias->raiseError("The image could not be uploaded!", $this->ilias->error_obj->MESSAGE);
+                $this->tpl->setOnScreenMessage('failure', 'The image could not be uploaded!');
+                return;
             }
             global $DIC;
             $ilLog = $DIC['ilLog'];
@@ -880,9 +881,9 @@ class assImagemapQuestion extends assQuestion implements ilObjQuestionScoringAdj
     /**
      * {@inheritdoc}
      */
-    public function setExportDetailsXLS(ilAssExcelFormatHelper $worksheet, int $startrow, int $col, int $active_id, int $pass): int
+    public function setExportDetailsXLSX(ilAssExcelFormatHelper $worksheet, int $startrow, int $col, int $active_id, int $pass): int
     {
-        parent::setExportDetailsXLS($worksheet, $startrow, $col, $active_id, $pass);
+        parent::setExportDetailsXLSX($worksheet, $startrow, $col, $active_id, $pass);
 
         $solution = $this->getSolutionValues($active_id, $pass);
 

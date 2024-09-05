@@ -97,7 +97,6 @@ class SurveyMatrixQuestionGUI extends SurveyQuestionGUI
         $columns->setDisabledScale(false);
         $columns->setNeutralCategoryTitle($this->lng->txt('matrix_neutral_answer'));
         $columns->setCategoryText($this->lng->txt('matrix_standard_answers'));
-        $columns->setShowSavePhrase(true);
         $a_form->addItem($columns);
 
 
@@ -564,9 +563,6 @@ class SurveyMatrixQuestionGUI extends SurveyQuestionGUI
         $neutralstyle = "3px solid #808080";
         $bordercolor = "#808080";
         $template = new ilTemplate("tpl.il_svy_out_matrix.html", true, true, "Modules/SurveyQuestionPool");
-        $template->setCurrentBlock("material_matrix");
-        $template->setVariable("TEXT_MATERIAL", $this->getMaterialOutput());
-        $template->parseCurrentBlock();
 
         if ($this->show_layout_row) {
             $layout_row = $this->getLayoutRow();

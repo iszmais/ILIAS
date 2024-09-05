@@ -91,12 +91,12 @@ class ilTestQuestionsTableGUI extends ilTable2GUI
 
     public function getSelectableColumns(): array
     {
-        $cols = array(
-            'qid' => array('txt' => $this->lng->txt('question_id'), 'default' => true),
-            'description' => array('txt' => $this->lng->txt('description'), 'default' => false),
-            'author' => array('txt' => $this->lng->txt('author'), 'default' => false),
-            'lifecycle' => array('txt' => $this->lng->txt('qst_lifecycle'), 'default' => true)
-        );
+        $cols = [
+            'qid' => ['txt' => $this->lng->txt('question_id'), 'default' => true],
+            'description' => ['txt' => $this->lng->txt('description'), 'default' => false],
+            'author' => ['txt' => $this->lng->txt('author'), 'default' => false],
+            'lifecycle' => ['txt' => $this->lng->txt('qst_lifecycle'), 'default' => true]
+        ];
 
         return $cols;
     }
@@ -147,7 +147,7 @@ class ilTestQuestionsTableGUI extends ilTable2GUI
 
         $this->addColumn($this->lng->txt('qpl'), 'qpl', '');
 
-        $this->addColumn($this->lng->txt('actions'), '', '1%');
+        $this->addColumn($this->lng->txt('actions'), '');
     }
 
     protected function initCommands(): void

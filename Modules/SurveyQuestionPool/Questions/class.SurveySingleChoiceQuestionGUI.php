@@ -55,7 +55,6 @@ class SurveySingleChoiceQuestionGUI extends SurveyQuestionGUI
         $answers->setRequired(false);
         $answers->setAllowMove(true);
         $answers->setShowWizard(true);
-        $answers->setShowSavePhrase(true);
         $answers->setUseOtherAnswer(true);
         $answers->setShowNeutralCategory(true);
         $answers->setNeutralCategoryTitle($this->lng->txt('svy_neutral_answer'));
@@ -248,11 +247,6 @@ class SurveySingleChoiceQuestionGUI extends SurveyQuestionGUI
             $orientation = 3;
         }
         $template = new ilTemplate($template_file, true, true, "Modules/SurveyQuestionPool");
-        if ($this->getMaterialOutput() !== "") {
-            $template->setCurrentBlock("material");
-            $template->setVariable("TEXT_MATERIAL", $this->getMaterialOutput());
-            $template->parseCurrentBlock();
-        }
         switch ($orientation) {
             case 0:
                 // vertical orientation

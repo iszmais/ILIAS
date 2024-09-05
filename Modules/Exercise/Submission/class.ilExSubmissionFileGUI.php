@@ -99,14 +99,14 @@ class ilExSubmissionFileGUI extends ilExSubmissionBaseGUI
 
                 $button = $gui->link(
                     $title,
-                    $ilCtrl->getLinkTargetByClass(array("ilExSubmissionGUI", "ilExSubmissionFileGUI"), "submissionScreen")
+                    $ilCtrl->getLinkTargetByClass(array(ilAssignmentPresentationGUI::class, "ilExSubmissionGUI", "ilExSubmissionFileGUI"), "submissionScreen")
                 )->primary();
                 $files_str .= "<br><br>" . $button->render();
             } else {
                 if (count($titles) > 0) {
                     $link = $gui->link(
                         $lng->txt("already_delivered_files"),
-                        $ilCtrl->getLinkTargetByClass(array("ilExSubmissionGUI", "ilExSubmissionFileGUI"), "submissionScreen")
+                        $ilCtrl->getLinkTargetByClass(array(ilAssignmentPresentationGUI::class, "ilExSubmissionGUI", "ilExSubmissionFileGUI"), "submissionScreen")
                     )->emphasised();
                     $files_str .= "<br><br>" . $link->render();
                 }
@@ -247,7 +247,7 @@ class ilExSubmissionFileGUI extends ilExSubmissionBaseGUI
         if ($max_file > 0) {
             $max_file = $this->submission->getAssignment()->getMaxFile() - count($this->submission->getFiles());
         } else {
-            $max_file = 0;
+            $max_file = 20;
         }
 
         $form_adapter = $this->gui

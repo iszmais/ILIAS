@@ -74,7 +74,6 @@ class SurveyMultipleChoiceQuestionGUI extends SurveyQuestionGUI
         $answers->setRequired(false);
         $answers->setAllowMove(true);
         $answers->setShowWizard(false);
-        $answers->setShowSavePhrase(false);
         $answers->setUseOtherAnswer(true);
         $answers->setShowNeutralCategory(true);
         $answers->setNeutralCategoryTitle($this->lng->txt('svy_neutral_answer'));
@@ -301,9 +300,6 @@ class SurveyMultipleChoiceQuestionGUI extends SurveyQuestionGUI
         bool $compress_view = false
     ): string {
         $template = new ilTemplate("tpl.il_svy_out_mc.html", true, true, "Modules/SurveyQuestionPool");
-        $template->setCurrentBlock("material");
-        $template->setVariable("TEXT_MATERIAL", $this->getMaterialOutput());
-        $template->parseCurrentBlock();
         switch ($this->object->getOrientation()) {
             case 0:
                 // vertical orientation
