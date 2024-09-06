@@ -1,3 +1,19 @@
 <div class="ilDashboardMainContent">
-{CONTENT}
+    <button id="wpn-start">Start</button>
+    <button id="wpn-stop">Stop</button>
+    <script>
+        document.querySelector('#wpn-start').addEventListener('click', () => {
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    navigator.serviceWorker.register('/service-worker.js');
+                }
+            });
+        });
+        document.querySelector('#wpn-stop').addEventListener('click', () => {
+            navigator.serviceWorker.getRegistration().then(registration => {
+              registration.active.postMessage('Remove');
+            });
+        });
+    </script>
+    {CONTENT}
 </div>
