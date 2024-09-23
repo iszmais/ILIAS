@@ -182,9 +182,9 @@ class ilObjSurveyQuestionPoolGUI extends ilObjectGUI implements ilCtrlBaseClassI
         $desc->setCols(40);
         $form->addItem($desc);
 
-        $section2 = new ilFormSectionHeaderGUI();
-        $section2->setTitle($this->lng->txt('obj_activation_list_gui'));
-        $form->addItem($section2);
+        $availability_section = new ilFormSectionHeaderGUI();
+        $availability_section->setTitle($this->lng->txt('obj_activation_list_gui'));
+        $form->addItem($availability_section);
 
         // online
         $online = new ilCheckboxInputGUI($this->lng->txt("spl_online_property"), "online");
