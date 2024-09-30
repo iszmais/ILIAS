@@ -18,6 +18,9 @@
 
 declare(strict_types=1);
 
+use ILIAS\Object\Properties\CoreProperties\TileImage\ilObjectPropertyTileImage;
+use ILIAS\UI\Component\Input\Container\Form\Form;
+
 /**
  * @ilCtrl_Calls ilObjDataCollectionGUI: ilInfoScreenGUI, ilNoteGUI, ilCommonActionDispatcherGUI
  * @ilCtrl_Calls ilObjDataCollectionGUI: ilPermissionGUI, ilObjectCopyGUI, ilDclExportGUI
@@ -49,6 +52,7 @@ class ilObjDataCollectionGUI extends ilObject2GUI
     protected ilCtrl $ctrl;
     protected ilLanguage $lng;
     protected ILIAS\HTTP\Services $http;
+    protected ILIAS\FileUpload\FileUpload $upload;
     protected ilTabsGUI $tabs;
     protected int $table_id;
 
@@ -61,6 +65,7 @@ class ilObjDataCollectionGUI extends ilObject2GUI
         $this->http = $DIC->http();
         $this->tabs = $DIC->tabs();
         $this->notes = $DIC->notes();
+        $this->upload = $DIC->upload();
 
         $this->lng->loadLanguageModule("dcl");
         $this->lng->loadLanguageModule('content');
@@ -247,10 +252,35 @@ class ilObjDataCollectionGUI extends ilObject2GUI
                     case 'export':
                         $this->handleExport(true);
                         break;
+                    case 'update':
+                        $this->handleFormSave();
+                        break;
                     default:
                         parent::executeCommand();
                 }
         }
+    }
+
+    protected function handleFormSave(): void
+    {
+        if (!$this->checkPermissionBool('write')) {
+            $this->error->raiseError($this->lng->txt('permission_denied'), $this->error->MESSAGE);
+        }
+
+        $new_form = $this->getSettingsForm()->withRequest($this->http->request());
+        $data = $new_form->getData();
+
+        $this->object->setTitle($data['edit']['title']);
+        $this->object->setDescription($data['edit']['description']);
+        $this->object->setNotification($data['edit']['notification']);
+        $this->object->setOnline($data['availability']['online']);
+        $this->object->getObjectProperties()->storePropertyTileImage($data['presentation']['tile_image']);
+
+        $this->object->update();
+
+        $this->tpl->setOnScreenMessage('success', $this->lng->txt('msg_obj_modified'), true);
+
+        $this->ctrl->redirectByClass([ilRepositoryGUI::class, self::class], 'editObject');
     }
 
     protected function handleExport(bool $do_default = false)
@@ -438,6 +468,54 @@ class ilObjDataCollectionGUI extends ilObject2GUI
         $this->tabs->addTab($langKey, $this->lng->txt($langKey), $link);
     }
 
+    private function getSettingsForm(array $values = []): Form
+    {
+        $title_input = $this->ui_factory->input()->field()
+            ->text(
+                $this->lng->txt('title')
+            )->withRequired(true)->withValue($values['title'] ?? '');
+        $description_input = $this->ui_factory->input()->field()
+            ->textarea(
+                $this->lng->txt('description')
+            )->withValue($values['desc'] ?? '');
+        $notification_input = $this->ui_factory->input()->field()
+            ->checkbox(
+                $this->lng->txt('dcl_activate_notification'),
+                $this->lng->txt('dcl_notification_info')
+            )->withValue($values['notification'] ?? false);
+
+        $edit_section = $this->ui_factory->input()->field()->section([
+            'title' => $title_input,
+            'description' => $description_input,
+            'notification' => $notification_input
+        ], $this->lng->txt($this->object->getType() . '_edit'));
+
+        $online_input = $this->ui_factory->input()->field()
+            ->checkbox(
+                $this->lng->txt('online'),
+                $this->lng->txt('dcl_online_info')
+            )->withValue($values['is_online'] ?? false);
+
+        $availability_section = $this->ui_factory->input()->field()->section([
+            'online' => $online_input
+        ], $this->lng->txt('obj_activation_list_gui'));
+
+        $tile_image_input = (new ilObjectPropertyTileImage(
+            $this->object->getObjectProperties()->getPropertyTileImage()->getTileImage()
+        ))->toForm($this->lng, $this->ui_factory->input()->field(), $this->refinery);
+
+        $presentation_section = $this->ui_factory->input()->field()->section([
+            'tile_image' => $tile_image_input,
+        ], $this->lng->txt('cont_presentation'));
+
+        $form_action = $this->ctrl->getFormAction($this, 'update');
+        return $this->ui_factory->input()->container()->form()->standard($form_action, [
+            'edit' => $edit_section,
+            'availability' => $availability_section,
+            'presentation' => $presentation_section
+        ]);
+    }
+
     /**
      * edit object
      * @access    public
@@ -461,7 +539,7 @@ class ilObjDataCollectionGUI extends ilObject2GUI
 
         $this->addExternalEditFormCustom($form);
 
-        $dataCollectionTemplate->setContent($form->getHTML());
+        $dataCollectionTemplate->setContent($this->ui_renderer->render($this->getSettingsForm($values)));
     }
 
     protected function initEditForm(): ilPropertyFormGUI
