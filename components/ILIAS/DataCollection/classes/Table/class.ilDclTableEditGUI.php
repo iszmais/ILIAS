@@ -30,7 +30,6 @@ class ilDclTableEditGUI
     protected ilCtrl $ctrl;
     protected ilGlobalTemplateInterface $tpl;
     protected ilToolbarGUI $toolbar;
-    protected \ILIAS\UI\Component\Input\Container\Form\Factory $formNew;
     protected ilPropertyFormGUI $form;
     protected ILIAS\HTTP\Services $http;
     protected ILIAS\Refinery\Factory $refinery;
@@ -85,31 +84,7 @@ class ilDclTableEditGUI
 
         switch ($cmd) {
             case 'update':
-                $newForm = $this->initNewForm()->withRequest($this->http->request());
-                $data = $newForm->getData();
-                $this->table->setTitle($data["edit"]["title"]);
-                $this->table->setDefaultSortField($data["edit"]["sort_by"]);
-                $this->table->setDefaultSortFieldOrder($data["edit"]["sort_order"]);
-                $this->table->setDescription($data["edit"]["description"]);
-                $this->table->setAddPerm($data["user"]["user_add_entries"]);
-                $this->table->setSaveConfirmation($data["user"]["confirm_save"]);
-                $this->table->setEditPerm((bool)$data["user"]["user_edit_entries"]);
-                $this->table->setEditByOwner(($data["user"]["user_edit_entries"]["edit"] ?? "") === "own");
-                $this->table->setDeletePerm((bool)$data["user"]["user_delete_entries"]);
-                $this->table->setDeleteByOwner(($data["user"]["user_delete_entries"]["delete"] ?? "") === "own");
-                $this->table->setViewOwnRecordsPerm($data["user"]["view_only_own"]);
-                $this->table->setExportEnabled($data["user"]["allow_export"]);
-                $this->table->setImportEnabled($data["user"]["allow_import"]);
-                if ($data["user"]["limited_action_period"] !== null) {
-                    $this->table->setLimited(true);
-                    $this->table->setLimitStart($data["user"]["limited_action_period"]["start"]);
-                    $this->table->setLimitEnd($data["user"]["limited_action_period"]["end"]);
-                } else {
-                    $this->table->setLimited(false);
-                }
-                $this->table->doUpdate();
-                $this->tpl->setOnScreenMessage('success', $this->lng->txt("dcl_msg_table_edited"), true);
-                $this->ctrl->redirectByClass(self::class, "edit");
+                $this->update();
                 break;
             default:
                 $this->$cmd();
@@ -138,7 +113,7 @@ class ilDclTableEditGUI
         }
 
         $input_field = $this->ui_factory->input()->field();
-        $this->formNew = $this->ui_factory->input()->container()->form();
+        $form = $this->ui_factory->input()->container()->form();
         $title = $input_field->text("Title")->withRequired(true)->withValue($this->table->getTitle());
         $sort_field = $input_field->select("Default sort field", $options, "The table will be sorted by this field by default")
             ->withValue($this->table->getDefaultSortField());
@@ -207,7 +182,7 @@ class ilDclTableEditGUI
         ];
         $user_action_section = $input_field->section($user_action_inputs, "User Actions");
 
-        return $this->formNew->standard($this->ctrl->getFormAction($this, "update"), ["edit" => $edit_section, "user" => $user_action_section]);
+        return $form->standard($this->ctrl->getFormAction($this, "update"), ["edit" => $edit_section, "user" => $user_action_section]);
     }
 
     public function edit(): void
@@ -223,7 +198,6 @@ class ilDclTableEditGUI
         $this->getValues();
         $newForm = $this->initNewForm();
         $this->tpl->setContent($this->ui_renderer->render($newForm));
-//        $this->tpl->setContent($this->form->getHTML());
     }
 
     public function getValues(): void
@@ -583,5 +557,34 @@ class ilDclTableEditGUI
             $ref_id,
             $this->table_id
         ) : ilObjDataCollectionAccess::hasWriteAccess($ref_id);
+    }
+
+    private function update(): void
+    {
+        $newForm = $this->initNewForm()->withRequest($this->http->request());
+        $data = $newForm->getData();
+        $this->table->setTitle($data["edit"]["title"]);
+        $this->table->setDefaultSortField($data["edit"]["sort_by"]);
+        $this->table->setDefaultSortFieldOrder($data["edit"]["sort_order"]);
+        $this->table->setDescription($data["edit"]["description"]);
+        $this->table->setAddPerm($data["user"]["user_add_entries"]);
+        $this->table->setSaveConfirmation($data["user"]["confirm_save"]);
+        $this->table->setEditPerm((bool)$data["user"]["user_edit_entries"]);
+        $this->table->setEditByOwner(($data["user"]["user_edit_entries"]["edit"] ?? "") === "own");
+        $this->table->setDeletePerm((bool)$data["user"]["user_delete_entries"]);
+        $this->table->setDeleteByOwner(($data["user"]["user_delete_entries"]["delete"] ?? "") === "own");
+        $this->table->setViewOwnRecordsPerm($data["user"]["view_only_own"]);
+        $this->table->setExportEnabled($data["user"]["allow_export"]);
+        $this->table->setImportEnabled($data["user"]["allow_import"]);
+        if ($data["user"]["limited_action_period"] !== null) {
+            $this->table->setLimited(true);
+            $this->table->setLimitStart($data["user"]["limited_action_period"]["start"]);
+            $this->table->setLimitEnd($data["user"]["limited_action_period"]["end"]);
+        } else {
+            $this->table->setLimited(false);
+        }
+        $this->table->doUpdate();
+        $this->tpl->setOnScreenMessage('success', $this->lng->txt("dcl_msg_table_edited"), true);
+        $this->ctrl->redirectByClass(self::class, "edit");
     }
 }
