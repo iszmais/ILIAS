@@ -268,20 +268,14 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
 
         $this->getLogger()->debug('Showing login page');
 
-        $extUid = '';
-        if ($this->http->wrapper()->query()->has('ext_uid')) {
-            $extUid = $this->http->wrapper()->query()->retrieve(
-                'ext_uid',
-                $this->refinery->kindlyTo()->string()
-            );
-        }
-        $soapPw = '';
-        if ($this->http->wrapper()->query()->has('soap_pw')) {
-            $extUid = $this->http->wrapper()->query()->retrieve(
-                'soap_pw',
-                $this->refinery->kindlyTo()->string()
-            );
-        }
+        $extUid = $this->http->wrapper()->query()->retrieve(
+            'ext_uid',
+            $this->refinery->byTrying([$this->refinery->kindlyTo()->string(), $this->refinery->always('')])
+        );
+        $soapPw = $this->http->wrapper()->query()->retrieve(
+            'soap_pw',
+            $this->refinery->byTrying([$this->refinery->kindlyTo()->string(), $this->refinery->always('')])
+        );
         $credentials = new ilAuthFrontendCredentialsSoap(
             $GLOBALS['DIC']->http()->request(),
             $this->ctrl,
@@ -1106,7 +1100,8 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
                 '[list-login-form]',
                 '[list-cas-login-form]',
                 '[list-saml-login]',
-                '[list-shibboleth-login-form]'
+                '[list-shibboleth-login-form]',
+                '[list-openid-connect-login]'
             ),
             array('', '', '', '', '', '', ''),
             $page_editor_html
@@ -1400,11 +1395,10 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
         }
 
         // reset cookie
-        $client_id = CLIENT_ID;
         ilUtil::setCookie("ilClientId", "");
 
         // redirect and show logout information
-        $this->ctrl->setParameter($this, 'client_id', $client_id);
+        $this->ctrl->setParameter($this, 'client_id', CLIENT_ID);
         $this->ctrl->setParameter($this, 'lang', $user_language);
         $this->ctrl->redirect($this, 'showLogout');
     }
@@ -1782,6 +1776,8 @@ class ilStartUpGUI implements ilCtrlBaseClassInterface, ilCtrlSecurityInterface
 
     public function confirmRegistration(): void
     {
+        $this->lng->loadLanguageModule('registration');
+
         ilUtil::setCookie('iltest', 'cookie', false);
         $regitration_hash = '';
         if ($this->http->wrapper()->query()->has('rh')) {

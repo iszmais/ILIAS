@@ -41,6 +41,10 @@ use ILIAS\ResourceStorage\Preloader\DBRepositoryPreloader;
 use ILIAS\Filesystem\Definitions\SuffixDefinitions;
 use ILIAS\FileUpload\Processor\InsecureFilenameSanitizerPreProcessor;
 use ILIAS\FileUpload\Processor\SVGBlacklistPreProcessor;
+use ILIAS\Data\Result;
+use ILIAS\Data\Result\Ok;
+use ILIAS\Data\Result\Error;
+use ILIAS\Refinery\Transformation;
 
 require_once("libs/composer/vendor/autoload.php");
 
@@ -441,35 +445,81 @@ class ilInitialisation
         if (!$DIC->isDependencyAvailable('iliasIni')) {
             self::abortAndDie('Fatal Error: ilInitialisation::determineClient called without initialisation of ILIAS ini file object.');
         }
-        $in_unit_tests = defined('IL_PHPUNIT_TEST');
-        $context_supports_persitent_session = ilContext::supportsPersistentSessions();
-        $can_set_cookie = !$in_unit_tests && $context_supports_persitent_session;
-        $has_request_client_id = $DIC->http()->wrapper()->query()->has('client_id');
-        $has_cookie_client_id = $DIC->http()->cookieJar()->has('ilClientId');
+
+        // determine the available clientIds (default, request, cookie)
         $default_client_id = $DIC->iliasIni()->readVariable('clients', 'default');
 
-        // determintaion of client_id:
+        if ($DIC->http()->wrapper()->query()->has('client_id')) {
+            $client_id_from_get = $DIC->http()->wrapper()->query()->retrieve(
+                'client_id',
+                self::getClientIdTransformation()
+            );
+        }
+        if ($DIC->http()->wrapper()->cookie()->has('ilClientId')) {
+            $client_id_from_cookie = $DIC->http()->wrapper()->cookie()->retrieve(
+                'ilClientId',
+                self::getClientIdTransformation()
+            );
+        }
+
+        // set the clientId by availability: 1. request, 2. cookie, fallback to defined default
         $client_id_to_use = '';
-        // first we try to get the client_id from request
-        if ($has_request_client_id) {
-            // @todo refinerey undefined
-            $client_id_from_get = (string) $_GET['client_id'];
+        if (isset($client_id_from_get) && $client_id_from_get !== '') {
+            $client_id_to_use = $client_id_from_get;
         }
-        // we found a client_id in $GET
-        if (isset($client_id_from_get) && strlen($client_id_from_get) > 0) {
-            $client_id_to_use = $_GET['client_id'] = $df->clientId($client_id_from_get)->toString();
-            if ($can_set_cookie) {
-                ilUtil::setCookie('ilClientId', $client_id_to_use);
-            }
-        } else {
-            $client_id_to_use = $default_client_id;
-            if (!isset($_COOKIE['ilClientId'])) {
-                ilUtil::setCookie('ilClientId', $client_id_to_use);
-            }
+
+        if ($client_id_to_use === '' && isset($client_id_from_cookie)) {
+            $client_id_to_use = $client_id_from_cookie;
         }
-        $client_id_to_use = strlen($client_id_to_use) > 0 ? $client_id_to_use : $default_client_id;
+
+        $client_id_to_use = $client_id_to_use ?: $default_client_id;
 
         define('CLIENT_ID', $df->clientId($client_id_to_use)->toString());
+    }
+
+
+    /**
+     * Refinery is not initialized early enough to provide a transformation to be used with the
+     * \ILIAS\HTTP implementation to retrieve the parameters. Instead, this implementation here will be used.
+     *
+     * @return Transformation implementation of a transformation to get the clientId.
+     */
+    private static function getClientIdTransformation(): Transformation
+    {
+        return new class () implements Transformation {
+            /**
+             * @inheritDoc
+             */
+            public function transform($from): string
+            {
+                if (!is_string($from)) {
+                    throw new InvalidArgumentException(__METHOD__ . " the argument is not a string.");
+                }
+                return strip_tags($from);
+            }
+
+            /**
+             * @inheritDoc
+             */
+            public function applyTo(Result $result): Result
+            {
+                return $result->then(function ($value): Result {
+                    try {
+                        return new Ok($this->transform($value));
+                    } catch (Exception $exception) {
+                        return new Error($exception);
+                    }
+                });
+            }
+
+            /**
+             * @inheritDoc
+             */
+            public function __invoke($from): string
+            {
+                return $this->transform($from);
+            }
+        };
     }
 
     /**
@@ -509,8 +559,7 @@ class ilInitialisation
         // invalid client id / client ini
         if ($ilClientIniFile->ERROR != "") {
             $default_client = $ilIliasIniFile->readVariable("clients", "default");
-            ilUtil::setCookie("ilClientId", $default_client);
-            if (CLIENT_ID != "" && CLIENT_ID != $default_client) {
+            if (CLIENT_ID !== "") {
                 $mess = array("en" => "Client does not exist.",
                               "de" => "Mandant ist ungültig."
                 );
@@ -658,6 +707,15 @@ class ilInitialisation
         }
     }
 
+    private static function setClientIdCookie(): void
+    {
+        if (defined('CLIENT_ID') &&
+            !defined('IL_PHPUNIT_TEST') &&
+            ilContext::supportsPersistentSessions()) {
+            ilUtil::setCookie('ilClientId', CLIENT_ID);
+        }
+    }
+
     /**
      * set session cookie params
      */
@@ -672,13 +730,22 @@ class ilInitialisation
             $cookie_secure = !$ilSetting->get('https', '0') && $DIC['https']->isDetected();
             define('IL_COOKIE_SECURE', $cookie_secure); // Default Value
 
-            session_set_cookie_params(
-                IL_COOKIE_EXPIRE,
-                IL_COOKIE_PATH,
-                IL_COOKIE_DOMAIN,
-                IL_COOKIE_SECURE,
-                IL_COOKIE_HTTPONLY
-            );
+            $cookie_parameters = [
+                'lifetime' => IL_COOKIE_EXPIRE,
+                'path' => IL_COOKIE_PATH,
+                'domain' => IL_COOKIE_DOMAIN,
+                'secure' => IL_COOKIE_SECURE,
+                'httponly' => IL_COOKIE_HTTPONLY,
+            ];
+
+            if (
+                $cookie_secure &&
+                (!isset(session_get_cookie_params()['samesite']) || strtolower(session_get_cookie_params()['samesite']) !== 'strict')
+            ) {
+                $cookie_parameters['samesite'] = 'Lax';
+            }
+
+            session_set_cookie_params($cookie_parameters);
         }
     }
 
@@ -1050,24 +1117,27 @@ class ilInitialisation
     protected static function initAccessHandling(): void
     {
         self::initGlobal(
-            "rbacreview",
-            "ilRbacReview",
-            "./Services/AccessControl/classes/class.ilRbacReview.php"
+            'rbacreview',
+            'ilRbacReview',
+            './Services/AccessControl/classes/class.ilRbacReview.php',
+            true
         );
 
         $rbacsystem = ilRbacSystem::getInstance();
-        self::initGlobal("rbacsystem", $rbacsystem);
+        self::initGlobal('rbacsystem', $rbacsystem, null, true);
 
         self::initGlobal(
-            "rbacadmin",
-            "ilRbacAdmin",
-            "./Services/AccessControl/classes/class.ilRbacAdmin.php"
+            'rbacadmin',
+            'ilRbacAdmin',
+            './Services/AccessControl/classes/class.ilRbacAdmin.php',
+            true
         );
 
         self::initGlobal(
-            "ilAccess",
-            "ilAccess",
-            "./Services/AccessControl/classes/class.ilAccess.php"
+            'ilAccess',
+            'ilAccess',
+            './Services/AccessControl/classes/class.ilAccess.php',
+            true
         );
     }
 
@@ -1084,18 +1154,28 @@ class ilInitialisation
     }
 
     /**
-     * Initialize global instance
-     * @param string $a_name
-     * @param string|object $a_class
-     * @param ?string $a_source_file
+     * @param object|string $a_class
      */
-    protected static function initGlobal($a_name, $a_class, $a_source_file = null): void
-    {
+    protected static function initGlobal(
+        string $a_name,
+        $a_class,
+        ?string $a_source_file = null,
+        ?bool $destroy_existing = false
+    ): void {
         global $DIC;
+
+        if ($destroy_existing) {
+            if (isset($GLOBALS[$a_name])) {
+                unset($GLOBALS[$a_name]);
+            }
+            if (isset($DIC[$a_name])) {
+                unset($DIC[$a_name]);
+            }
+        }
 
         $GLOBALS[$a_name] = is_object($a_class) ? $a_class : new $a_class();
 
-        $DIC[$a_name] = function ($c) use ($a_name) {
+        $DIC[$a_name] = static function (Container $c) use ($a_name) {
             return $GLOBALS[$a_name];
         };
     }
@@ -1197,7 +1277,11 @@ class ilInitialisation
      */
     protected static function initSession(): void
     {
-        $GLOBALS["DIC"]["ilAuthSession"] = function ($c) {
+        if (isset($GLOBALS['DIC']['ilAuthSession'])) {
+            unset($GLOBALS['DIC']['ilAuthSession']);
+        }
+
+        $GLOBALS['DIC']['ilAuthSession'] = static function (Container $c): ilAuthSession {
             $auth_session = ilAuthSession::getInstance(
                 $c['ilLoggerFactory']->getLogger('auth')
             );
@@ -1351,6 +1435,8 @@ class ilInitialisation
         unset($tree);
 
         self::setSessionCookieParams();
+        self::setClientIdCookie();
+
         self::initRefinery($DIC);
 
         (new InitCtrlService())->init($DIC);
@@ -1370,7 +1456,8 @@ class ilInitialisation
         self::initGlobal(
             "ilUser",
             "ilObjUser",
-            "./Services/User/classes/class.ilObjUser.php"
+            "./Services/User/classes/class.ilObjUser.php",
+            true
         );
         $ilias->account = $ilUser;
 

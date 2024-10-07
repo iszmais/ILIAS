@@ -571,9 +571,6 @@ abstract class ilTestPlayerAbstractGUI extends ilTestServiceGUI
 
         $this->performTestPassFinishedTasks($actualpass);
 
-        $this->testSession->setLastFinishedPass($this->testSession->getPass());
-        $this->testSession->increaseTestPass();
-
         $url = $this->ctrl->getLinkTarget($this, ilTestPlayerCommands::AFTER_TEST_PASS_FINISHED, '', false, false);
 
         $this->tpl->addBlockFile($this->getContentBlockName(), "adm_content", "tpl.il_as_tst_redirect_autosave.html", "Modules/Test");
@@ -2832,6 +2829,7 @@ JS;
         // Forced feedback will change the navigation saving command
         $config['forcedInstantFeedback'] = $this->object->isForceInstantFeedbackEnabled();
         $config['nextQuestionLocks'] = $this->object->isFollowupQuestionAnswerFixationEnabled();
+        $config['autosaveFailureMessage'] = $this->lng->txt('autosave_failed');
 
         $this->tpl->addJavascript('./Modules/Test/js/ilTestPlayerQuestionEditControl.js');
         $this->tpl->addOnLoadCode('il.TestPlayerQuestionEditControl.init(' . json_encode($config) . ')');

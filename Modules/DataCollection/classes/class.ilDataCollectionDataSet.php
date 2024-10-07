@@ -16,11 +16,6 @@
  *
  *********************************************************************/
 
-/**
- * DataCollection dataset class
- * @author Stefan Wanzenried <sw@studer-raimann.ch>
- * @author Fabian Schmid <fs@studer-raimann.ch>
- */
 class ilDataCollectionDataSet extends ilDataSet
 {
     /**
@@ -114,18 +109,13 @@ class ilDataCollectionDataSet extends ilDataSet
         string $a_schema_version
     ): void {
         foreach ($a_rec as $key => &$value) {
-            $decode = json_decode($value);
-            if (is_array($decode)) {
-                foreach ($decode as &$entry) {
-                    $entry = htmlspecialchars($entry, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8');
-                }
-                $value = json_encode($decode);
+            $array = json_decode($value, true);
+            if ($key === 'title' || $key === 'description') {
+                $value = strip_tags($value, ilObjectGUI::ALLOWED_TAGS_IN_TITLE_AND_DESCRIPTION);
+            } elseif (is_array($array)) {
+                $value = json_encode($this->escapeArray($array));
             } else {
-                if ($key === 'title' || $key === 'description') {
-                    $value = strip_tags($value, ilObjectGUI::ALLOWED_TAGS_IN_TITLE_AND_DESCRIPTION);
-                } else {
-                    $value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8');
-                }
+                $value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8');
             }
         }
         switch ($a_entity) {
@@ -209,29 +199,42 @@ class ilDataCollectionDataSet extends ilDataSet
             case 'il_dcl_field':
                 $new_table_id = $a_mapping->getMapping('Modules/DataCollection', 'il_dcl_table', $a_rec['table_id']);
                 if ($new_table_id) {
-                    $field = new ilDclBaseFieldModel();
-                    $field->setTableId($new_table_id);
-                    $field->setDatatypeId($a_rec['datatype_id']);
-                    $field->setTitle($a_rec['title']);
-                    $field->setDescription($a_rec['description']);
-                    $field->setUnique($a_rec['is_unique']);
-                    $field->doCreate();
-                    $a_mapping->addMapping('Modules/DataCollection', 'il_dcl_field', $a_rec['id'], $field->getId());
-                    // Check if this field was used as default order by, if so, update to new id
-                    $table = ilDclCache::getTableCache($new_table_id);
-                    if ($table && $table->getDefaultSortField() == $a_rec['id']) {
-                        $table->setDefaultSortField($field->getId());
-                        $table->doUpdate();
+                    $datatype_id = $a_rec['datatype_id'];
+                    $datatype = $a_rec['datatype_title'];
+                    $datatypes = ilDclDatatype::getAllDatatype();
+                    if (ilDclFieldTypePlugin::isPluginDatatype($datatype)) {
+                        $datatype_id = null;
+                        foreach ($datatypes as $dt) {
+                            if ($dt->getTitle() === $datatype) {
+                                $datatype_id = $dt->getId();
+                            }
+                        }
+                    }
+                    if (in_array($datatype_id, array_keys($datatypes))) {
+                        $field = new ilDclBaseFieldModel();
+                        $field->setTableId($new_table_id);
+                        $field->setDatatypeId($datatype_id);
+                        $field->setTitle($a_rec['title']);
+                        $field->setDescription($a_rec['description']);
+                        $field->setUnique($a_rec['is_unique']);
+                        $field->doCreate();
+                        $a_mapping->addMapping('Modules/DataCollection', 'il_dcl_field', $a_rec['id'], $field->getId());
+                        // Check if this field was used as default order by, if so, update to new id
+                        $table = ilDclCache::getTableCache($new_table_id);
+                        if ($table && $table->getDefaultSortField() == $a_rec['id']) {
+                            $table->setDefaultSortField($field->getId());
+                            $table->doUpdate();
+                        }
                     }
                 }
                 break;
             case 'il_dcl_tfield_set':
                 $new_table_id = $a_mapping->getMapping('Modules/DataCollection', 'il_dcl_table', $a_rec['table_id']);
                 $new_field_id = $a_mapping->getMapping('Modules/DataCollection', 'il_dcl_field', $a_rec['field']);
-                if ($new_table_id) {
+                if ($new_table_id && $new_field_id) {
                     $setting = ilDclTableFieldSetting::getInstance(
                         $new_table_id,
-                        $new_field_id ?: $a_rec['field']
+                        $new_field_id
                     );
                     $setting->setFieldOrder($a_rec['field_order']);
                     $setting->setExportable($a_rec['exportable']);
@@ -486,6 +489,26 @@ class ilDataCollectionDataSet extends ilDataSet
         }
     }
 
+    protected function escapeArray(array $array): array
+    {
+        $new = [];
+        foreach ($array as $key => $value) {
+            $newkey = $key;
+            if (is_string($key)) {
+                $newkey = htmlspecialchars($key, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8');
+            }
+            $newvalue = $value;
+            if (is_string($value)) {
+                $newvalue = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8');
+            }
+            if (is_array($value)) {
+                $newvalue = $this->escapeArray($value);
+            }
+            $new[$newkey] = $newvalue;
+        }
+        return $new;
+    }
+
     /**
      * Called before finishing import. Fix references inside DataCollections
      * @param ilImportMapping $a_mapping
@@ -584,6 +607,7 @@ class ilDataCollectionDataSet extends ilDataSet
                     'title' => 'text',
                     'description' => 'text',
                     'datatype_id' => 'integer',
+                    'datatype_title' => 'text',
                     'is_unique' => 'integer',
                 ];
             case 'il_dcl_tview_set':
@@ -692,7 +716,7 @@ class ilDataCollectionDataSet extends ilDataSet
                     'integer'
                 ));
                 $ids_records = $this->buildCache('il_dcl_record', $set);
-                $set = $this->db->query('SELECT * FROM il_dcl_field WHERE table_id = ' . $this->db->quote(
+                $set = $this->db->query('SELECT il_dcl_field.*, il_dcl_datatype.title as datatype_title FROM il_dcl_field INNER JOIN il_dcl_datatype ON il_dcl_field.datatype_id = il_dcl_datatype.id WHERE table_id = ' . $this->db->quote(
                     $a_rec['id'],
                     'integer'
                 ));
