@@ -1086,15 +1086,6 @@ class ilObjectGUI implements ImplementsCreationCallback
         $ta->setMaxNumOfChars(ilObject::LONG_DESC_LENGTH);
         $form->addItem($ta);
 
-        //Availability Section
-        $availability_section = new ilFormSectionHeaderGUI();
-        $availability_section->setTitle($this->lng->txt('obj_activation_list_gui'));
-        $form->addItem($availability_section);
-
-        // Online
-        $online = new ilCheckboxInputGUI($lng->txt("online"), "online");
-        $form->addItem($online);
-
         $this->initEditCustomForm($form);
 
         $form->addCommandButton("update", $this->lng->txt("save"));

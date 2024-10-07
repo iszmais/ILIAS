@@ -764,6 +764,7 @@ class ilObjWikiGUI extends ilObjectGUI
         $this->checkPermission("write");
 
         $this->setSettingsSubTabs("general_settings");
+
         $this->initSettingsForm();
         $this->getSettingsFormValues();
 
@@ -822,6 +823,11 @@ class ilObjWikiGUI extends ilObjectGUI
             $this->form_gui->addItem($sp);
         }
 
+        // Online
+        $online = new ilCheckboxInputGUI($lng->txt("online"), "online");
+        $this->form_gui->addItem($online);
+
+
         // rating
 
         $lng->loadLanguageModule('rating');
@@ -858,15 +864,6 @@ class ilObjWikiGUI extends ilObjectGUI
         $page_toc = new ilCheckboxInputGUI($lng->txt("wiki_page_toc"), "page_toc");
         $page_toc->setInfo($lng->txt("wiki_page_toc_info"));
         $this->form_gui->addItem($page_toc);
-
-        //Availability Section
-        $availability_section = new ilFormSectionHeaderGUI();
-        $availability_section->setTitle($this->lng->txt('obj_activation_list_gui'));
-        $this->form_gui->addItem($availability_section);
-
-        // Online
-        $online = new ilCheckboxInputGUI($lng->txt("online"), "online");
-        $this->form_gui->addItem($online);
 
         if ($a_mode === "edit") {
             // advanced metadata auto-linking
