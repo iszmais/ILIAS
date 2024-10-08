@@ -33,6 +33,9 @@
  * @ilCtrl_Calls ilObjDataCollectionGUI: ilRatingGUI
  * @ilCtrl_Calls ilObjDataCollectionGUI: ilPropertyFormGUI
  * @ilCtrl_Calls ilObjDataCollectionGUI: ilDclPropertyFormGUI
+// uni-freiburg-patch: begin dc content style
+ * @ilCtrl_Calls ilObjDataCollectionGUI: ilObjectContentStyleSettingsGUI
+// uni-freiburg-patch: end dc content style
  * @extends      ilObject2GUI
  */
 class ilObjDataCollectionGUI extends ilObject2GUI
@@ -262,6 +265,17 @@ class ilObjDataCollectionGUI extends ilObject2GUI
                 $this->ctrl->forwardCommand($form);
                 break;
 
+            // uni-freiburg-patch: begin dc content style
+            case strtolower(ilObjectContentStyleSettingsGUI::class):
+                $this->prepareOutput();
+                $this->setEditTabs();
+                $this->tabs->activateTab('settings');
+                $this->tabs->activateSubTab('cont_style');
+                global $DIC;
+                $settings_gui = $DIC->contentStyle()->gui()->objectSettingsGUIForRefId(null, $this->ref_id);
+                $this->ctrl->forwardCommand($settings_gui);
+                break;
+            // uni-freiburg-patch: end dc content style
             default:
                 switch ($cmd) {
                     case 'edit': // this is necessary because ilObjectGUI only calls its own editObject (why??)
@@ -500,9 +514,29 @@ class ilObjDataCollectionGUI extends ilObject2GUI
 
         $dataCollectionTemplate->setContent($form->getHTML());
     }
+    // uni-freiburg-patch: begin dc content style
+    protected function setEditTabs(): void
+    {
+        $this->tabs->addSubTab(
+            'general',
+            $this->lng->txt('general'),
+            $this->ctrl->getLinkTargetByClass(self::class, 'edit')
+        );
+        $this->tabs->addSubTab(
+            'cont_style',
+            $this->lng->txt('cont_style'),
+            $this->ctrl->getLinkTargetByClass(ilObjectContentStyleSettingsGUI::class)
+        );
+        $this->tabs->activateSubTab('general');
+    }
+    // uni-freiburg-patch: end dc content style
 
     protected function initEditForm(): ilPropertyFormGUI
     {
+        // uni-freiburg-patch: begin dc content style
+        $this->setEditTabs();
+        $this->tabs->activateSubTab('general');
+        // uni-freiburg-patch: end dc content style
         $this->tabs->activateTab(self::TAB_EDIT_DCL);
 
         $form = new ilPropertyFormGUI();

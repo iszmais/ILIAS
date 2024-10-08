@@ -93,6 +93,9 @@ class ilDclDetailedViewDefinitionGUI extends ilPageObjectGUI
 
     public function showPage(): string
     {
+        // uni-freiburg-patch: begin dc content style
+        $this->tpl->addCss(ilObjStyleSheet::getContentStylePath($this->getStyleId()));
+        // uni-freiburg-patch: end dc content style
         if ($this->getOutputMode() == ilPageObjectGUI::EDIT) {
             $delete_button = ilLinkButton::getInstance();
             $delete_button->setCaption('dcl_empty_detailed_view');
