@@ -18,20 +18,24 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Component\Input\Container\Form\Form;
+
 class ilDclTableEditGUI
 {
     private ?int $table_id;
     private ilDclTable $table;
     protected \ILIAS\UI\Factory $ui_factory;
+    protected \ILIAS\UI\Renderer $ui_renderer;
     protected ilLanguage $lng;
     protected ilCtrl $ctrl;
     protected ilGlobalTemplateInterface $tpl;
     protected ilToolbarGUI $toolbar;
     protected ilPropertyFormGUI $form;
+    protected int $obj_id;
     protected ILIAS\HTTP\Services $http;
     protected ILIAS\Refinery\Factory $refinery;
     protected ilDclTableListGUI $parent_object;
-    protected int $obj_id;
+
 
     /**
      * Constructor
@@ -51,6 +55,7 @@ class ilDclTableEditGUI
         $this->http = $DIC->http();
         $this->refinery = $DIC->refinery();
         $this->ui_factory = $DIC->ui()->factory();
+        $this->ui_renderer = $DIC->ui()->renderer();
 
         $table_id = null;
         if ($this->http->wrapper()->query()->has("table_id")) {
@@ -76,14 +81,7 @@ class ilDclTableEditGUI
     {
         $cmd = $this->ctrl->getCmd();
 
-        switch ($cmd) {
-            case 'update':
-                $this->save("update");
-                break;
-            default:
-                $this->$cmd();
-                break;
-        }
+        $this->$cmd();
     }
 
     public function create(): void
@@ -91,6 +89,91 @@ class ilDclTableEditGUI
         $this->initForm();
         $this->getStandardValues();
         $this->tpl->setContent($this->form->getHTML());
+    }
+
+    private function initNewForm(): Form
+    {
+        $fields = array_filter($this->table->getFields(), function (ilDclBaseFieldModel $field) {
+            return !is_null($field->getRecordQuerySortObject());
+        });
+        $options = [0 => $this->lng->txt('dcl_please_select')];
+        foreach ($fields as $field) {
+            if ($field->getId() == 'comments') {
+                continue;
+            }
+            $options[$field->getId()] = $field->getTitle();
+        }
+
+        $input_field = $this->ui_factory->input()->field();
+        $form = $this->ui_factory->input()->container()->form();
+        $title = $input_field->text("Title")->withRequired(true)->withValue($this->table->getTitle());
+        $sort_field = $input_field->select("Default sort field", $options, "The table will be sorted by this field by default")
+            ->withValue($this->table->getDefaultSortField());
+        $sort_order = $input_field->select("Default sort field order", ['asc' => $this->lng->txt('dcl_asc'), 'desc' => $this->lng->txt('dcl_desc')])
+            ->withValue($this->table->getDefaultSortFieldOrder());
+        $markdown = $input_field->markdown(new ilUIMarkdownPreviewGUI(), "Additional Information")->withValue($this->table->getDescription());
+        $edit_inputs = [
+            "title" => $title,
+            "sort_by" => $sort_field,
+            "sort_order" => $sort_order,
+            "description" => $markdown
+        ];
+        $edit_section = $input_field->section($edit_inputs, "Edit Table Settings");
+
+        $user_add_entries = $input_field->checkbox("User can add entries")->withValue($this->table->getAddPerm());
+        $save_confirmation = $input_field->checkbox("Save confirmation")->withValue($this->table->getSaveConfirmation());
+        $user_can_edit_radio = $input_field->radio("")
+            ->withOption("all", "All entries")
+            ->withOption("own", "Only Own Entries");
+        if ($this->table->getEditPerm()) {
+            $user_can_edit_radio = $user_can_edit_radio->withValue("all");
+            $user_can_edit = $input_field->optionalGroup(["delete" => $user_can_edit_radio], "User can delete entries");
+        } elseif ($this->table->getEditByOwner()) {
+            $user_can_edit_radio = $user_can_edit_radio->withValue("own");
+            $user_can_edit = $input_field->optionalGroup(["delete" => $user_can_edit_radio], "User can delete entries");
+        } else {
+            $user_can_edit = $input_field->optionalGroup(["delete" => $user_can_edit_radio], "User can delete entries")->withValue(null);
+        }
+
+        $user_can_delete_radio = $input_field->radio("")
+            ->withOption("all", "All entries")
+            ->withOption("own", "Only Own Entries");
+        if ($this->table->getDeletePerm()) {
+            $user_can_delete_radio = $user_can_delete_radio->withValue("all");
+            $user_can_delete = $input_field->optionalGroup(["delete" => $user_can_delete_radio], "User can delete entries");
+        } elseif ($this->table->getDeleteByOwner()) {
+            $user_can_delete_radio = $user_can_delete_radio->withValue("own");
+            $user_can_delete = $input_field->optionalGroup(["delete" => $user_can_delete_radio], "User can delete entries");
+        } else {
+            $user_can_delete = $input_field->optionalGroup(["delete" => $user_can_delete_radio], "User can delete entries")->withValue(null);
+        }
+
+        $view_only_own = $input_field->checkbox("View only own entries");
+        $allow_export = $input_field->checkbox("Allow Export function for all user")->withValue($this->table->getExportEnabled());
+        $allow_import = $input_field->checkbox("Allow Import function for all user")->withValue($this->table->getImportEnabled());
+        if ($this->table->getLimitStart() === "" && $this->table->getLimitEnd() === "") {
+            $start_date = $input_field->dateTime("Start")->withValue(null);
+            $end_date = $input_field->dateTime("End")->withValue(null);
+            $limited_action_period = $input_field->optionalGroup(["start" => $start_date, "end" => $end_date], "Limited Add / Edit / Delete Period")->withValue(null);
+        } else {
+            $start_date = $input_field->dateTime("Start")->withValue($this->table->getLimitStart());
+            $end_date = $input_field->dateTime("End")->withValue($this->table->getLimitEnd());
+            $limited_action_period = $input_field->optionalGroup(["start" => $start_date, "end" => $end_date], "Limited Add / Edit / Delete Period");
+        }
+
+        $user_action_inputs = [
+            "user_add_entries" => $user_add_entries,
+            "confirm_save" => $save_confirmation,
+            "user_edit_entries" => $user_can_edit,
+            "user_delete_entries" => $user_can_delete,
+            "view_only_own" => $view_only_own,
+            "allow_export" => $allow_export,
+            "allow_import" => $allow_import,
+            "limited_action_period" => $limited_action_period,
+        ];
+        $user_action_section = $input_field->section($user_action_inputs, "User Actions");
+
+        return $form->standard($this->ctrl->getFormAction($this, "update"), ["edit" => $edit_section, "user" => $user_action_section]);
     }
 
     public function edit(): void
@@ -104,7 +187,8 @@ class ilDclTableEditGUI
         }
         $this->initForm("edit");
         $this->getValues();
-        $this->tpl->setContent($this->form->getHTML());
+        $newForm = $this->initNewForm();
+        $this->tpl->setContent($this->ui_renderer->render($newForm));
     }
 
     public function getValues(): void
@@ -460,5 +544,34 @@ class ilDclTableEditGUI
             $ref_id,
             $this->table_id
         ) : ilObjDataCollectionAccess::hasWriteAccess($ref_id);
+    }
+
+    private function update(): void
+    {
+        $newForm = $this->initNewForm()->withRequest($this->http->request());
+        $data = $newForm->getData();
+        $this->table->setTitle($data["edit"]["title"]);
+        $this->table->setDefaultSortField($data["edit"]["sort_by"]);
+        $this->table->setDefaultSortFieldOrder($data["edit"]["sort_order"]);
+        $this->table->setDescription($data["edit"]["description"]);
+        $this->table->setAddPerm($data["user"]["user_add_entries"]);
+        $this->table->setSaveConfirmation($data["user"]["confirm_save"]);
+        $this->table->setEditPerm((bool) $data["user"]["user_edit_entries"]);
+        $this->table->setEditByOwner(($data["user"]["user_edit_entries"]["edit"] ?? "") === "own");
+        $this->table->setDeletePerm((bool) $data["user"]["user_delete_entries"]);
+        $this->table->setDeleteByOwner(($data["user"]["user_delete_entries"]["delete"] ?? "") === "own");
+        $this->table->setViewOwnRecordsPerm($data["user"]["view_only_own"]);
+        $this->table->setExportEnabled($data["user"]["allow_export"]);
+        $this->table->setImportEnabled($data["user"]["allow_import"]);
+        if ($data["user"]["limited_action_period"] !== null) {
+            $this->table->setLimited(true);
+            $this->table->setLimitStart($data["user"]["limited_action_period"]["start"]);
+            $this->table->setLimitEnd($data["user"]["limited_action_period"]["end"]);
+        } else {
+            $this->table->setLimited(false);
+        }
+        $this->table->doUpdate();
+        $this->tpl->setOnScreenMessage('success', $this->lng->txt("dcl_msg_table_edited"), true);
+        $this->ctrl->redirectByClass(self::class, "edit");
     }
 }
