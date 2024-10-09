@@ -136,7 +136,7 @@ class ilDclTableEditGUI
         if ($this->table->getEditPerm()) {
             $user_can_edit_radio = $user_can_edit_radio->withValue("all");
             $user_can_edit = $input_field->optionalGroup(["delete" => $user_can_edit_radio], "User can delete entries");
-        } else if ($this->table->getEditByOwner()) {
+        } elseif ($this->table->getEditByOwner()) {
             $user_can_edit_radio = $user_can_edit_radio->withValue("own");
             $user_can_edit = $input_field->optionalGroup(["delete" => $user_can_edit_radio], "User can delete entries");
         } else {
@@ -149,7 +149,7 @@ class ilDclTableEditGUI
         if ($this->table->getDeletePerm()) {
             $user_can_delete_radio = $user_can_delete_radio->withValue("all");
             $user_can_delete = $input_field->optionalGroup(["delete" => $user_can_delete_radio], "User can delete entries");
-        } else if ($this->table->getDeleteByOwner()) {
+        } elseif ($this->table->getDeleteByOwner()) {
             $user_can_delete_radio = $user_can_delete_radio->withValue("own");
             $user_can_delete = $input_field->optionalGroup(["delete" => $user_can_delete_radio], "User can delete entries");
         } else {
@@ -204,18 +204,18 @@ class ilDclTableEditGUI
     {
         $values = [
             'title' => $this->table->getTitle(),
-            'add_perm' => (int)$this->table->getAddPerm(),
-            'edit_perm' => (int)$this->table->getEditPerm(),
+            'add_perm' => (int) $this->table->getAddPerm(),
+            'edit_perm' => (int) $this->table->getEditPerm(),
             'edit_perm_mode' => $this->table->getEditByOwner() ? 'own' : 'all',
-            'delete_perm' => (int)$this->table->getDeletePerm(),
+            'delete_perm' => (int) $this->table->getDeletePerm(),
             'delete_perm_mode' => $this->table->getDeleteByOwner() ? 'own' : 'all',
             'export_enabled' => $this->table->getExportEnabled(),
             'import_enabled' => $this->table->getImportEnabled(),
             'limited' => $this->table->getLimited(),
             'limit_start' => substr($this->table->getLimitStart(), 0, 10) . " " . substr(
-                    $this->table->getLimitStart(),
-                    -8
-                ),
+                $this->table->getLimitStart(),
+                -8
+            ),
             'limit_end' => substr($this->table->getLimitEnd(), 0, 10) . " " . substr($this->table->getLimitEnd(), -8),
             'default_sort_field' => $this->table->getDefaultSortField(),
             'default_sort_field_order' => $this->table->getDefaultSortFieldOrder(),
@@ -388,7 +388,7 @@ class ilDclTableEditGUI
         $ilTabs->activateTab("id_fields");
         $this->initForm($a_mode);
 
-//        dd($this->checkInput($a_mode),$a_mode,$this->table_id);
+        //        dd($this->checkInput($a_mode),$a_mode,$this->table_id);
 
         if ($this->checkInput($a_mode)) {
             if ($a_mode != "update") {
@@ -402,27 +402,27 @@ class ilDclTableEditGUI
 
             $this->table->setTitle($this->form->getInput("title"));
             $this->table->setObjId($this->obj_id);
-            $this->table->setSaveConfirmation((bool)$this->form->getInput('save_confirmation'));
-            $this->table->setAddPerm((bool)$this->form->getInput("add_perm"));
-            $this->table->setEditPerm((bool)$this->form->getInput("edit_perm"));
+            $this->table->setSaveConfirmation((bool) $this->form->getInput('save_confirmation'));
+            $this->table->setAddPerm((bool) $this->form->getInput("add_perm"));
+            $this->table->setEditPerm((bool) $this->form->getInput("edit_perm"));
             if ($this->table->getEditPerm()) {
                 $edit_by_owner = ($this->form->getInput('edit_perm_mode') == 'own');
                 $this->table->setEditByOwner($edit_by_owner);
             }
-            $this->table->setDeletePerm((bool)$this->form->getInput("delete_perm"));
+            $this->table->setDeletePerm((bool) $this->form->getInput("delete_perm"));
             if ($this->table->getDeletePerm()) {
                 $delete_by_owner = ($this->form->getInput('delete_perm_mode') == 'own');
                 $this->table->setDeleteByOwner($delete_by_owner);
             }
-            $this->table->setViewOwnRecordsPerm((bool)$this->form->getInput('view_own_records_perm'));
-            $this->table->setExportEnabled((bool)$this->form->getInput("export_enabled"));
-            $this->table->setImportEnabled((bool)$this->form->getInput("import_enabled"));
+            $this->table->setViewOwnRecordsPerm((bool) $this->form->getInput('view_own_records_perm'));
+            $this->table->setExportEnabled((bool) $this->form->getInput("export_enabled"));
+            $this->table->setImportEnabled((bool) $this->form->getInput("import_enabled"));
             $this->table->setDefaultSortField($this->form->getInput("default_sort_field"));
             $this->table->setDefaultSortFieldOrder($this->form->getInput("default_sort_field_order"));
-            $this->table->setLimited((bool)$this->form->getInput("limited"));
+            $this->table->setLimited((bool) $this->form->getInput("limited"));
             $this->table->setDescription($this->form->getInput('description'));
-            $this->table->setLimitStart((string)$this->form->getInput("limit_start"));
-            $this->table->setLimitEnd((string)$this->form->getInput("limit_end"));
+            $this->table->setLimitStart((string) $this->form->getInput("limit_start"));
+            $this->table->setLimitEnd((string) $this->form->getInput("limit_end"));
             if ($a_mode == "update") {
                 $this->table->doUpdate();
                 $this->tpl->setOnScreenMessage('success', $this->lng->txt("dcl_msg_table_edited"), true);
@@ -476,7 +476,7 @@ class ilDclTableEditGUI
         $conf->setFormAction($this->ctrl->getFormAction($this));
         $conf->setHeaderText($this->lng->txt('dcl_confirm_delete_table'));
 
-        $conf->addItem('table', (string)$this->table->getId(), $this->table->getTitle());
+        $conf->addItem('table', (string) $this->table->getId(), $this->table->getTitle());
 
         $conf->setConfirm($this->lng->txt('delete'), 'delete');
         $conf->setCancel($this->lng->txt('cancel'), 'cancelDelete');
@@ -569,9 +569,9 @@ class ilDclTableEditGUI
         $this->table->setDescription($data["edit"]["description"]);
         $this->table->setAddPerm($data["user"]["user_add_entries"]);
         $this->table->setSaveConfirmation($data["user"]["confirm_save"]);
-        $this->table->setEditPerm((bool)$data["user"]["user_edit_entries"]);
+        $this->table->setEditPerm((bool) $data["user"]["user_edit_entries"]);
         $this->table->setEditByOwner(($data["user"]["user_edit_entries"]["edit"] ?? "") === "own");
-        $this->table->setDeletePerm((bool)$data["user"]["user_delete_entries"]);
+        $this->table->setDeletePerm((bool) $data["user"]["user_delete_entries"]);
         $this->table->setDeleteByOwner(($data["user"]["user_delete_entries"]["delete"] ?? "") === "own");
         $this->table->setViewOwnRecordsPerm($data["user"]["view_only_own"]);
         $this->table->setExportEnabled($data["user"]["allow_export"]);
