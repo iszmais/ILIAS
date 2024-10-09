@@ -31,6 +31,7 @@ class ilDclTableEditGUI
     protected ilGlobalTemplateInterface $tpl;
     protected ilToolbarGUI $toolbar;
     protected ilPropertyFormGUI $form;
+    protected int $obj_id;
     protected ILIAS\HTTP\Services $http;
     protected ILIAS\Refinery\Factory $refinery;
     protected ilDclTableListGUI $parent_object;
@@ -76,20 +77,11 @@ class ilDclTableEditGUI
         }
     }
 
-    protected int $obj_id;
-
     public function executeCommand(): void
     {
         $cmd = $this->ctrl->getCmd();
 
-        switch ($cmd) {
-            case 'update':
-                $this->update();
-                break;
-            default:
-                $this->$cmd();
-                break;
-        }
+        $this->$cmd();
     }
 
     public function create(): void
@@ -169,7 +161,6 @@ class ilDclTableEditGUI
             $limited_action_period = $input_field->optionalGroup(["start" => $start_date, "end" => $end_date], "Limited Add / Edit / Delete Period");
         }
 
-        //😭
         $user_action_inputs = [
             "user_add_entries" => $user_add_entries,
             "confirm_save" => $save_confirmation,
@@ -375,7 +366,6 @@ class ilDclTableEditGUI
 
     public function save(string $a_mode = "create"): void
     {
-        //TODO update method to load own form
         global $DIC;
         $ilTabs = $DIC['ilTabs'];
 
@@ -388,13 +378,10 @@ class ilDclTableEditGUI
         $ilTabs->activateTab("id_fields");
         $this->initForm($a_mode);
 
-        //        dd($this->checkInput($a_mode),$a_mode,$this->table_id);
-
         if ($this->checkInput($a_mode)) {
             if ($a_mode != "update") {
                 $this->table = ilDclCache::getTableCache();
             } elseif ($this->table_id) {
-                // we get here
                 $this->table = ilDclCache::getTableCache($this->table_id);
             } else {
                 $this->ctrl->redirectByClass("ildclfieldeditgui", "listFields");
