@@ -552,6 +552,9 @@ assessment#:#backtocallingpage#:#Back to the question page
 assessment#:#backtocallingpool#:#Back to the question pool
 assessment#:#backtocallingtest#:#Back to the test
 assessment#:#baseunit#:#Base Unit
+assessment#:#bulkedit_author#:#Set Author
+assessment#:#bulkedit_lifecycle#:#Set Lifecycle
+assessment#:#bulkedit_taxonomies#:#Set Taxonomies
 assessment#:#button_request_next_question_hint#:#Request Next Hint
 assessment#:#button_request_question_hint#:#Request Hint
 assessment#:#cancel_test#:#Suspend the Test
@@ -1005,6 +1008,9 @@ assessment#:#previous_question_rows#:#<< Questions %d - %d of %d
 assessment#:#qpl_assessment_no_assessment_of_questions#:#There is no assessment of questions available for the selected question. The question has not yet been used in a test.
 assessment#:#qpl_assessment_total_of_answers#:#Total of Answers
 assessment#:#qpl_assessment_total_of_right_answers#:#Total Percentage of Correct Answers (percentage of maximum points)
+assessment#:#qpl_bulk_save_add#:#Add
+assessment#:#qpl_bulk_save_overwrite#:#Overwrite
+assessment#:#qpl_bulkedit_success#:#Modifications saved.
 assessment#:#qpl_cancel_skill_assigns_update#:#Cancel
 assessment#:#qpl_confirm_delete_questions#:#Are you sure you want to remove the following questions?
 assessment#:#qpl_copy_insert_clipboard#:#The selected question(s) are copied to the clipboard
@@ -2877,7 +2883,7 @@ chatroom#:#autogen_usernames#:#Auto Generated User Names
 chatroom#:#autogen_usernames_info#:#Pattern for auto generated user names that is assigned to anonymous user accounts. ‘#’ will be automatically replaced by a number.
 chatroom#:#ban_question#:#Do you really want to ban the user from chat?
 chatroom#:#ban_table_title#:#Banned Users
-chatroom#:#banned#:#You have been banned from this chat room
+chatroom#:#banned#:#You have been banned from this chat room.
 chatroom#:#bans#:#Bans
 chatroom#:#chat_address#:#Address
 chatroom#:#chat_anonymous_not_allowed#:#Please login to use the chat.
@@ -2885,8 +2891,8 @@ chatroom#:#chat_auth_token_info#:#Please define unique strings used by ILIAS for
 chatroom#:#chat_ban#:#Ban
 chatroom#:#chat_broadcast_typing#:#Broadcast Typing
 chatroom#:#chat_broadcast_typing_info#:#If enabled, your typing will be broadcasted to other participants of a conversation or chat room.
-chatroom#:#chat_connection_disconnected#:#--- <b>#username#</b> left the chat room ---
-chatroom#:#chat_connection_established#:#+++ <b>#username#</b> has entered chat room +++
+chatroom#:#chat_connection_disconnected#:##username# left the chat room.
+chatroom#:#chat_connection_established#:##username# has entered chat room.
 chatroom#:#chat_deletion_disabled#:#Disabled
 chatroom#:#chat_deletion_interval#:#Interval
 chatroom#:#chat_deletion_interval_info#:#If chosen, messages in the repository chat and On-Screen-Chat conversations will be deleted after the defined threshold.
@@ -2918,7 +2924,6 @@ chatroom#:#chat_mainroom#:#Main Room
 chatroom#:#chat_message#:#Message
 chatroom#:#chat_message_display#:#Options
 chatroom#:#chat_message_options#:#Display
-chatroom#:#chat_message_to_all#:#To All
 chatroom#:#chat_no_use_typing_broadcast#:#Typing will not be broadcasted
 chatroom#:#chat_not_use_osc#:#Not Using On-Screen-Chat
 chatroom#:#chat_osc_accept_msg#:#Allow On-Screen Chat Conversations
@@ -3008,11 +3013,11 @@ chatroom#:#invite_to_private_room#:#Invite to Chat Room
 chatroom#:#invite_username#:#Username
 chatroom#:#key#:#Key
 chatroom#:#kick_question#:#Do you really want to kick the user from chat?
-chatroom#:#kicked#:#You have been kicked from this chat room
+chatroom#:#kicked#:#You have been kicked from this chat room.
 chatroom#:#lost_connection#:#The connection to the chat server was interrupted.
 chatroom#:#main#:#Main Room
 chatroom#:#messages#:#Messages
-chatroom#:#no_further_users#:#No other users present
+chatroom#:#no_further_users#:#No other users present.
 chatroom#:#no_messages#:#There are no saved messages for the given period.
 chatroom#:#no_username_given#:#Please choose a username
 chatroom#:#osc_browser_noti_no_permission_error#:#Please remove this domain from the list of blocked domains in the notification settings of your browser or operating system. Otherwise you will not be able to receive browser notifications.
@@ -3031,17 +3036,17 @@ chatroom#:#server_further_information#:#You can find further information about t
 chatroom#:#session#:#Session
 chatroom#:#settings_general#:#General
 chatroom#:#settings_title#:#Settings
-chatroom#:#speak_to#:#Speak to <b>#user#</b>
+chatroom#:#start_private_chat#:#Start Private Chat
 chatroom#:#unable_to_connect#:#The connection to the chat server could not be established.
 chatroom#:#unban#:#Unban
+chatroom#:#user_banned#:#The user #user# has been banned.
 chatroom#:#user_in_ilias#:#Search and invite user from ILIAS
 chatroom#:#user_in_room#:#Invite user from current chat room
 chatroom#:#user_invited#:#The user has been invited.
-chatroom#:#user_invited_self#:#<b>#user#</b> invited you to the chat room <b>#room#</b>.
-chatroom#:#user_kicked#:#The user <b>#user#</b> has been kicked.
+chatroom#:#user_invited_self#:##user# invited you to the chat room #room#.
+chatroom#:#user_kicked#:#The user #user# has been kicked.
 chatroom#:#users#:#Users
-chatroom#:#welcome_to_chat#:#Welcome to the chat room
-chatroom#:#whisper_to#:#Whisper to <b>#user#</b>
+chatroom#:#welcome_to_chat#:#Welcome to the chat room.
 chatroom#:#write_message#:#New Message
 chatroom_adm#:#chat_cannot_connect_to_server#:#ILIAS cannot build a socket connection to the chat server.
 chatroom_adm#:#chat_enabled#:#Enable Chat
@@ -9067,6 +9072,7 @@ ecs#:#ecs_protocol#:#Protocol
 ecs#:#ecs_publish_as#:#Publish as:
 ecs#:#ecs_publish_for#:#Release for:
 ecs#:#ecs_published_for#:#Published for:
+ecs#:#ecs_rcat_created_body_a#:#A new ECS Category has been created:
 ecs#:#ecs_rcrs_created_body_a#:#A new ECS Course has been created:
 ecs#:#ecs_read_remote_links#:#Update ECS Courses
 ecs#:#ecs_refresh_participants#:#Refresh ECS-Participants
@@ -13214,6 +13220,7 @@ prg#:#prg_auto_member_select_crs#:#Courses
 prg#:#prg_auto_member_select_grp#:#Groups
 prg#:#prg_auto_member_select_role#:#Roles
 prg#:#prg_autoassignment#:#(auto)
+prg#:#prg_availability_action_not_allowed#:#Cannot set Availability Period on Study Programmes.
 prg#:#prg_belongs_to#:#Belongs to
 prg#:#prg_can_not_manage_in_repo#:#You're not allowed to manage this Study Programme, because of user assignments.
 prg#:#prg_cancel#:#Cancel
@@ -13230,6 +13237,7 @@ prg#:#prg_create_new_leaf#:#Create new leaf
 prg#:#prg_create_new_node#:#Create new node
 prg#:#prg_cron_job_configuration#:#Configuration automatic Mails
 prg#:#prg_custom_plan#:#Custom Plan
+prg#:#prg_cut_action_not_allowed#:#Cannot move Study Programmes
 prg#:#prg_dash_label_finish_until#:#Finish until
 prg#:#prg_dash_label_gain#:#Current Completion
 prg#:#prg_dash_label_minimum#:#Minimum Completion
@@ -13256,6 +13264,7 @@ prg#:#prg_description#:#Description
 prg#:#prg_edit#:#Edit Study Programme
 prg#:#prg_expiry_date#:#Expiry date
 prg#:#prg_formatted_period#:#%d days
+prg#:#prg_import_action_not_allowed#:#Cannot import into Study Programmes.
 prg#:#prg_invalidate_expired_progresses_desc#:#Marks expired progresses at Studyprogrammes as 'not passed'
 prg#:#prg_invalidate_expired_progresses_title#:#Limited validity of Studyprogramme progress
 prg#:#prg_link#:#Link
@@ -15155,7 +15164,6 @@ search#:#lucene_port#:#Port
 search#:#lucene_prefix_wildcard#:#Prefix Wildcard Queries
 search#:#lucene_prefix_wildcard_info#:#Supports prefix wildcard queries: ‘*LIAS’ finds ‘ILIAS’
 search#:#lucene_relevance#:#Relevance of Search Results
-search#:#lucene_relevance_short#:#Relevance
 search#:#lucene_settings_tab#:#Lucene
 search#:#lucene_settings_title#:#Lucene Settings
 search#:#lucene_show_relevance#:#Show Relevance
@@ -15227,6 +15235,14 @@ search#:#search_show_inactive_user#:#Show Inactive Users
 search#:#search_show_inactive_user_info#:#If enabled, the user search will show inactive users, too.
 search#:#search_show_limited_user#:#Show Users with Limited Access
 search#:#search_show_limited_user_info#:#If enabled, the user search will also show users with limited access outside their allowed time period.
+search#:#search_sort_by#:#Sortation: %s
+search#:#search_sort_creation_date_asc#:#Oldest
+search#:#search_sort_creation_date_desc#:#Latest
+search#:#search_sort_generic_asc#:#%s, asc.
+search#:#search_sort_generic_desc#:#%s, desc.
+search#:#search_sort_relevance#:#By Relevance
+search#:#search_sort_title_asc#:#Alphabetically: A-Z
+search#:#search_sort_title_desc#:#Alphabetically: Z-A
 search#:#search_term_combination#:#Combination
 search#:#search_title_description#:#Title / Description
 search#:#search_tst_svy#:#Tests/Surveys
@@ -16029,7 +16045,7 @@ survey#:#SurveyTextQuestion#:#Essay
 survey#:#add_heading#:#Add Heading
 survey#:#already_completed_survey#:#You have already finished the survey! You are not able to enter the survey again.
 survey#:#anonymization#:#Anonymization
-survey#:#anonymize_anonymous_introduction#:#To grant you access to the survey, you must use a 5-character survey code which you can receive from the creator/maintainer of this survey.<br />Please enter it in the text field above.
+survey#:#anonymize_anonymous_introduction#:#To grant you access to the survey, you must use a 5-character survey code which you can receive from the creator/maintainer of this survey.
 survey#:#answer#:#Answer
 survey#:#arithmetic_mean#:#Arithmetic Mean
 survey#:#browse_for_questions#:#Add from Pool
@@ -16318,8 +16334,8 @@ survey#:#survey_360_add_external_rater#:#Add External Rater
 survey#:#survey_360_add_self_appraisee#:#Add yourself as appraisee to this survey
 survey#:#survey_360_appraisee#:#Appraisee
 survey#:#survey_360_appraisee_close_action#:#Close Survey For Raters
-survey#:#survey_360_appraisee_close_action_info#:#This will give access to your statistics.
-survey#:#survey_360_appraisee_close_action_info_skill#:#This will give access to your statistics and update your competence levels.
+survey#:#survey_360_appraisee_close_action_info#:#Closing the survey for raters will finalise the survey results and give you access to the results.
+survey#:#survey_360_appraisee_close_action_info_skill#:#Closing the survey for raters will finalise the survey results, give you access to the results and update your competence levels.
 survey#:#survey_360_appraisee_close_action_status#:#Survey was closed on %s.
 survey#:#survey_360_appraisee_close_action_success#:#You have closed your 360° survey for your raters.
 survey#:#survey_360_appraisee_close_action_success_admin#:#The 360° surveys of the appraisees were closed for the raters.
@@ -16332,7 +16348,8 @@ survey#:#survey_360_mode#:#360° Feedback
 survey#:#survey_360_mode_info#:#Use for peer-reviewing of persons
 survey#:#survey_360_no_appraisees#:#There are currently no appraisees for you to rate.
 survey#:#survey_360_no_closed_appraisees#:#No appraisee has closed his survey yet.
-survey#:#survey_360_rate_other_appraisees#:#Rate appraisees
+survey#:#survey_360_rate_other_appraisee#:#Rate Appraisee
+survey#:#survey_360_rate_other_appraisees#:#Rate Appraisees
 survey#:#survey_360_rater_finished#:#Survey Finished
 survey#:#survey_360_rater_mail_sent#:#Mail sent
 survey#:#survey_360_rater_message_content_anonymous#:#Message Content (Anonymous)
@@ -16621,12 +16638,16 @@ survey#:#warning_question_not_complete#:#The question is not complete!
 survey#:#workingtime#:#Working time
 svy#:#survey_360_appraisees_remind_info#:#If self evaluation is activated, appraisees that have not yet finished the survey will be reminded.
 svy#:#survey_360_raters_remind_info#:#Raters that have not yet finished the survey will be reminded.
+svy#:#svy_0_open_appraisees#:#You cannot perform the survey for any appraisee anymore.
 svy#:#svy_all_pages#:#All Pages
 svy#:#svy_all_participants#:#All Participants
 svy#:#svy_all_questions#:#All Questions
+svy#:#svy_code#:#Access Code
 svy#:#svy_codes#:#Access Codes
 svy#:#svy_current_page#:#Current Page
 svy#:#svy_finish_survey#:#Finish survey '%1'
+svy#:#svy_finished_x_appraisees#:#You have finished the survey for %s appraisee(s).
+svy#:#svy_information#:#Information
 svy#:#svy_invite_participants#:#Invite Participants
 svy#:#svy_link_to_svy#:#Link to Survey
 svy#:#svy_part_overview#:#Overview
@@ -16649,6 +16670,11 @@ svy#:#svy_user_added_rater_mail#:#You have been added as a rater to the survey.
 svy#:#svy_user_added_rater_reminder_mail#:#Please finish to rate the following appraisees:
 svy#:#svy_user_not_found#:#User not found.
 svy#:#svy_users_invited#:#Users have been invited.
+svy#:#svy_x_appraisees_closed_for_raters#:#%s appraisee(s) has/have closed the survey for raters.
+svy#:#svy_x_open_appraisees#:#%s appraisee(s) are open for you to rate.
+svy#:#svy_your_appraisees#:#Your Appraisees
+svy#:#svy_your_raters#:#Your Raters
+svy#:#svy_your_raters_finished#:#%s of your raters have finished the survey.
 sysc#:#sysc_action_list_tree#:#Create Repository Tree Dump
 sysc#:#sysc_action_repair#:#Repair
 sysc#:#sysc_action_show_tree#:#Show Repository Tree Dump
@@ -16710,6 +16736,7 @@ tagging#:#tagging_enable_all_users_info#:#Adds a section ‘All Users’ to the 
 tagging#:#tagging_enable_tagging#:#Enable Tagging
 tagging#:#tagging_forbidden_tags#:#Forbidden Tags
 tagging#:#tagging_no_obj_for_tag#:#No Resources tagged with %s.
+tagging#:#tagging_no_perm_write#:#You have no permission to change this data.
 tagging#:#tagging_other_users#:#Tags of Other Users
 tagging#:#tagging_resources_for_tag#:#Resources tagged with %s
 tagging#:#tagging_search_users#:#Search Users
