@@ -122,7 +122,12 @@ class ilPersonalSettingsGUI
                 $this->setHeader();
                 $this->ctrl->forwardCommand(new ilMailOptionsGUI());
                 break;
-
+            case strtolower(ilNotificationsSettingsGUI::class):
+                $this->setHeader();
+                $this->initSubTabs($this->ctrl->getCmd());
+                $this->tabs->activateTab('push_settings');
+                $this->ctrl->forwardCommand(new ilNotificationsSettingsGUI());
+                break;
             default:
                 $cmd = $this->ctrl->getCmd('showGeneralSettings');
                 $this->$cmd();
@@ -175,6 +180,15 @@ class ilPersonalSettingsGUI
                 'delacc',
                 $this->lng->txt('user_delete_own_account'),
                 $this->ctrl->getLinkTarget($this, 'deleteOwnAccountStep1')
+            );
+        }
+
+        if ((new ilSetting('notifications'))->get('enable_push')) {
+            $this->lng->loadLanguageModule('notifications_adm');
+            $this->tabs->addTab(
+                'push_settings',
+                $this->lng->txt('push_settings'),
+                $this->ctrl->getLinkTargetByClass(ilNotificationsSettingsGUI::class, 'userSettings')
             );
         }
     }

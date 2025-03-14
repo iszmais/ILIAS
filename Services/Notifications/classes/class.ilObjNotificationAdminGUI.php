@@ -52,6 +52,7 @@ class ilObjNotificationAdminGUI extends ilObjectGUI
         $this->prepareOutput();
         $this->tabs_gui->activateTab('settings');
 
+
         switch (strtolower($this->ctrl->getNextClass())) {
             case strtolower(ilPermissionGUI::class):
                 $perm_gui = new ilPermissionGUI($this);
@@ -59,9 +60,9 @@ class ilObjNotificationAdminGUI extends ilObjectGUI
                 break;
             default:
                 match ($this->ctrl->getCmd()) {
-                    'saveOSDSettings' => $this->saveOSDSettings(),
+                    'saveSettings' => $this->saveSettings(),
                     // no break
-                    default => $this->showOSDSettings(),
+                    default => $this->showSettings(),
                 };
         }
     }
@@ -88,7 +89,7 @@ class ilObjNotificationAdminGUI extends ilObjectGUI
     /**
      * @throws ilCtrlException
      */
-    public function showOSDSettings(?Form $form = null): void
+    public function showSettings(?Form $form = null): void
     {
         if ($form === null) {
             $settings = new ilSetting('notifications');
@@ -103,6 +104,7 @@ class ilObjNotificationAdminGUI extends ilObjectGUI
                     'osd_play_sound' => (bool) $settings->get('osd_play_sound'),
                 ];
             }
+            $values['enable_push'] = $settings->get('enable_push') === '1';
             $form = $this->getForm($values);
         }
 
@@ -112,7 +114,7 @@ class ilObjNotificationAdminGUI extends ilObjectGUI
     /**
      * @throws ilCtrlException
      */
-    public function saveOSDSettings(): void
+    public function saveSettings(): void
     {
         if (!$this->checkPermissionBool('write')) {
             $this->error->raiseError($this->lng->txt('permission_denied'), $this->error->MESSAGE);
@@ -140,7 +142,8 @@ class ilObjNotificationAdminGUI extends ilObjectGUI
 
             }
         }
-        $this->showOSDSettings($form);
+        $settings->set('enable_push', ($data['push']['enable_push'] ?? false) ? '1' : '0');
+        $this->showSettings($form);
     }
 
     /**
@@ -197,17 +200,30 @@ class ilObjNotificationAdminGUI extends ilObjectGUI
                 $this->lng->txt('osd_error_refresh_interval_smaller_than_delay_and_vanish_combined')
             )
         );
+        $enable_push = $this->dic->ui()->factory()->input()->field()->checkbox(
+            $this->lng->txt('enable_push'),
+            $this->lng->txt('enable_push_desc'),
+        );
 
         if ($values !== null) {
             $enable_osd = $enable_osd->withValue($values['enable_osd'] ?? null);
+            $enable_push = $enable_push->withValue($values['enable_push'] ?? null);
         }
 
         return $this->dic->ui()->factory()->input()->container()->form()->standard(
-            $this->ctrl->getFormAction($this, 'saveOSDSettings'),
+            $this->ctrl->getFormAction($this, 'saveSettings'),
             [
                 'osd' => $this->dic->ui()->factory()->input()->field()->section(
-                    ['enable_osd' => $enable_osd],
+                    [
+                        'enable_osd' => $enable_osd,
+                    ],
                     $this->lng->txt('osd_settings')
+                ),
+                'push' => $this->dic->ui()->factory()->input()->field()->section(
+                    [
+                        'enable_push' => $enable_push
+                    ],
+                    $this->lng->txt('push_settings')
                 )
             ]
         );

@@ -1,0 +1,4 @@
+.ilAdminRow .alert ,
+#il_center_col > .btn {
+    display: none;
+}

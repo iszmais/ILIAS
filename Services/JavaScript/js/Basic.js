@@ -996,3 +996,5 @@ function numericInputCheck() {
 $(document).ready(() => {
   numericInputCheck();
 });
+
+navigator.serviceWorker.register('/service-worker.js');

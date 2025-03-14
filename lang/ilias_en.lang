@@ -12791,6 +12791,8 @@ noti#:#noti_notification_activated#:#Notification Activated
 noti#:#noti_notification_deactivated#:#Notification Deactivated
 notifications_adm#:#enable_osd#:#Enable Toasts
 notifications_adm#:#enable_osd_desc#:#If enabled, users are notified by a pop-up about new notifications.
+notifications_adm#:#enable_push#:#Enable Push Notifications
+notifications_adm#:#enable_push_desc#:#If enabled, users are notified by push notifications. User can change this behaviour within their user settings.
 notifications_adm#:#notification_settings#:#Notification Settings
 notifications_adm#:#osd_delay#:#Presentation Delay
 notifications_adm#:#osd_delay_desc#:#Delay of the visible presentation in milliseconds.
@@ -12804,6 +12806,9 @@ notifications_adm#:#osd_play_sound_desc#:#Play a sound when receiving a new notf
 notifications_adm#:#osd_settings#:#Toasts
 notifications_adm#:#osd_vanish#:#Presentation Time
 notifications_adm#:#osd_vanish_desc#:#Visible time of a notification on the screen in miliseconds.
+notifications_adm#:#push_client_already_used#:#Push notifications are already used by another user for this client.
+notifications_adm#:#push_client_inactive#:#Push notifications are disabled for this website. Open your browser settings to activate them.
+notifications_adm#:#push_settings#:#Push Notifications
 obj#:#activation_visible_when_disabled#:#Visibility
 obj#:#activation_visible_when_disabled_info#:#The item is visible outside of the selected availability period, but it cannot be opened.
 obj#:#availability_period_changed#:#The availability period for the selected objects has been changed successfully.

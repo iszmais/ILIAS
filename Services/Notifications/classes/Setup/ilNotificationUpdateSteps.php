@@ -199,4 +199,34 @@ class ilNotificationUpdateSteps implements ilDatabaseUpdateSteps
             'value' => [ilDBConstants::T_TEXT, '1']
         ]);
     }
+
+    public function step_12(): void
+    {
+        if (!$this->db->tableExists('push_subscriptions')) {
+            $this->db->createTable(
+                'push_subscriptions',
+                [
+                    "endpoint" => [
+                        'type' => ilDBConstants::T_TEXT,
+                        'notnull' => true,
+                    ],
+                    "user_id" => [
+                        'type' => ilDBConstants::T_INTEGER,
+                        'notnull' => true,
+                    ],
+                    "p256dh" => [
+                        'type' => ilDBConstants::T_TEXT,
+                        'notnull' => true,
+                        'length' => 87
+                    ],
+                    "auth" => [
+                        'type' => ilDBConstants::T_TEXT,
+                        'notnull' => true,
+                        'length' => 22
+                    ],
+                ]
+            );
+            $this->db->addPrimaryKey('push_subscriptions', ['auth']);
+        }
+    }
 }

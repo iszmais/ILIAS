@@ -58,7 +58,7 @@ class ilNotificationUpdateAgent implements Setup\Agent
 
     public function getBuildArtifactObjective(): Setup\Objective
     {
-        return new Setup\Objective\NullObjective();
+        return new PushProviderObjective();
     }
 
     public function getStatusObjective(Setup\Metrics\Storage $storage): Setup\Objective
