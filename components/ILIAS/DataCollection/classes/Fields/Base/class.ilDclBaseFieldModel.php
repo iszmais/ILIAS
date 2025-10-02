@@ -802,4 +802,9 @@ class ilDclBaseFieldModel
 
         return $ilConfirmationGUI;
     }
+
+    public function getDefaultValue(): mixed
+    {
+
+    }
 }

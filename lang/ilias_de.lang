@@ -8571,7 +8571,6 @@ dcl#:#dcl_copy_field#:#Kopie
 dcl#:#dcl_copy_field_desc#:#Kopieren von Auswahloptionen, die in einem anderen Feld einer Tabelle gepflegt werden
 dcl#:#dcl_copy_title#:#Kopie von Tabelle und Feld
 dcl#:#dcl_create_date#:#Erstellungsdatum
-dcl#:#dcl_create_entry_rules#:#Eintragserstellung
 dcl#:#dcl_create_field#:#Feld hinzufügen
 dcl#:#dcl_create_fields#:#Klicken Sie in der Registerkarte „Tabellen“ auf eine Tabelle und erstellen Sie mithilfe des Button „Feld hinzufügen“ neue Felder.
 dcl#:#dcl_creation_date#:#Erstellungsdatum
@@ -8602,9 +8601,9 @@ dcl#:#dcl_display_action_menu#:#Kopieren
 dcl#:#dcl_display_action_menu_desc#:#Das Objekt kann von dem Eintrag aus kopiert werden.
 dcl#:#dcl_display_record_alt#:#Diesen Eintrag anzeigen
 dcl#:#dcl_edit#:#Einstellungen der Datensammlung
-dcl#:#dcl_edit_entry_rules#:#Eintragsbearbeitung
 dcl#:#dcl_edit_field#:#Feld bearbeiten
 dcl#:#dcl_edit_perm#:#Einträge bearbeiten
+dcl#:#dcl_edit_record_settings#:#Eintragseinstellungen bearbeiten
 dcl#:#dcl_edit_table#:#Einstellungen der Tabelle "%s"
 dcl#:#dcl_edit_view#:#Einstellungen der Ansicht "%s"
 dcl#:#dcl_editable_in_table_gui#:#Ein Eintrag kann nur über die Tabellenansicht bewertet werden.
@@ -8662,7 +8661,6 @@ dcl#:#dcl_limited_desc#:#Einträge können nur im Zeitraum zwischen Start und En
 dcl#:#dcl_link_detail_page#:#Link zur Einzelansicht
 dcl#:#dcl_link_detail_page_desc#:#Die Einzelansicht muss zusätzlich für die gewünschten Ansichten im Reiter „Einzelansicht“ aktiviert und konfiguriert werden.
 dcl#:#dcl_list_fields#:#Felder
-dcl#:#dcl_list_visibility_and_filter#:#Übersicht
 dcl#:#dcl_locked#:#Gesperrt
 dcl#:#dcl_locked_tooltip#:#Ein gesperrtes Feld lässt sich von Benutzern nicht mehr bearbeiten. Dies gilt nicht für Rollen mit dem Recht „Einstellungen bearbeiten“.
 dcl#:#dcl_manage#:#Verwalten
@@ -8815,6 +8813,7 @@ dcl#:#dcl_url#:#URL oder E-Mail
 dcl#:#dcl_view_configuration#:#Ansichtskonfiguration
 dcl#:#dcl_view_own_records_perm#:#Nur eigene Einträge anzeigen
 dcl#:#dcl_view_own_records_perm_desc#:#Einträge von anderen Personen werden nicht angezeigt.
+dcl#:#dcl_view_record_settings#:#Eintragseinstellungen
 dcl#:#dcl_view_viewdefinition#:#Vorlage für Einzelansicht
 dcl#:#dcl_visible#:#Für alle Benutzer sichtbar
 dcl#:#dcl_visible_desc#:#Benutzer haben Zugriff auf diese Tabelle.

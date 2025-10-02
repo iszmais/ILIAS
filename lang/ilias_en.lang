@@ -8572,7 +8572,6 @@ dcl#:#dcl_copy_field#:#Copy
 dcl#:#dcl_copy_field_desc#:#Field to copy options stored in a different field of a table.
 dcl#:#dcl_copy_title#:#Copy of table and field
 dcl#:#dcl_create_date#:#Creation Date
-dcl#:#dcl_create_entry_rules#:#Entry Creation
 dcl#:#dcl_create_field#:#Create Field
 dcl#:#dcl_create_fields#:#Click on a table in the tab ‘Tables and create new fields by using the button ‘Add New Field’.
 dcl#:#dcl_creation_date#:#Creation Date
@@ -8605,9 +8604,9 @@ dcl#:#dcl_display_action_menu_desc#:#The object can be copied from the entry.
 dcl#:#dcl_display_record_alt#:#Display this entry
 dcl#:#dcl_duplicate_non_unique_entries_exist#:#This may also concern existing records.###23 02 2024 new variable
 dcl#:#dcl_edit#:#Settings for This Data Collection
-dcl#:#dcl_edit_entry_rules#:#Entry Editing
 dcl#:#dcl_edit_field#:#Edit Field
 dcl#:#dcl_edit_perm#:#Edit Entries
+dcl#:#dcl_edit_record_settings#:#Edit Record Settings
 dcl#:#dcl_edit_table#:#Settings of the Table ‘%s’
 dcl#:#dcl_edit_view#:#Edit Settings of View "%s"
 dcl#:#dcl_editable_in_table_gui#:#Please vote in the table view.
@@ -8665,7 +8664,6 @@ dcl#:#dcl_limited_desc#:#Entries can only be added, edited and deleted within th
 dcl#:#dcl_link_detail_page#:#Link to Detailed View
 dcl#:#dcl_link_detail_page_desc#:#Additionally, a detailed view template must have been created and activated within the tab ‘Detailed View’.
 dcl#:#dcl_list_fields#:#Fields
-dcl#:#dcl_list_visibility_and_filter#:#Overview
 dcl#:#dcl_locked#:#Locked
 dcl#:#dcl_locked_tooltip#:#Disable this field for users to edit. Does not include roles with the permission 'Edit Settings'
 dcl#:#dcl_manage#:#Manage
@@ -8819,6 +8817,7 @@ dcl#:#dcl_url#:#Mandatory URL or E-Mail
 dcl#:#dcl_view_configuration#:#View Configuration
 dcl#:#dcl_view_own_records_perm#:#View Only Own Entries
 dcl#:#dcl_view_own_records_perm_desc#:#The entries of other users are not visible.
+dcl#:#dcl_view_record_settings#:#Record Settings
 dcl#:#dcl_view_viewdefinition#:#Detailed View
 dcl#:#dcl_visible#:#Visible for all users
 dcl#:#dcl_visible_desc#:#Users can access this table.

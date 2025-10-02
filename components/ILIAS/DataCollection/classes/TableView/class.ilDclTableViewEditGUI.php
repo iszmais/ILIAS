@@ -105,47 +105,26 @@ class ilDclTableViewEditGUI
             $this->lng->txt('dcl_tables'),
             $this->ctrl->getLinkTarget($this->parent_obj->getParentObj())
         );
+        $this->setTabs();
 
-        switch ($next_class) {
-            case 'ildcldetailedviewdefinitiongui':
+        switch (strtolower($this->ctrl->getNextClass($this))) {
+            case strtolower(ilDclDetailedViewDefinitionGUI::class):
                 $this->help->setSubScreenId('detailed_view');
-                $this->setTabs('detailed_view');
-                $recordedit_gui = new ilDclDetailedViewDefinitionGUI($this->tableview->getId());
-                $ret = $this->ctrl->forwardCommand($recordedit_gui);
-                if ($ret != "") {
-                    $this->tpl->setContent($ret);
-                }
+                $gui = new ilDclDetailedViewDefinitionGUI($this->tableview->getId());
+                $this->tpl->setContent($this->ctrl->forwardCommand($gui));
                 break;
-            case 'ildclcreateviewdefinitiongui':
-                $this->help->setSubScreenId('record_create');
-                $this->setTabs('create_view');
-                $creation_gui = new ilDclCreateViewDefinitionGUI($this->tableview->getId());
-                $this->ctrl->forwardCommand($creation_gui);
-                break;
-            case 'ildcleditviewdefinitiongui':
-                $this->help->setSubScreenId('record_edit');
-                $this->setTabs('edit_view');
-                $edit_gui = new ilDclEditViewDefinitionGUI($this->tableview->getId());
-                $this->ctrl->forwardCommand($edit_gui);
+            case strtolower(ilDclTableViewRecordSettingsGUI::class):
+                $this->help->setSubScreenId('overview');
+                $this->tabs_gui->activateTab('record_settings');
+                $gui = new ilDclTableViewRecordSettingsGUI($this->tableview);
+                $this->ctrl->forwardCommand($gui);
                 break;
             default:
                 switch ($cmd) {
                     case 'show':
-                        if ($this->tableview->getId()) {
-                            $this->ctrl->redirect($this, 'editGeneralSettings');
-                        } else {
-                            $this->ctrl->redirect($this, 'add');
-                        }
-                        break;
-                    case 'add':
-                        $this->help->setSubScreenId('create');
-                        $this->tpl->setContent(
-                            $this->lng->txt('dcl_new_view') . $this->ui_renderer->render($this->initForm(true))
-                        );
-                        break;
                     case 'editGeneralSettings':
                         $this->help->setSubScreenId('edit');
-                        $this->setTabs('general_settings');
+                        $this->tabs_gui->activateTab('general_settings');
                         $this->tpl->setContent(
                             sprintf($this->lng->txt('dcl_edit_view'), $this->tableview->getTitle()) .
                             $this->ui_renderer->render($this->initForm())
@@ -214,7 +193,7 @@ class ilDclTableViewEditGUI
         return $inputs;
     }
 
-    protected function setTabs(string $active): void
+    protected function setTabs(): void
     {
         $this->tabs_gui->addTab(
             'general_settings',
@@ -222,26 +201,15 @@ class ilDclTableViewEditGUI
             $this->ctrl->getLinkTarget($this, 'editGeneralSettings')
         );
         $this->tabs_gui->addTab(
-            'create_view',
-            $this->lng->txt('dcl_create_entry_rules'),
-            $this->ctrl->getLinkTargetByClass('ilDclCreateViewDefinitionGUI', 'presentation')
-        );
-        $this->tabs_gui->addTab(
-            'edit_view',
-            $this->lng->txt('dcl_edit_entry_rules'),
-            $this->ctrl->getLinkTargetByClass('ilDclEditViewDefinitionGUI', 'presentation')
-        );
-        $this->tabs_gui->addTab(
-            'field_settings',
-            $this->lng->txt('dcl_list_visibility_and_filter'),
-            $this->ctrl->getLinkTarget($this, 'editFieldSettings')
+            'record_settings',
+            $this->lng->txt('dcl_view_record_settings'),
+            $this->ctrl->getLinkTargetByClass(ilDclTableViewRecordSettingsGUI::class, 'editRecordSettings')
         );
         $this->tabs_gui->addTab(
             'detailed_view',
             $this->lng->txt('dcl_detailed_view'),
-            $this->ctrl->getLinkTargetByClass('ilDclDetailedViewDefinitionGUI', 'edit')
+            $this->ctrl->getLinkTargetByClass(ilDclDetailedViewDefinitionGUI::class, 'edit')
         );
-        $this->tabs_gui->setTabActive($active);
     }
 
     public function save(bool $create = false): void
