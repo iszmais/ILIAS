@@ -18,19 +18,20 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Component\Input\Container\Form\FormInput;
+use ILIAS\UI\Component\Input\Field\Node\Factory as NodeFactory;
+use ILIAS\UI\Component\Input\Field\Node\NodeRetrieval;
+use ILIAS\UI\Component\Symbol\Icon\Factory as IconFactory;
+
 class ilDclIliasReferenceFieldRepresentation extends ilDclBaseFieldRepresentation
 {
-    public function getInputField(ilPropertyFormGUI $form, ?int $record_id = null): ilRepositorySelector2InputGUI
+    public function getInputField(): FormInput
     {
-        $input = new ilRepositorySelector2InputGUI(
+        return $this->factory->input()->field()->treeSelect(
+            new ilDataCollectionNodeRetrieval(),
             $this->getField()->getTitle(),
-            'field_' . $this->getField()->getId(),
-            false,
-            $form
+            $this->getField()->getDescription()
         );
-        $this->setupInputField($input, $this->getField());
-
-        return $input;
     }
 
     /**

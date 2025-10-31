@@ -18,16 +18,13 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Component\Input\Container\Form\FormInput;
+
 class ilDclRatingFieldRepresentation extends ilDclBaseFieldRepresentation
 {
-    public function getInputField(ilPropertyFormGUI $form, ?int $record_id = null): ilTextInputGUI
+    public function getInputField(): null
     {
-        $input = new ilTextInputGUI($this->getField()->getTitle(), 'field_' . $this->getField()->getId());
-        $input->setValue($this->lng->txt("dcl_editable_in_table_gui"));
-        $input->setDisabled(true);
-        $this->setupInputField($input, $this->getField());
-
-        return $input;
+        return null;
     }
 
     /**

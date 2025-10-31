@@ -18,14 +18,16 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Component\Input\Container\Form\FormInput;
+
 class ilDclDateFieldRepresentation extends ilDclBaseFieldRepresentation
 {
-    public function getInputField(ilPropertyFormGUI $form, ?int $record_id = null): ilDateTimeInputGUI
+    public function getInputField(): FormInput
     {
-        $input = new ilDateTimeInputGUI($this->getField()->getTitle(), 'field_' . $this->getField()->getId());
-        $this->setupInputField($input, $this->getField());
-
-        return $input;
+        return $this->factory->input()->field()->dateTime(
+            $this->getField()->getTitle(),
+            $this->getField()->getDescription()
+        );
     }
 
     public function addFilterInputFieldToTable(ilTable2GUI $table): ?array

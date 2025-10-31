@@ -18,17 +18,16 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Component\Input\Container\Form\FormInput;
+
 class ilDclNumberFieldRepresentation extends ilDclBaseFieldRepresentation
 {
-    public function getInputField(ilPropertyFormGUI $form, ?int $record_id = null): ilNumberInputGUI
+    public function getInputField(): FormInput
     {
-        $input = new ilNumberInputGUI($this->getField()->getTitle(), 'field_' . $this->getField()->getId());
-        // 9 is the maximum number of digits for an integer
-        $input->setMaxLength(9);
-        $input->setInfo($this->lng->txt('dcl_max_digits') . ": 9");
-        $this->setupInputField($input, $this->getField());
-
-        return $input;
+        return $this->factory->input()->field()->numeric(
+            $this->getField()->getTitle(),
+            $this->getField()->getDescription()
+        );
     }
 
     /**

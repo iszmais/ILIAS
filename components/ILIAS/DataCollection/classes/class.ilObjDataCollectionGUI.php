@@ -181,7 +181,7 @@ class ilObjDataCollectionGUI extends ilObject2GUI
             case strtolower(ilDclRecordEditGUI::class):
                 $this->prepareOutput();
                 $this->tabs->activateTab(self::TAB_CONTENT);
-                $recordedit_gui = new ilDclRecordEditGUI($this, $this->table_id, $this->getTableViewId());
+                $recordedit_gui = new ilDclRecordEditGUI($this->getObject(), $this->table_id, $this->getTableViewId());
                 $this->ctrl->forwardCommand($recordedit_gui);
                 break;
             case strtolower(ilObjFileGUI::class):
@@ -238,13 +238,6 @@ class ilObjDataCollectionGUI extends ilObject2GUI
             case strtolower(ilExportGUI::class):
                 $this->prepareOutput();
                 $this->handleExport();
-                break;
-            case strtolower(ilDclPropertyFormGUI::class):
-                $recordedit_gui = new ilDclRecordEditGUI($this, $this->table_id, $this->getTableViewId());
-                $recordedit_gui->getRecord();
-                $recordedit_gui->initForm();
-                $form = $recordedit_gui->getForm();
-                $this->ctrl->forwardCommand($form);
                 break;
             case strtolower(ilObjectMetaDataGUI::class):
                 $this->checkPermission('write');

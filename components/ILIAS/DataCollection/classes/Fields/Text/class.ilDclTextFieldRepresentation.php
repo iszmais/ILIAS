@@ -18,6 +18,8 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Component\Input\Container\Form\FormInput;
+
 class ilDclTextFieldRepresentation extends ilDclBaseFieldRepresentation
 {
     public function addFilterInputFieldToTable(ilTable2GUI $table): ?string
@@ -50,32 +52,26 @@ class ilDclTextFieldRepresentation extends ilDclBaseFieldRepresentation
         return $pass;
     }
 
-    public function getInputField(ilPropertyFormGUI $form, ?int $record_id = null): ilFormPropertyGUI
+    public function getInputField(): FormInput
     {
         $length = (int) $this->getField()->getProperty(ilDclBaseFieldModel::PROP_LENGTH);
         if ($length > 200 && !$this->getField()->hasProperty(ilDclBaseFieldModel::PROP_URL)) {
-            $input = new ilTextAreaInputGUI();
-            $input->setMaxNumOfChars($length);
+            $input = $this->factory->input()->field()->textarea($this->getField()->getTitle(), $this->getField()->getDescription())->withMaxLimit($length);
         } else {
-            $input = new ilDclTextInputGUI();
-            $input->setMaxLength($length);
+            $input = $this->factory->input()->field()->text($this->getField()->getTitle(), $this->getField()->getDescription())->withMaxLength($length);
         }
-        $input->setTitle($this->getField()->getTitle());
-        $input->setPostVar('field_' . $this->getField()->getId());
+        $input = $input->withByline($input->getByline() . sprintf($this->lng->txt('dcl_max_text_length'), $length));
 
         if ($this->getField()->hasProperty(ilDclBaseFieldModel::PROP_URL)) {
-            $input->setInfo($this->lng->txt('dcl_text_email_detail_desc'));
-            $title_field = new ilDclTextInputGUI(
+            $input = $this->factory->input()->field()->section(
+                [
+                    'url' => $input,
+                    'title' => $this->factory->input()->field()->text($this->lng->txt('dcl_text_email_title'), $this->lng->txt('dcl_text_email_title_info'))
+                ],
                 $this->lng->txt('dcl_text_email_title'),
-                'field_' . $this->getField()->getId() . '_title'
+                $this->lng->txt('dcl_text_email_detail_desc')
             );
-            $title_field->setInfo($this->lng->txt('dcl_text_email_title_info'));
-            $input->addSubItem($title_field);
-        } else {
-            $input->setInfo(sprintf($this->lng->txt("dcl_max_text_length"), $length));
         }
-
-        $this->setupInputField($input, $this->getField());
 
         return $input;
     }

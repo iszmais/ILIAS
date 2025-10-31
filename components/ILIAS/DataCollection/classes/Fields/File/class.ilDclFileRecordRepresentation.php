@@ -36,11 +36,6 @@ class ilDclFileRecordRepresentation extends ilDclBaseRecordRepresentation
         $this->ui_services = $DIC->ui();
     }
 
-    public function getSingleHTML(?array $options = null, bool $link = true): string
-    {
-        return $this->getHTML(true, $options ?? []);
-    }
-
     public function getHTML(bool $link = true, array $options = []): string
     {
         $value = $this->record_field->getValue();

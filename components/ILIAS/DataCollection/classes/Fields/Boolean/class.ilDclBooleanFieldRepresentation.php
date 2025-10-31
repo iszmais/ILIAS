@@ -18,14 +18,16 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Component\Input\Container\Form\FormInput;
+
 class ilDclBooleanFieldRepresentation extends ilDclBaseFieldRepresentation
 {
-    public function getInputField(ilPropertyFormGUI $form, ?int $record_id = null): ilDclCheckboxInputGUI
+    public function getInputField(): FormInput
     {
-        $input = new ilDclCheckboxInputGUI($this->getField()->getTitle(), 'field_' . $this->getField()->getId());
-        $this->setupInputField($input, $this->getField());
-
-        return $input;
+        return $this->factory->input()->field()->checkbox(
+            $this->getField()->getTitle(),
+            $this->getField()->getDescription()
+        );
     }
 
     /**

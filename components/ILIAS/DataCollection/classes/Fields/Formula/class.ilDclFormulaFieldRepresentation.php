@@ -21,17 +21,13 @@ declare(strict_types=1);
 use ILIAS\components\DataCollection\Fields\Formula\FormulaParser\Math\Operators;
 use ILIAS\components\DataCollection\Fields\Formula\FormulaParser\Math\Functions;
 use ILIAS\components\DataCollection\Fields\Formula\FormulaParser\Token\Tokenizer;
+use ILIAS\UI\Component\Input\Container\Form\FormInput;
 
 class ilDclFormulaFieldRepresentation extends ilDclBaseFieldRepresentation
 {
-    public function getInputField(ilPropertyFormGUI $form, ?int $record_id = null): ilTextInputGUI
+    public function getInputField(): null
     {
-        $input = new ilTextInputGUI($this->getField()->getTitle(), 'field_' . $this->getField()->getId());
-        $input->setDisabled(true);
-        $input->setValue('-');
-        $input->setInfo($this->getField()->getDescription() . '<br>' . $this->lng->txt('dcl_formula_detail_desc'));
-
-        return $input;
+        return null;
     }
 
     protected function buildFieldCreationInput(ilObjDataCollection $dcl, string $mode = 'create'): ilRadioOption

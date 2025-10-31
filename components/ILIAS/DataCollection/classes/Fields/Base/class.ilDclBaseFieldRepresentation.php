@@ -18,6 +18,9 @@
 
 declare(strict_types=1);
 
+use ILIAS\UI\Component\Input\Container\Form\FormInput;
+use ILIAS\UI\Factory;
+
 abstract class ilDclBaseFieldRepresentation
 {
     protected ilDclBaseFieldModel $field;
@@ -29,6 +32,7 @@ abstract class ilDclBaseFieldRepresentation
 
     protected ilComponentRepository $component_repository;
     protected ilComponentFactory $component_factory;
+    protected Factory $factory;
 
     public function __construct(ilDclBaseFieldModel $field)
     {
@@ -40,6 +44,7 @@ abstract class ilDclBaseFieldRepresentation
         $this->http = $DIC->http();
         $this->user = $DIC->user();
         $this->refinery = $DIC->refinery();
+        $this->factory = $DIC->ui()->factory();
         $this->component_repository = $DIC["component.repository"];
         $this->component_factory = $DIC["component.factory"];
     }
@@ -89,23 +94,7 @@ abstract class ilDclBaseFieldRepresentation
         return $value;
     }
 
-    /**
-     * Returns field-input
-     */
-    public function getInputField(ilPropertyFormGUI $form, ?int $record_id = null): ?ilFormPropertyGUI
-    {
-        return null;
-    }
-
-    /**
-     * Sets basic settings on field-input
-     * @param ilFormPropertyGUI $input
-     * @param ilDclBaseFieldModel $field
-     */
-    protected function setupInputField(ilFormPropertyGUI $input, ilDclBaseFieldModel $field): void
-    {
-        $input->setInfo($field->getDescription() . ($input->getInfo() ? '<br>' . $input->getInfo() : ''));
-    }
+    abstract public function getInputField(): ?FormInput;
 
     /**
      * @return string|array|null

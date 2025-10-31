@@ -8662,7 +8662,6 @@ dcl#:#dcl_edit_field#:#Edit Field
 dcl#:#dcl_edit_perm#:#Edit Entries
 dcl#:#dcl_edit_table#:#Settings of the Table ‘%s’
 dcl#:#dcl_edit_view#:#Edit Settings of View "%s"
-dcl#:#dcl_editable_in_table_gui#:#Please vote in the table view.
 dcl#:#dcl_err_formula_field_not_found#:#Field with title '%s' not found
 dcl#:#dcl_error_parsing_expression#:#Error parsing expression
 dcl#:#dcl_export_enabled#:#Export Table
@@ -8685,7 +8684,6 @@ dcl#:#dcl_filter#:#Available in filter
 dcl#:#dcl_filter_changeable#:#Filter changeable
 dcl#:#dcl_formula#:#Formula
 dcl#:#dcl_formula_desc#:#You can aggregate several entries in a record with a formula.
-dcl#:#dcl_formula_detail_desc#:#Entries are generated automatically, you are not able to edit the entry.
 dcl#:#dcl_height#:#Height in Pixels
 dcl#:#dcl_height_desc#:#The height of the file will be reduced to this value during upload.
 dcl#:#dcl_id#:#ID
@@ -8778,7 +8776,6 @@ dcl#:#dcl_owner_description#:#The owner of the entry.
 dcl#:#dcl_owner_name#:#Owner (Name)
 dcl#:#dcl_page_type_dclf#:#Details View
 dcl#:#dcl_placeholder_info#:#To use data from the data collection in this view, please use the corresponding placeholders. These are available in the page element 'Text' and 'Data Table'.
-dcl#:#dcl_please_select#:#--- Please select ---
 dcl#:#dcl_plugin#:#Plugin
 dcl#:#dcl_plugin_desc#:#DataCollection Field-Plugins
 dcl#:#dcl_plugin_no_hooks_available#:#No active field-type plugins found
