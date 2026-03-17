@@ -263,9 +263,22 @@ class ilDashboardGUI implements ilCtrlBaseClassInterface
         }
         $content .= $this->getCenterColumnHTML();
 
+        global $DIC;
+        $content = $DIC->ui()->renderer()->render(
+            $DIC->ui()->factory()->button()->standard('Notify me!', $this->ctrl->getLinkTarget($this, 'notify')),
+        ) . $content;
+
         $this->tpl->setContent($content);
         $this->tpl->setRightContent($this->getRightColumnHTML());
         $this->tpl->printToStdout();
+    }
+
+    public function notify(): void
+    {
+        $provider = new \ILIAS\Notifications\MyProvider();
+        $handler = new \ILIAS\Notifications\Provider\NotificationsPushProvider($provider);
+        $handler->push($this->user, 'You pushed a button. Congrats!');
+        $this->show();
     }
 
     public function getCenterColumnHTML(): string
